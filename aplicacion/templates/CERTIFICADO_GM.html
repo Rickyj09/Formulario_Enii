@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/static/base.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FR-INPS-009.02 Reporte Inspección Grúas Boom Articulado {%block title%} {%endblock%}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-2">
+        <img src="/static/img/logo_eni.jpg">
+      </div>
+      <div class="col-sm-12 col-md-8">
+        <p>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A. CERTIFICADO DE INSPECCIÓN DE GRÚAS MÓVILES Y GRÚAS LOCOMOTORAS (CERTIFICATE OF INSPECTION MOBILES CRANE AND LOCOMOTIVE CRANES)</p>
+      </div>
+      <div class="col-sm-12 col-md-2">
+        <img src="/static/img/Acreditacion.jpg">
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <h4>Fecha de Inspección</h4>
+      </div>
+      <div class="col-3">
+        <h3>Lugar de Inspección</h3>
+      </div>
+      <div class="col-3">
+        <h3>Código Interno</h3>
+      </div>
+      <div class="col-3">
+        <h3>Inspector Responsable</h3>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <form class="row g-3 needs-validation" novalidate></form>
+  <h2>DATOS DESCRIPTIVOS</h2>
+  <div class="col-md-4 position-relative">
+    <label for="validationTooltip01" class="form-label">CERTIFICADO INSPECCIÓN Nº(Inspecction )</label>
+    <input type="text" class="form-control" id="validationTooltip01" placeholder="Fabricante" required>
+</div>
+<div class="col-md-4 position-relative">
+    <label for="validationTooltip01" class="form-label">SOLICITADO POR (Required by)</label>
+    <input type="text" class="form-control" id="validationTooltip01" placeholder="Marca" required>
+</div>
+<div class="col-md-4 position-relative">
+    <label for="validationTooltip01" class="form-label">EQUIPO (Name of loose gear)</label>
+    <input type="text" class="form-control" id="validationTooltip01" placeholder="Modelo" required>
+</div>
+<div class="col-md-4 position-relative">
+    <label for="validationTooltip01" class="form-label">CAPACIDAD DE LEVANTE MAX</label>
+    <input type="text" class="form-control" id="validationTooltip01" placeholder="Serie" required>
+</div>
+<div class="col-md-4 position-relative">
+  <label for="validationTooltip01" class="form-label">MODELO (Model)</label>
+  <input type="text" class="form-control" id="validationTooltip01" placeholder="Fabricante" required>
+</div>
+<div class="col-md-4 position-relative">
+  <label for="validationTooltip01" class="form-label">MARCA (Brand)</label>
+  <input type="text" class="form-control" id="validationTooltip01" placeholder="Marca" required>
+</div>
+<div class="col-md-4 position-relative">
+  <label for="validationTooltip01" class="form-label">FECHA DE FABRICACIÓN (Built date)</label>
+  <input type="text" class="form-control" id="validationTooltip01" placeholder="Modelo" required>
+</div>
+<div class="col-md-4 position-relative">
+  <label for="validationTooltip01" class="form-label">Nro. DE SERIE (Serial Nr.)</label>
+  <input type="text" class="form-control" id="validationTooltip01" placeholder="Serie" required>
+</div>
+</form>
+<hr>
+<h2>PROCESO DE INSPECCION</h2>
+
+
+    
+        
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="{{ url_for('caratula')}}">CARATULA</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url_for('CHECK_LIST_bck')}}">CHECH LIST</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url_for('REP_LMI')}}">REP -LMI-001</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url_for('PRUE_CARG')}}">REP - PRUE-CARG-001</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url_for('REP_FOTO')}}">REP-FOT-001</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url_for('RESULTADOS')}}">RESULTADOS</a></li>
+          <li class="page-item"><a class="page-link" href="{{ url_for('CERTIFICADO_GM')}}">CERTIFICADO GM</a></li>
+        </ul>
+      </nav>
+        <div class="col-12">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+     
+</body>
+</html>

@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{%block title%} PRUEBA DE CARGA FR-INPS-009.02 {%endblock%}
+{% block content %}
+<body>
+    <hr>
+    <P>
+        DOCUMENTOS DE REFERENCIA:  ASME B30.5 (2018), ASME B30.9 (2018), ASME B30.10 (2019)																																					
+        "CONDICIÓN:     S: Satisfactorio;     DG: Defecto Grave
+                    MANUAL DEL FABRICANTE"	
+    </P>
+    <center><h1>PRUEBA DE CARGA</h1></center>
+    <center><h2>PRUEBA DE ENSAYO DINÁMICO</h2></center>
+    
+    <hr>
+    <form class="row g-3 needs-validation" novalidate method="POST"> 
+      {{ form.csrf_token }}
+        <h2>CONFIGURACIÓN</h2>													
+        <h3>UNIDAD/MEDIDA</h3>
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+          {{ form.long.label }} {{ form.long(class_="form-control") }}
+          {% for error in form.long.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+          <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.long_pluma_din.label }} {{ form.long_pluma_din(class_="form-control") }}
+          {% for error in form.long_pluma_din.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.rad_oper_din.label }} {{ form.rad_oper_din(class_="form-control") }}
+          {% for error in form.rad_oper_din.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ang_pluma_din.label }} {{ form.ang_pluma_din(class_="form-control") }}
+          {% for error in form.ang_pluma_din.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.cap_maxima_din.label }} {{ form.cap_maxima_din(class_="form-control") }}
+          {% for error in form.cap_maxima_din.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <hr>
+        <h2>ROTACIÓN DE LA CARGA</h2>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.check1_pru_car.label }} {{ form.check1_pru_car(class_="form-control") }}
+          {% for error in form.check1_pru_car.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.check2_pru_car.label }} {{ form.check2_pru_car(class_="form-control") }}
+          {% for error in form.check2_pru_car.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.check3_pru_car.label }} {{ form.check3_pru_car(class_="form-control") }}
+          {% for error in form.check3_pru_car.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          <h6>EVALUACIÓN DEL ENSAYO</h6>
+          {{ form.conforme.label }} {{ form.conforme(class_="form-control") }}
+          {% for error in form.conforme.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="col-12">
+          {{ form.hidden_tag() }}
+          {{ form.submit(class_="btn btn-primary") }}
+        </div>
+
+    </form>
+</body>
+</html>
+  {% endblock %}

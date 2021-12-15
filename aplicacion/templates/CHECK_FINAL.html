@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{%block title%} CHECH_LIST {%endblock%}
+{% block content %}
+
+<body>
+    <hr>
+    <h1>FR-INPS-009.02 Reporte Inspección Grúas Boom Articulado</h1>
+    <p>
+        DOCUMENTOS DE REFERENCIA:  B30.5 (2018), ASME B30.9 (2018), ASME B30.10 (2019)																				
+        "CONDICIÓN:     S: Satisfactorio;     DG: Defecto Grave;     DL: Defecto Leve;     NA: No Aplica  
+        MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR"
+    </p>
+    <hr>
+    <center><h3>ENSAYOS NO DESTRUCTIVOS (END)</h3></center>
+  
+       <br>   
+      
+      <form class="row g-3 needs-validation" novalidate method="POST">  
+       
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          
+          {{ form.check1.label }} {{ form.check1(class_="form-control") }}
+          {% for error in form.check1.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          
+          {{ form.check2.label }} {{ form.check2(class_="form-control") }}
+          {% for error in form.check2.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>	
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          
+        {{ form.check3.label }} {{ form.check3(class_="form-control") }}
+        {% for error in form.check3.errors %}
+            <span style="color: red;"> {{ error }} </span>
+        {% endfor %}
+        </div>
+     
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          
+          {{ form.check4.label }} {{ form.check4(class_="form-control") }}
+          {% for error in form.check4.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          
+          {{ form.check5.label }} {{ form.check5(class_="form-control") }}
+          {% for error in form.check5.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>	
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          
+        {{ form.check6.label }} {{ form.check6(class_="form-control") }}
+        {% for error in form.check6.errors %}
+            <span style="color: red;"> {{ error }} </span>
+        {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>CONDICIÓN</h7>
+          {{ form.check7.label }} {{ form.check7(class_="form-control") }}
+          {% for error in form.check7.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        
+      
+   <hr>
+    <div class="col-12">
+      {{ form.hidden_tag() }}
+      {{ form.submit(class_="btn btn-primary") }}
+    </div>
+  </form>
+</body>
+
+
+</html>
+{% endblock %}

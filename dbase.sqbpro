@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Ricardo/paginas_web/u30/bck_base/dbase.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1690"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,9:mainarticulos"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">select * from categorias;
+select * from articulos;
+
+update categorias set nombre = 'Liquidos' where id =2;
+update categorias set nombre = 'Visual' where id =3;
+update categorias set nombre = 'Cargadoras' where id =4;
+
+update articulos set nombre = 'FR-INSP-037.01', descripcion = 'Formato de Inspección Liquidos Penetrantes Accesorios Izaje' where id =3;
+update articulos set nombre = 'FR-INSP-003.05', descripcion = 'Formato Inspección Cargadoras Frontales y Montacargas' where id =7;
+update articulos set nombre = 'FR-INPS-009.02', descripcion = 'Reporte Inspección Grúas Boom Articulado' where id =1;
+
+delete from articulos where id=4;
+commit;</sql><current_tab id="0"/></tab_sql></sqlb_project>

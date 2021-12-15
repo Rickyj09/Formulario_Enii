@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{%block title%} PRUEBA DE CARGA FR-INPS-009.02 {%endblock%}
+{% block content %}
+<body>
+    <hr>
+    <P>
+        DOCUMENTOS DE REFERENCIA:  ASME B30.5 (2018), ASME B30.9 (2018), ASME B30.10 (2019)																																					
+        "CONDICIÓN:     S: Satisfactorio;     DG: Defecto Grave
+                    MANUAL DEL FABRICANTE"	
+    </P>
+    <center><h1>PRUEBA DE CARGA</h1></center>
+    <center><h2>PRUEBA DE ENSAYO ESTÁTICO</h2></center>
+    
+    <hr>
+    <form class="row g-3 needs-validation" novalidate method="POST"> 
+      {{ form.csrf_token }}
+        <h2>CONFIGURACIÓN</h2>													
+        <h3>UNIDAD/MEDIDA</h3>
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+          {{ form.long.label }} {{ form.long(class_="form-control") }}
+          {% for error in form.long.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+          <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.long_pluma_est.label }} {{ form.long_pluma_est(class_="form-control") }}
+          {% for error in form.long_pluma_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.rad_oper_est.label }} {{ form.rad_oper_est(class_="form-control") }}
+          {% for error in form.rad_oper_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ang_pluma_est.label }} {{ form.ang_pluma_est(class_="form-control") }}
+          {% for error in form.ang_pluma_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.cap_maxima_est.label }} {{ form.cap_maxima_est(class_="form-control") }}
+          {% for error in form.cap_maxima_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+
+        <div class="col-12">
+          {{ form.hidden_tag() }}
+          {{ form.submit(class_="btn btn-primary") }}
+        </div>
+
+    </form>
+</body>
+</html>
+  {% endblock %}

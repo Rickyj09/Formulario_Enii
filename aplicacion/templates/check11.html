@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{%block title%} CHECK LIST L {%endblock%}
+{% block content %}
+<head>
+  
+</head>
+<body>
+ 
+
+  <hr>
+  <h3>INSPECCIÓN MECÁNICA Y ESTRUCTURAL</h3>
+        
+        <h3>K. SISTEMA HIDRÁULICO</h3>
+    
+       <br>   
+      <fieldset id="billing">
+      <form class="row g-3 needs-validation" novalidate method="POST">  
+        <div>
+          <label for="billing_is_shipping">Todo Satisfactorio:</label>
+          <input type="checkbox" value="7" name="micheck" id="billing-checkbox" checked>
+             <label for="validationTooltip01" class="form-label"></label>
+         </div> 
+          
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h7>1.- Cilindro(S) elevador de pluma</h7>
+          {{ form.check1.label }} {{ form.check1(class_="form-control") }}
+          {% for error in form.check1.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h7>2. Cilindro(S) estabilizadores</h7>
+          {{ form.check2.label }} {{ form.check2(class_="form-control") }}
+          {% for error in form.check2.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>	
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h7>3. Cilindro extensión pluma</h7>
+        {{ form.check3.label }} {{ form.check3(class_="form-control") }}
+        {% for error in form.check3.errors %}
+            <span style="color: red;"> {{ error }} </span>
+        {% endfor %}
+        </div>
+     
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>4. Cilindro(S) vigas de estabilizadores</h7>
+          {{ form.check4.label }} {{ form.check4(class_="form-control") }}
+          {% for error in form.check4.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h7>5. Circuito Hidráulico</h7>
+          {{ form.check5.label }} {{ form.check5(class_="form-control") }}
+          {% for error in form.check5.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>	
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h7>6. Winches</h7>
+        {{ form.check6.label }} {{ form.check6(class_="form-control") }}
+        {% for error in form.check6.errors %}
+            <span style="color: red;"> {{ error }} </span>
+        {% endfor %}
+        </div>
+      
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+        <h7>7. Frenos</h7>
+          {{ form.check7.label }} {{ form.check7(class_="form-control") }}
+          {% for error in form.check7.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          {{ form.checkobs.label }} {{ form.checkobs(class_="form-control") }}
+          {% for error in form.checkobs.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>	
+        
+     
+   <hr>
+    <div class="col-12">
+      {{ form.hidden_tag() }}
+      {{ form.submit(class_="btn btn-primary") }}
+    </div>
+  </form>
+</body>
+
+
+</html>
+{% endblock %}

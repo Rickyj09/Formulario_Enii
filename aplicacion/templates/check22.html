@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{%block title%} CHECK LIST W {%endblock%}
+{% block content %}
+<head>
+  
+</head>
+<body>
+ 
+
+  <hr>
+  <h3>INSPECCIÓN MECÁNICA Y ESTRUCTURAL</h3>
+        
+        <h3>V. MOTOR(S) DE COMBUSTIÓN</h3>
+    
+       <br>   
+      
+      <form class="row g-3 needs-validation" novalidate method="POST"> 
+        <div>
+          <label for="billing_is_shipping">Todo Satisfactorio:</label>
+          <input type="checkbox" value="2" name="micheck" id="billing-checkbox" checked>
+             <label for="validationTooltip01" class="form-label"></label>
+        </div> 
+         
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h7>1.- Gases de escape entubados</h7> 
+          {{ form.check1.label }} {{ form.check1(class_="form-control") }}
+          {% for error in form.check1.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h7>2. Fugas de aceite por cuerpo del motor</h7>
+          {{ form.check2.label }} {{ form.check2(class_="form-control") }}
+          {% for error in form.check2.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>	
+        <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+        {{ form.checkobs.label }} {{ form.checkobs(class_="form-control") }}
+        {% for error in form.checkobs.errors %}
+            <span style="color: red;"> {{ error }} </span>
+        {% endfor %}
+        </div>
+     
+   <hr>
+    <div class="col-12">
+      {{ form.hidden_tag() }}
+      {{ form.submit(class_="btn btn-primary") }}
+    </div>
+  </form>
+</body>
+
+
+</html>
+{% endblock %}

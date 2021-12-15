@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{%block title%} CHECK_LIST {%endblock%}
+{% block content %}
+
+<body>
+    <hr>
+    <h1>FR-INPS-009.02 Reporte Inspección Grúas Boom Articulado</h1>
+    <p>
+        DOCUMENTOS DE REFERENCIA:  B30.5 (2018), ASME B30.9 (2018), ASME B30.10 (2019)																				
+        "CONDICIÓN:     S: Satisfactorio;     DG: Defecto Grave;     DL: Defecto Leve;     NA: No Aplica  
+        MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR"
+    </p>
+    <hr>
+    
+        <hr>
+        
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action active">
+                CHECK LIST
+            </a>
+            <a href="{{ url_for('check1') }}" class="list-group-item list-group-item-action">A: DOCUMENTACIÓN DEL EQUIPO</a>
+            
+          </div>
+</body>
+</html>
+{% endblock %}
