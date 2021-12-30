@@ -15,14 +15,7 @@
     <form class="row g-3 needs-validation" novalidate method="POST"> 
       {{ form.csrf_token }}
         <h2>CONFIGURACIÓN</h2>													
-        <h3>UNIDAD/MEDIDA</h3>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-          {{ form.long.label }} {{ form.long(class_="form-control") }}
-          {% for error in form.long.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>
-          <hr>
+        <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
           {{ form.long_pluma_est.label }} {{ form.long_pluma_est(class_="form-control") }}
           {% for error in form.long_pluma_est.errors %}

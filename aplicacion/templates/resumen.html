@@ -8,18 +8,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
 </head>
 <body background="/static/img/fondo1.jpg">
-   <div class="container">
-    
-        <ul class="nav justify-content-end">
-          
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('caratula')}}">CARATULA </a>
-            </li>
+          <ul class="nav justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home')}}">INICIO </a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('caratula')}}">CARATULA </a>
+          </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('CHECK_LIST_bck')}}">CHECH_LIST </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('REP_LMI')}}">REP -LMI-001 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('PRUE_CARG')}}">REP - PRUE-CARG-001</a>

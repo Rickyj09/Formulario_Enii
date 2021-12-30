@@ -15,13 +15,7 @@
     <form class="row g-3 needs-validation" novalidate method="POST"> 
       {{ form.csrf_token }}
         <h2>DATOS DE LA CARGA</h2>													
-        <h3>UNIDAD/MEDIDA</h3>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-          {{ form.peso.label }} {{ form.peso(class_="form-control") }}
-          {% for error in form.peso.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>
+        
           <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
           {{ form.carga_utli_est.label }} {{ form.carga_utli_est(class_="form-control") }}
@@ -44,9 +38,157 @@
           {% endfor %}
         </div>
         <hr>
+        <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-          
+          {{ form.long_pluma_est.label }} {{ form.long_pluma_est(class_="form-control") }}
+          {% for error in form.long_pluma_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
         </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.rad_oper_est.label }} {{ form.rad_oper_est(class_="form-control") }}
+          {% for error in form.rad_oper_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ang_pluma_est.label }} {{ form.ang_pluma_est(class_="form-control") }}
+          {% for error in form.ang_pluma_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.cap_maxima_est.label }} {{ form.cap_maxima_est(class_="form-control") }}
+          {% for error in form.cap_maxima_est.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <h2>COMPROBACIÓN DE ESTABILIZADORES</h2>													
+        <hr>
+        <h4>Tiempo 5 minutos</h4>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.carga.label }} {{ form.carga(class_="form-control") }}
+          {% for error in form.carga.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB1.label }} {{ form.ESTAB1(class_="form-control") }}
+          {% for error in form.ESTAB1.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB2.label }} {{ form.ESTAB2(class_="form-control") }}
+          {% for error in form.ESTAB2.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB3.label }} {{ form.ESTAB3(class_="form-control") }}
+          {% for error in form.ESTAB3.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB4.label }} {{ form.ESTAB4(class_="form-control") }}
+          {% for error in form.ESTAB4.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <hr>
+        <h4>Tiempo 10 minutos</h4>
+        
+        <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.carga2.label }} {{ form.carga2(class_="form-control") }}
+          {% for error in form.carga2.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB12.label }} {{ form.ESTAB12(class_="form-control") }}
+          {% for error in form.ESTAB12.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB22.label }} {{ form.ESTAB22(class_="form-control") }}
+          {% for error in form.ESTAB22.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB32.label }} {{ form.ESTAB32(class_="form-control") }}
+          {% for error in form.ESTAB32.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB42.label }} {{ form.ESTAB42(class_="form-control") }}
+          {% for error in form.ESTAB42.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        
+        <hr>
+        <h4>Tiempo 15 minutos</h4>
+        
+        <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.carga3.label }} {{ form.carga3(class_="form-control") }}
+          {% for error in form.carga3.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB13.label }} {{ form.ESTAB13(class_="form-control") }}
+          {% for error in form.ESTAB13.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB23.label }} {{ form.ESTAB23(class_="form-control") }}
+          {% for error in form.ESTAB23.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB33.label }} {{ form.ESTAB33(class_="form-control") }}
+          {% for error in form.ESTAB33.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          {{ form.ESTAB43.label }} {{ form.ESTAB43(class_="form-control") }}
+          {% for error in form.ESTAB43.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+        <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+          <h6>EVALUACIÓN DEL ENSAYO</h6>
+          {{ form.conforme.label }} {{ form.conforme(class_="form-control") }}
+          {% for error in form.conforme.errors %}
+              <span style="color: red;"> {{ error }} </span>
+          {% endfor %}
+        </div>
+
+        <hr>
+        <p>El ensayo con carga suspendida se ha llevado acabo por un lapso comprendido entre 5 y 15 minutos. La carga se encuentra configurada en posición según tabla de cargas , teniendo en cuenta el peso de la carga en servicio y el peso del dispositivo de sujeción de esta y las fijaciones de los mecanismos de maniobra.</p>
+        
 
 
         <div class="col-12">
