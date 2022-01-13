@@ -7,7 +7,8 @@ from aplicacion.forms import check_list4, check_list5, check_list6, check_list7,
 from aplicacion.forms import check_list10, check_list11, check_list12,check_list13, check_list14, check_list15
 from aplicacion.forms import check_list16, check_list17, check_list18, check_list19, check_list20, check_list21
 from aplicacion.forms import check_list22, check_list23, check_list24, check_list25, Publicaciones, CHECK_LIST_FIN
-from aplicacion.forms import prueba_carga,check_list1,prueba_carga1,prueba_carga2,prueba_carga3,prueba_carga4
+from aplicacion.forms import prueba_carga,check_list1,prueba_carga3
+from aplicacion.forms import formu1
 from aplicacion.forms import  LoginForm, UploadForm
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
@@ -56,8 +57,8 @@ def load_user(user_id):
 def inicio():
     return render_template("inicio.html")
 
-
 @app.route('/inicio_1')
+@app.route('/inicio_1/<id>')
 def inicio_1(id='0'):
     from aplicacion.models import Articulos, Categorias
     categoria = Categorias.query.get(id)
@@ -149,6 +150,14 @@ def reporte_foto():
         lista.append(file)
     return render_template("reporte_foto.html", lista=lista)
 
+@app.route('/reporte_foto1')
+@login_required
+def reporte_foto1():
+    lista = []
+    for file in listdir(app.root_path+"/static/img/subidas/"):
+        lista.append(file)
+    return render_template("reporte_foto1.html", lista=lista)
+
 @app.route('/home', methods=['GET','POST'])
 @login_required
 def home():
@@ -173,7 +182,69 @@ def home():
         return redirect(url_for('resumen'))
     return render_template('home.html', form=form,datos=nom_form)
 
+@app.route('/home_1', methods=['GET','POST'])
+@login_required
+def home_1():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id = 4;")
+    nom_form = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        #return 'OK'
+        return redirect(url_for('formu_1'))
+    return render_template('home_1.html', form=form,datos=nom_form)
 
+
+@app.route('/formu_1', methods=['GET','POST'])
+@login_required
+def formu_1():
+    form = formu1()
+    if form.validate_on_submit():
+        proc = request.form['proc']
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
+        proc_p = request.form['proc_p']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        num = request.form['num']
+        ref = request.form['ref']
+        cod_enii = request.form['cod_enii']
+        ancho = request.form['ancho']
+        diam = request.form['diam']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur = mysql.connection.cursor()
+        cur.execute("select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        llave_form = cur.fetchone()
+        cur.execute("select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        fecha_form = cur.fetchone()
+        cur.execute('insert into form2 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,num,ref,cod_enii,ancho,diam,vt,ptt) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(llave_form,fecha_form,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,num,ref,cod_enii,ancho,diam,vt,pt))
+        mysql.connection.commit()
+        return redirect(url_for('reporte_foto1'))
+    return render_template('formu_1.html', form=form) 
 
 
 @app.route('/resumen')
@@ -213,13 +284,6 @@ def servicios_detalle(slug):
         return render_template('404.html')
     return render_template('detalle.html', datos=datos)
 
-@app.route('/contactos')
-def contactos():
-    return render_template('contactos.html')
-
-@app.route('/nosotros')
-def nosotros():
-    return render_template('nosotros.html')
 
 @app.route('/formulario_simple', methods=['GET','POST'])
 def formulario_simple():
@@ -1317,191 +1381,77 @@ def REP_LMI():
 @login_required
 def PRUE_CARG():
     form = prueba_carga()
-    #print(datos)
-    valor = request.form.get('peso')
     print(form.errors)
-    print(valor)
-    if valor == 'Lb' and request.method=="POST":
-        cons = 2.2
+    cursor = mysql.connection.cursor()
+    cursor.execute("select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+    llave_form = cursor.fetchone()
+    if form.validate_on_submit():
         p1 = form.carga_utli_est.data
-        print(p1)
-        vcon = (p1/cons)
-        print(vcon)
         p2 = form.peso_carga_est.data
-        print(p2)
         p3 = form.peso_aparejo_est.data
-        print(p3)
         valor_t = p1+p2+p3
-        print(valor_t)
-        valor_kg = valor_t / cons
-        print(valor_kg)
-        peso_total = valor_kg
-        return redirect('PRUE_CARG_1')
-    if valor == 'Kg' and form.validate_on_submit():
-        p1 = form.carga_utli_est.data
-        print(p1)
-        p2 = form.peso_carga_est.data
-        print(p2)
-        p3 = form.peso_aparejo_est.data
-        print(p3)
-        valor_t = p1+p2+p3
-        print(valor_t)
-        return redirect('PRUE_CARG_1')    
+        l_plu = form.long_pluma_est.data
+        r_oper = form.rad_oper_est.data
+        ang_plu = form.ang_pluma_est.data
+        cap_max = form.cap_maxima_est.data
+        v_total = l_plu+r_oper+ang_plu+cap_max
+        carga = form.carga.data
+        est1 = form.ESTAB1.data
+        est2 = form.ESTAB2.data
+        est3 = form.ESTAB3.data
+        est4 = form.ESTAB4.data
+        carga2 = form.carga2.data
+        est12 = form.ESTAB12.data
+        est22 = form.ESTAB22.data
+        est32 = form.ESTAB32.data
+        est42 = form.ESTAB42.data
+        carga3 = form.carga3.data
+        est13 = form.ESTAB13.data
+        est23 = form.ESTAB23.data
+        est33 = form.ESTAB33.data
+        est43 = form.ESTAB43.data
+        cursor.execute('insert into prue_carg_est (id_formulario,carga_utilizada,peso_carga,peso_aparejos,peso_total,medida,long_pluma,radio_ope,ang_pluma,cap_max,tiempo,carga,estab_1,estab_2,estab_3,estab_4) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(llave_form,p1,p2,p3,valor_t,'Kg',l_plu,r_oper,ang_plu,cap_max,'5',carga,est1,est2,est3,est4))
+        cursor.execute('insert into prue_carg_est (id_formulario,carga_utilizada,peso_carga,peso_aparejos,peso_total,medida,long_pluma,radio_ope,ang_pluma,cap_max,tiempo,carga,estab_1,estab_2,estab_3,estab_4) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(llave_form,p1,p2,p3,valor_t,'Kg',l_plu,r_oper,ang_plu,cap_max,'5',carga2,est12,est22,est32,est42))
+        cursor.execute('insert into prue_carg_est (id_formulario,carga_utilizada,peso_carga,peso_aparejos,peso_total,medida,long_pluma,radio_ope,ang_pluma,cap_max,tiempo,carga,estab_1,estab_2,estab_3,estab_4) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(llave_form,p1,p2,p3,valor_t,'Kg',l_plu,r_oper,ang_plu,cap_max,'5',carga3,est13,est23,est33,est43))
+        mysql.connection.commit()
+        return redirect('PRUE_CARG_3')  
     return render_template('PRUE_CARG.html', form=form)
 
 
-@app.route('/PRUE_CARG_1', methods=['GET','POST'])
-@login_required
-def PRUE_CARG1():
-    form = prueba_carga1()
-    #print(datos)
-    valor = request.form.get('long')
-    print(form.errors)
-    print(valor)
-    if valor == 'ft' and request.method=="POST":
-        cons = 0.3048
-        p1 = form.long_pluma_est.data
-        print(p1)
-        vcon = (p1 * cons)
-        print(vcon)
-        p2 = form.rad_oper_est.data
-        print(p2)
-        p3 = form.ang_pluma_est.data
-        print(p3)
-        p4 = form.cap_maxima_est.data
-        print(p4)
-        v_total = p1+p2+p3+p4
-        print(v_total)
-        tranf_m = v_total * cons
-        print(tranf_m)
-        return redirect('PRUE_CARG_2')
-    if valor == 'm' and form.validate_on_submit():
-        p1 = form.long_pluma_est.data
-        print(p1)
-        p2 = form.rad_oper_est.data
-        print(p2)
-        p3 = form.ang_pluma_est.data
-        print(p3)
-        p4 = form.cap_maxima_est.data
-        print(p4)
-        v_total = p1+p2+p3+p4
-        print(v_total)
-        return redirect('PRUE_CARG_2')    
-    return render_template('PRUE_CARG_1.html', form=form)
 
 
-@app.route('/PRUE_CARG_2', methods=['GET','POST'])
-@login_required
-def PRUE_CARG2():
-    form = prueba_carga2()
-    #print(datos)
-    valor = request.form.get('long')
-    print(form.errors)
-    print(valor)
-    if valor == 'ft' and request.method=="POST":
-        cons = 0.3048
-        p1 = form.carga.data
-        print(p1)
-        vcon = (p1 * cons)
-        print(vcon)
-        p2 = form.ESTAB1.data
-        print(p2 * cons)
-        p3 = form.ESTAB2.data
-        print(p3 * cons)
-        p4 = form.ESTAB3.data
-        print(p4 * cons)
-        p5 = form.ESTAB4.data
-        print(p5 * cons)
-        return redirect('PRUE_CARG_3')
-    if valor == 'm' and form.validate_on_submit():
-        p1 = form.carga.data
-        print(p1)
-        p2 = form.ESTAB1.data
-        print(p2)
-        p3 = form.ESTAB1.data
-        print(p3)
-        p4 = form.ESTAB1.data
-        print(p4)
-        p5 = form.ESTAB1.data
-        print(p5)
-        return redirect('PRUE_CARG_3')    
-    return render_template('PRUE_CARG_2.html', form=form)
+
 
 
 @app.route('/PRUE_CARG_3', methods=['GET','POST'])
 @login_required
 def PRUE_CARG3():
     form = prueba_carga3()
-    #print(datos)
-    valor = request.form.get('peso')
     print(form.errors)
-    print(valor)
-    if valor == 'Lb' and request.method=="POST":
-        cons = 2.2
+    cursor = mysql.connection.cursor()
+    cursor.execute("select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+    llave_form = cursor.fetchone()
+    if form.validate_on_submit():
         p1 = form.carga_utli_din.data
-        print(p1)
-        vcon = (p1/cons)
-        print(vcon)
         p2 = form.peso_carga_din.data
-        print(p2)
         p3 = form.peso_aparejo_din.data
-        print(p3)
         valor_t = p1+p2+p3
-        print(valor_t)
-        valor_kg = valor_t / cons
-        print(valor_kg)
-        return redirect('PRUE_CARG_4')
-    if valor == 'Kg' and form.validate_on_submit():
-        p1 = form.carga_utli_din.data
-        print(p1)
-        p2 = form.peso_carga_din.data
-        print(p2)
-        p3 = form.peso_aparejo_din.data
-        print(p3)
-        valor_t = p1+p2+p3
-        print(valor_t)
-        return redirect('PRUE_CARG_4')    
+        p5 = form.long_pluma_din.data
+        p6 = form.rad_oper_din.data
+        p7 = form.ang_pluma_din.data
+        p8 = form.cap_maxima_din.data
+        v_total = p5+p6+p7+p8
+        tor = form.check1_pru_car.data
+        tor1 = form.check2_pru_car.data
+        tor2 = form.check3_pru_car.data
+        tor3 = form.check4_pru_car.data
+        cursor.execute('insert into prue_carg_din (id_formulario,carga_utilizada,peso_carga,peso_aparejos,medida,peso_total,long_pluma,radio_ope,ang_pluma,cap_max,tornamesa,sis_mov_fre,est_estabilizado,cond_estab_maq) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(llave_form,p1,p2,p3,'Kg',valor_t,p5,p6,p7,p8,tor,tor1,tor2,tor3))
+        mysql.connection.commit()
+        return redirect('REP_FOTO_CARGA')
     return render_template('PRUE_CARG_3.html', form=form)
 
 
-@app.route('/PRUE_CARG_4', methods=['GET','POST'])
-@login_required
-def PRUE_CARG4():
-    form = prueba_carga4()
-    #print(datos)
-    valor = request.form.get('long')
-    print(form.errors)
-    print(valor)
-    if valor == 'ft' and request.method=="POST":
-        cons = 0.3048
-        p1 = form.long_pluma_din.data
-        print(p1)
-        vcon = (p1 * cons)
-        print(vcon)
-        p2 = form.rad_oper_din.data
-        print(p2)
-        p3 = form.ang_pluma_din.data
-        print(p3)
-        p4 = form.cap_maxima_din.data
-        print(p4)
-        v_total = p1+p2+p3+p4
-        print(v_total)
-        tranf_m = v_total * cons
-        print(tranf_m)
-        return redirect('REP_FOTO_CARGA')
-    if valor == 'm' and form.validate_on_submit():
-        p1 = form.long_pluma_din.data
-        print(p1)
-        p2 = form.rad_oper_din.data
-        print(p2)
-        p3 = form.ang_pluma_din.data
-        print(p3)
-        p4 = form.cap_maxima_din.data
-        print(p4)
-        v_total = p1+p2+p3+p4
-        print(v_total)
-        return redirect('REP_FOTO_CARGA')    
-    return render_template('PRUE_CARG_4.html', form=form)
+
 
 
 @app.route('/REP_FOTO_CARGA', methods=['GET','POST'])
@@ -1527,47 +1477,63 @@ def REP_FOTO():
         return redirect(url_for('reporte_foto'))
     return render_template('REP_FOTO.html', form=form)
 
-@app.route('/RESULTADOS')
+@app.route('/RESULTADOS', methods=['GET', 'POST'])
 @login_required
 def RESULTADOS():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select codigo from equipos_ins where nombre = 'MULTIMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    cod_int = cursor.fetchone()
-    cursor.execute("select fecha_calib from equipos_ins where nombre = 'MULTIMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    fec_cal = cursor.fetchone()
-    cursor.execute("select codigo from equipos_ins where nombre = 'CINTA METRICA' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    cod_int1 = cursor.fetchone()
-    cursor.execute("select fecha_calib from equipos_ins where nombre = 'CINTA METRICA' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    fec_cal1 = cursor.fetchone()
-    cursor.execute("select codigo from equipos_ins where nombre = 'PIE DE REY' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    cod_int2 = cursor.fetchone()
-    cursor.execute("select fecha_calib from equipos_ins where nombre = 'PIE DE REY' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    fec_cal2 = cursor.fetchone()
-    cursor.execute("select codigo from equipos_ins where nombre = 'FLEXOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    cod_int3 = cursor.fetchone()
-    cursor.execute("select fecha_calib from equipos_ins where nombre = 'FLEXOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    fec_cal3 = cursor.fetchone()
-    cursor.execute("select codigo from equipos_ins where nombre = 'GONIOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    cod_int4 = cursor.fetchone()
-    cursor.execute("select fecha_calib from equipos_ins where nombre = 'GONIOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    fec_cal4 = cursor.fetchone()
-    cursor.execute("select count(1) from check_list where valor ='S' and id_formulario = (select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    count_S = cursor.fetchone()
-    cursor.execute("select count(1) from check_list where valor ='DL' and id_formulario = (select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    count_DL = cursor.fetchone()
-    number_of_rows_DL=count_DL[0]
-    cursor.execute("select count(1) from check_list where valor ='DG' and id_formulario = (select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
-    count_DG = cursor.fetchone()
-    number_of_rows=count_DG[0]
-    if number_of_rows >= 1:
-        cond = 'EQUIPO NO CONFORME'
-        return render_template('RESULTADOS.html', a=cod_int, fec1=fec_cal, b=cod_int1,fec2=fec_cal1,c=cod_int2,fec3=fec_cal2,d=cod_int3,fec4=fec_cal3,e=cod_int4,fec5=fec_cal4,S=count_S,DL=count_DL,DG=count_DG,C=cond)
-    if number_of_rows_DL >=0 and number_of_rows ==0:
-        cond = 'EQUIPO CONFORME CON DEFECTOS LEVES'
-        return render_template('RESULTADOS.html', a=cod_int, fec1=fec_cal, b=cod_int1,fec2=fec_cal1,c=cod_int2,fec3=fec_cal2,d=cod_int3,fec4=fec_cal3,e=cod_int4,fec5=fec_cal4,S=count_S,DL=count_DL,DG=count_DG,C=cond)
-    cond = 'EQUIPO CONFORME'    
-    return render_template('RESULTADOS.html', a=cod_int, fec1=fec_cal, b=cod_int1,fec2=fec_cal1,c=cod_int2,fec3=fec_cal2,d=cod_int3,fec4=fec_cal3,e=cod_int4,fec5=fec_cal4,S=count_S,DL=count_DL,DG=count_DG,C=cond)
-
+    #if request.method=="POST":
+        cursor = mysql.connection.cursor()
+        cursor.execute("select MAX(id_formulario) from formulario")
+        id_f = cursor.fetchone()
+        cursor.execute("select codigo from equipos_ins where nombre = 'MULTIMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        cod_int = cursor.fetchone()
+        cursor.execute("select fecha_calib from equipos_ins where nombre = 'MULTIMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        fec_cal = cursor.fetchone()
+        cursor.execute("select codigo from equipos_ins where nombre = 'CINTA METRICA' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        cod_int1 = cursor.fetchone()
+        cursor.execute("select fecha_calib from equipos_ins where nombre = 'CINTA METRICA' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        fec_cal1 = cursor.fetchone()
+        cursor.execute("select codigo from equipos_ins where nombre = 'PIE DE REY' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        cod_int2 = cursor.fetchone()
+        cursor.execute("select fecha_calib from equipos_ins where nombre = 'PIE DE REY' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        fec_cal2 = cursor.fetchone()
+        cursor.execute("select codigo from equipos_ins where nombre = 'FLEXOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        cod_int3 = cursor.fetchone()
+        cursor.execute("select fecha_calib from equipos_ins where nombre = 'FLEXOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        fec_cal3 = cursor.fetchone()
+        cursor.execute("select codigo from equipos_ins where nombre = 'GONIOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        cod_int4 = cursor.fetchone()
+        cursor.execute("select fecha_calib from equipos_ins where nombre = 'GONIOMETRO' and nombre_insp = (select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        fec_cal4 = cursor.fetchone()
+        cursor.execute("select count(1) from check_list where valor ='S' and id_formulario = (select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        count_S = cursor.fetchone()
+        number_of_rows_S=count_S[0]
+        cursor.execute("select count(1) from check_list where valor ='DL' and id_formulario = (select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        count_DL = cursor.fetchone()
+        number_of_rows_DL=count_DL[0]
+        cursor.execute("select count(1) from check_list where valor ='DG' and id_formulario = (select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario));")
+        count_DG = cursor.fetchone()
+        number_of_rows_DG=count_DG[0]
+        cursor.execute('insert into resultados (cod_ins,nom_ins,fecha_calib,id_formulario,DL_res,DG_res,S_res,conforme) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(cod_int,'MULTIMETRO',fec_cal,id_f,number_of_rows_DL,number_of_rows_DG,number_of_rows_S,1))
+        cursor.execute('insert into resultados (cod_ins,nom_ins,fecha_calib,id_formulario,DL_res,DG_res,S_res,conforme) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(cod_int1,'CINTA METRICA',fec_cal1,id_f,number_of_rows_DL,number_of_rows_DG,number_of_rows_S,1))
+        cursor.execute('insert into resultados (cod_ins,nom_ins,fecha_calib,id_formulario,DL_res,DG_res,S_res,conforme) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(cod_int2,'PIE DE REY',fec_cal2,id_f,number_of_rows_DL,number_of_rows_DG,number_of_rows_S,1))
+        cursor.execute('insert into resultados (cod_ins,nom_ins,fecha_calib,id_formulario,DL_res,DG_res,S_res,conforme) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(cod_int3,'FLEXOMETRO',fec_cal3,id_f,number_of_rows_DL,number_of_rows_DG,number_of_rows_S,1))
+        cursor.execute('insert into resultados (cod_ins,nom_ins,fecha_calib,id_formulario,DL_res,DG_res,S_res,conforme) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(cod_int4,'GONIOMETRO',fec_cal4,id_f,number_of_rows_DL,number_of_rows_DG,number_of_rows_S,1))
+        mysql.connection.commit()
+        if number_of_rows_DG >= 1:
+            cond = 'EQUIPO NO CONFORME'
+            return render_template('RESULTADOS.html', a=cod_int, fec1=fec_cal, b=cod_int1,fec2=fec_cal1,
+                                c=cod_int2,fec3=fec_cal2,d=cod_int3,fec4=fec_cal3,e=cod_int4,
+                                fec5=fec_cal4,S=count_S,DL=count_DL,DG=count_DG,C=cond,id_f=id_f)
+        if number_of_rows_DL >=0 and number_of_rows_DG ==0:
+            cond = 'EQUIPO CONFORME CON DEFECTOS LEVES'
+            return render_template('RESULTADOS.html', a=cod_int, fec1=fec_cal, b=cod_int1,fec2=fec_cal1,
+                                    c=cod_int2,fec3=fec_cal2,d=cod_int3,fec4=fec_cal3,e=cod_int4,
+                                    fec5=fec_cal4,S=count_S,DL=count_DL,DG=count_DG,C=cond,id_f=id_f)
+        cond = 'EQUIPO CONFORME'    
+        return render_template('RESULTADOS.html', a=cod_int, fec1=fec_cal, b=cod_int1,fec2=fec_cal1,
+                                c=cod_int2,fec3=fec_cal2,d=cod_int3,fec4=fec_cal3,e=cod_int4,fec5=fec_cal4,
+                                S=count_S,DL=count_DL,DG=count_DG,C=cond,id_f=id_f)
+        
 
 
 @app.route('/genera_pdf')
@@ -1591,10 +1557,69 @@ def genera_pdf():
 @app.route('/CERTIFICADO_GM', methods=['GET','POST'])
 @login_required
 def CERTIFICADO_GM():
-    form = datos_reporte()
-    if form.validate_on_submit():
-        return f"email ={request.form['email']} | clave ={request.form['password']}"
-    return render_template('CERTIFICADO_GM.html', form=form)
+    cursor = mysql.connection.cursor()
+    cursor.execute("select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute("select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute("select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute("select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute("select codint_datos_equipo from datos_equipo where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_inter = cursor.fetchone()
+    cursor.execute("select CAP_MAX_Capacidad_Trabajo from capacidad_trabajo where id_formulario = (select MAX(id_formulario) from formulario);")
+    cap_max = cursor.fetchone()
+    cursor.execute("select modelo_datos_equipo from datos_equipo where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo = cursor.fetchone()
+    cursor.execute("select MARCA_datos_equipo from datos_equipo where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca = cursor.fetchone()
+    cursor.execute("select anio_datos_equipo from datos_equipo where id_formulario = (select MAX(id_formulario) from formulario);")
+    ani = cursor.fetchone()
+    cursor.execute("select serie_datos_equipo from datos_equipo where id_formulario = (select MAX(id_formulario) from formulario);")
+    serie = cursor.fetchone()
+    cursor.execute("select cod_ins from resultados where nom_ins = 'MULTIMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    cod1 = cursor.fetchone()
+    cursor.execute("select nom_ins from resultados where nom_ins = 'MULTIMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    nom1 = cursor.fetchone()
+    cursor.execute("select fecha_calib from resultados where nom_ins = 'MULTIMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_cal1 = cursor.fetchone()
+    cursor.execute("select cod_ins from resultados where nom_ins = 'CINTA METRICA' and id_formulario = (select MAX(id_formulario) from formulario);")
+    cod2 = cursor.fetchone()
+    cursor.execute("select nom_ins from resultados where nom_ins = 'CINTA METRICA' and id_formulario = (select MAX(id_formulario) from formulario);")
+    nom2 = cursor.fetchone()
+    cursor.execute("select fecha_calib from resultados where nom_ins = 'CINTA METRICA' and id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_cal2 = cursor.fetchone()
+    cursor.execute("select cod_ins from resultados where nom_ins = 'PIE DE REY' and id_formulario = (select MAX(id_formulario) from formulario);")
+    cod3 = cursor.fetchone()
+    cursor.execute("select nom_ins from resultados where nom_ins = 'PIE DE REY' and id_formulario = (select MAX(id_formulario) from formulario);")
+    nom3 = cursor.fetchone()
+    cursor.execute("select fecha_calib from resultados where nom_ins = 'PIE DE REY' and id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_cal3 = cursor.fetchone()
+    cursor.execute("select cod_ins from resultados where nom_ins = 'FLEXOMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    cod4 = cursor.fetchone()
+    cursor.execute("select nom_ins from resultados where nom_ins = 'FLEXOMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    nom4 = cursor.fetchone()
+    cursor.execute("select fecha_calib from resultados where nom_ins = 'FLEXOMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_cal4 = cursor.fetchone()
+    cursor.execute("select cod_ins from resultados where nom_ins = 'GONIOMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    cod5 = cursor.fetchone()
+    cursor.execute("select nom_ins from resultados where nom_ins = 'GONIOMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    nom5 = cursor.fetchone()
+    cursor.execute("select fecha_calib from resultados where nom_ins = 'GONIOMETRO' and id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_cal5 = cursor.fetchone()
+    
+    return render_template('CERTIFICADO_GM.html', datos=nom_form, 
+                            fec1=fec_insp, fec2=fec_emi,fec3=fec_exp,lugar=lugar,inspector=inpe, 
+                            cod_inter=cod_inter,cap_max=cap_max,modelo=modelo,marca=marca,ani=ani,
+                            serie=serie,cod1=cod1,nom1=nom1,fec_cal1=fec_cal1,cod2=cod2,nom2=nom2,
+                            fec_cal2=fec_cal2,cod3=cod3,nom3=nom3,fec_cal3=fec_cal3,cod4=cod4,nom4=nom4,
+                            fec_cal4=fec_cal4,cod5=cod5,nom5=nom5,fec_cal5=fec_cal5)
+
 
 @app.errorhandler(404)
 def page_not_found(error):

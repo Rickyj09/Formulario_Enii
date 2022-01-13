@@ -96,6 +96,35 @@ class datos_equipo(FlaskForm):
 
     submit = SubmitField('Enviar')
 
+
+class formu1(FlaskForm):
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
+    met_insp = StringField('MÉTODO DE INSPECCIÓN:', validators=[DataRequired()])
+    tipo_il = StringField('TIPO DE ILUMINACIÓN:', validators=[DataRequired()])
+    check1 = RadioField('ESPEJOS:',choices=[('S', 'Satisfactorio')], id='check1')
+    check2 = RadioField('LENTES:',choices=[('S', 'Satisfactorio')], id='check2')
+    check3 = RadioField('OTROS:',choices=[('S', 'Satisfactorio')], id='check3')
+    detalle = StringField('Detalla:', validators=[])
+    proc_p =  StringField('PROCEDIMIENTO Nº', validators=[DataRequired()])
+    revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
+    tipo_sec = StringField('TIPO DE SECADO', validators=[DataRequired()])
+    num = StringField('Nº', validators=[DataRequired()])
+    ref = StringField('REFERENCIA', validators=[DataRequired()])
+    cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
+    ancho = StringField('ANCHO (mm)', validators=[DataRequired()])
+    diam = StringField('DIÁMETRO (mm)', validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
+    
+    submit = SubmitField('Enviar')
+
 class CHECK_LIST():
     submit = SubmitField('Grabar')
 
@@ -394,57 +423,51 @@ class CHECK_LIST_FIN(FlaskForm):
 
 
 class prueba_carga(FlaskForm):
-    peso = RadioField('peso',choices=[('Kg', 'Kilogramo'),('Lb','Libra')],render_kw={}, id='peso')
+    conforme = RadioField('',choices=[('c', 'Conforme'),('nc','No Conforme')],render_kw={}, id='conforme')
     carga_utli_est = FloatField('CARGA UTILIZADA',validators=[DataRequired()])
     peso_carga_est = FloatField('PESO CARGA',validators=[DataRequired()])
     peso_aparejo_est = FloatField('PESO APAREJOS',validators=[DataRequired()])
     peso_total = FloatField('PESO TOTAL')
-    
-    submit = SubmitField('Grabar')
-
-class prueba_carga1(FlaskForm):
-    long = RadioField('longitud',choices=[('m', 'metro'),('ft','pie')],render_kw={}, id='long')
     long_pluma_est = FloatField('Longitud Pluma',validators=[DataRequired()])
     rad_oper_est = FloatField('Radio de Operación',validators=[DataRequired()])
     ang_pluma_est = FloatField('Angulo de Pluma (°)',validators=[DataRequired()])
     cap_maxima_est = FloatField('Capacidad Máxima',validators=[DataRequired()])
-    
-    submit = SubmitField('Grabar')
-
-
-class prueba_carga2(FlaskForm):
-    long = RadioField('longitud',choices=[('m', 'metro'),('ft','pie')],render_kw={}, id='long')
-    conforme = RadioField('',choices=[('c', 'Conforme'),('nc','No Conforme')],render_kw={}, id='conforme')
     carga = FloatField('Carga',validators=[DataRequired()])
     ESTAB1 = FloatField('ESTAB. 1',validators=[DataRequired()])
     ESTAB2 = FloatField('ESTAB. 2',validators=[DataRequired()])
     ESTAB3 = FloatField('ESTAB. 3',validators=[DataRequired()])
     ESTAB4 = FloatField('ESTAB. 4',validators=[DataRequired()])
+    carga2 = FloatField('Carga',validators=[DataRequired()])
+    ESTAB12 = FloatField('ESTAB. 1',validators=[DataRequired()])
+    ESTAB22 = FloatField('ESTAB. 2',validators=[DataRequired()])
+    ESTAB32 = FloatField('ESTAB. 3',validators=[DataRequired()])
+    ESTAB42 = FloatField('ESTAB. 4',validators=[DataRequired()])
+    carga3 = FloatField('Carga',validators=[DataRequired()])
+    ESTAB13 = FloatField('ESTAB. 1',validators=[DataRequired()])
+    ESTAB23 = FloatField('ESTAB. 2',validators=[DataRequired()])
+    ESTAB33 = FloatField('ESTAB. 3',validators=[DataRequired()])
+    ESTAB43 = FloatField('ESTAB. 4',validators=[DataRequired()])
     
     submit = SubmitField('Grabar')
 
 
 class prueba_carga3(FlaskForm):
-    peso = RadioField('peso',choices=[('Kg', 'Kilogramo'),('Lb','Libra')],render_kw={}, id='peso')
     carga_utli_din = FloatField('CARGA UTILIZADA',validators=[DataRequired()])
     peso_carga_din = FloatField('PESO CARGA',validators=[DataRequired()])
     peso_aparejo_din = FloatField('PESO APAREJOS',validators=[DataRequired()])
-    
-    submit = SubmitField('Grabar')
-
-
-class prueba_carga4(FlaskForm):
-    long = RadioField('longitud',choices=[('m', 'metro'),('ft','pie')],render_kw={}, id='long')
     long_pluma_din = FloatField('Longitud Pluma',validators=[DataRequired()])
     rad_oper_din = FloatField('Radio de Operación',validators=[DataRequired()])
     ang_pluma_din = FloatField('Angulo de Pluma (°)',validators=[DataRequired()])
     cap_maxima_din = FloatField('Capacidad Máxima',validators=[DataRequired()])
-    check1_pru_car = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1_pru_car')
-    check2_pru_car = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2_pru_car')
-    check3_pru_car = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3_pru_car')
+    check1_pru_car = RadioField('Estado de corona (tornamesa)', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1_pru_car')
+    check2_pru_car = RadioField('Sistema movimiento y frenado', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2_pru_car')
+    check3_pru_car = RadioField('Estado de los estabilizadores', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3_pru_car')
+    check4_pru_car = RadioField('Condiciones de estabilidad de la máquina', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3_pru_car')
     conforme = RadioField('',choices=[('c', 'Conforme'),('nc','No Conforme')],render_kw={}, id='conforme')
-    
+        
     submit = SubmitField('Grabar')
+
+
 
 
 
@@ -471,6 +494,9 @@ class datos_lmi(FlaskForm):
     nom_inspec = StringField('NOMBRE DEL INSPECTOR', validators=[DataRequired()],render_kw={"placeholder": "NOMBRE DEL INSPECTOR"})
 
     submit = SubmitField('Enviar')
+
+
+
 
 class FormChangePassword(FlaskForm):
     password = PasswordField('Password', validators=[Required()])
