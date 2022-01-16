@@ -1,0 +1,67 @@
+{% extends "layout1.html" %}
+{% block title %}Lista de Formularios{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+  
+  <div class="col-md-10">
+	    <h3>FORMULARIOS... ({{categoria.nombre}})</h3>
+	    <div class="panel panel-default">
+  			<table class="table table-bordered">
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Ir</th>
+            
+          </tr>
+  	    		
+
+  	    			<tr>
+                <td>FR-INPS-009.02</td>
+                <td>Reporte Inspección Grúas Boom Articulado</td>
+                <td><a href="{{url_for('home')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td>
+              </tr>
+              <tr> 
+                <td>FR-INSP-041.04</td>
+                <td>Reporte Inspeccion Poleas</td>
+                <td><a href="{{url_for('home_1')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td>
+              </tr>
+              <tr>
+                <td>FR-INSP-043.03</td> 
+                <td>Reporte Inspección Eslinga Cable Acero</td>
+                <td><a href="{{url_for('home_2')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td> 
+              </tr>
+              <tr>
+                <td>FR-INSP-045.04 </td>
+                <td>Reporte Inspección Cadena</td>
+                <td><a href="{{url_for('home_3')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td>
+              </tr>
+              <tr>
+                <td>FR-INSP-047.03</td>
+                <td>Reporte Inspección Eslinga Faja Sintética</td>
+                <td><a href="{{url_for('home_4')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td>
+              </tr>
+              <tr>
+                <td>FR-INSP-049.04 </td>
+                <td>Reporte Inspección Ganchos</td>
+                <td><a href="{{url_for('home_5')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td>
+              </tr>
+              <tr>
+                <td>FR-INSP-051.03 </td>
+                <td>Reporte Inspección Grilletes</td>
+                <td><a href="{{url_for('home_6')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td>
+              </tr>
+              <tr>
+                <td>FR-INSP-053.04 </td>
+                <td>Reporte Inspeccion King Pin</td>
+                <td><a href="{{url_for('home_7')}}"><span class="glyphicon glyphicon-pencil"></span> Ir</a></td>
+  	    			</tr>
+  	    		
+  	    	</table>
+  	    
+  	</div>
+  </div>
+</div>
+ 	
+  
+{% endblock %}

@@ -70,6 +70,19 @@ def inicio_1(id='0'):
     return render_template("inicio_1.html", articulos=articulos,categorias=categorias, categoria=categoria)
 
 
+@app.route('/inicio_new')
+@app.route('/inicio_new/<id>')
+def inicio_new(id='0'):
+    from aplicacion.models import Articulos, Categorias
+    categoria = Categorias.query.get(id)
+    if id == '0':
+        articulos = Articulos.query.all()
+    else:
+        articulos = Articulos.query.filter_by(CategoriaId=id)
+    categorias = Categorias.query.all()
+    return render_template("inicio_new.html", articulos=articulos,categorias=categorias, categoria=categoria)
+
+
 @app.route('/articulos/<id>/edit', methods=["get", "post"])
 @login_required
 def articulos_edit(id):
@@ -2115,7 +2128,7 @@ def login():
     # Control de permisos
     if current_user.is_authenticated:
         #return 'OK'
-        return redirect(url_for("inicio_1"))
+        return redirect(url_for("inicio_new"))
     form = LoginForm()
     if form.validate_on_submit():
         user = Usuarios.query.filter_by(username=form.username.data).first()
@@ -2127,7 +2140,7 @@ def login():
         if user is not None and user.verify_password(form.password.data):
             login_user(user)
             next = request.args.get('next')
-            return redirect(next or url_for('inicio_1'))
+            return redirect(next or url_for('inicio_new'))
         form.username.errors.append("Usuario o contraseña incorrectas.")
     return render_template('login.html', form=form)
 
