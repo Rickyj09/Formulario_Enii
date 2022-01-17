@@ -201,6 +201,8 @@ def home_1():
     cursor = mysql.connection.cursor()
     cursor.execute("select nombre from articulos where id = 4;")
     nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 4;")
+    nom_form1 = cursor.fetchone()
     form = datos_reporte()
     if form.validate_on_submit():
         empre = request.form['empresa']
@@ -210,14 +212,14 @@ def home_1():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
         print(datos)
         #return 'OK'
         return redirect(url_for('formu_1'))
-    return render_template('home_1.html', form=form,datos=nom_form)
+    return render_template('home_1.html', form=form,datos=nom_form,desc=nom_form1)
 
 
 @app.route('/home_2', methods=['GET','POST'])
@@ -226,6 +228,8 @@ def home_2():
     cursor = mysql.connection.cursor()
     cursor.execute("select nombre from articulos where id = 5;")
     nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 5;")
+    nom_form1 = cursor.fetchone()
     form = datos_reporte()
     if form.validate_on_submit():
         empre = request.form['empresa']
@@ -235,14 +239,14 @@ def home_2():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
         print(datos)
         #return 'OK'
         return redirect(url_for('formu_2'))
-    return render_template('home_2.html', form=form,datos=nom_form)
+    return render_template('home_2.html', form=form,datos=nom_form,desc=nom_form1)
 
 
 @app.route('/home_3', methods=['GET','POST'])
@@ -251,6 +255,8 @@ def home_3():
     cursor = mysql.connection.cursor()
     cursor.execute("select nombre from articulos where id = 10;")
     nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 10;")
+    nom_form1 = cursor.fetchone()
     form = datos_reporte()
     if form.validate_on_submit():
         empre = request.form['empresa']
@@ -260,14 +266,14 @@ def home_3():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
         print(datos)
         #return 'OK'
         return redirect(url_for('formu_3'))
-    return render_template('home_3.html', form=form,datos=nom_form)
+    return render_template('home_3.html', form=form,datos=nom_form,desc=nom_form1)
 
 
 
@@ -277,8 +283,10 @@ def home_3():
 @login_required
 def home_4():
     cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id = 10;")
+    cursor.execute("select nombre from articulos where id = 7;")
     nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 7;")
+    nom_form1 = cursor.fetchone()
     form = datos_reporte()
     if form.validate_on_submit():
         empre = request.form['empresa']
@@ -288,14 +296,14 @@ def home_4():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
         print(datos)
         #return 'OK'
         return redirect(url_for('formu_4'))
-    return render_template('home_4.html', form=form,datos=nom_form)
+    return render_template('home_4.html', form=form,datos=nom_form,desc=nom_form1)
 
 
 @app.route('/home_5', methods=['GET','POST'])
@@ -304,6 +312,8 @@ def home_5():
     cursor = mysql.connection.cursor()
     cursor.execute("select nombre from articulos where id = 8;")
     nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 8;")
+    nom_form1 = cursor.fetchone()
     form = datos_reporte()
     if form.validate_on_submit():
         empre = request.form['empresa']
@@ -313,14 +323,14 @@ def home_5():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
         print(datos)
         #return 'OK'
         return redirect(url_for('formu_5'))
-    return render_template('home_5.html', form=form,datos=nom_form)
+    return render_template('home_5.html', form=form,datos=nom_form,desc=nom_form1)
 
 
 @app.route('/home_6', methods=['GET','POST'])
@@ -329,6 +339,8 @@ def home_6():
     cursor = mysql.connection.cursor()
     cursor.execute("select nombre from articulos where id =9;")
     nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 9;")
+    nom_form1 = cursor.fetchone()
     form = datos_reporte()
     if form.validate_on_submit():
         empre = request.form['empresa']
@@ -338,14 +350,14 @@ def home_6():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
         print(datos)
         #return 'OK'
         return redirect(url_for('formu_6'))
-    return render_template('home_6.html', form=form,datos=nom_form)
+    return render_template('home_6.html', form=form,datos=nom_form,desc=nom_form1)
 
 
 @app.route('/home_7', methods=['GET','POST'])
@@ -354,6 +366,8 @@ def home_7():
     cursor = mysql.connection.cursor()
     cursor.execute("select nombre from articulos where id =11;")
     nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 11;")
+    nom_form1 = cursor.fetchone()
     form = datos_reporte()
     if form.validate_on_submit():
         empre = request.form['empresa']
@@ -363,14 +377,14 @@ def home_7():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,'Reporte Inspeccion Poleas',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
         print(datos)
         #return 'OK'
         return redirect(url_for('formu_7'))
-    return render_template('home_7.html', form=form,datos=nom_form)
+    return render_template('home_7.html', form=form,datos=nom_form,desc=nom_form1)
 
 @app.route('/formu_1', methods=['GET','POST'])
 @login_required

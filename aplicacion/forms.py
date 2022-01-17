@@ -739,7 +739,7 @@ class datos_reporte(FlaskForm):
     fec_emision = DateField('FECHA DE EMISIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE EMISIÓN"})
     fec_expiracion = DateField('FECHA DE EXPIRACIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE EXPIRACIÓN"})
     lugar_inpec = StringField('LUGAR INSPECCIÓN', validators=[DataRequired()],render_kw={"placeholder": "LUGAR INSPECCIÓN"})
-    nom_inspec = StringField('NOMBRE DEL INSPECTOR', validators=[DataRequired()],render_kw={"placeholder": "NOMBRE DEL INSPECTOR"})
+    nom_inspec = SelectField('NOMBRE DEL INSPECTOR:',choices=[('DIEGO COLLAGUAZO', 'DIEGO COLLAGUAZO'),('RAMIRO LOPEZ PEREZ', 'RAMIRO LOPEZ PEREZ'),('EDUARDO LOPEZ PEREZ', 'EDUARDO LOPEZ PEREZ')],render_kw={}, id='nom_insp')
 
     submit = SubmitField('Enviar')
 
