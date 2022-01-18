@@ -187,7 +187,7 @@ def home():
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
         cursor.execute("select llave_formulario from formulario where id_formulario = 1;")
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',('FR-INSP-003.06','REPORTE DE INSPECCIÓN DE GRÚAS',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',('FR-INSP-003.06','REPORTE DE INSPECCIÓN DE GRÚAS',fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -212,7 +212,7 @@ def home_1():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -239,7 +239,7 @@ def home_2():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -266,7 +266,7 @@ def home_3():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -296,7 +296,7 @@ def home_4():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -323,7 +323,7 @@ def home_5():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -350,7 +350,7 @@ def home_6():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -377,7 +377,7 @@ def home_7():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,obs1_formulario) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,''))
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
