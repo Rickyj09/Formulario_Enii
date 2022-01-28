@@ -1,14 +1,12 @@
 {% extends 'layout_for.html' %}
-{%block title%} FORMULARIO FR-INSP-041.04 {%endblock%}
+{%block title%} FORMULARIO FR-INSP-061.04{%endblock%}
 {% block content %}
-
 <body>
     <hr>
-    <h1>Reporte Inspeccion Poleas</h1>
-    <P>REFERENCIA NORMATIVA:  ASME B30.26 (2015),  Aparejos (Los números a indicar pertenecen a la norma en mención),  MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
+    <h1>REPORTE DE INSPECCIÓN TENSOR TRINQUETE</h1>
+    <P>REFERENCIA NORMATIVA:  ASME B30.26 (2015),  Aparejos ASME B30.10 (2019) Ganchos (Los números a indicar pertenecen a la norma en mención),  MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
     <h3>DATOS DEL END (VT)</h3>
-    
     <form class="row g-3 needs-validation" novalidate method="POST">
         <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
@@ -76,6 +74,7 @@
     <h3>DATOS DEL END (PT)</h3>
     
         <hr>
+             
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.proc_p.label }} {{ form.proc_p(class_="form-control") }}
             {% for error in form.proc_p.errors %}
@@ -119,7 +118,7 @@
              {% endfor %}
          </div>
          <hr>
-        <h3>CONSUMIBLES</h3>
+         <h3>CONSUMIBLES</h3>
         <h1>1.- PENETRANTE</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.tipo_pen.label }} {{ form.tipo_pen(class_="form-control") }}
@@ -177,6 +176,7 @@
                 <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
+        
         <hr>
         <center><h1>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS</h1></center>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
@@ -197,72 +197,161 @@
                 <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
+
+       
+       
+
         <hr>
         <center><h1>CRITERIOS DE ACEPTACIÓN Y RECHAZO </h1></center>
-        <center><h1>ASME B30.26 (2015) Aparejos</h1></center>
+        <center><h2>ASME B30.26 (2015) Aparejos</h2></center>
         <div class="container">
             <div class="row">
               
               <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-                  <p>1	Estado de ranuras, rugosidades (huellas)</p>
-                  <p>2	Lados y bordes de ranura redondeados</p>										
-                  <p>3	Daños producidos por calor, salpicaduras de soldadura</p>
-                  <p>4	Desprendimiento de material en cuerpo</p>
-                  <p>5	Grietas hendiduras</p>
-                  <p>6	Picaduras o corrosion exesivas</p>
-                  <p>7	Desgaste excesivo, mellas o hendiduras</p>
-                  <p>8	Daños visibles o condiciones que causen duda sobre su uso</p>
-              </div>
-              <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-                <img src="/static/img/0411-1.jpg">
-              </div>
-              <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-                <img src="/static/img/0411-2.jpg">
-              </div>
+                
+                  <p>1	Identificación faltante o ilegible</p>
+                  <p>2	Daños por calor, salpicaduras, soldadura, golpes</p>										
+                  <p>3	Picaduras o corrosión excesivas</p>
+                  <p>4	Componentes de reemplazo no autorizados</p>
+                  <p>5	Componentes doblados, torcidos, estirados</p>
+                  <p>6	Daños visibles que causen duda</p>
+                  <p>7	Montaje incorrecto u otras condiciones</p>
+                  <p>8	Componentes alargados, agrietados o rotos</p>
+                  <p>9	Mellas o ranuras excesivas</p>
+                  <p>10	Capacidad de rotar, pivotar</p>
+                  <p>11	Daño excesivo hilos de rosca</p>
+                  <p>12	Modificaciones, soldaduras no autorizadas</p>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                    <p>A.- MANIVELA</p>
+                    <p>B.- BARRIL</p>										
+                    <p>C.- POSICIÓN CERRADA</p>
+                    <p>D.- POSICIÓN ABIERTA</p>
+                    <p>E.- INTERIOR DEL OJO</p>
+                    <p>F.- EXTERIOR DEL OJO</p>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                    <img src="/static/img/066-11.jpg">
+                </div>
+
+                
+              
+                
+
             </div>
+        
         </div>
+        <center><h2>ASME B30.10 (2019) Ganchos</h2></center>
+        <div class="container">
+            <div class="row">
+              
+              <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                
+                  <p>13	Identificación del fabricante faltante o ilegible</p>
+                  <p>14	Identificación de carga nominal faltante o ilegible</p>										
+                  <p>15	Picaduras excesivas o corrosión</p>
+                  <p>16	Grietas, mellas o hendiduras</p>
+                  <p>17	Cualquier desgaste  mas a 10% de gancho, pasador</p>
+                  <p>18	Deformación, dobladuras en plano del gancho</p>
+                  <p>19	Apertura de garganta  que no exceda 5% (6mm)</p>
+                  <p>20	Incapacidad de bloqueo</p>
+                  <p>21	Cualquier daño pestillo o defectuoso inoperativo (S/A)</p>
+                  <p>22	Unión de gancho,  fijación dañado, faltantes</p>
+                  <p>23	Desgaste de la rosca, daño o corrosión</p>
+                  <p>24	Exposición calor excesivo, soldado. no autorizadas</p>
+                  <p>25	Evidencia de alteraciones, perforación, rectificado, etc.</p>
+                </div>
+
+
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                    <p>A.- ASIENTO</p>
+                    <p>B.- PARTE INTERNA DEL OJO</p>										
+                    <p>C.- PARTE EXTERNA DEL OJO</p>
+                    <p>D.- APERTURA</p>
+                    <p>E.- DIAMETRO DE GANCHO </p>
+                </div>
+
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                    <img src="/static/img/066-2.jpg">
+                </div>
+
+               
+              
+                
+
+            </div>
+        
+        </div> 
+
         <center><h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1></center>
-        <h3>ESPECIFICACIONES DEL ACCESORIO Y RESULTADOS DE INSPECCIÓN</h3>
+
+            
+        <h3>ESPECIFICACIONES DEL ACCESORIO   INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
+
         <div class="form-group col-xs-12 col-sm-12 col-md-1  position-relative">
-            {{ form.num.label }} {{ form.num(class_="form-control") }}
-            {% for error in form.num.errors %}
+            {{ form.numero.label }} {{ form.numero(class_="form-control") }}
+            {% for error in form.numero.errors %}
                 <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.cod_enii.label }} {{ form.cod_enii(class_="form-control") }}
-            {% for error in form.cod_enii.errors %}
+            {{ form.codigo.label }} {{ form.codigo(class_="form-control") }}
+            {% for error in form.codigo.errors %}
                 <span style="color: red;"> {{ error }} </span>
             {% endfor %}
-        </div>
+        </div> 
 
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+       <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
             {{ form.ref.label }} {{ form.ref(class_="form-control") }}
             {% for error in form.ref.errors %}
                 <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
+
+
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.medidas.label }} {{ form.medidas(class_="form-control") }}
+            {% for error in form.medidas.errors %}
+                <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.cap.label }} {{ form.cap(class_="form-control") }}
+            {% for error in form.cap.errors %}
+                <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div> 
+
+       <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.gancho1.label }} {{ form.gancho1(class_="form-control") }}
+            {% for error in form.gancho1.errors %}
+                <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+                
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+             {{ form.gancho2.label }} {{ form.gancho2(class_="form-control") }}
+            {% for error in form.gancho2.errors %}
+                <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
         
+             
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-             {{ form.ancho.label }} {{ form.ancho(class_="form-control") }}
-            {% for error in form.ancho.errors %}
-                <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.diam.label }} {{ form.diam(class_="form-control") }}
-            {% for error in form.diam.errors %}
-                <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
             {{ form.vt.label }} {{ form.vt(class_="form-control") }}
             {% for error in form.vt.errors %}
                 <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+        <div class="form-group col-xs-12 col-sm-12 col-md-2 position-relative">
            {{ form.pt.label }} {{ form.pt(class_="form-control") }}
             {% for error in form.pt.errors %}
                 <span style="color: red;"> {{ error }} </span>
@@ -272,13 +361,12 @@
         <div class="col-12">
             {{ form.hidden_tag() }}
             {{ form.submit(class_="btn btn-primary") }}
-          </div>
+        </div>
       
     <hr>
+     
       
-      
-    </form> 
-   
+    </form>  
 </body>
 </html>
 {% endblock %}

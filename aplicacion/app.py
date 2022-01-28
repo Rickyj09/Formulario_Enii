@@ -8,7 +8,7 @@ from aplicacion.forms import check_list10, check_list11, check_list12,check_list
 from aplicacion.forms import check_list16, check_list17, check_list18, check_list19, check_list20, check_list21
 from aplicacion.forms import check_list22, check_list23, check_list24, check_list25, Publicaciones, CHECK_LIST_FIN
 from aplicacion.forms import prueba_carga,check_list1,prueba_carga3
-from aplicacion.forms import formu1,formu2,formu3,formu4,formu5,formu6,formu7,formu8,formu9,formu10,formu11,formu12
+from aplicacion.forms import formu1,formu2,formu3,formu4,formu5,formu6,formu7,formu8,formu9,formu10,formu11,formu12,formu13
 from aplicacion.forms import  LoginForm, UploadForm
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
@@ -549,6 +549,34 @@ def home_13():
         #return 'OK'
         return redirect(url_for('formu_13'))
     return render_template('home_13.html', form=form,datos=nom_form,desc=nom_form1)
+
+
+@app.route('/home_14', methods=['GET','POST'])
+@login_required
+def home_14():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id = 18;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 18;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(nom_form,nom_form1,fecha_insp,fecha_emi,fecha_exp,lugar_ins,nombre_ins,empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        #return 'OK'
+        return redirect(url_for('formu_14'))
+    return render_template('home_14.html', form=form,datos=nom_form,desc=nom_form1)
+
 
 
 @app.route('/formu_1', methods=['GET','POST'])
@@ -1279,6 +1307,64 @@ def formu_13():
         return redirect(url_for('reporte_foto1'))
         
     return render_template('formu_13.html', form=form)
+
+
+
+
+@app.route('/formu_14', methods=['GET','POST'])
+@login_required
+def formu_14():
+    form = formu13()
+    if form.validate_on_submit():
+        proc = request.form['proc']
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
+        proc_p = request.form['proc_p']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        equipo = request.form['equipo']
+        modelo = request.form['modelo']
+        iden = request.form['iden']
+        numero = request.form['numero']
+        codigo = request.form['codigo']
+        ref = request.form['ref']
+        medidas = request.form['medidas']
+        cap = request.form['cap']
+        gancho1 = request.form['gancho1']
+        gancho2 = request.form['gancho2']       
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur = mysql.connection.cursor()
+        cur.execute("select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        llave_form = cur.fetchone()
+        cur.execute("select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        fecha_form = cur.fetchone()
+        cur.execute('insert into form15 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,numero,codigo,ref,medidas,cap,gancho1,gancho2,vt,pt) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(llave_form,fecha_form,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,numero,codigo,ref,medidas,cap,gancho1,gancho2))
+        mysql.connection.commit()
+        return redirect(url_for('reporte_foto1'))
+        
+    return render_template('formu_14.html', form=form)
+
 
 
 
@@ -2654,6 +2740,332 @@ def CERTIFICADO_GM():
                             serie=serie,cod1=cod1,nom1=nom1,fec_cal1=fec_cal1,cod2=cod2,nom2=nom2,
                             fec_cal2=fec_cal2,cod3=cod3,nom3=nom3,fec_cal3=fec_cal3,cod4=cod4,nom4=nom4,
                             fec_cal4=fec_cal4,cod5=cod5,nom5=nom5,fec_cal5=fec_cal5)
+
+
+
+@app.route('/cert_for1', methods=['GET','POST'])
+@login_required
+def cert_for1():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select num from form2 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select cod_enii from form2 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_enii = cursor.fetchone()
+    cursor.execute("select ref from form2 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select ancho from form2 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ancho = cursor.fetchone()
+    cursor.execute("select diam from form2 where id_formulario = (select MAX(id_formulario) from formulario);")
+    diam = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    
+    print(numero)
+    return render_template('cert_for1.html',numero=numero,cod_enii=cod_enii, ref=ref,ancho=ancho,diam=diam,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for2', methods=['GET','POST'])
+@login_required
+def cert_for2():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select num from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select cod_enii from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_enii = cursor.fetchone()
+    cursor.execute("select ref from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select tipo_ter from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+    tipo_ter = cursor.fetchone()
+    cursor.execute("select medidas from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute("select capac from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    
+    print(numero)
+    return render_template('cert_for2.html',numero=numero,cod_enii=cod_enii, ref=ref,tipo_ter=tipo_ter,medidas=medidas,capac=capac,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for3', methods=['GET','POST'])
+@login_required
+def cert_for3():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select num from form4 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select cod_enii from form4 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_enii = cursor.fetchone()
+    cursor.execute("select ref from form4 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select tipo_ace from form4 where id_formulario = (select MAX(id_formulario) from formulario);")
+    tipo_ter = cursor.fetchone()
+    cursor.execute("select medidas from form4 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute("select capac from form4 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    
+    print(numero)
+    return render_template('cert_for3.html',numero=numero,cod_enii=cod_enii, ref=ref,tipo_ter=tipo_ter,medidas=medidas,capac=capac,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for4', methods=['GET','POST'])
+@login_required
+def cert_for4():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select num from form5 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select cod_enii from form5 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_enii = cursor.fetchone()
+    cursor.execute("select ref from form5 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select tipo from form5 where id_formulario = (select MAX(id_formulario) from formulario);")
+    tipo_ter = cursor.fetchone()
+    cursor.execute("select medidas from form5 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute("select capac from form5 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    
+    print(numero)
+    return render_template('cert_for4.html',numero=numero,cod_enii=cod_enii, ref=ref,tipo_ter=tipo_ter,medidas=medidas,capac=capac,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+
+
+@app.route('/cert_for5', methods=['GET','POST'])
+@login_required
+def cert_for5():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select num from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select cod_enii from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_enii = cursor.fetchone()
+    cursor.execute("select ref from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select tipo_il from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+    tipo_ter = cursor.fetchone()
+    cursor.execute("select medidas from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute("select capac from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    
+    print(numero)
+    return render_template('cert_for5.html',numero=numero,cod_enii=cod_enii, ref=ref,tipo_ter=tipo_ter,medidas=medidas,capac=capac,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for6', methods=['GET','POST'])
+@login_required
+def cert_for6():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select num from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select cod_enii from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_enii = cursor.fetchone()
+    cursor.execute("select ref from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select tipo_il from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
+    tipo_ter = cursor.fetchone()
+    cursor.execute("select medidas from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute("select capac from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    
+    print(numero)
+    return render_template('cert_for6.html',numero=numero,cod_enii=cod_enii, ref=ref,tipo_ter=tipo_ter,medidas=medidas,capac=capac,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for7', methods=['GET','POST'])
+@login_required
+def cert_for7():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select marca_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute("select modelo_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute("select iden_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute("select capac_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for7.html',marca_pk=marca_pk,modelo_pk=modelo_pk, iden_pk=iden_pk,capac_pk=capac_pk,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for8', methods=['GET','POST'])
+@login_required
+def cert_for8():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select equipo from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
+    equipo = cursor.fetchone()
+    cursor.execute("select marca_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute("select modelo_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute("select iden_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute("select capac_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for8.html',equipo=equipo,marca_pk=marca_pk,modelo_pk=modelo_pk,iden_pk=iden_pk,capac_pk=capac_pk,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+
+@app.route('/cert_for9', methods=['GET','POST'])
+@login_required
+def cert_for9():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select marca_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute("select modelo_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute("select iden_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute("select capac_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for9.html',marca_pk=marca_pk,modelo_pk=modelo_pk,iden_pk=iden_pk,capac_pk=capac_pk,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+
+@app.route('/cert_for10', methods=['GET','POST'])
+@login_required
+def cert_for10():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select marca_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_hd = cursor.fetchone()
+    cursor.execute("select iden_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_hd = cursor.fetchone()
+    cursor.execute("select medidas_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas_hd = cursor.fetchone()
+    cursor.execute("select capac_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_hd = cursor.fetchone()
+    cursor.execute("select marca_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_hi = cursor.fetchone()
+    cursor.execute("select iden_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_hi = cursor.fetchone()
+    cursor.execute("select medidas_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas_hi = cursor.fetchone()
+    cursor.execute("select capac_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_hi = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for10.html',marca_hd=marca_hd,iden_hd=iden_hd,medidas_hd=medidas_hd,capac_hd=capac_hd,
+                                             marca_hi=marca_hi,iden_hi=iden_hi,medidas_hi=medidas_hi,capac_hi=capac_hi,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for11', methods=['GET','POST'])
+@login_required
+def cert_for11():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select marca_pas from form12 where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pas = cursor.fetchone()
+    cursor.execute("select modelo_pas from form12  where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pas = cursor.fetchone()
+    cursor.execute("select iden_pas from form12 where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pas = cursor.fetchone()
+    cursor.execute("select cap_pas from form12 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cap_pas = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for11.html',marca_pas=marca_pas,modelo_pas=modelo_pas,iden_pas=iden_pas,cap_pas=cap_pas,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+
+@app.route('/cert_for12', methods=['GET','POST'])
+@login_required
+def cert_for12():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select marca_pas from form13 where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pas = cursor.fetchone()
+    cursor.execute("select modelo_pas from form13  where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pas = cursor.fetchone()
+    cursor.execute("select iden_pas from form13 where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pas = cursor.fetchone()
+    cursor.execute("select cap_pas from form13 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cap_pas = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for12.html',marca_pas=marca_pas,modelo_pas=modelo_pas,iden_pas=iden_pas,cap_pas=cap_pas,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for13', methods=['GET','POST'])
+@login_required
+def cert_for13():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select numero from form14 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select tipo_acc from form14 where id_formulario = (select MAX(id_formulario) from formulario);")
+    tipo_acc = cursor.fetchone()
+    cursor.execute("select codigo from form14 where id_formulario = (select MAX(id_formulario) from formulario);")
+    codigo = cursor.fetchone()
+    cursor.execute("select ref from form14 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select medidas from form14 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute("select cap from form14 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cap = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for13.html',numero=numero,tipo_acc=tipo_acc,codigo=codigo,ref=ref,medidas=medidas,cap=cap,fec_emi=fec_emi,fec_exp=fec_exp)
+
+
+@app.route('/cert_for14', methods=['GET','POST'])
+@login_required
+def cert_for14():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select numero from form15 where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute("select equipo from form15 where id_formulario = (select MAX(id_formulario) from formulario);")
+    equipo = cursor.fetchone()
+    cursor.execute("select codigo from form15 where id_formulario = (select MAX(id_formulario) from formulario);")
+    codigo = cursor.fetchone()
+    cursor.execute("select ref from form15 where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute("select medidas from form15 where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute("select cap from form14 where id_formulario = (select MAX(id_formulario) from formulario);")
+    cap = cursor.fetchone()
+    cursor.execute("select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute("select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for14.html',numero=numero,equipo=equipo,codigo=codigo,ref=ref,medidas=medidas,cap=cap,fec_emi=fec_emi,fec_exp=fec_exp)
+
 
 
 @app.errorhandler(404)

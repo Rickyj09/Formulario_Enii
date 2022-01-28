@@ -1,0 +1,85 @@
+{% extends 'layout_cert.html' %}
+{%block title%} CERTIFICADO INSPECCIÓN PASTECA PRINCIPAL{%endblock%}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/static/base.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+</head>
+<body>
+  <center><h2> INSPECCIÓN PASTECA PRINCIPAL</h2></center>
+  <hr>
+  <div class="col-md-10">
+    <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
+    <div class="panel panel-default">
+      <table class="table table-bordered">
+        <tr>
+          <th>MARCA</th>
+          <th>MODELO</th>
+          <th>IDENTIFICACIÓN</th>
+          <th>CAPACIDAD</th>
+        </tr>
+        
+        <tr>
+              <td>{{marca_pas.0}}</td>
+              <td>{{modelo_pas.0}}</td>
+              <td>{{iden_pas.0}}</td>
+              <td>{{cap_pas.0}}</td>
+        </tr>
+
+    
+       
+      </table>
+      
+  </div>
+</div>
+
+<h2>RESULTADOS DE INSPECCIÓN</h2>
+
+<p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quien firma, certifica que en la fecha de esta inspección, los accesorios arriba descritos, fueron sometidos a una prueba de ensayo no destructivo de Inspección Visual,  según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes, según ASTM E165/E165M-18 y la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  ASME B30.9:2018 Eslingas, ASME B30.10:2019 Ganchos, ASME B30.26:2015 Aparejos,  para la emisión del presente CERTIFICADO  con RESULTADO APROBADO.</p>
+
+<p>Los accesorios  fueron  preparados  e  inspeccionados,  de  acuerdo con los requerimientos  del procedimiento aplicado  PR-INSP-006 Inspección visual,  PR-INSP-007 Líquidos penetrantes.</p>
+
+<p>Este certificado hace referencia a las condiciones que presentan los accesorios al momento de la inspección, sin ninguna obligación o responsabilidad posterior</p>
+<br>
+<hr>
+
+
+<form class="row g-3 needs-validation" novalidate></form>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>Fecha de emisión del certificado (Certificate issue date): {{ fec_emi.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ fec_exp.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>Fecha de próxima de inspección (Next inspection date): {{ fec_exp.0 }}</h4>
+  </div>
+</form> 
+
+<br>
+<hr>
+
+<center>
+  <h2>
+    NOMBRE
+  </h2>
+</center>
+
+<center>
+  <h2>
+    GERENTE TECNICO ENII SA
+  </h2>
+</center>
+
+</body>
+</html>
+
+{% endblock %}
