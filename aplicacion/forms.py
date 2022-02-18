@@ -5,25 +5,28 @@ from wtforms.fields.html5 import EmailField
 from flask_wtf.file import FileField
 from wtforms.validators import Required
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, TextAreaField, FileField, SelectField,RadioField
+from wtforms import StringField, SubmitField, PasswordField, TextAreaField, FileField, SelectField, RadioField
 from wtforms import FloatField
-from wtforms.validators import DataRequired, Email, Length, ValidationError,AnyOf
+from wtforms.validators import DataRequired, Email, Length, ValidationError, AnyOf
 from wtforms.fields.html5 import DateField
 from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import Required
 
-def validar_obvio(form,field):
-    if field.data=="12345678":
+
+def validar_obvio(form, field):
+    if field.data == "12345678":
         raise ValidationError('La clave debe ser más segura!!')
+
 
 class Publicaciones(FlaskForm):
     post = TextAreaField('Notas de las fotos', validators=[
         DataRequired(), Length(min=1, max=140)
     ])
     imagen = FileField('image')
- 
+
     submit = SubmitField('Subir')
+
 
 class FormArticulo(FlaskForm):
     nombre = StringField("Nombre:",
@@ -41,6 +44,7 @@ class FormArticulo(FlaskForm):
                          )
     CategoriaId = SelectField("Categoría:", coerce=int)
     submit = SubmitField('Enviar')
+
 
 class FormSINO(FlaskForm):
     si = SubmitField('Si')
@@ -62,7 +66,8 @@ class FormUsuario(FlaskForm):
 
 
 class datos_equipo(FlaskForm):
-    de_marca = StringField('MARCA', validators=[DataRequired()],render_kw={"placeholder": "Marca"})
+    de_marca = StringField('MARCA', validators=[DataRequired()], render_kw={
+                           "placeholder": "Marca"})
     de_serie = StringField('SERIE', validators=[DataRequired()])
     de_tipo = StringField('TIPO', validators=[DataRequired()])
     de_modelo = StringField('MODELO', validators=[DataRequired()])
@@ -70,7 +75,7 @@ class datos_equipo(FlaskForm):
     de_kilometraje = StringField('KILOMETRAJE', validators=[DataRequired()])
     de_anio = StringField('AÑO', validators=[DataRequired()])
     de_cod_interno = StringField('CODIGO INTERNO', validators=[DataRequired()])
-    dm_marca =  StringField('MARCA', validators=[DataRequired()])
+    dm_marca = StringField('MARCA', validators=[DataRequired()])
     dm_serie = StringField('SERIE', validators=[DataRequired()])
     dm_modelo = StringField('MODELO', validators=[DataRequired()])
     dm_horometro = StringField('HORÓMETRO', validators=[DataRequired()])
@@ -86,43 +91,59 @@ class datos_equipo(FlaskForm):
     pp_capacidad = StringField('CAPACIDAD ', validators=[DataRequired()])
     pp_modelo = StringField('MODELO', validators=[DataRequired()])
     pp_serie_ref = StringField('SERIE/REFERENCIA', validators=[DataRequired()])
-    pp_diam_clab = StringField('DIAMETRO DE CABLE', validators=[DataRequired()])
+    pp_diam_clab = StringField(
+        'DIAMETRO DE CABLE', validators=[DataRequired()])
     ps_marca = StringField('MARCA', validators=[DataRequired()])
     ps_capacidad = StringField('CAPACIDAD ', validators=[DataRequired()])
     ps_modelo = StringField('MODELO', validators=[DataRequired()])
     ps_serieref = StringField('SERIE/REFERENCIA', validators=[DataRequired()])
-    ps_diam_clab = StringField('DIAMETRO DE CABLE', validators=[DataRequired()])
-    conf_caratula = RadioField('', choices=[('c', 'Conforme'), ('NC', 'No Conforme')],default = 'C',render_kw={}, id='conf_caratula')
+    ps_diam_clab = StringField(
+        'DIAMETRO DE CABLE', validators=[DataRequired()])
+    conf_caratula = RadioField('', choices=[(
+        'c', 'Conforme'), ('NC', 'No Conforme')], default='C', render_kw={}, id='conf_caratula')
 
     submit = SubmitField('Enviar')
 
 
 class formu1(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[(
+        'AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -132,37 +153,53 @@ class formu1(FlaskForm):
     cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
     ancho = StringField('ANCHO (mm)', validators=[DataRequired()])
     diam = StringField('DIÁMETRO (mm)', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+
     submit = SubmitField('Enviar')
 
+
 class formu2(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -173,41 +210,57 @@ class formu2(FlaskForm):
     tipo_ter = StringField('TIPO DE TERMINAL', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
-    dia_elin =  StringField('DIAMETRO ESLINGA (mm)', validators=[DataRequired()])
-    med_aces =  StringField('MEDIDA DEL ACCESORIO (mm)', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    
+    dia_elin = StringField('DIAMETRO ESLINGA (mm)',
+                           validators=[DataRequired()])
+    med_aces = StringField('MEDIDA DEL ACCESORIO (mm)',
+                           validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+
     submit = SubmitField('Enviar')
 
 
-
 class formu3(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -218,25 +271,33 @@ class formu3(FlaskForm):
     eslabon = StringField('ESLABÓN (diámetro) mm', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
-    gancho1 =  StringField('GANCHO 1 (E-B) mm', validators=[DataRequired()])
-    gancho2 =  StringField('GANCHO 2 (E-B) mm', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    tipo_ace = StringField('TIPO DE ACCESORIO (mm)', validators=[DataRequired()]) 
+    gancho1 = StringField('GANCHO 1 (E-B) mm', validators=[DataRequired()])
+    gancho2 = StringField('GANCHO 2 (E-B) mm', validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+    tipo_ace = StringField('TIPO DE ACCESORIO (mm)',
+                           validators=[DataRequired()])
 
     submit = SubmitField('Enviar')
 
 
 class formu4(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -247,39 +308,52 @@ class formu4(FlaskForm):
     tipo = StringField('TIPO', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-      
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
 
     submit = SubmitField('Enviar')
 
 
 class formu5(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    elem_en =  StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    elem_en = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -290,40 +364,55 @@ class formu5(FlaskForm):
     asiento = StringField('ASIENTO (mm)', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
-    garganta =  StringField('GARGANTA (mm)', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    
-    submit = SubmitField('Enviar')    
+    garganta = StringField('GARGANTA (mm)', validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+
+    submit = SubmitField('Enviar')
 
 
 class formu6(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    elem_en =  StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    elem_en = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -331,167 +420,229 @@ class formu6(FlaskForm):
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
-    diam_cue = StringField('DIÁMETRO DE CUERPO (mm)', validators=[DataRequired()])
+    diam_cue = StringField('DIÁMETRO DE CUERPO (mm)',
+                           validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    
-    submit = SubmitField('Enviar') 
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
 
-
-class formu7(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
-    revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
-    detalle = StringField('Detalla:', validators=[])
-    elem_en =  StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
-    revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
-    tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
-    mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
-    equipo = StringField('EQUIPO', validators=[DataRequired()])
-    marca = StringField('MARCA', validators=[DataRequired()])
-    iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
-    marca_pk = StringField('MARCA', validators=[DataRequired()])
-    iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    modelo_pk = StringField('MODELO', validators=[DataRequired()])
-    capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
-    dia_sup = StringField('Ø diámetro superior (A)  mm', validators=[DataRequired()])
-    dia_cen = StringField('Ø  diámetro central (B) mm', validators=[DataRequired()])
-    dia_inf = StringField('Ø  diámetro inferior (C) mm', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    
-    submit = SubmitField('Enviar') 
-
-
-
-class formu8(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
-    revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
-    detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
-    revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
-    tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
-    mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
-    equipo = StringField('EQUIPO', validators=[DataRequired()])
-    marca = StringField('MARCA', validators=[DataRequired()])
-    iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
-    marca_pk = StringField('MARCA', validators=[DataRequired()])
-    iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    modelo_pk = StringField('MODELO', validators=[DataRequired()])
-    capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    
-    submit = SubmitField('Enviar') 
-
-
-class formu9(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
-    revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
-    detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
-    revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
-    tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
-    mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
-    marca_pk = StringField('MARCA', validators=[DataRequired()])
-    iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    modelo_pk = StringField('MODELO', validators=[DataRequired()])
-    capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
-    
     submit = SubmitField('Enviar')
 
 
+class formu7(FlaskForm):
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
+    revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
+    detalle = StringField('Detalla:', validators=[])
+    elem_en = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
+    tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
+    mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+    equipo = StringField('EQUIPO', validators=[DataRequired()])
+    marca = StringField('MARCA', validators=[DataRequired()])
+    iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
+    marca_pk = StringField('MARCA', validators=[DataRequired()])
+    iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
+    modelo_pk = StringField('MODELO', validators=[DataRequired()])
+    capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
+    dia_sup = StringField('Ø diámetro superior (A)  mm',
+                          validators=[DataRequired()])
+    dia_cen = StringField('Ø  diámetro central (B) mm',
+                          validators=[DataRequired()])
+    dia_inf = StringField('Ø  diámetro inferior (C) mm',
+                          validators=[DataRequired()])
+    obs = StringField('OBSERVACIONES', validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+
+    submit = SubmitField('Enviar')
+
+
+class formu8(FlaskForm):
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
+    revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
+    detalle = StringField('Detalla:', validators=[])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
+    tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
+    mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+    equipo = StringField('EQUIPO', validators=[DataRequired()])
+    marca = StringField('MARCA', validators=[DataRequired()])
+    iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
+    marca_pk = StringField('MARCA', validators=[DataRequired()])
+    iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
+    modelo_pk = StringField('MODELO', validators=[DataRequired()])
+    capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
+    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+
+    submit = SubmitField('Enviar')
+
+
+class formu9(FlaskForm):
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
+    revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
+    detalle = StringField('Detalla:', validators=[])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
+    tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
+    mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+    marca_pk = StringField('MARCA', validators=[DataRequired()])
+    iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
+    modelo_pk = StringField('MODELO', validators=[DataRequired()])
+    capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
+    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+
+    submit = SubmitField('Enviar')
+
 
 class formu10(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -499,165 +650,231 @@ class formu10(FlaskForm):
     marca_hd = StringField('MARCA', validators=[DataRequired()])
     iden_hd = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     modelo_hd = StringField('MODELO', validators=[DataRequired()])
-    capac_hd  = StringField('CAPACIDAD', validators=[DataRequired()])
-    medidas_hd  = StringField('MEDIDAS (ESPESOR, ANCHO, LONGITUD)(mm)', validators=[DataRequired()])    
+    capac_hd = StringField('CAPACIDAD', validators=[DataRequired()])
+    medidas_hd = StringField(
+        'MEDIDAS (ESPESOR, ANCHO, LONGITUD)(mm)', validators=[DataRequired()])
     marca_hi = StringField('MARCA', validators=[DataRequired()])
     iden_hi = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     modelo_hi = StringField('MODELO', validators=[DataRequired()])
-    capac_hi  = StringField('CAPACIDAD', validators=[DataRequired()])
-    medidas_hi  = StringField('MEDIDAS (ESPESOR, ANCHO, LONGITUD)(mm)', validators=[DataRequired()])
+    capac_hi = StringField('CAPACIDAD', validators=[DataRequired()])
+    medidas_hi = StringField(
+        'MEDIDAS (ESPESOR, ANCHO, LONGITUD)(mm)', validators=[DataRequired()])
     marca_hd1 = StringField('MARCA', validators=[DataRequired()])
     iden_hd1 = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     marca_hi1 = StringField('MARCA', validators=[DataRequired()])
     iden_hi1 = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    med_asi_hd =  StringField('Medida de asiento (Horquilla derecha)(mm)', validators=[DataRequired()])
-    med_asi_hi =  StringField('Medida de asiento(Horquilla Izquierda)(mm)', validators=[DataRequired()])  
+    med_asi_hd = StringField(
+        'Medida de asiento (Horquilla derecha)(mm)', validators=[DataRequired()])
+    med_asi_hi = StringField(
+        'Medida de asiento(Horquilla Izquierda)(mm)', validators=[DataRequired()])
     obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
 
     submit = SubmitField('Enviar')
 
 
-
-
-
-
 class formu11(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     marca_pas = StringField('MARCA', validators=[DataRequired()])
     iden_pas = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    modelo_pas  = StringField('MODELO', validators=[DataRequired()])   
+    modelo_pas = StringField('MODELO', validators=[DataRequired()])
     cap_pas = StringField('CAPACIDAD', validators=[DataRequired()])
     numero = StringField('Nº', validators=[DataRequired()])
-    marca  = StringField('MARCA', validators=[DataRequired()])
-    iden1  = StringField('IDENTIFICACIÓN', validators=[DataRequired()])    
+    marca = StringField('MARCA', validators=[DataRequired()])
+    iden1 = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
 
     submit = SubmitField('Enviar')
 
 
-
 class formu12(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    c1 = RadioField('1 Identificación faltante o ilegible ',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c1')
-    c2 = RadioField('2 Daños por calor, salpicaduras, soldadura, golpes ',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c2')
-    c3 = RadioField('3 Picaduras o corrosión excesivas',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c3')
-    c4 = RadioField('4 Componentes de reemplazo no autorizados',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c4')
-    c5 = RadioField('5 Componentes doblados, torcidos, estirados',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c5')
-    c6 = RadioField('6 Daños visibles que causen duda',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c6')
-    c7 = RadioField('7 Montaje incorrecto u otras condiciones',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c7')
-    c8 = RadioField('8 Componentes alargados, agrietados o rotos',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c8')
-    c9 = RadioField('9 Mellas o ranuras excesivas',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c9')
-    c10 = RadioField('10 Capacidad de rotar, pivotar',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c10')
-    c11 = RadioField('11 Daño excesivo hilos de rosca',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c11')
-    c12 = RadioField('12 Modificaciones, soldaduras no autorizadas',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c12')
-    c13 = RadioField('13 Reducción + del 10% en cualquier punto cuerpo',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c13')
-    c14 = RadioField('14 Decoloración áreas frágiles o rígidas en cualquier parte',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c14')
-    c15 = RadioField('15 Indicaciones de cable dañado',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c15')
-    c16 = RadioField('16 Carbonización de cualquier parte de cinta',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c16')
-    c17 = RadioField('17 Tuercas sueltas, faltantes, pernos, pasadores de chaveta',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c17')
-    c18 = RadioField('18 Capacidad de rotar, pivotar',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c18')
-    c19 = RadioField('19 Costuras rotas o desgastadas en empalmes de carga',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c19')
-    c20 = RadioField('20 Nudos en cualquier parte de la cinta',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c20')
-    c21 = RadioField('21 Modificaciones, soldaduras no autorizadas.',choices=[('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')],default = 'A', id='c21')
+    c1 = RadioField('1 Identificación faltante o ilegible ', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c1')
+    c2 = RadioField('2 Daños por calor, salpicaduras, soldadura, golpes ', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c2')
+    c3 = RadioField('3 Picaduras o corrosión excesivas', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c3')
+    c4 = RadioField('4 Componentes de reemplazo no autorizados', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c4')
+    c5 = RadioField('5 Componentes doblados, torcidos, estirados', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c5')
+    c6 = RadioField('6 Daños visibles que causen duda', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c6')
+    c7 = RadioField('7 Montaje incorrecto u otras condiciones', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c7')
+    c8 = RadioField('8 Componentes alargados, agrietados o rotos', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c8')
+    c9 = RadioField('9 Mellas o ranuras excesivas', choices=[
+                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c9')
+    c10 = RadioField('10 Capacidad de rotar, pivotar', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c10')
+    c11 = RadioField('11 Daño excesivo hilos de rosca', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c11')
+    c12 = RadioField('12 Modificaciones, soldaduras no autorizadas', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c12')
+    c13 = RadioField('13 Reducción + del 10% en cualquier punto cuerpo', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c13')
+    c14 = RadioField('14 Decoloración áreas frágiles o rígidas en cualquier parte', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c14')
+    c15 = RadioField('15 Indicaciones de cable dañado', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c15')
+    c16 = RadioField('16 Carbonización de cualquier parte de cinta', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c16')
+    c17 = RadioField('17 Tuercas sueltas, faltantes, pernos, pasadores de chaveta', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c17')
+    c18 = RadioField('18 Capacidad de rotar, pivotar', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c18')
+    c19 = RadioField('19 Costuras rotas o desgastadas en empalmes de carga', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c19')
+    c20 = RadioField('20 Nudos en cualquier parte de la cinta', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c20')
+    c21 = RadioField('21 Modificaciones, soldaduras no autorizadas.', choices=[
+                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c21')
     tipo_acc = StringField('TIPO DE ACCESORIO ', validators=[DataRequired()])
     numero = StringField('Nº', validators=[DataRequired()])
     codigo = StringField('CÓDIGO ENII', validators=[DataRequired()])
-    ref  = StringField('REFERENCIA', validators=[DataRequired()])   
+    ref = StringField('REFERENCIA', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
-    cap  = StringField('CAPACIDAD (kg)', validators=[DataRequired()])
-    medida_cu  = StringField('MEDIDA DEL CUERPO (mm)', validators=[DataRequired()])    
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
+    cap = StringField('CAPACIDAD (kg)', validators=[DataRequired()])
+    medida_cu = StringField('MEDIDA DEL CUERPO (mm)',
+                            validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
 
     submit = SubmitField('Enviar')
 
 
 class formu13(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()],render_kw={"placeholder": "PROCEDIMIENTO Nº"})
+    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
+                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    nivel_il = StringField('NIVEL DE ILUMINACIÓN:', validators=[DataRequired()])
-    con_sup = StringField('CONDICIÓN SUPERFICIAL:', validators=[DataRequired()])
-    met_insp = RadioField('MÉTODO DE INSPECCIÓN:',choices=[('D', 'DIRECTA'), ('I', 'INDIRECTA')],default = 'D',render_kw={}, id='met_insp')
-    tipo_il = RadioField('TIPO DE ILUMINACIÓN:',choices=[('N', 'NATURAL'), ('A', 'ASISTIDA')],default = 'N',render_kw={}, id='tipo_il')
-    check1 = SelectField('ESPEJOS:', choices=[(' ',' '),('X', 'X')])
-    check2 = SelectField('LENTES:', choices=[(' ',' '),('X', 'X')])
-    check3 = SelectField(u'OTROS:', choices=[(' ',' '),('X', 'X')])
+    nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
+                           validators=[DataRequired()])
+    con_sup = StringField('CONDICIÓN SUPERFICIAL:',
+                          validators=[DataRequired()])
+    met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
+        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+    tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
+                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+    check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
+    check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
+    check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p =  StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
-    temp_ens = StringField('TEMPERATURA DE ENSAYO', validators=[DataRequired()])
+    temp_ens = StringField('TEMPERATURA DE ENSAYO',
+                           validators=[DataRequired()])
     tipo_il_p = StringField('TIPO DE ILUMINACIÓN', validators=[DataRequired()])
-    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN', validators=[DataRequired()])
+    nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
+                             validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:',choices=[('A', 'AMBIENTE'), ('H', 'HORNO')],default = 'A',render_kw={}, id='tipo_sec')
-    tipo_pen =  StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN', validators=[DataRequired()])
-    met_rem =  StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR', validators=[DataRequired()])
-    for_rev =  StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
+                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
+    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
+                            validators=[DataRequired()])
+    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
+                           validators=[DataRequired()])
+    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
+    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
+    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
+                           validators=[DataRequired()])
+    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
+    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
+                             validators=[DataRequired()])
     tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
@@ -665,15 +882,16 @@ class formu13(FlaskForm):
     numero = StringField('Nº', validators=[DataRequired()])
     codigo = StringField('CÓDIGO ENII', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
-    medidas  = StringField('MEDIDAS (mm)', validators=[DataRequired()])   
+    medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     cap = StringField('CAPACIDAD (kg)', validators=[DataRequired()])
     gancho1 = StringField('GANCHO 1 (A-E) mm', validators=[DataRequired()])
     gancho2 = StringField('GANCHO 2 (A-E) mm', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)',choices=[('A', 'Aprobado'), ('R', 'Rechazado')],default = 'A', id='pt')
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
 
     submit = SubmitField('Enviar')
-
 
 
 class CHECK_LIST():
@@ -681,372 +899,571 @@ class CHECK_LIST():
 
 
 class check_list1(FlaskForm):
-    check1 = RadioField('1.- Matricula Doc Identificación',choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve')],default = 'S', id='check1')
-    check2 = RadioField('2. Manual de Operación', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('3. Manual de servicio-partes', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('4. Programa de Mantenimiento', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('5. Registros de Reparaciones', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA', 'No Aplica')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('6. Tablas de Carga', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('7. File de certificaciones', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check7')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-    
+    check1 = RadioField('1.- Matricula Doc Identificación', choices=[
+                        ('S', 'Satisfactorio'), ('DL', 'Defecto Leve')], default='S', id='check1')
+    check2 = RadioField('2. Manual de Operación', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('3. Manual de servicio-partes', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('4. Programa de Mantenimiento', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('5. Registros de Reparaciones', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('6. Tablas de Carga', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('7. File de certificaciones', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check7')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
 
 
 class check_list2(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check7')
-    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check8')
-    check9 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check9')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-    
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check7')
+    check8 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check8')
+    check9 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check9')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
+
 
 class check_list3(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check5')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')  
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list4(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check7')
-    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve'),('NA','No Aplica')],default = 'S',render_kw={}, id='check8')
-    check9 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check9')
-    check10 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check10')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-    
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DL', 'Defecto Leve'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check7')
+    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DL', 'Defecto Leve'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check8')
+    check9 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check9')
+    check10 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check10')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
+
 
 class check_list5(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-    
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
+
 
 class check_list6(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check7')
-    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check8')
-    check9 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve'),('NA','No Aplica')],default = 'S',render_kw={}, id='check9')
-    check10 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check10')
-    check11 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check11')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-    
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check7')
+    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check8')
+    check9 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DL', 'Defecto Leve'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check9')
+    check10 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check10')
+    check11 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check11')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
+
 
 class check_list7(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')  
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DL', 'Defecto Leve')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DL', 'Defecto Leve')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
 
-   
 
 class check_list8(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones') 
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list9(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check6')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-
-    submit = SubmitField('Grabar')  
-
-class check_list10(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check6')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones') 
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check6')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
 
+
+class check_list10(FlaskForm):
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check6')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
+    submit = SubmitField('Grabar')
+
+
 class check_list11(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check7')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check7')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
 
 
 class check_list12(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list13(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list14(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve')],default = 'S',render_kw={}, id='check4')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DL', 'Defecto Leve')], default='S', render_kw={}, id='check4')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list15(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check5')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DL', 'Defecto Leve')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check5')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list16(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list17(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check7')
-    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check8')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-   
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check7')
+    check8 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check8')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
+
 
 class check_list18(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check7')
-    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check8')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-   
-   
-    submit = SubmitField('Grabar')
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check7')
+    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check8')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
+    submit = SubmitField('Grabar')
 
 
 class check_list19(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve'),('NA','No Aplica')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DL', 'Defecto Leve'),('NA','No Aplica')],default = 'S',render_kw={}, id='check7')
-    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check8')
-    check9 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check9')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DL', 'Defecto Leve'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DL', 'Defecto Leve'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check7')
+    check8 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check8')
+    check9 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check9')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
 
     submit = SubmitField('Grabar')
+
 
 class check_list20(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check7')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-        
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check7')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
 
+
 class check_list21(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check5')
-    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check6')
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check7')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-    
+    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check5')
+    check6 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check6')
+    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check7')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
 
 
 class check_list22(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-        
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
 
+
 class check_list23(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-        
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
 
 
 class check_list24(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-        
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
 
 
 class check_list25(FlaskForm):
-    check1 = RadioField(u'CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1')
-    check2 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2')
-    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave'),('NA','No Aplica')],default = 'S',render_kw={}, id='check3')
-    check4 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
-    check5 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check5')
-    checkobs = TextAreaField('OBSERVACIONES', validators=[],render_kw={},id='observaciones')
-        
+    check1 = RadioField(u'CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1')
+    check2 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2')
+    check3 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), (
+        'DG', 'Defecto Grave'), ('NA', 'No Aplica')], default='S', render_kw={}, id='check3')
+    check4 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
+    check5 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check5')
+    checkobs = TextAreaField(
+        'OBSERVACIONES', validators=[], render_kw={}, id='observaciones')
+
     submit = SubmitField('Grabar')
 
 
 class CHECK_LIST_FIN(FlaskForm):
-    check1 = StringField('ZONA INSPECCIONADA ', validators=[],render_kw={})
-    check2 = StringField('ENSAYO APLICADO', validators=[],render_kw={})
-    check3 = StringField('REFERENCIA', validators=[],render_kw={})
-    check4 = StringField('ZONA INSPECCIONADA ', validators=[],render_kw={})
-    check5 = StringField('ENSAYO APLICADO', validators=[],render_kw={})
-    check6 = StringField('REFERENCIA', validators=[],render_kw={})
-    check7 = RadioField('CONDICIÓN', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check4')
+    check1 = StringField('ZONA INSPECCIONADA ', validators=[], render_kw={})
+    check2 = StringField('ENSAYO APLICADO', validators=[], render_kw={})
+    check3 = StringField('REFERENCIA', validators=[], render_kw={})
+    check4 = StringField('ZONA INSPECCIONADA ', validators=[], render_kw={})
+    check5 = StringField('ENSAYO APLICADO', validators=[], render_kw={})
+    check6 = StringField('REFERENCIA', validators=[], render_kw={})
+    check7 = RadioField('CONDICIÓN', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check4')
 
     submit = SubmitField('Grabar')
 
 
 class prueba_carga(FlaskForm):
-    conforme = RadioField('',choices=[('c', 'Conforme'),('nc','No Conforme')],render_kw={}, id='conforme')
-    carga_utli_est = FloatField('CARGA UTILIZADA',validators=[DataRequired()])
-    peso_carga_est = FloatField('PESO CARGA',validators=[DataRequired()])
-    peso_aparejo_est = FloatField('PESO APAREJOS',validators=[DataRequired()])
+    conforme = RadioField('', choices=[
+                          ('c', 'Conforme'), ('nc', 'No Conforme')], render_kw={}, id='conforme')
+    carga_utli_est = FloatField('CARGA UTILIZADA', validators=[DataRequired()])
+    peso_carga_est = FloatField('PESO CARGA', validators=[DataRequired()])
+    peso_aparejo_est = FloatField('PESO APAREJOS', validators=[DataRequired()])
     peso_total = FloatField('PESO TOTAL')
-    long_pluma_est = FloatField('Longitud Pluma',validators=[DataRequired()])
-    rad_oper_est = FloatField('Radio de Operación',validators=[DataRequired()])
-    ang_pluma_est = FloatField('Angulo de Pluma (°)',validators=[DataRequired()])
-    cap_maxima_est = FloatField('Capacidad Máxima',validators=[DataRequired()])
-    carga = FloatField('Carga',validators=[DataRequired()])
-    ESTAB1 = FloatField('ESTAB. 1',validators=[DataRequired()])
-    ESTAB2 = FloatField('ESTAB. 2',validators=[DataRequired()])
-    ESTAB3 = FloatField('ESTAB. 3',validators=[DataRequired()])
-    ESTAB4 = FloatField('ESTAB. 4',validators=[DataRequired()])
-    carga2 = FloatField('Carga',validators=[DataRequired()])
-    ESTAB12 = FloatField('ESTAB. 1',validators=[DataRequired()])
-    ESTAB22 = FloatField('ESTAB. 2',validators=[DataRequired()])
-    ESTAB32 = FloatField('ESTAB. 3',validators=[DataRequired()])
-    ESTAB42 = FloatField('ESTAB. 4',validators=[DataRequired()])
-    carga3 = FloatField('Carga',validators=[DataRequired()])
-    ESTAB13 = FloatField('ESTAB. 1',validators=[DataRequired()])
-    ESTAB23 = FloatField('ESTAB. 2',validators=[DataRequired()])
-    ESTAB33 = FloatField('ESTAB. 3',validators=[DataRequired()])
-    ESTAB43 = FloatField('ESTAB. 4',validators=[DataRequired()])
-    
+    long_pluma_est = FloatField('Longitud Pluma', validators=[DataRequired()])
+    rad_oper_est = FloatField('Radio de Operación',
+                              validators=[DataRequired()])
+    ang_pluma_est = FloatField(
+        'Angulo de Pluma (°)', validators=[DataRequired()])
+    cap_maxima_est = FloatField(
+        'Capacidad Máxima', validators=[DataRequired()])
+    carga = FloatField('Carga', validators=[DataRequired()])
+    ESTAB1 = FloatField('ESTAB. 1', validators=[DataRequired()])
+    ESTAB2 = FloatField('ESTAB. 2', validators=[DataRequired()])
+    ESTAB3 = FloatField('ESTAB. 3', validators=[DataRequired()])
+    ESTAB4 = FloatField('ESTAB. 4', validators=[DataRequired()])
+    carga2 = FloatField('Carga', validators=[DataRequired()])
+    ESTAB12 = FloatField('ESTAB. 1', validators=[DataRequired()])
+    ESTAB22 = FloatField('ESTAB. 2', validators=[DataRequired()])
+    ESTAB32 = FloatField('ESTAB. 3', validators=[DataRequired()])
+    ESTAB42 = FloatField('ESTAB. 4', validators=[DataRequired()])
+    carga3 = FloatField('Carga', validators=[DataRequired()])
+    ESTAB13 = FloatField('ESTAB. 1', validators=[DataRequired()])
+    ESTAB23 = FloatField('ESTAB. 2', validators=[DataRequired()])
+    ESTAB33 = FloatField('ESTAB. 3', validators=[DataRequired()])
+    ESTAB43 = FloatField('ESTAB. 4', validators=[DataRequired()])
+
     submit = SubmitField('Grabar')
 
 
 class prueba_carga3(FlaskForm):
-    carga_utli_din = FloatField('CARGA UTILIZADA',validators=[DataRequired()])
-    peso_carga_din = FloatField('PESO CARGA',validators=[DataRequired()])
-    peso_aparejo_din = FloatField('PESO APAREJOS',validators=[DataRequired()])
-    long_pluma_din = FloatField('Longitud Pluma',validators=[DataRequired()])
-    rad_oper_din = FloatField('Radio de Operación',validators=[DataRequired()])
-    ang_pluma_din = FloatField('Angulo de Pluma (°)',validators=[DataRequired()])
-    cap_maxima_din = FloatField('Capacidad Máxima',validators=[DataRequired()])
-    check1_pru_car = RadioField('Estado de corona (tornamesa)', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check1_pru_car')
-    check2_pru_car = RadioField('Sistema movimiento y frenado', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check2_pru_car')
-    check3_pru_car = RadioField('Estado de los estabilizadores', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3_pru_car')
-    check4_pru_car = RadioField('Condiciones de estabilidad de la máquina', choices=[('S', 'Satisfactorio'), ('DG', 'Defecto Grave')],default = 'S',render_kw={}, id='check3_pru_car')
-    conforme = RadioField('',choices=[('c', 'Conforme'),('nc','No Conforme')],render_kw={}, id='conforme')
-        
+    carga_utli_din = FloatField('CARGA UTILIZADA', validators=[DataRequired()])
+    peso_carga_din = FloatField('PESO CARGA', validators=[DataRequired()])
+    peso_aparejo_din = FloatField('PESO APAREJOS', validators=[DataRequired()])
+    long_pluma_din = FloatField('Longitud Pluma', validators=[DataRequired()])
+    rad_oper_din = FloatField('Radio de Operación',
+                              validators=[DataRequired()])
+    ang_pluma_din = FloatField(
+        'Angulo de Pluma (°)', validators=[DataRequired()])
+    cap_maxima_din = FloatField(
+        'Capacidad Máxima', validators=[DataRequired()])
+    check1_pru_car = RadioField('Estado de corona (tornamesa)', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check1_pru_car')
+    check2_pru_car = RadioField('Sistema movimiento y frenado', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check2_pru_car')
+    check3_pru_car = RadioField('Estado de los estabilizadores', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3_pru_car')
+    check4_pru_car = RadioField('Condiciones de estabilidad de la máquina', choices=[(
+        'S', 'Satisfactorio'), ('DG', 'Defecto Grave')], default='S', render_kw={}, id='check3_pru_car')
+    conforme = RadioField('', choices=[
+                          ('c', 'Conforme'), ('nc', 'No Conforme')], render_kw={}, id='conforme')
+
     submit = SubmitField('Grabar')
 
 
-
-
-
-
-
 class datos_reporte(FlaskForm):
-    empresa = StringField('EMPRESA', validators=[DataRequired()],render_kw={"placeholder": "EMPRESA"})
-    fec_inpec = DateField('FECHA DE INSPECCIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
-    fec_emision = DateField('FECHA DE EMISIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE EMISIÓN"})
-    fec_expiracion = DateField('FECHA DE EXPIRACIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE EXPIRACIÓN"})
-    lugar_inpec = StringField('LUGAR INSPECCIÓN', validators=[DataRequired()],render_kw={"placeholder": "LUGAR INSPECCIÓN"})
-    nom_inspec = SelectField('NOMBRE DEL INSPECTOR:',choices=[('DIEGO COLLAGUAZO', 'DIEGO COLLAGUAZO'),('RAMIRO LOPEZ PEREZ', 'RAMIRO LOPEZ PEREZ'),('EDUARDO LOPEZ PEREZ', 'EDUARDO LOPEZ PEREZ')],render_kw={}, id='nom_insp')
+    empresa = StringField('EMPRESA', validators=[DataRequired()], render_kw={
+                          "placeholder": "EMPRESA"})
+    fec_inpec = DateField('FECHA DE INSPECCIÓN', validators=[
+                          DataRequired()], render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
+    fec_emision = DateField('FECHA DE EMISIÓN', validators=[
+                            DataRequired()], render_kw={"placeholder": "FECHA DE EMISIÓN"})
+    fec_expiracion = DateField('FECHA DE EXPIRACIÓN', validators=[
+                               DataRequired()], render_kw={"placeholder": "FECHA DE EXPIRACIÓN"})
+    lugar_inpec = StringField('LUGAR INSPECCIÓN', validators=[
+                              DataRequired()], render_kw={"placeholder": "LUGAR INSPECCIÓN"})
+    nom_inspec = SelectField('NOMBRE DEL INSPECTOR:', choices=[('DIEGO COLLAGUAZO', 'DIEGO COLLAGUAZO'), (
+        'RAMIRO LOPEZ PEREZ', 'RAMIRO LOPEZ PEREZ'), ('EDUARDO LOPEZ PEREZ', 'EDUARDO LOPEZ PEREZ')], render_kw={}, id='nom_insp')
 
     submit = SubmitField('Enviar')
 
 
 class datos_lmi(FlaskForm):
-    empresa = StringField('EMPRESA', validators=[DataRequired()],render_kw={"placeholder": "EMPRESA"})
-    num_reporte = StringField('NÚMERO REPORTE', validators=[DataRequired()],render_kw={"placeholder": "NUMERO DE REPORTE"})
-    fec_inpec = DateField('FECHA DE INSPECCIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
-    fec_emision = DateField('FECHA DE EMISIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE EMISIÓN"})
-    fec_expiracion = DateField('FECHA DE EXPIRACIÓN', validators=[DataRequired()],render_kw={"placeholder": "FECHA DE EXPIRACIÓN"})
-    lugar_inpec = StringField('LUGAR INSPECCIÓN', validators=[DataRequired()],render_kw={"placeholder": "LUGAR INSPECCIÓN"})
-    nom_inspec = StringField('NOMBRE DEL INSPECTOR', validators=[DataRequired()],render_kw={"placeholder": "NOMBRE DEL INSPECTOR"})
+    empresa = StringField('EMPRESA', validators=[DataRequired()], render_kw={
+                          "placeholder": "EMPRESA"})
+    num_reporte = StringField('NÚMERO REPORTE', validators=[
+                              DataRequired()], render_kw={"placeholder": "NUMERO DE REPORTE"})
+    fec_inpec = DateField('FECHA DE INSPECCIÓN', validators=[
+                          DataRequired()], render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
+    fec_emision = DateField('FECHA DE EMISIÓN', validators=[
+                            DataRequired()], render_kw={"placeholder": "FECHA DE EMISIÓN"})
+    fec_expiracion = DateField('FECHA DE EXPIRACIÓN', validators=[
+                               DataRequired()], render_kw={"placeholder": "FECHA DE EXPIRACIÓN"})
+    lugar_inpec = StringField('LUGAR INSPECCIÓN', validators=[
+                              DataRequired()], render_kw={"placeholder": "LUGAR INSPECCIÓN"})
+    nom_inspec = StringField('NOMBRE DEL INSPECTOR', validators=[
+                             DataRequired()], render_kw={"placeholder": "NOMBRE DEL INSPECTOR"})
 
     submit = SubmitField('Enviar')
-
-
 
 
 class FormChangePassword(FlaskForm):
@@ -1055,5 +1472,5 @@ class FormChangePassword(FlaskForm):
 
 
 class UploadForm(FlaskForm):
-    photo = FileField('selecciona imagen:',validators=[FileRequired()])
+    photo = FileField('selecciona imagen:', validators=[FileRequired()])
     submit = SubmitField('Submit')

@@ -1,96 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FR-INPS-009.02 Reporte Inspección Grúas Boom Articulado {%block title%} {%endblock%}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FR-INPS-009.02 Reporte Inspección Grúas Boom Articulado {%block title%} {%endblock%}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
 </head>
+
 <body background="/static/img/fondo1.jpg">
-          <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('home')}}">INICIO </a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('caratula')}}">CARATULA </a>
-          </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('CHECK_LIST_bck')}}">CHECH_LIST </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('PRUE_CARG')}}">REP - PRUE-CARG-001</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('REP_FOTO')}}">REP-FOT-001</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('RESULTADOS')}}">RESULTADOS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('CERTIFICADO_GM')}}">CERTIFICADO GM</a>
-          </li>
-          <li class="nav-item">
-            {% if current_user.is_authenticated %}
-            <a class="nav-link" href="/logout"> {{ current_user.username}} (Salir)</a>
-          </li>
-          <li class="nav-item">
-            {% else %}
-            <a class="nav-link" href="/login">Login</a>
-            <a class="nav-link" href="/registro">Registro</a>
-            {% endif %}
-          </li>
-        </ul>
-        <hr>
-        <hr>
-  
-        <div class="container">
-          <div class="row">
-            <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-              <img src="/static/img/Acreditacion.jpg">
-            </div>
-            <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-              <h3>REPORTE DE INSPECCIÓN DE GRÚAS MÓVILES Y GRÚAS LOCOMOTORAS</h3>
-              <h4>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h4>
-            </div>
-            <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-              <img src="/static/img/logo_eni.jpg">
-            </div>
-          </div>
-        </div>
-        <hr>       
-        <form class="row g-3 needs-validation" novalidate>
-          
-          <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-            <h2>PARA USO EXCLUSIVO DE ENII</h2>
-          </div> 
-          <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-            <h2>
-            <div>
-              CÓDIGO DEL REPORTE: {{ datos.0 }}
-            </div>
-          </h2>
-          </div>
-          <hr>
-          
-          <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            <h2>FECHA DE INSPECCIÓN: {{ fec1.0 }}</h2>
-          </div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h2>FECHA EMISIÓN: {{ fec2.0 }}</h2>
-          </div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h2>FECHA EXPIRACIÓN: {{ fec3.0 }}</h2>
-          </div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            <h2>LUGAR INSPECCIÓN: {{ lugar.0 }}</h2>
-            </div>
-            <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            <h2>NOMBRE INSPECTOR: {{ inspector.0 }}</h2>
-            </div>
-           
-        </form>    
-        {% block content %}{% endblock %}
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('home')}}">INICIO </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('caratula')}}">CARATULA </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('CHECK_LIST_bck')}}">CHECH_LIST </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('PRUE_CARG')}}">REP - PRUE-CARG-001</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('REP_FOTO')}}">REP-FOT-001</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('RESULTADOS')}}">RESULTADOS</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('CERTIFICADO_GM')}}">CERTIFICADO GM</a>
+    </li>
+    <li class="nav-item">
+      {% if current_user.is_authenticated %}
+      <a class="nav-link" href="/logout"> {{ current_user.username}} (Salir)</a>
+    </li>
+    <li class="nav-item">
+      {% else %}
+      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/registro">Registro</a>
+      {% endif %}
+    </li>
+  </ul>
+  <hr>
+  <hr>
+
+  <div class="container">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+        <img src="/static/img/Acreditacion.jpg">
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+        <h3>REPORTE DE INSPECCIÓN DE GRÚAS MÓVILES Y GRÚAS LOCOMOTORAS</h3>
+        <h4>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h4>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+        <img src="/static/img/logo_eni.jpg">
+      </div>
     </div>
+  </div>
+  <hr>
+  <form class="row g-3 needs-validation" novalidate>
+
+    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+      <h2>PARA USO EXCLUSIVO DE ENII</h2>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+      <h2>
+        <div>
+          CÓDIGO DEL REPORTE: {{ datos.0 }}
+        </div>
+      </h2>
+    </div>
+    <hr>
+
+    <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+      <h2>FECHA DE INSPECCIÓN: {{ fec1.0 }}</h2>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+      <h2>FECHA EMISIÓN: {{ fec2.0 }}</h2>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+      <h2>FECHA EXPIRACIÓN: {{ fec3.0 }}</h2>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+      <h2>LUGAR INSPECCIÓN: {{ lugar.0 }}</h2>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+      <h2>NOMBRE INSPECTOR: {{ inspector.0 }}</h2>
+    </div>
+
+  </form>
+  {% block content %}{% endblock %}
+  </div>
 </body>
+
 </html>

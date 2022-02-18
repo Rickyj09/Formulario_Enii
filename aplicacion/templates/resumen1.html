@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> {%block title%}REPORTE DE INSPECCIÓN POLEAS {%endblock%}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+</head>
+
+<body background="/static/img/fondo1.jpg">
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('inicio_new')}}">INICIO </a>
+    </li>
+
+    <li class="nav-item">
+      {% if current_user.is_authenticated %}
+      <a class="nav-link" href="/logout"> {{ current_user.username}} (Salir)</a>
+    </li>
+    <li class="nav-item">
+      {% else %}
+      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/registro">Registro</a>
+      {% endif %}
+    </li>
+  </ul>
+  <hr>
+  <hr>
+
+  <div class="container">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+        <img src="/static/img/Acreditacion.jpg">
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+        <h3>REPORTE DE INSPECCIÓN POLEAS</h3>
+        <h4>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h4>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+        <img src="/static/img/logo_eni.jpg">
+      </div>
+
+      <hr>
+      <form class="row g-3 needs-validation" novalidate>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+          <h2>PARA USO EXCLUSIVO DE ENII</h2>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+          <h2>
+            <div>
+              CÓDIGO DEL REPORTE: {{ datos.0 }}
+            </div>
+          </h2>
+        </div>
+        <hr>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>FECHA DE INSPECCIÓN: {{ fec1.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>FECHA EMISIÓN: {{ fec2.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>FECHA EXPIRACIÓN: {{ fec3.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>LUGAR INSPECCIÓN: {{ lugar.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>NOMBRE INSPECTOR: {{ inspector.0 }}</h3>
+        </div>
+        <hr>
+        <h4>DATOS DEL END (VT)</h4>
+        {% for dato in datos1 %}
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          PROCEDIMIENTO Nº: {{ dato.2 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          REVISIÓN Nº: {{ dato.3 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          NIVEL DE ILUMINACIÓN: {{ dato.4 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          CONDICIÓN SUPERFICIAL: {{ dato.5 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MÉTODO DE INSPECCIÓN: {{ dato.6 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE ILUMINACIÓN:: {{ dato.7 }}
+        </div>
+        <hr>
+
+        <h4>DATOS DEL END (PT)</h4>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          PROCEDIMIENTO Nº {{ dato.12 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          REVISIÓN Nº {{ dato.13 }}
+
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TEMPERATURA DE ENSAYO: {{ dato.14 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE ILUMINACIÓN: {{ dato.15 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          NIVEL DE ILUMINACIÓN: {{ dato.16 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MATERIAL BASE: {{ dato.17 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE SECADO: {{ dato.18 }}
+        </div>
+        <hr>
+        <h4>CONSUMIBLES</h4>
+
+        <h4>1.- PENETRANTE</h4>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE PENETRANTE: {{ dato.26 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MARCA KIT DE INSPECCIÓN: {{ dato.27 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIEMPO DE PENETRACIÓN {{ dato.28 }}
+        </div>
+        <hr>
+        <h2>CONSUMIBLES</h2>
+
+        <h2>2.- REMOVEDOR </h2>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MÉTODO DE REMOCIÓN: {{ dato.29 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MARCA KIT DE INSPECCIÓN: {{ dato.30 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIEMPO DE SECADO DEL REMOVEDOR: {{ dato.31 }}
+        </div>
+        <hr>
+        <h4>CONSUMIBLES</h4>
+
+        <h4>3.- REVELADOR </h4>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          FORMA DE REVELADO: {{ dato.32 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MARCA KIT DE INSPECCIÓN: {{ dato.33 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIEMPO DE REVELADO: {{ dato.34 }}
+        </div>
+        <hr>
+        <h4>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS </h4>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          EQUIPO: {{ dato.35 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MODELO: {{ dato.36 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          IDENTIFICACIÓN : {{ dato.37 }}
+        </div>
+        <hr>
+        <h4>
+          DESCRIPCIÓN DE LA INSPECCIÓN
+        </h4>
+        <h4>
+          ESPECIFICACIONES DEL ACCESORIO Y RESULTADOS DE INSPECCIÓN
+        </h4>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          Nº {{ dato.19 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          CÓDIGO ENII {{ dato.20 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          REFERENCIA: {{ dato.21 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          ANCHO (mm): {{ dato.22 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          DIÁMETRO (mm): {{ dato.23 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          INSPECCIÓN VISUAL: {{ dato.24 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          LÍQUIDOS PENETRANTES: {{ dato.25 }}
+        </div>
+        {% endfor %}
+        <br>
+        <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <a href="{{ url_for('inicio_new')}}" class="btn btn-primary">MODIFICAR</a>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <a href="{{ url_for('cert_for1')}}" class="btn btn-primary">CERTIFICADO</a>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <a href="{{ url_for('reporte_foto1')}}" class="btn btn-primary">OK</a>
+        </div>
+    </div>
+  </div>
+  </form>
+  {% block content %}{% endblock %}
+  </div>
+
+
+
+</body>
+
+</html>

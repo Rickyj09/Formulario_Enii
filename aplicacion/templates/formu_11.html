@@ -1,10 +1,12 @@
 {% extends 'layout_for.html' %}
 {%block title%} FORMULARIO FR-INSP-061.04{%endblock%}
 {% block content %}
+
 <body>
     <hr>
     <h1>REPORTE DE INSPECCIÓN PASTECA PRINCIPAL</h1>
-    <P>REFERENCIA NORMATIVA:  ASME B30.26 (2015) Aparejos, ASME B30.10 (2019) Ganchos, (Los números a indicar pertenecen a la norma en mención),  MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
+    <P>REFERENCIA NORMATIVA: ASME B30.26 (2015) Aparejos, ASME B30.10 (2019) Ganchos, (Los números a indicar pertenecen
+        a la norma en mención), MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
     <h3>DATOS DEL END (VT)</h3>
     <form class="row g-3 needs-validation" novalidate method="POST">
@@ -12,242 +14,251 @@
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.proc.label }} {{ form.proc(class_="form-control") }}
             {% for error in form.proc.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis.label }} {{ form.revis(class_="form-control") }}
             {% for error in form.revis.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-             {{ form.nivel_il.label }} {{ form.nivel_il(class_="form-control") }}
+            {{ form.nivel_il.label }} {{ form.nivel_il(class_="form-control") }}
             {% for error in form.nivel_il.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.con_sup.label }} {{ form.con_sup(class_="form-control") }}
             {% for error in form.con_sup.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.met_insp.label }} {{ form.met_insp(class_="form-control") }}
             {% for error in form.met_insp.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-           {{ form.tipo_il.label }} {{ form.tipo_il(class_="form-control") }}
+            {{ form.tipo_il.label }} {{ form.tipo_il(class_="form-control") }}
             {% for error in form.tipo_il.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
-        <h2>EQUIPAMIENTO  PARA LA TÉCNICA INDIRECTA</h2>
+        <h2>EQUIPAMIENTO PARA LA TÉCNICA INDIRECTA</h2>
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
             {{ form.check1.label }} {{ form.check1(class_="form-control") }}
             {% for error in form.check1.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
             {{ form.check2.label }} {{ form.check2(class_="form-control") }}
             {% for error in form.check2.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
-        </div><div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
             {{ form.check3.label }} {{ form.check3(class_="form-control") }}
             {% for error in form.check3.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.detalle.label }} {{ form.detalle(class_="form-control") }}
-             {% for error in form.detalle.errors %}
-                 <span style="color: red;"> {{ error }} </span>
-             {% endfor %}
-         </div>
+            {% for error in form.detalle.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
         <hr>
         <h2>PARÁMETROS INSPECCIÓN MEDIANTE LÍQUIDOS PENETRANTES (PT)</h2>
-    <h3>DATOS DEL END (PT)</h3>
-    
+        <h3>DATOS DEL END (PT)</h3>
+
         <hr>
-             
+
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.proc_p.label }} {{ form.proc_p(class_="form-control") }}
             {% for error in form.proc_p.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis_p.label }} {{ form.revis_p(class_="form-control") }}
             {% for error in form.revis_p.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-             {{ form.temp_ens.label }} {{ form.temp_ens(class_="form-control") }}
+            {{ form.temp_ens.label }} {{ form.temp_ens(class_="form-control") }}
             {% for error in form.temp_ens.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.tipo_il_p.label }} {{ form.tipo_il_p(class_="form-control") }}
             {% for error in form.tipo_il_p.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.nivel_il_p.label }} {{ form.nivel_il_p(class_="form-control") }}
             {% for error in form.nivel_il_p.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-           {{ form.mater_base.label }} {{ form.mater_base(class_="form-control") }}
+            {{ form.mater_base.label }} {{ form.mater_base(class_="form-control") }}
             {% for error in form.mater_base.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.tipo_sec.label }} {{ form.tipo_sec(class_="form-control") }}
-             {% for error in form.tipo_sec.errors %}
-                 <span style="color: red;"> {{ error }} </span>
-             {% endfor %}
-         </div>
-         <hr>
-         <h3>CONSUMIBLES</h3>
+            {% for error in form.tipo_sec.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <hr>
+        <h3>CONSUMIBLES</h3>
         <h1>1.- PENETRANTE</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.tipo_pen.label }} {{ form.tipo_pen(class_="form-control") }}
             {% for error in form.tipo_pen.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.marca_kit.label }} {{ form.marca_kit(class_="form-control") }}
             {% for error in form.marca_kit.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-             {{ form.tiem_pen.label }} {{ form.tiem_pen(class_="form-control") }}
+            {{ form.tiem_pen.label }} {{ form.tiem_pen(class_="form-control") }}
             {% for error in form.tiem_pen.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <h1>2.- REMOVEDOR </h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.met_rem.label }} {{ form.met_rem(class_="form-control") }}
             {% for error in form.met_rem.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.marca_kit1.label }} {{ form.marca_kit1(class_="form-control") }}
             {% for error in form.marca_kit1.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-             {{ form.tiem_sec.label }} {{ form.tiem_sec(class_="form-control") }}
+            {{ form.tiem_sec.label }} {{ form.tiem_sec(class_="form-control") }}
             {% for error in form.tiem_sec.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <h1>3.- REVELADOR</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.for_rev.label }} {{ form.for_rev(class_="form-control") }}
             {% for error in form.for_rev.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.marca_kit2.label }} {{ form.marca_kit2(class_="form-control") }}
             {% for error in form.marca_kit2.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-             {{ form.tiem_rev.label }} {{ form.tiem_rev(class_="form-control") }}
+            {{ form.tiem_rev.label }} {{ form.tiem_rev(class_="form-control") }}
             {% for error in form.tiem_rev.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
-        
+
         <hr>
-        <center><h1>DESCRIPCIÓN DEL EQUIPO EN LA QUE SE ENCUENTRA INSTALADO PASTECA</h1></center>
+        <center>
+            <h1>DESCRIPCIÓN DEL EQUIPO EN LA QUE SE ENCUENTRA INSTALADO PASTECA</h1>
+        </center>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.equipo.label }} {{ form.equipo(class_="form-control") }}
             {% for error in form.equipo.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.modelo.label }} {{ form.modelo(class_="form-control") }}
             {% for error in form.modelo.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-             {{ form.iden.label }} {{ form.iden(class_="form-control") }}
+            {{ form.iden.label }} {{ form.iden(class_="form-control") }}
             {% for error in form.iden.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
-        <center><h1>DATOS DE PASTECA</h1></center>
+        <center>
+            <h1>DATOS DE PASTECA</h1>
+        </center>
 
-      
+
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.marca_pas.label }} {{ form.marca_pas(class_="form-control") }}
             {% for error in form.marca_pas.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.iden_pas.label }} {{ form.iden_pas(class_="form-control") }}
             {% for error in form.iden_pas.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-             {{ form.modelo_pas.label }} {{ form.modelo_pas(class_="form-control") }}
+            {{ form.modelo_pas.label }} {{ form.modelo_pas(class_="form-control") }}
             {% for error in form.modelo_pas.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.cap_pas.label }} {{ form.cap_pas(class_="form-control") }}
-           {% for error in form.cap_pas.errors %}
-               <span style="color: red;"> {{ error }} </span>
-           {% endfor %}
-       </div>
+            {% for error in form.cap_pas.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
 
-       
+
 
         <hr>
-        <center><h1>CRITERIOS DE ACEPTACIÓN Y RECHAZO </h1></center>
+        <center>
+            <h1>CRITERIOS DE ACEPTACIÓN Y RECHAZO </h1>
+        </center>
         <center></center>
         <div class="container">
             <div class="row">
-              
-              <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-                <h1>ASME B30.26 (2015) Pastecas</h1>
-                  <p>1	Identificación faltante o ilegible</p>
-                  <p>2	Tuercas, pernos, pasadores, chavetas, anillos reten, u otros sujetadores y dispositivos de retencion sueltos o faltantes</p>										
-                  <p>3	Daños producidos por calor, salpicaduras de soldadura</p>
-                  <p>4	Picaduras o corrosion exesivas</p>
-                  <p>5	Componentes de soporte doblados, agrietados, torcidos, distorcionados, estirados, alargados, rotos</p>
-                  <p>6	Desgaste excesivo, mellas o hendiduras</p>
-                  <p>7	Reducción de 10% de la dimensión original</p>
-                  <p>8	Daño excesivo hilos de rosca</p>
-                  <p>9	Evidencia de soldaduras o modificaciones no autorizadas</p>
-                  <p>10	Para grilletes criterios de eliminación según (ASME B30.26)</p>
-                  <p>11	Para ganchos criterios de eliminación según (ASME B30.10)</p>
-                  <p>12	Daños visibles o condiciones que causen duda sobre su uso</p>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                    <h1>ASME B30.26 (2015) Pastecas</h1>
+                    <p>1 Identificación faltante o ilegible</p>
+                    <p>2 Tuercas, pernos, pasadores, chavetas, anillos reten, u otros sujetadores y dispositivos de
+                        retencion sueltos o faltantes</p>
+                    <p>3 Daños producidos por calor, salpicaduras de soldadura</p>
+                    <p>4 Picaduras o corrosion exesivas</p>
+                    <p>5 Componentes de soporte doblados, agrietados, torcidos, distorcionados, estirados, alargados,
+                        rotos</p>
+                    <p>6 Desgaste excesivo, mellas o hendiduras</p>
+                    <p>7 Reducción de 10% de la dimensión original</p>
+                    <p>8 Daño excesivo hilos de rosca</p>
+                    <p>9 Evidencia de soldaduras o modificaciones no autorizadas</p>
+                    <p>10 Para grilletes criterios de eliminación según (ASME B30.26)</p>
+                    <p>11 Para ganchos criterios de eliminación según (ASME B30.10)</p>
+                    <p>12 Daños visibles o condiciones que causen duda sobre su uso</p>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
@@ -256,7 +267,7 @@
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
                     <p>1.- SEGUROS</p>
-                    <p>2.- POLEAS</p>										
+                    <p>2.- POLEAS</p>
                     <p>3.- PASADOR,PERNOS</p>
                     <p>4.- CUBIERTAS</p>
                     <p>5.- ROSCA</p>
@@ -265,31 +276,31 @@
                     <p>8.- PESTILLO</p>
                     <p>9.- GANCHO</p>
                 </div>
-              
-                
+
+
 
             </div>
-        
+
         </div>
-        
+
         <div class="container">
             <div class="row">
-              
-              <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-                <h1>ASME B30.10 (2019) Ganchos</h1>
-                  <p>1	Identificación del fabricante faltante o ilegible</p>
-                  <p>2	Identificación de carga nominal faltante o ilegible</p>										
-                  <p>3	Picaduras excesivas o corrosión</p>
-                  <p>4	Grietas, mellas o hendiduras</p>
-                  <p>5	Cualquier desgaste  mas a 10% de gancho, pasador</p>
-                  <p>6	Deformación, dobladuras en plano del gancho</p>
-                  <p>7	Apertura de garganta  que no exceda 5% (6mm)</p>
-                  <p>8	Incapacidad de bloqueo</p>
-                  <p>9	Cualquier daño pestillo o defectuoso inoperativo (S/A)</p>
-                  <p>10	Unión de gancho,  fijación dañado, faltantes</p>
-                  <p>11	Desgaste de la rosca, daño o corrosión</p>
-                  <p>12	Exposición calor excesivo, soldado. no autorizadas</p>
-                  <p>13	Evidencia de alteraciones, perforación, rectificado, etc.</p>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                    <h1>ASME B30.10 (2019) Ganchos</h1>
+                    <p>1 Identificación del fabricante faltante o ilegible</p>
+                    <p>2 Identificación de carga nominal faltante o ilegible</p>
+                    <p>3 Picaduras excesivas o corrosión</p>
+                    <p>4 Grietas, mellas o hendiduras</p>
+                    <p>5 Cualquier desgaste mas a 10% de gancho, pasador</p>
+                    <p>6 Deformación, dobladuras en plano del gancho</p>
+                    <p>7 Apertura de garganta que no exceda 5% (6mm)</p>
+                    <p>8 Incapacidad de bloqueo</p>
+                    <p>9 Cualquier daño pestillo o defectuoso inoperativo (S/A)</p>
+                    <p>10 Unión de gancho, fijación dañado, faltantes</p>
+                    <p>11 Desgaste de la rosca, daño o corrosión</p>
+                    <p>12 Exposición calor excesivo, soldado. no autorizadas</p>
+                    <p>13 Evidencia de alteraciones, perforación, rectificado, etc.</p>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
@@ -298,32 +309,32 @@
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
                     <p>A.- GARGANTA</p>
-                    <p>B.- ASIENTO</p>										
+                    <p>B.- ASIENTO</p>
                     <p>C.- SEGURO/PESTILLO</p>
                 </div>
-              
-                
+
+
 
             </div>
-        
-        </div> 
+
+        </div>
 
 
         <div class="container">
             <div class="row">
-              
-              <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-                <h1>ASME B30.26 (2015) Grilletes</h1>
-                  <p>1	Identificación faltante o ilegible</p>
-                  <p>2	Daños por calor, salpicaduras soldadura, golpes</p>										
-                  <p>3	Picaduras o corrosión excesivas</p>
-                  <p>4	Componentes doblados, torcidos, estirados</p>
-                  <p>5	Componentes alargados, agrietados o rotos.</p>
-                  <p>6	Mellas o ranuras excesivas</p>
-                  <p>7	Reducción + del 10% en cualquier punto cuerpo</p>
-                  <p>8	Enganche de pin incompleto</p>
-                  <p>9	Daño excesivo hilos de rosca</p>
-                  <p>10	Modificaciones, soldaduras no autorizadas</p>
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+                    <h1>ASME B30.26 (2015) Grilletes</h1>
+                    <p>1 Identificación faltante o ilegible</p>
+                    <p>2 Daños por calor, salpicaduras soldadura, golpes</p>
+                    <p>3 Picaduras o corrosión excesivas</p>
+                    <p>4 Componentes doblados, torcidos, estirados</p>
+                    <p>5 Componentes alargados, agrietados o rotos.</p>
+                    <p>6 Mellas o ranuras excesivas</p>
+                    <p>7 Reducción + del 10% en cualquier punto cuerpo</p>
+                    <p>8 Enganche de pin incompleto</p>
+                    <p>9 Daño excesivo hilos de rosca</p>
+                    <p>10 Modificaciones, soldaduras no autorizadas</p>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
@@ -332,82 +343,85 @@
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
                     <p>A.- DIÁMETRO</p>
-                    <p>B.- PASADOR</p>										
+                    <p>B.- PASADOR</p>
                     <p>C.- PUNTOS DE RESISTENCIA</p>
                     <p>D.- ENTRADA</p>
                     <p>E.- OREJA</p>
                     <p>F.- CUERPO</p>
                 </div>
-              
-                
+
+
 
             </div>
-        
-        </div> 
+
+        </div>
 
 
 
-        <center><h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1></center>
+        <center>
+            <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
+        </center>
 
         <h3>ESPECIFICACIONES DEL ACCESORIO</h3>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.numero.label }} {{ form.numero(class_="form-control") }}
             {% for error in form.numero.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.marca.label }} {{ form.marca(class_="form-control") }}
             {% for error in form.marca.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
-        </div> 
+        </div>
 
-       <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.iden1.label }} {{ form.iden1(class_="form-control") }}
             {% for error in form.iden1.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
-       
-        
+
+
         <h3>INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
 
-       
-                
+
+
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-             {{ form.obs.label }} {{ form.obs(class_="form-control") }}
+            {{ form.obs.label }} {{ form.obs(class_="form-control") }}
             {% for error in form.obs.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
-        
-             
+
+
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
             {{ form.vt.label }} {{ form.vt(class_="form-control") }}
             {% for error in form.vt.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-           {{ form.pt.label }} {{ form.pt(class_="form-control") }}
+            {{ form.pt.label }} {{ form.pt(class_="form-control") }}
             {% for error in form.pt.errors %}
-                <span style="color: red;"> {{ error }} </span>
+            <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
-        
+
         <div class="col-12">
             {{ form.hidden_tag() }}
             {{ form.submit(class_="btn btn-primary") }}
         </div>
-      
-    <hr>
-     
-      
-    </form>  
+
+        <hr>
+
+
+    </form>
 </body>
+
 </html>
 {% endblock %}

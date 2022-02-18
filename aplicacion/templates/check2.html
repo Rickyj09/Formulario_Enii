@@ -1,101 +1,103 @@
 {% extends 'layout.html' %}
 {%block title%} CHECK LIST B {%endblock%}
 {% block content %}
+
 <head>
-  
+
 </head>
+
 <body>
- 
+
 
   <hr>
   <h3>INSPECCIÓN MECÁNICA Y ESTRUCTURAL</h3>
-        
-        <h3>B. CABINA / ESTACIÓN DEL OPERADOR</h3>
-    
-         
-      
-      <form class="row g-3 needs-validation" novalidate method="POST">  
-        <div>
-          <label for="">Todo Satisfactorio:</label>
-          <input type="checkbox" value="9" name="micheck" id="formu-checkbox" checked>
-          <hr>
-         </div>
-         <br> 
-         
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h7>1.- Accesos y puntos de apoyo, estado</h7> 
-          {{ form.check1.label }} {{ form.check1(class_="form-control") }}
-          {% for error in form.check1.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-          <h7>2. Puerta seguro posic. abierto y posic. cerrado </h7>
-          {{ form.check2.label }} {{ form.check2(class_="form-control") }}
-          {% for error in form.check2.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>	
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-        <h7>3. Identificación de instrumentos y mandos </h7>
-        {{ form.check3.label }} {{ form.check3(class_="form-control") }}
-        {% for error in form.check3.errors %}
-            <span style="color: red;"> {{ error }} </span>
-        {% endfor %}
-        </div>
-     
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+
+  <h3>B. CABINA / ESTACIÓN DEL OPERADOR</h3>
+
+
+
+  <form class="row g-3 needs-validation" novalidate method="POST">
+    <div>
+      <label for="">Todo Satisfactorio:</label>
+      <input type="checkbox" value="9" name="micheck" id="formu-checkbox" checked>
+      <hr>
+    </div>
+    <br>
+
+    <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+      <h7>1.- Accesos y puntos de apoyo, estado</h7>
+      {{ form.check1.label }} {{ form.check1(class_="form-control") }}
+      {% for error in form.check1.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>2. Puerta seguro posic. abierto y posic. cerrado </h7>
+      {{ form.check2.label }} {{ form.check2(class_="form-control") }}
+      {% for error in form.check2.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>3. Identificación de instrumentos y mandos </h7>
+      {{ form.check3.label }} {{ form.check3(class_="form-control") }}
+      {% for error in form.check3.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
       <h7>4. Tipo de vidrio, parabrisas y techo</h7>
-          {{ form.check4.label }} {{ form.check4(class_="form-control") }}
-          {% for error in form.check4.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-          <h7>5. Limpia parabrisas</h7>
-          {{ form.check5.label }} {{ form.check5(class_="form-control") }}
-          {% for error in form.check5.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>	
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-          <h7>6. Cartilla de advertencia riesgo electrocución </h7>
-        {{ form.check6.label }} {{ form.check6(class_="form-control") }}
-        {% for error in form.check6.errors %}
-            <span style="color: red;"> {{ error }} </span>
-        {% endfor %}
-        </div>
-      
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-          <h7>7. Estado de asiento, bloqueo posa brazo</h7>
-          {{ form.check7.label }} {{ form.check7(class_="form-control") }}
-          {% for error in form.check7.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-          <h7>8. Cinturón de seguridad </h7>
-          {{ form.check8.label }} {{ form.check8(class_="form-control") }}
-          {% for error in form.check8.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>	
-        <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-          <h7>9. Condición de la cabina/estructura</h7>
-        {{ form.check9.label }} {{ form.check9(class_="form-control") }}
-        {% for error in form.check9.errors %}
-            <span style="color: red;"> {{ error }} </span>
-        {% endfor %}
-        </div>
-        
-        <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-          {{ form.checkobs.label }} {{ form.checkobs(class_="form-control") }}
-          {% for error in form.checkobs.errors %}
-              <span style="color: red;"> {{ error }} </span>
-          {% endfor %}
-        </div>
-        
-	   <hr>
+      {{ form.check4.label }} {{ form.check4(class_="form-control") }}
+      {% for error in form.check4.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>5. Limpia parabrisas</h7>
+      {{ form.check5.label }} {{ form.check5(class_="form-control") }}
+      {% for error in form.check5.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>6. Cartilla de advertencia riesgo electrocución </h7>
+      {{ form.check6.label }} {{ form.check6(class_="form-control") }}
+      {% for error in form.check6.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>7. Estado de asiento, bloqueo posa brazo</h7>
+      {{ form.check7.label }} {{ form.check7(class_="form-control") }}
+      {% for error in form.check7.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>8. Cinturón de seguridad </h7>
+      {{ form.check8.label }} {{ form.check8(class_="form-control") }}
+      {% for error in form.check8.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+      <h7>9. Condición de la cabina/estructura</h7>
+      {{ form.check9.label }} {{ form.check9(class_="form-control") }}
+      {% for error in form.check9.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+      {{ form.checkobs.label }} {{ form.checkobs(class_="form-control") }}
+      {% for error in form.checkobs.errors %}
+      <span style="color: red;"> {{ error }} </span>
+      {% endfor %}
+    </div>
+
+    <hr>
     <div class="col-12">
       {{ form.hidden_tag() }}
       {{ form.submit(class_="btn btn-primary") }}
