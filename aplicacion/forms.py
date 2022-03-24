@@ -130,7 +130,7 @@ class formu1(FlaskForm):
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[(
-        'AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
+        'AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
     marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
                             validators=[DataRequired()])
@@ -148,6 +148,12 @@ class formu1(FlaskForm):
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
+    
+
+    submit = SubmitField('Enviar')
+
+
+class formu1_1(FlaskForm):
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
@@ -177,6 +183,7 @@ class formu2(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
+    elem_ens = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
     proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
@@ -204,6 +211,11 @@ class formu2(FlaskForm):
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
+    
+    submit = SubmitField('Enviar')
+
+
+class formu2_2(FlaskForm):
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
@@ -218,6 +230,8 @@ class formu2(FlaskForm):
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+
+
 
     submit = SubmitField('Enviar')
 
@@ -542,7 +556,7 @@ class formu8(FlaskForm):
     iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     modelo_pk = StringField('MODELO', validators=[DataRequired()])
     capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
+    obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
@@ -595,7 +609,7 @@ class formu9(FlaskForm):
     iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     modelo_pk = StringField('MODELO', validators=[DataRequired()])
     capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
+    obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
@@ -667,7 +681,7 @@ class formu10(FlaskForm):
         'Medida de asiento (Horquilla derecha)(mm)', validators=[DataRequired()])
     med_asi_hi = StringField(
         'Medida de asiento(Horquilla Izquierda)(mm)', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
+    obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
@@ -726,7 +740,7 @@ class formu11(FlaskForm):
     numero = StringField('Nº', validators=[DataRequired()])
     marca = StringField('MARCA', validators=[DataRequired()])
     iden1 = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES  DESGASTE', validators=[DataRequired()])
+    obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[

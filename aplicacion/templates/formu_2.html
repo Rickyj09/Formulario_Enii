@@ -5,7 +5,7 @@
 <body>
     <hr>
     <h1>Reporte Inspección Eslinga Cable Acero</h1>
-    <P>REFERENCIA NORMATIVA: ASME B30.9 (2018) Eslingas, ASME B30.10:2019 Ganchos, ASME B30.26:2015 Aparejos (Los
+    <P>REFERENCIA NORMATIVA: ASME B30.26:2015 Aparejos (Los
         números a indicar pertenecen a la norma en mención)
         MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
@@ -78,6 +78,12 @@
         <h3>DATOS DEL END (PT)</h3>
 
         <hr>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            {{ form.elem_ens.label }} {{ form.elem_ens(class_="form-control") }}
+            {% for error in form.elem_ens.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.proc_p.label }} {{ form.proc_p(class_="form-control") }}
             {% for error in form.proc_p.errors %}
@@ -274,73 +280,7 @@
             </div>
         </div>
 
-        <center>
-            <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
-        </center>
-        <h3>ESPECIFICACIONES DEL ACCESORIO INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
-        <div class="form-group col-xs-12 col-sm-12 col-md-1  position-relative">
-            {{ form.num.label }} {{ form.num(class_="form-control") }}
-            {% for error in form.num.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.cod_enii.label }} {{ form.cod_enii(class_="form-control") }}
-            {% for error in form.cod_enii.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.ref.label }} {{ form.ref(class_="form-control") }}
-            {% for error in form.ref.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.tipo_ter.label }} {{ form.tipo_ter(class_="form-control") }}
-            {% for error in form.tipo_ter.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.medidas.label }} {{ form.medidas(class_="form-control") }}
-            {% for error in form.medidas.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.capac.label }} {{ form.capac(class_="form-control") }}
-            {% for error in form.capac.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.dia_elin.label }} {{ form.dia_elin(class_="form-control") }}
-            {% for error in form.dia_elin.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.med_aces.label }} {{ form.med_aces(class_="form-control") }}
-            {% for error in form.med_aces.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.vt.label }} {{ form.vt(class_="form-control") }}
-            {% for error in form.vt.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.pt.label }} {{ form.pt(class_="form-control") }}
-            {% for error in form.pt.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
+       
 
         <div class="col-12">
             {{ form.hidden_tag() }}

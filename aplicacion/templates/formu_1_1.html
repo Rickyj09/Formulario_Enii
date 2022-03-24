@@ -1,0 +1,101 @@
+{% extends 'layout_for.html' %}
+{%block title%} FORMULARIO FR-INSP-041.04 {%endblock%}
+{% block content %}
+
+<body>
+
+
+    <form action="{{url_for('add_formu_1_1')}}" method="POST" class="row g-3 needs-validation">
+        <center>
+            <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
+        </center>
+        <h3>ESPECIFICACIONES DEL ACCESORIO Y RESULTADOS DE INSPECCIÓN</h3>
+        <div class="form-group col-xs-12 col-sm-12 col-md-1  position-relative">
+            {{ form.num.label }} {{ form.num(class_="form-control") }}
+            {% for error in form.num.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.cod_enii.label }} {{ form.cod_enii(class_="form-control") }}
+            {% for error in form.cod_enii.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.ref.label }} {{ form.ref(class_="form-control") }}
+            {% for error in form.ref.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.ancho.label }} {{ form.ancho(class_="form-control") }}
+            {% for error in form.ancho.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.diam.label }} {{ form.diam(class_="form-control") }}
+            {% for error in form.diam.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.vt.label }} {{ form.vt(class_="form-control") }}
+            {% for error in form.vt.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.pt.label }} {{ form.pt(class_="form-control") }}
+            {% for error in form.pt.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+
+
+
+        <hr>
+        <div class="col-12">
+            {{ form.hidden_tag() }}
+            {{ form.submit(class_="btn btn-primary") }}
+            <a href="{{ url_for('resumen1') }}" class="btn btn-dark btn-sm rounded-0">Fin</a>
+        </div>
+
+
+        </div>
+
+
+
+    </form>
+    <div class="list-group">
+        <table class="table table-bordered">
+            <tr>
+                <th>Nº</th>
+                <th>CÓDIGO ENII</th>
+                <th>REFERENCIA</th>
+                <th>ANCHO (mm)</th>
+                <th>DIÁMETRO (mm)</th>
+                <th>INSPECCIÓN VISUAL(VT)</th>
+                <th>LÍQUIDOS PENETRANTES(PT)</th>
+            </tr>
+            {% for cat in data %}
+            <tr>
+                <td>{{cat.0}}</td>
+                <td>{{cat.2}}</td>
+                <td>{{cat.1}}</td>
+                <td>{{cat.3}}</td>
+                <td>{{cat.4}}</td>
+                <td>{{cat.5}}</td>
+                <td>{{cat.6}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>
+{% endblock %}

@@ -229,66 +229,15 @@
                 </div>
             </div>
         </div>
-        <center>
-            <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
-        </center>
-        <h3>ESPECIFICACIONES DEL ACCESORIO Y RESULTADOS DE INSPECCIÓN</h3>
-        <div class="form-group col-xs-12 col-sm-12 col-md-1  position-relative">
-            {{ form.num.label }} {{ form.num(class_="form-control") }}
-            {% for error in form.num.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.cod_enii.label }} {{ form.cod_enii(class_="form-control") }}
-            {% for error in form.cod_enii.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.ref.label }} {{ form.ref(class_="form-control") }}
-            {% for error in form.ref.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.ancho.label }} {{ form.ancho(class_="form-control") }}
-            {% for error in form.ancho.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.diam.label }} {{ form.diam(class_="form-control") }}
-            {% for error in form.diam.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.vt.label }} {{ form.vt(class_="form-control") }}
-            {% for error in form.vt.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.pt.label }} {{ form.pt(class_="form-control") }}
-            {% for error in form.pt.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="col-12">
-            {{ form.hidden_tag() }}
-            {{ form.submit(class_="btn btn-primary") }}
-        </div>
-
-        <hr>
-
-
-    </form>
-
+   
+     
+    <hr>
+    <div class="col-12">
+        {{ form.hidden_tag() }}
+        {{ form.submit(class_="btn btn-primary") }}
+    </div>
+</form>
+   
 </body>
 
 </html>
