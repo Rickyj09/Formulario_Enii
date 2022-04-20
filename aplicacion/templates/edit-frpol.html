@@ -1,15 +1,14 @@
 {% extends 'layout_for.html' %}
-{%block title%} FORMULARIO FR-INSP-045.04  {%endblock%}
+{%block title%} FORMULARIO FR-INSP-041.04 {%endblock%}
 {% block content %}
 
-<h1>REPORTE DE INSPECCIÓN DE CADENA</h1>
-<P>REFERENCIA NORMATIVA: ASME B30.26:2015 Aparejos (Los
-    números a indicar pertenecen a la norma en mención)
-    MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
+<h1>Reporte Inspeccion Poleas</h1>
+<P>REFERENCIA NORMATIVA: ASME B30.26 (2015), Aparejos (Los números a indicar pertenecen a la norma en mención),
+  MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
 <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
 <h3>DATOS DEL END (VT)</h3>
 
-<form action="/update1/{{contact.0}}" method="POST" class="row g-3 needs-validation">
+<form action="/update_frpol/{{contact.0}}" method="POST" class="row g-3 needs-validation">
 
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">PROCEDIMIENTO Nº: </label>
@@ -56,92 +55,90 @@
   <h2>PARÁMETROS INSPECCIÓN MEDIANTE LÍQUIDOS PENETRANTES (PT)</h2>
   <h3>DATOS DEL END (PT)</h3>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-    <label for="name">ELEMENTO A ENSAYAR</label>
-    <input type="text" name="elem_ens" value="{{contact.13}}" class="form-control">
-  </div>
-  <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">PROCEDIMIENTO Nº</label>
-    <input type="text" name="proc_p" value="{{contact.14}}" class="form-control">
+    <input type="text" name="proc_p" value="{{contact.13}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">REVISIÓN Nº:</label>
-    <input type="text" name="revis_p" value="{{contact.15}}" class="form-control">
+    <input type="text" name="revis_p" value="{{contact.14}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">TEMPERATURA DE ENSAYO:</label>
-    <input type="text" name="temp_ens" value="{{contact.16}}" class="form-control">
+    <input type="text" name="temp_ens" value="{{contact.15}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">TIPO DE ILUMINACIÓN:</label>
-    <input type="text" name="tipo_il_p" value="{{contact.17}}" class="form-control">
+    <input type="text" name="tipo_il_p" value="{{contact.16}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">NIVEL DE ILUMINACIÓN:</label>
-    <input type="text" name="nivel_il_p" value="{{contact.18}}" class="form-control">
+    <input type="text" name="nivel_il_p" value="{{contact.17}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">MATERIAL BASE:</label>
-    <input type="text" name="mater_base" value="{{contact.19}}" class="form-control">
+    <input type="text" name="mater_base" value="{{contact.18}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">TIPO DE SECADO::</label>
-    <input type="text" name="tipo_sec" value="{{contact.20}}" class="form-control">
+    <input type="text" name="tipo_sec" value="{{contact.19}}" class="form-control">
   </div>
   <h3>CONSUMIBLES</h3>
   <h1>1.- PENETRANTE</h1>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">TIPO DE PENETRANTE:</label>
-    <input type="text" name="tipo_pen" value="{{contact.21}}" class="form-control">
+    <input type="text" name="tipo_pen" value="{{contact.20}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">MARCA KIT DE INSPECCIÓN:</label>
-    <input type="text" name="marca_kit" value="{{contact.22}}" class="form-control">
+    <input type="text" name="marca_kit" value="{{contact.21}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">TIEMPO DE PENETRACIÓN:</label>
-    <input type="text" name="tiem_pen" value="{{contact.23}}" class="form-control">
+    <input type="text" name="tiem_pen" value="{{contact.22}}" class="form-control">
   </div>
   <h1>2.- REMOVEDOR </h1>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">MÉTODO DE REMOCIÓN:</label>
-    <input type="text" name="met_rem" value="{{contact.24}}" class="form-control">
+    <input type="text" name="met_rem" value="{{contact.23}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">MARCA KIT DE INSPECCIÓN:</label>
-    <input type="text" name="marca_kit1" value="{{contact.25}}" class="form-control">
+    <input type="text" name="marca_kit1" value="{{contact.24}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">TIEMPO DE SECADO DEL REMOVEDOR:</label>
-    <input type="text" name="tiem_sec" value="{{contact.26}}" class="form-control">
+    <input type="text" name="tiem_sec" value="{{contact.25}}" class="form-control">
   </div>
   <h1>3.- REVELADOR</h1>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">FORMA DE REVELADO:</label>
-    <input type="text" name="for_rev" value="{{contact.27}}" class="form-control">
+    <input type="text" name="for_rev" value="{{contact.26}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">MARCA KIT DE INSPECCIÓN:</label>
-    <input type="text" name="marca_kit2" value="{{contact.28}}" class="form-control">
+    <input type="text" name="marca_kit2" value="{{contact.27}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">TIEMPO DE REVELADO:</label>
-    <input type="text" name="tiem_rev" value="{{contact.29}}" class="form-control">
+    <input type="text" name="tiem_rev" value="{{contact.28}}" class="form-control">
   </div>
   <center>
     <h1>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS</h1>
   </center>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">EQUIPO:</label>
-    <input type="text" name="equipo" value="{{contact.30}}" class="form-control">
+    <input type="text" name="equipo" value="{{contact.29}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">MODELO:</label>
-    <input type="text" name="modelo" value="{{contact.31}}" class="form-control">
+    <input type="text" name="modelo" value="{{contact.30}}" class="form-control">
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">IDENTIFICACIÓN:</label>
-    <input type="text" name="iden" value="{{contact.32}}" class="form-control">
+    <input type="text" name="iden" value="{{contact.31}}" class="form-control">
   </div>
+
+
 
   <div class="form-group">
     <button type="submit" class="btn btn-primary btn-block">

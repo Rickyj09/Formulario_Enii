@@ -13,10 +13,7 @@
     <form class="row g-3 needs-validation" novalidate method="POST">
         <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc.label }} {{ form.proc(class_="form-control") }}
-            {% for error in form.proc.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-006
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis.label }} {{ form.revis(class_="form-control") }}
@@ -79,10 +76,7 @@
 
         <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc_p.label }} {{ form.proc_p(class_="form-control") }}
-            {% for error in form.proc_p.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-007
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis_p.label }} {{ form.revis_p(class_="form-control") }}

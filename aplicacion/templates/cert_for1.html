@@ -17,26 +17,47 @@
   <center><h2>INSPECCIÓN POLEAS</h2></center>
   <hr>
   <div class="col-md-10">
-    <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
-    <div class="panel panel-default">
-      <table class="table table-bordered">
-        <tr>
-          <th>N°</th>
-          <th>CODIGOS ENII</th>
-          <th>REFERENCIAS</th>
-          <th>ANCHO</th>
-          <th>DIAMETRO</th>
-        </tr>
-        
+   
 
-            <tr>
-              <td>{{numero.0}}</td>
-              <td>{{cod_enii.0}}</td>
-              <td>{{ref.0}}</td>
-              <td>{{ancho.0}}</td>
-              <td>{{diam.0}}</td>
-            </tr>
-       
+    <form class="row g-3 needs-validation" novalidate></form>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ llave.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>SOLICITADO POR (Required by): {{ fec_exp.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>FECHA DE INSPECCIÓN (Inspection date): {{ fec_emi.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ lug.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>INSPECTOR RESPONSABLE (Inspector): {{ ins.0 }}</h4>
+  </div>
+</form> 
+  <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
+    <div class="panel panel-default">
+     
+        <table class="table table-bordered">
+          <tr>
+            <th>Nº</th>
+            <th>CÓDIGO ENII</th>
+            <th>REFERENCIA</th>
+            <th>ANCHO (mm)</th>
+            <th>DIÁMETRO (mm)</th>
+            
+          </tr>
+          {% for cat in data %}
+          <tr>
+            <td>{{cat.0}}</td>
+            <td>{{cat.2}}</td>
+            <td>{{cat.1}}</td>
+            <td>{{cat.3}}</td>
+            <td>{{cat.4}}</td>
+            
+          </tr>
+          {% endfor %}
         </table>
       
   </div>

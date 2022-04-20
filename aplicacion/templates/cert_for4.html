@@ -21,25 +21,26 @@
     <div class="panel panel-default">
       <table class="table table-bordered">
         <tr>
-          <th>N°</th>
-          <th>TIPO DE  ACCESORIO</th>
-          <th>CODIGOS ENII</th>
-          <th>REFERENCIAS</th>
-          <th>MEDIDAS</th>
-          <th>CAPACIDAD</th>
+            <th>Nº</th>
+            <th>CÓDIGO ENII</th>
+            <th>REFERENCIA</th>
+            <th>TIPO</th>
+            <th>MEDIDAS (mm)</th>
+            <th>CAPACIDAD (Kg)</th>
+            <th>INSPECCIÓN VISUAL(VT)</th>
         </tr>
-        
+        {% for cat in data %}
+        <tr>
+            <td>{{cat.0}}</td>
+            <td>{{cat.3}}</td>
+            <td>{{cat.2}}</td>
+            <td>{{cat.4}}</td>
+            <td>{{cat.5}}</td>
+            <td>{{cat.6}}</td>
 
-            <tr>
-              <td>{{numero.0}}</td>
-              <td>{{cod_enii.0}}</td>
-              <td>{{ref.0}}</td>
-              <td>{{tipo_ter.0}}</td>
-              <td>{{medidas.0}}</td>
-              <td>{{capac.0}}</td>
-            </tr>
-       
-        </table>
+        </tr>
+        {% endfor %}
+    </table>
       
   </div>
 </div>

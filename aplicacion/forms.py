@@ -106,8 +106,6 @@ class datos_equipo(FlaskForm):
 
 
 class formu1(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -121,7 +119,6 @@ class formu1(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -156,7 +153,6 @@ class formu1(FlaskForm):
 class formu1_1(FlaskForm):
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
-    cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
     ancho = StringField('ANCHO (mm)', validators=[DataRequired()])
     diam = StringField('DIÁMETRO (mm)', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
@@ -168,8 +164,7 @@ class formu1_1(FlaskForm):
 
 
 class formu2(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
+    
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -184,7 +179,6 @@ class formu2(FlaskForm):
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
     elem_ens = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -218,7 +212,6 @@ class formu2(FlaskForm):
 class formu2_2(FlaskForm):
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
-    cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
     tipo_ter = StringField('TIPO DE TERMINAL', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
@@ -237,8 +230,7 @@ class formu2_2(FlaskForm):
 
 
 class formu3(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
+    
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -252,7 +244,7 @@ class formu3(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
+    
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -279,9 +271,14 @@ class formu3(FlaskForm):
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
+
+    submit = SubmitField('Enviar')
+
+
+class formu3_3(FlaskForm):
+    tipo_ace = StringField('TIPO DE ACCESORIO (mm)', validators=[DataRequired()])
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
-    cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
     eslabon = StringField('ESLABÓN (diámetro) mm', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
@@ -291,15 +288,12 @@ class formu3(FlaskForm):
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
-    tipo_ace = StringField('TIPO DE ACCESORIO (mm)',
-                           validators=[DataRequired()])
+
+
 
     submit = SubmitField('Enviar')
 
-
 class formu4(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -316,9 +310,15 @@ class formu4(FlaskForm):
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
+    
+
+    submit = SubmitField('Enviar')
+
+
+
+class formu4_4(FlaskForm):
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
-    cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
     tipo = StringField('TIPO', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
@@ -326,6 +326,8 @@ class formu4(FlaskForm):
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
 
     submit = SubmitField('Enviar')
+
+
 
 
 class formu5(FlaskForm):

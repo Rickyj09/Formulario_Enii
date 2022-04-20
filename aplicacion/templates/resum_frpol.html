@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> {%block title%}REPORTE DE INSPECCIÓN ESLINGA CABLE DE ACERO{%endblock%}</title>
+  <title> {%block title%}REPORTE DE INSPECCIÓN POLEAS {%endblock%}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
 </head>
 
@@ -35,7 +35,7 @@
         <img src="/static/img/Acreditacion.jpg">
       </div>
       <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-        <h3>REPORTE DE INSPECCIÓN ESLINGA CABLE DE ACERO</h3>
+        <h3>REPORTE DE INSPECCIÓN POLEAS</h3>
         <h4>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h4>
       </div>
       <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
@@ -97,30 +97,27 @@
 
         <h4>DATOS DEL END (PT)</h4>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          ELEMENTO A ENSAYAR {{ dato.13 }}
+          PROCEDIMIENTO Nº {{ dato.13 }}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          PROCEDIMIENTO Nº {{ dato.14 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          REVISIÓN Nº {{ dato.15 }}
+          REVISIÓN Nº {{ dato.14 }}
 
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TEMPERATURA DE ENSAYO: {{ dato.16 }}
+          TEMPERATURA DE ENSAYO: {{ dato.15 }}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIPO DE ILUMINACIÓN: {{ dato.17 }}
+          TIPO DE ILUMINACIÓN: {{ dato.16 }}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          NIVEL DE ILUMINACIÓN: {{ dato.18 }}
+          NIVEL DE ILUMINACIÓN: {{ dato.17 }}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MATERIAL BASE: {{ dato.19 }}
+          MATERIAL BASE: {{ dato.18 }}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIPO DE SECADO: {{ dato.20 }}
+          TIPO DE SECADO: {{ dato.19 }}
         </div>
         <hr>
         <h4>CONSUMIBLES</h4>
@@ -128,59 +125,59 @@
         <h4>1.- PENETRANTE</h4>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIPO DE PENETRANTE: {{ dato.21 }}
+          TIPO DE PENETRANTE: {{ dato.20 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MARCA KIT DE INSPECCIÓN: {{ dato.22 }}
+          MARCA KIT DE INSPECCIÓN: {{ dato.21 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIEMPO DE PENETRACIÓN {{ dato.23 }}
+          TIEMPO DE PENETRACIÓN {{ dato.22 }}
         </div>
         <hr>
         <h2>CONSUMIBLES</h2>
 
         <h2>2.- REMOVEDOR </h2>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MÉTODO DE REMOCIÓN: {{ dato.24 }}
+          MÉTODO DE REMOCIÓN: {{ dato.23 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MARCA KIT DE INSPECCIÓN: {{ dato.25 }}
+          MARCA KIT DE INSPECCIÓN: {{ dato.24 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIEMPO DE SECADO DEL REMOVEDOR: {{ dato.26 }}
+          TIEMPO DE SECADO DEL REMOVEDOR: {{ dato.25 }}
         </div>
         <hr>
         <h4>CONSUMIBLES</h4>
 
         <h4>3.- REVELADOR </h4>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          FORMA DE REVELADO: {{ dato.27 }}
+          FORMA DE REVELADO: {{ dato.26 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MARCA KIT DE INSPECCIÓN: {{ dato.28 }}
+          MARCA KIT DE INSPECCIÓN: {{ dato.27 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIEMPO DE REVELADO: {{ dato.29 }}
+          TIEMPO DE REVELADO: {{ dato.28 }}
         </div>
         <hr>
         <h4>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS </h4>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          EQUIPO: {{ dato.30 }}
+          EQUIPO: {{ dato.29 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MODELO: {{ dato.31 }}
+          MODELO: {{ dato.30 }}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          IDENTIFICACIÓN : {{ dato.32 }}
+          IDENTIFICACIÓN : {{ dato.31 }}
         </div>
         <hr>
         <h4>
@@ -196,40 +193,34 @@
         <div class="list-group">
           <table class="table table-bordered">
             <tr>
-                <th>Nº</th>
-                <th>CÓDIGO ENII</th>
-                <th>REFERENCIA</th>
-                <th>TIPO DE TERMINAL</th>
-                <th>MEDIDAS (mm)</th>
-                <th>CAPACIDAD (Kg)</th>
-                <th>DIAMETRO ESLINGA (mm)</th>
-                <th>MEDIDA DEL ACCESORIO (mm)</th>
-                <th>INSPECCIÓN VISUAL(VT)</th>
-                <th>LÍQUIDOS PENETRANTES(PT)</th>
+              <th>Nº</th>
+              <th>CÓDIGO ENII</th>
+              <th>REFERENCIA</th>
+              <th>ANCHO (mm)</th>
+              <th>DIÁMETRO (mm)</th>
+              <th>INSPECCIÓN VISUAL</th>
+              <th>LÍQUIDOS PENETRANTES</th>
             </tr>
             {% for cat in data %}
             <tr>
-                <td>{{cat.0}}</td>
-                <td>{{cat.2}}</td>
-                <td>{{cat.1}}</td>
-                <td>{{cat.3}}</td>
-                <td>{{cat.4}}</td>
-                <td>{{cat.5}}</td>
-                <td>{{cat.6}}</td>
-                <td>{{cat.7}}</td>
-                <td>{{cat.8}}</td>
-                <td>{{cat.9}}</td>
+              <td>{{cat.0}}</td>
+              <td>{{cat.2}}</td>
+              <td>{{cat.1}}</td>
+              <td>{{cat.3}}</td>
+              <td>{{cat.4}}</td>
+              <td>{{cat.5}}</td>
+              <td>{{cat.6}}</td>
             </tr>
             {% endfor %}
-        </table>
+          </table>
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <a href="/edit1/{{contact}}" class="btn btn-secondary">MODIFICAR</a>
-
+          <a href="/edit_frpol/{{contact}}" class="btn btn-secondary">MODIFICAR</a>
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <a href="{{ url_for('cert_for2')}}" class="btn btn-primary">CERTIFICADO</a>
+          <a href="{{ url_for('cert_for1')}}" class="btn btn-primary">CERTIFICADO</a>
         </div>
+        
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
           <a href="{{ url_for('reporte_foto1')}}" class="btn btn-primary">OK</a>
         </div>

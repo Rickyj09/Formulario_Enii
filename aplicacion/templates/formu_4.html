@@ -14,10 +14,7 @@
     <form class="row g-3 needs-validation" novalidate method="POST">
         <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc.label }} {{ form.proc(class_="form-control") }}
-            {% for error in form.proc.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-006
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis.label }} {{ form.revis(class_="form-control") }}
@@ -143,60 +140,6 @@
             <img src="/static/img/047-2.jpg">
         </div>
 
-
-
-        <center>
-            <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
-        </center>
-
-        <h3>ESPECIFICACIONES DEL ACCESORIO RESULTADOS DE INSPECCIÓN</h3>
-        <div class="form-group col-xs-12 col-sm-12 col-md-1  position-relative">
-            {{ form.num.label }} {{ form.num(class_="form-control") }}
-            {% for error in form.num.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.cod_enii.label }} {{ form.cod_enii(class_="form-control") }}
-            {% for error in form.cod_enii.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.ref.label }} {{ form.ref(class_="form-control") }}
-            {% for error in form.ref.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.tipo.label }} {{ form.tipo(class_="form-control") }}
-            {% for error in form.tipo.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.medidas.label }} {{ form.medidas(class_="form-control") }}
-            {% for error in form.medidas.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.capac.label }} {{ form.capac(class_="form-control") }}
-            {% for error in form.capac.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.vt.label }} {{ form.vt(class_="form-control") }}
-            {% for error in form.vt.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
 
 
         <div class="col-12">
