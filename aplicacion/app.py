@@ -850,15 +850,15 @@ def home_2():
         datos = cursor.fetchone()
         print(datos)
         # return 'OK'
-        return redirect(url_for('formu_2'))
+        return redirect(url_for('freca'))
     return render_template('home_2.html', form=form, datos=nom_form, desc=nom_form1)
 
 
 
 
-@app.route('/formu_2', methods=['GET', 'POST'])
+@app.route('/freca', methods=['GET', 'POST'])
 @login_required
-def formu_2():
+def freca():
     form = formu2()
     if form.validate_on_submit():
         revis = request.form['revis']
@@ -897,18 +897,18 @@ def formu_2():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form3 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,elem_ens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+        cur.execute('insert into freca (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,elem_ens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
                     (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden,elem_ens))
         mysql.connection.commit()
-        return redirect(url_for('formu_2_2'))
+        return redirect(url_for('freca1'))
         #return render_template('formu_1_1.html', form=form)
-    return render_template('formu_2.html', form=form)
+    return render_template('freca.html', form=form)
 		
 
 
-@app.route('/add_formu_2_2', methods=['POST'])
+@app.route('/add_freca1', methods=['POST'])
 @login_required
-def add_formu_2_2():
+def add_freca1():
     form = formu2_2()
     cur = mysql.connection.cursor()
     cur.execute("select (sec+1) from codigo where id_for = 3;")
@@ -932,39 +932,39 @@ def add_formu_2_2():
         vt = request.form['vt']
         pt = request.form['pt']
         cur = mysql.connection.cursor()
-        cur.execute("select id from form3 where id = (select MAX(id) from form3) ;")
+        cur.execute("select id from freca where id = (select MAX(id) from freca) ;")
         llave_form = cur.fetchone()
         print(llave_form)
-        cur.execute('insert into form33 (num,ref,cod_enii,tipo_ter,medidas,capac,dia_elin,med_aces,vt,pt,id_f3) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(num, ref, cod_enii, tipo_ter, medidas, capac, dia_elin, med_aces, vt, pt,llave_form))
+        cur.execute('insert into freca1 (num,ref,cod_enii,tipo_ter,medidas,capac,dia_elin,med_aces,vt,pt,id_f3) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(num, ref, cod_enii, tipo_ter, medidas, capac, dia_elin, med_aces, vt, pt,llave_form))
         mysql.connection.commit()
-        return redirect(url_for('formu_2_2'))
+        return redirect(url_for('freca1'))
 
 
-@app.route('/formu_2_2', methods=['GET', 'POST'])
+@app.route('/freca1', methods=['GET', 'POST'])
 @login_required
-def formu_2_2():
+def freca1():
     form = formu2_2()
     cur = mysql.connection.cursor()
-    cur.execute("select * from form33 where id_f3=(select MAX(id) from form3) ;")
+    cur.execute("select * from freca1 where id_f3=(select MAX(id) from freca) ;")
     data = cur.fetchall()
-    return render_template('formu_2_2.html',form = form, data = data)
+    return render_template('freca1.html',form = form, data = data)
 
 
 
-@app.route('/edit1/<id>', methods = ['POST', 'GET'])
+@app.route('/edit_freca/<id>', methods = ['POST', 'GET'])
 @login_required
 def get_contact1(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM form3 WHERE id = %s', (id))
+    cur.execute('SELECT * FROM freca WHERE id = %s', (id,))
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-form2.html', contact = data[0])
+    return render_template('edit-freca.html', contact = data[0])
 
 
-@app.route('/update1/<id>', methods=['POST'])
+@app.route('/update_freca/<id>', methods=['POST'])
 @login_required
-def update_form3(id):
+def update_freca(id):
     if request.method == 'POST':
         proc = request.form['proc']
         revis = request.form['revis']
@@ -998,7 +998,7 @@ def update_form3(id):
         iden = request.form['iden']
         cur = mysql.connection.cursor()
         cur.execute("""
-            UPDATE form3
+            UPDATE freca
             SET proc = %s,
                 revis = %s,
                 nivel_il = %s,
@@ -1033,22 +1033,22 @@ def update_form3(id):
         """, (proc, revis, nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_ens,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,id))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('resumen2'))
+        return redirect(url_for('resum_freca'))
 
 
-@app.route('/edit_f22/<id>', methods = ['POST', 'GET'])
+@app.route('/edit_freca1/<id>', methods = ['POST', 'GET'])
 @login_required
-def get_f22(id):
+def get_freca1(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM form33 WHERE num = %s and id_f3=(select MAX(id) from form3)', (id))
+    cur.execute('SELECT * FROM freca1 WHERE num = %s and id_f3=(select MAX(id) from freca)', (id))
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-f22.html', contact = data[0])
+    return render_template('edit-freca1.html', contact = data[0])
 
-@app.route('/update_f22/<id>', methods=['POST'])
+@app.route('/update_freca1/<id>', methods=['POST'])
 @login_required
-def update_f22(id):
+def update_freca1(id):
     if request.method == 'POST':
         num = request.form['num']
         ref = request.form['ref']
@@ -1062,7 +1062,7 @@ def update_f22(id):
         pt = request.form['pt']
         cur = mysql.connection.cursor()
         cur.execute("""
-            UPDATE form33
+            UPDATE freca1
             SET num = %s,
                 ref = %s,
                 cod_enii = %s,
@@ -1077,11 +1077,11 @@ def update_f22(id):
         """, (num,ref,cod_enii,tipo_ter,medidas,capac,dia_elin,med_aces,vt,pt,num))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('formu_2_2'))
+        return redirect(url_for('freca1'))
 
-@app.route('/resumen2')
+@app.route('/resum_freca')
 @login_required
-def resumen2():
+def resum_freca():
     cursor = mysql.connection.cursor()
     cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
@@ -1102,17 +1102,17 @@ def resumen2():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     inpe = cursor.fetchone()
     cursor.execute(
-        "select * from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from freca where id_formulario = (select MAX(id_formulario) from formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
-        "select MAX(id) from form3 ;")
+        "select MAX(id) from freca ;")
     data1 = cursor.fetchone()
     cursor.execute(
-        "select * from form33 where id_f3 = (select MAX(id) from form3) ;")
+        "select * from freca1 where id_f3 = (select MAX(id) from freca) ;")
     data = cursor.fetchall()
     print(data1)
     print(data)
-    return render_template('resumen2.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1,contact = data1[0],data=data)
+    return render_template('resum_freca.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1,contact = data1[0],data=data)
 
 
 
@@ -1136,7 +1136,7 @@ def cert_for2():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     ins = cursor.fetchone()
     cursor.execute(
-        "select * from form33 where id_f3 = (select MAX(id) from form3) ;")
+        "select * from freca1 where id_f3 = (select MAX(id) from freca) ;")
     data = cursor.fetchall()
     
     return render_template('cert_for2.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp,llave=llave,lug=lug,ins=ins)
@@ -1289,7 +1289,7 @@ def update_form4(id):
         iden = request.form['iden']
         cur = mysql.connection.cursor()
         cur.execute("""
-            UPDATE form3
+            UPDATE freca
             SET proc = %s,
                 revis = %s,
                 nivel_il = %s,
@@ -1398,10 +1398,10 @@ def resumen3():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     inpe = cursor.fetchone()
     cursor.execute(
-        "select * from form3 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from freca where id_formulario = (select MAX(id_formulario) from formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
-        "select MAX(id) from form3 ;")
+        "select MAX(id) from freca ;")
     data1 = cursor.fetchone()
     cursor.execute(
         "select * from form44 where id_f4 = (select MAX(id) from form4) ;")

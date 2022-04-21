@@ -5,7 +5,7 @@
 <body>
 
 
-    <form action="{{url_for('add_formu_2_2')}}" method="POST" class="row g-3 needs-validation">
+    <form action="{{url_for('add_freca1')}}" method="POST" class="row g-3 needs-validation">
         <center>
             <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
         </center>
@@ -73,7 +73,7 @@
         <div class="col-12">
             {{ form.hidden_tag() }}
             {{ form.submit(class_="btn btn-primary") }}
-            <a href="{{ url_for('resumen2') }}" class="btn btn-dark btn-sm rounded-0">Fin</a>
+            <a href="{{ url_for('resum_freca') }}" class="btn btn-dark btn-sm rounded-0">Fin</a>
         </div>
 
 
@@ -109,7 +109,7 @@
                 <td>{{cat.8}}</td>
                 <td>{{cat.9}}</td>
                 <td>
-                    <a href="/edit_f22/{{cat.0}}" class="btn btn-secondary">edit</a>
+                    <a href="/edit_freca1/{{cat.0}}" class="btn btn-secondary">edit</a>
                 </td>
             </tr>
             {% endfor %}
