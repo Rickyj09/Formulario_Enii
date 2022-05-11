@@ -9,7 +9,7 @@
         MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTORREFERENCIA NORMATIVA: ASME B30.9 (2018) Eslingas (Los números a
         indicar pertenecen a la norma en mención)
         MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
-    <form action="{{url_for('add_formu_4_4')}}" method="POST" class="row g-3 needs-validation">
+    <form action="{{url_for('add_frefs1')}}" method="POST" class="row g-3 needs-validation">
         <hr>
         <center>
             <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
@@ -60,7 +60,7 @@
         <div class="col-12">
             {{ form.hidden_tag() }}
             {{ form.submit(class_="btn btn-primary") }}
-            <a href="{{ url_for('resumen4') }}" class="btn btn-dark btn-sm rounded-0">Fin</a>
+            <a href="{{ url_for('resum_frefs') }}" class="btn btn-dark btn-sm rounded-0">Fin</a>
         </div>
 
         <hr>
@@ -88,7 +88,7 @@
                     <td>{{cat.5}}</td>
                     <td>{{cat.6}}</td>
                     <td>
-                        <a href="/edit_f44/{{cat.0}}" class="btn btn-secondary">edit</a>
+                        <a href="/edit-frefs1/{{cat.0}}" class="btn btn-secondary">edit</a>
                     </td>
                 </tr>
                 {% endfor %}

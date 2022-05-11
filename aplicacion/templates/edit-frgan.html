@@ -1,15 +1,15 @@
 {% extends 'layout_for.html' %}
-{%block title%} FORMULARIO FR-INSP-045.04  {%endblock%}
+{%block title%} FORMULARIO FR-INSP-055.04 {%endblock%}
 {% block content %}
 
-<h1>REPORTE DE INSPECCIÓN DE CADENA</h1>
-<P>REFERENCIA NORMATIVA: ASME B30.26:2015 Aparejos (Los
-    números a indicar pertenecen a la norma en mención)
-    MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
+<h1>REPORTE DE INSPECCIÓN GANCHOS</h1>
+<P>REFERENCIA NORMATIVA: ASME B30.26 (2015), Aparejos (Los números a indicar pertenecen a la norma en mención),
+  MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
 <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
 <h3>DATOS DEL END (VT)</h3>
 
-<form action="/update1/{{contact.0}}" method="POST" class="row g-3 needs-validation">
+
+<form action="/update_frgan/{{contact.0}}" method="POST" class="row g-3 needs-validation">
 
   <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
     <label for="name">PROCEDIMIENTO Nº: </label>

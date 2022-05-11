@@ -8,8 +8,8 @@ from aplicacion.forms import check_list10, check_list11, check_list12, check_lis
 from aplicacion.forms import check_list16, check_list17, check_list18, check_list19, check_list20, check_list21
 from aplicacion.forms import check_list22, check_list23, check_list24, check_list25, Publicaciones, CHECK_LIST_FIN
 from aplicacion.forms import prueba_carga, check_list1, prueba_carga3
-from aplicacion.forms import formu1,formu1_1, formu2, formu3, formu4, formu5, formu6, formu7, formu8, formu9, formu10, formu11, formu12, formu13
-from aplicacion.forms import formu2_2,formu3_3,formu4_4
+from aplicacion.forms import formu1, formu1_1, formu2, formu3, formu4, formu5, formu6, formu7, formu8, formu9, formu10, formu11, formu12, formu13
+from aplicacion.forms import formu2_2, formu3_3, formu4_4, formu5_5, formu6_6
 from aplicacion.forms import LoginForm, UploadForm
 from flask_mysqldb import MySQL
 from werkzeug.utils import secure_filename
@@ -203,349 +203,6 @@ def home():
     return render_template('home.html', form=form, datos=nom_form)
 
 
-
-
-
-
-@app.route('/home_3', methods=['GET', 'POST'])
-@login_required
-def home_3():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id = 10;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 10;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_3'))
-    return render_template('home_3.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_4', methods=['GET', 'POST'])
-@login_required
-def home_4():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id = 7;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 7;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_4'))
-    return render_template('home_4.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_5', methods=['GET', 'POST'])
-@login_required
-def home_5():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id = 8;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 8;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_5'))
-    return render_template('home_5.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_6', methods=['GET', 'POST'])
-@login_required
-def home_6():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id =9;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 9;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_6'))
-    return render_template('home_6.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_7', methods=['GET', 'POST'])
-@login_required
-def home_7():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id =11;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 11;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_7'))
-    return render_template('home_7.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_8', methods=['GET', 'POST'])
-@login_required
-def home_8():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id =12;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 12;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_8'))
-    return render_template('home_8.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_9', methods=['GET', 'POST'])
-@login_required
-def home_9():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id =13;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 13;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_9'))
-    return render_template('home_9.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_10', methods=['GET', 'POST'])
-@login_required
-def home_10():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id =14;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 14;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_10'))
-    return render_template('home_10.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_11', methods=['GET', 'POST'])
-@login_required
-def home_11():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id =15;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 15;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_11'))
-    return render_template('home_11.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_12', methods=['GET', 'POST'])
-@login_required
-def home_12():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id =16;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 16;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_12'))
-    return render_template('home_12.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_13', methods=['GET', 'POST'])
-@login_required
-def home_13():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id = 17;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 17;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_13'))
-    return render_template('home_13.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-@app.route('/home_14', methods=['GET', 'POST'])
-@login_required
-def home_14():
-    cursor = mysql.connection.cursor()
-    cursor.execute("select nombre from articulos where id = 18;")
-    nom_form = cursor.fetchone()
-    cursor.execute("select descripcion from articulos where id = 18;")
-    nom_form1 = cursor.fetchone()
-    form = datos_reporte()
-    if form.validate_on_submit():
-        empre = request.form['empresa']
-        fecha_insp = request.form['fec_inpec']
-        fecha_emi = request.form['fec_emision']
-        fecha_exp = request.form['fec_expiracion']
-        lugar_ins = request.form['lugar_inpec']
-        nombre_ins = request.form['nom_inspec']
-        cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
-        mysql.connection.commit()
-        flash('Guardado Correctamente')
-        datos = cursor.fetchone()
-        print(datos)
-        # return 'OK'
-        return redirect(url_for('formu_14'))
-    return render_template('home_14.html', form=form, datos=nom_form, desc=nom_form1)
-
-
-
-
-
 @app.route('/home_1', methods=['GET', 'POST'])
 @login_required
 def home_1():
@@ -572,8 +229,6 @@ def home_1():
         # return 'OK'
         return redirect(url_for('frpol'))
     return render_template('home_1.html', form=form, datos=nom_form, desc=nom_form1)
-
-
 
 
 @app.route('/frpol', methods=['GET', 'POST'])
@@ -616,10 +271,10 @@ def frpol():
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
         cur.execute('insert into frpol (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle,'PR-INSP-007' , revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden))
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden))
         mysql.connection.commit()
         return redirect(url_for('frpol1'))
-        #return render_template('frpol1.html', form=form)
+        # return render_template('frpol1.html', form=form)
     return render_template('frpol.html', form=form)
 
 
@@ -640,19 +295,22 @@ def add_frpol1():
         cur = mysql.connection.cursor()
         num = request.form['num']
         ref = request.form['ref']
-        cur.execute("select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 2;")
+        cur.execute(
+            "select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 2;")
         cod_enii = cur.fetchone()
         ancho = request.form['ancho']
         diam = request.form['diam']
         vt = request.form['vt']
         pt = request.form['pt']
-        cur.execute("select id from frpol where id = (select MAX(id) from frpol) ;")
+        cur.execute(
+            "select id from frpol where id = (select MAX(id) from frpol) ;")
         llave_form = cur.fetchone()
         print(cod_enii)
-        cur.execute('insert into frpol1 (num,ref,cod_enii,ancho,diam,vt,pt,id_f2) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(num, ref, cod_enii, ancho, diam, vt, pt,llave_form))
+        cur.execute('insert into frpol1 (num,ref,cod_enii,ancho,diam,vt,pt,id_f2) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (num, ref, cod_enii, ancho, diam, vt, pt, llave_form))
         mysql.connection.commit()
         return redirect(url_for('frpol1'))
-   
+
 
 @app.route('/frpol1', methods=['GET', 'POST'])
 @login_required
@@ -661,10 +319,10 @@ def frpol1():
     cur = mysql.connection.cursor()
     cur.execute("select * from frpol1 where id_f2=(select MAX(id) from frpol) ;")
     data = cur.fetchall()
-    return render_template('frpol1.html',form = form, data = data)
+    return render_template('frpol1.html', form=form, data=data)
 
 
-@app.route('/edit_frpol/<id>', methods = ['POST', 'GET'])
+@app.route('/edit_frpol/<id>', methods=['POST', 'GET'])
 @login_required
 def get_contact(id):
     cur = mysql.connection.cursor()
@@ -672,7 +330,7 @@ def get_contact(id):
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-frpol.html', contact = data[0])
+    return render_template('edit-frpol.html', contact=data[0])
 
 
 @app.route('/update_frpol/<id>', methods=['POST'])
@@ -741,23 +399,22 @@ def update_form2(id):
 				modelo = %s,
                 iden = %s
             WHERE id = %s
-        """, (proc, revis, nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,id))
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, id))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
         return redirect(url_for('resum_frpol'))
 
 
-
-
-@app.route('/edit-frpol1/<id>', methods = ['POST', 'GET'])
+@app.route('/edit-frpol1/<id>', methods=['POST', 'GET'])
 @login_required
 def get_frpol1(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM frpol1 WHERE num = %s and id_f2=(select MAX(id) from frpol)', [id])
+    cur.execute(
+        'SELECT * FROM frpol1 WHERE num = %s and id_f2=(select MAX(id) from frpol)', [id])
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-frpol1.html', contact = data[0])
+    return render_template('edit-frpol1.html', contact=data[0])
 
 
 @app.route('/update_frpol1/<id>', methods=['POST'])
@@ -782,7 +439,7 @@ def update_frpol1(id):
                 vt = %s,
 				pt = %s
             WHERE num = %s
-        """, (num, ref, cod_enii,ancho,diam,vt,pt,num))
+        """, (num, ref, cod_enii, ancho, diam, vt, pt, num))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
         return redirect(url_for('frpol1'))
@@ -821,9 +478,7 @@ def resum_frpol():
     data = cursor.fetchall()
     print(data1)
     print(data)
-    return render_template('resum_frpol.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1,contact = data1[0],data=data)
-
-
+    return render_template('resum_frpol.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
 
 
 @app.route('/home_2', methods=['GET', 'POST'])
@@ -852,8 +507,6 @@ def home_2():
         # return 'OK'
         return redirect(url_for('freca'))
     return render_template('home_2.html', form=form, datos=nom_form, desc=nom_form1)
-
-
 
 
 @app.route('/freca', methods=['GET', 'POST'])
@@ -889,7 +542,7 @@ def freca():
         equipo = request.form['equipo']
         modelo = request.form['modelo']
         iden = request.form['iden']
-        
+
         cur = mysql.connection.cursor()
         cur.execute(
             "select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
@@ -898,12 +551,11 @@ def freca():
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
         cur.execute('insert into freca (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,elem_ens) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden,elem_ens))
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, elem_ens))
         mysql.connection.commit()
         return redirect(url_for('freca1'))
-        #return render_template('formu_1_1.html', form=form)
+        # return render_template('formu_1_1.html', form=form)
     return render_template('freca.html', form=form)
-		
 
 
 @app.route('/add_freca1', methods=['POST'])
@@ -922,7 +574,8 @@ def add_freca1():
     if form.validate_on_submit():
         num = request.form['num']
         ref = request.form['ref']
-        cur.execute("select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 3;")
+        cur.execute(
+            "select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 3;")
         cod_enii = cur.fetchone()
         tipo_ter = request.form['tipo_ter']
         medidas = request.form['medidas']
@@ -932,10 +585,12 @@ def add_freca1():
         vt = request.form['vt']
         pt = request.form['pt']
         cur = mysql.connection.cursor()
-        cur.execute("select id from freca where id = (select MAX(id) from freca) ;")
+        cur.execute(
+            "select id from freca where id = (select MAX(id) from freca) ;")
         llave_form = cur.fetchone()
         print(llave_form)
-        cur.execute('insert into freca1 (num,ref,cod_enii,tipo_ter,medidas,capac,dia_elin,med_aces,vt,pt,id_f3) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(num, ref, cod_enii, tipo_ter, medidas, capac, dia_elin, med_aces, vt, pt,llave_form))
+        cur.execute('insert into freca1 (num,ref,cod_enii,tipo_ter,medidas,capac,dia_elin,med_aces,vt,pt,id_f3) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (num, ref, cod_enii, tipo_ter, medidas, capac, dia_elin, med_aces, vt, pt, llave_form))
         mysql.connection.commit()
         return redirect(url_for('freca1'))
 
@@ -947,11 +602,10 @@ def freca1():
     cur = mysql.connection.cursor()
     cur.execute("select * from freca1 where id_f3=(select MAX(id) from freca) ;")
     data = cur.fetchall()
-    return render_template('freca1.html',form = form, data = data)
+    return render_template('freca1.html', form=form, data=data)
 
 
-
-@app.route('/edit_freca/<id>', methods = ['POST', 'GET'])
+@app.route('/edit_freca/<id>', methods=['POST', 'GET'])
 @login_required
 def get_contact1(id):
     cur = mysql.connection.cursor()
@@ -959,7 +613,7 @@ def get_contact1(id):
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-freca.html', contact = data[0])
+    return render_template('edit-freca.html', contact=data[0])
 
 
 @app.route('/update_freca/<id>', methods=['POST'])
@@ -1030,21 +684,23 @@ def update_freca(id):
 				modelo = %s,
                 iden = %s
             WHERE id = %s
-        """, (proc, revis, nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_ens,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,id))
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_ens, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, id))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
         return redirect(url_for('resum_freca'))
 
 
-@app.route('/edit_freca1/<id>', methods = ['POST', 'GET'])
+@app.route('/edit_freca1/<id>', methods=['POST', 'GET'])
 @login_required
 def get_freca1(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM freca1 WHERE num = %s and id_f3=(select MAX(id) from freca)', (id))
+    cur.execute(
+        'SELECT * FROM freca1 WHERE num = %s and id_f3=(select MAX(id) from freca)',  [id])
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-freca1.html', contact = data[0])
+    return render_template('edit-freca1.html', contact=data[0])
+
 
 @app.route('/update_freca1/<id>', methods=['POST'])
 @login_required
@@ -1074,10 +730,11 @@ def update_freca1(id):
                 vt = %s,
 				pt = %s
             WHERE num = %s
-        """, (num,ref,cod_enii,tipo_ter,medidas,capac,dia_elin,med_aces,vt,pt,num))
+        """, (num, ref, cod_enii, tipo_ter, medidas, capac, dia_elin, med_aces, vt, pt, num))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
         return redirect(url_for('freca1'))
+
 
 @app.route('/resum_freca')
 @login_required
@@ -1112,8 +769,7 @@ def resum_freca():
     data = cursor.fetchall()
     print(data1)
     print(data)
-    return render_template('resum_freca.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1,contact = data1[0],data=data)
-
+    return render_template('resum_freca.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
 
 
 @app.route('/cert_for2', methods=['GET', 'POST'])
@@ -1138,16 +794,41 @@ def cert_for2():
     cursor.execute(
         "select * from freca1 where id_f3 = (select MAX(id) from freca) ;")
     data = cursor.fetchall()
-    
-    return render_template('cert_for2.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp,llave=llave,lug=lug,ins=ins)
-   
+
+    return render_template('cert_for2.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
 
 
-
-
-@app.route('/formu_3', methods=['GET', 'POST'])
+@app.route('/home_3', methods=['GET', 'POST'])
 @login_required
-def formu_3():
+def home_3():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id = 10;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 10;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frcad'))
+    return render_template('home_3.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frcad', methods=['GET', 'POST'])
+@login_required
+def frcad():
     form = formu3()
     if form.validate_on_submit():
         revis = request.form['revis']
@@ -1184,20 +865,16 @@ def formu_3():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form4 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+        cur.execute('insert into frcad (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
                     (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden,))
         mysql.connection.commit()
-        return redirect(url_for('formu_3_3'))
-    return render_template('formu_3.html', form=form)
+        return redirect(url_for('frcad1'))
+    return render_template('frcad.html', form=form)
 
 
-
-
-
-
-@app.route('/add_formu_3_3', methods=['POST'])
+@app.route('/add_frcad1', methods=['POST'])
 @login_required
-def add_formu_3_3():
+def add_frcad1():
     form = formu3_3()
     cur = mysql.connection.cursor()
     cur.execute("select (sec+1) from codigo where id_for = 4;")
@@ -1212,7 +889,8 @@ def add_formu_3_3():
         tipo_ace = request.form['tipo_ace']
         num = request.form['num']
         ref = request.form['ref']
-        cur.execute("select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 4;")
+        cur.execute(
+            "select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 4;")
         cod_enii = cur.fetchone()
         eslabon = request.form['eslabon']
         medidas = request.form['medidas']
@@ -1222,40 +900,40 @@ def add_formu_3_3():
         vt = request.form['vt']
         pt = request.form['pt']
         cur = mysql.connection.cursor()
-        cur.execute("select id from form4 where id = (select MAX(id) from form4) ;")
+        cur.execute(
+            "select id from frcad where id = (select MAX(id) from frcad) ;")
         llave_form = cur.fetchone()
         print(llave_form)
-        cur.execute('insert into form44 (tipo_ace,num,ref,cod_enii,eslabon,medidas,capac,gancho1,gancho2,vt,pt,id_f4) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',(tipo_ace,num, ref, cod_enii, eslabon, medidas, capac, gancho1, gancho2, vt, pt,llave_form))
+        cur.execute('insert into frcad1 (tipo_ace,num,ref,cod_enii,eslabon,medidas,capac,gancho1,gancho2,vt,pt,id_f4) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (tipo_ace, num, ref, cod_enii, eslabon, medidas, capac, gancho1, gancho2, vt, pt, llave_form))
         mysql.connection.commit()
-        return redirect(url_for('formu_3_3'))
-   
+        return redirect(url_for('frcad1'))
 
 
-@app.route('/formu_3_3', methods=['GET', 'POST'])
+@app.route('/frcad1', methods=['GET', 'POST'])
 @login_required
-def formu_3_3():
+def frcad1():
     form = formu3_3()
     cur = mysql.connection.cursor()
-    cur.execute("select * from form44 where id_f4=(select MAX(id) from form4) ;")
+    cur.execute("select * from frcad1 where id_f4=(select MAX(id) from frcad) ;")
     data = cur.fetchall()
-    return render_template('formu_3_3.html',form = form, data = data)
+    return render_template('frcad1.html', form=form, data=data)
 
 
-
-@app.route('/edit3/<id>', methods = ['POST', 'GET'])
+@app.route('/edit_frcad/<id>', methods=['POST', 'GET'])
 @login_required
 def get_contact2(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM form4 WHERE id = %s', (id))
+    cur.execute('SELECT * FROM frcad WHERE id = %s', (id,))
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-form4.html', contact = data[0])
+    return render_template('edit-frcad.html', contact=data[0])
 
 
-@app.route('/update3/<id>', methods=['POST'])
+@app.route('/update_frcad/<id>', methods=['POST'])
 @login_required
-def update_form4(id):
+def update_frcad(id):
     if request.method == 'POST':
         proc = request.form['proc']
         revis = request.form['revis']
@@ -1321,26 +999,27 @@ def update_form4(id):
 				modelo = %s,
                 iden = %s
             WHERE id = %s
-        """, (proc, revis, nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_ens,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,id))
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_ens, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, id))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('resumen3'))
+        return redirect(url_for('resum_frcad'))
 
-@app.route('/edit_f33/<id>', methods = ['POST', 'GET'])
+
+@app.route('/edit_frcad1/<id>', methods=['POST', 'GET'])
 @login_required
 def get_f33(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM form44 WHERE num = %s and id_f4=(select MAX(id) from form4)', (id))
+    cur.execute(
+        'SELECT * FROM frcad1 WHERE num = %s and id_f4=(select MAX(id) from frcad)', [id])
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-f33.html', contact = data[0])
+    return render_template('edit-frcad1.html', contact=data[0])
 
 
-
-@app.route('/update_f33/<id>', methods=['POST'])
+@app.route('/update_frcad1/<id>', methods=['POST'])
 @login_required
-def update_f33(id):
+def update_frcad1(id):
     if request.method == 'POST':
         num = request.form['num']
         ref = request.form['ref']
@@ -1355,7 +1034,7 @@ def update_f33(id):
         pt = request.form['pt']
         cur = mysql.connection.cursor()
         cur.execute("""
-            UPDATE form44
+            UPDATE frcad1
             SET tipo_ace = %s,
                 num = %s,
                 cod_enii = %s,
@@ -1368,16 +1047,15 @@ def update_f33(id):
                 vt = %s,
 				pt = %s
             WHERE num = %s
-        """, (tipo_ace,num,cod_enii,ref,medidas,capac,eslabon,gancho1,gancho2,vt,pt,num))
+        """, (tipo_ace, num, cod_enii, ref, medidas, capac, eslabon, gancho1, gancho2, vt, pt, num))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('formu_3_3'))
+        return redirect(url_for('frcad1'))
 
 
-
-@app.route('/resumen3')
+@app.route('/resum_frcad')
 @login_required
-def resumen3():
+def resum_frcad():
     cursor = mysql.connection.cursor()
     cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
@@ -1398,17 +1076,17 @@ def resumen3():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     inpe = cursor.fetchone()
     cursor.execute(
-        "select * from freca where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frcad where id_formulario = (select MAX(id_formulario) from formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
-        "select MAX(id) from freca ;")
+        "select MAX(id) from frcad ;")
     data1 = cursor.fetchone()
     cursor.execute(
-        "select * from form44 where id_f4 = (select MAX(id) from form4) ;")
+        "select * from frcad1 where id_f4 = (select MAX(id) from frcad) ;")
     data = cursor.fetchall()
     print(data1)
     print(data)
-    return render_template('resumen3.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1,contact = data1[0],data=data)
+    return render_template('resum_frcad.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
 
 
 @app.route('/cert_for3', methods=['GET', 'POST'])
@@ -1431,17 +1109,43 @@ def cert_for3():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     ins = cursor.fetchone()
     cursor.execute(
-        "select * from form44 where id_f4 = (select MAX(id) from form4) ;")
+        "select * from frcad1 where id_f4 = (select MAX(id) from frcad) ;")
     data = cursor.fetchall()
-    
-    return render_template('cert_for3.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp,llave=llave,lug=lug,ins=ins)
-   
+
+    return render_template('cert_for3.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
 
 
-
-@app.route('/formu_4', methods=['GET', 'POST'])
+@app.route('/home_4', methods=['GET', 'POST'])
 @login_required
-def formu_4():
+def home_4():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id = 7;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 7;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frefs'))
+    return render_template('home_4.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frefs', methods=['GET', 'POST'])
+@login_required
+def frefs():
     form = formu4()
     if form.validate_on_submit():
         revis = request.form['revis']
@@ -1463,16 +1167,16 @@ def formu_4():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form5 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalleequipo,modelo,iden) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+        cur.execute('insert into frefs (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,equipo,modelo,iden) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
                     (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, equipo, modelo, iden))
         mysql.connection.commit()
-        return redirect(url_for('formu_4_4'))
-    return render_template('formu_4.html', form=form)
+        return redirect(url_for('frefs1'))
+    return render_template('frefs.html', form=form)
 
 
-@app.route('/add_formu_4_4', methods=['POST'])
+@app.route('/add_frefs1', methods=['POST'])
 @login_required
-def add_formu_4_4():
+def add_frefs1():
     form = formu4_4()
     cur = mysql.connection.cursor()
     cur.execute("select (sec+1) from codigo where id_for = 5;")
@@ -1491,54 +1195,60 @@ def add_formu_4_4():
         medidas = request.form['medidas']
         capac = request.form['capac']
         vt = request.form['vt']
-        cur.execute("select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 5;")
+        cur.execute(
+            "select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 5;")
         cod_enii = cur.fetchone()
-        cur.execute("select id from form5 where id = (select MAX(id) from form5) ;")
+        cur.execute(
+            "select id from frefs where id = (select MAX(id) from frefs) ;")
         llave_form = cur.fetchone()
         print(cod_enii)
-        cur.execute('insert into form55 (num,ref,cod_enii,tipo,medidas,capac,vt,id_f5) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',(num, ref, cod_enii, tipo, medidas,capac,vt,llave_form))
+        cur.execute('insert into frefs1 (num,ref,cod_enii,tipo,medidas,capac,vt,id_f5) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (num, ref, cod_enii, tipo, medidas, capac, vt, llave_form))
         mysql.connection.commit()
-        return redirect(url_for('formu_4_4'))
+        return redirect(url_for('frefs1'))
 
-@app.route('/formu_4_4', methods=['GET', 'POST'])
+
+@app.route('/frefs1', methods=['GET', 'POST'])
 @login_required
-def formu_4_4():
+def frefs1():
     form = formu4_4()
     cur = mysql.connection.cursor()
-    cur.execute("select * from form55 where id_f5=(select MAX(id) from form5) ;")
+    cur.execute("select * from frefs1 where id_f5=(select MAX(id) from frefs) ;")
     data = cur.fetchall()
-    return render_template('formu_4_4.html',form = form, data = data)
+    return render_template('frefs1.html', form=form, data=data)
 
 
-@app.route('/edit_f44<id>', methods = ['POST', 'GET'])
+@app.route('/edit-frefs1/<id>', methods=['POST', 'GET'])
 @login_required
 def get_f44(id):
     cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM form55 WHERE num = %s and id_f5(select MAX(id) from form5)', (id))
+    cur.execute(
+        'SELECT * FROM frefs1 WHERE num = %s and id_f5 = (select MAX(id) from frefs)', (id,))
     data = cur.fetchall()
     cur.close()
     print(data[0])
-    return render_template('edit-f44.html', contact = data[0])
+    return render_template('edit-frefs1.html', contact=data[0])
 
-@app.route('/update_f4/<id>', methods=['POST'])
+
+@app.route('/update_frefs/<id>', methods=['POST'])
 @login_required
-def update_f4(id):
+def update_frefs(id):
     if request.method == 'POST':
-       proc = request.form['proc']
-       revis = request.form['revis']
-       nivel_il = request.form['nivel_il']      
-       con_sup = request.form['con_sup']
-       met_insp = request.form['met_insp']
-       tipo_il = request.form['tipo_il']
-       check1 = request.form['check1']
-       check2 = request.form['check2']
-       check3 = request.form['check3']
-       detalle = request.form['detalle']
-       equipo = request.form['equipo']
-       modelo = request.form['modelo']
-       iden = request.form['iden']
-       cur = mysql.connection.cursor()
-       cur.execute("""
+        proc = request.form['proc']
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
+        equipo = request.form['equipo']
+        modelo = request.form['modelo']
+        iden = request.form['iden']
+        cur = mysql.connection.cursor()
+        cur.execute("""
             UPDATE frpol
             SET proc = %s,
                 revis = %s,
@@ -1554,15 +1264,15 @@ def update_f4(id):
 				modelo = %s,
                 iden = %s
             WHERE id = %s
-        """, (proc, revis, nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,equipo,modelo,iden,id))
-       flash('Contact Updated Successfully')
-       mysql.connection.commit()
-       return redirect(url_for('resumen4'))
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, equipo, modelo, iden, id))
+        flash('Contact Updated Successfully')
+        mysql.connection.commit()
+        return redirect(url_for('resumen4'))
 
 
-@app.route('/update_f44/<id>', methods=['POST'])
+@app.route('/update_frefs1/<id>', methods=['POST'])
 @login_required
-def update_f44(id):
+def update_frefs1(id):
     if request.method == 'POST':
         num = request.form['num']
         ref = request.form['ref']
@@ -1573,7 +1283,7 @@ def update_f44(id):
         vt = request.form['vt']
         cur = mysql.connection.cursor()
         cur.execute("""
-            UPDATE form55
+            UPDATE frefs1
             SET num = %s,
                 ref = %s,
                 cod_enii = %s,
@@ -1582,15 +1292,15 @@ def update_f44(id):
                 capac = %s,
 				vt = %s
             WHERE num = %s
-        """, (num, ref, cod_enii,tipo,medidas,capac,vt,num))
+        """, (num, ref, cod_enii, tipo, medidas, capac, vt, num))
         flash('Contact Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('formu_4_4'))
+        return redirect(url_for('frefs1'))
 
 
-@app.route('/resumen4')
+@app.route('/resum_frefs')
 @login_required
-def resumen4():
+def resum_frefs():
     cursor = mysql.connection.cursor()
     cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
@@ -1611,17 +1321,17 @@ def resumen4():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     inpe = cursor.fetchone()
     cursor.execute(
-        "select * from form5 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frefs where id_formulario = (select MAX(id_formulario) from formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
-        "select MAX(id) from form5 ;")
+        "select MAX(id) from frefs ;")
     data1 = cursor.fetchone()
     cursor.execute(
-        "select * from form55 where id_f5 = (select MAX(id) from form5) ;")
+        "select * from frefs1 where id_f5 = (select MAX(id) from frefs) ;")
     data = cursor.fetchall()
     print(data1)
     print(data)
-    return render_template('resumen4.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1,contact = data1[0],data=data)
+    return render_template('resum_frefs.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
 
 
 @app.route('/cert_for4', methods=['GET', 'POST'])
@@ -1644,20 +1354,45 @@ def cert_for4():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     ins = cursor.fetchone()
     cursor.execute(
-        "select * from form55 where id_f5 = (select MAX(id) from form4) ;")
+        "select * from frefs1 where id_f5 = (select MAX(id) from frcad) ;")
     data = cursor.fetchall()
-    
-    return render_template('cert_for4.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp,llave=llave,lug=lug,ins=ins)
-   
+
+    return render_template('cert_for4.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
 
 
-
-@app.route('/formu_5', methods=['GET', 'POST'])
+@app.route('/home_5', methods=['GET', 'POST'])
 @login_required
-def formu_5():
+def home_5():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id = 8;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 8;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frgan'))
+    return render_template('home_5.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frgan', methods=['GET', 'POST'])
+@login_required
+def frgan():
     form = formu5()
     if form.validate_on_submit():
-        proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
         con_sup = request.form['con_sup']
@@ -1668,6 +1403,63 @@ def formu_5():
         check3 = request.form['check3']
         detalle = request.form['detalle']
         elem_en = request.form['elem_en']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        equipo = request.form['equipo']
+        modelo = request.form['modelo']
+        iden = request.form['iden']
+        cur = mysql.connection.cursor()
+        cur.execute(
+            "select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        llave_form = cur.fetchone()
+        cur.execute(
+            "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        fecha_form = cur.fetchone()
+        cur.execute('insert into frgan (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_en,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_en, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden))
+        mysql.connection.commit()
+        return redirect(url_for('frgan1'))
+    return render_template('frgan.html', form=form)
+
+
+@app.route('/edit_frgan/<id>', methods=['POST', 'GET'])
+@login_required
+def get_frgan(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frgan WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frgan.html', contact=data[0])
+
+
+@app.route('/update_frgan/<id>', methods=['POST'])
+@login_required
+def update_frgan(id):
+    if request.method == 'POST':
+        proc = request.form['proc']
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
         proc_p = request.form['proc_p']
         revis_p = request.form['revis_p']
         temp_ens = request.form['temp_ens']
@@ -1687,35 +1479,204 @@ def formu_5():
         equipo = request.form['equipo']
         modelo = request.form['modelo']
         iden = request.form['iden']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE frgan
+            SET proc = %s,
+                revis = %s,
+                nivel_il = %s,
+				con_sup = %s,
+                met_insp = %s,
+				tipo_il = %s,
+                check1 = %s,
+				check2 = %s,
+                check3 = %s,
+				detalle = %s,
+                proc_p = %s,
+				revis_p = %s,
+                temp_ens = %s,
+				tipo_il_p = %s,
+                nivel_il_p = %s,
+				mater_base = %s,
+                tipo_sec = %s,
+				tipo_pen = %s,
+                marca_kit = %s,
+				tiem_pen = %s,
+                met_rem = %s,
+				marca_kit1 = %s,
+                tiem_sec = %s,
+				for_rev = %s,
+                marca_kit2 = %s,
+				tiem_rev = %s,
+                equipo = %s,
+				modelo = %s,
+                iden = %s
+            WHERE id = %s
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, id))
+        flash('Contact Updated Successfully')
+        mysql.connection.commit()
+        return redirect(url_for('resum_frgan'))
+
+
+@app.route('/add_frgan1', methods=['POST'])
+@login_required
+def add_frgan():
+    form = formu5_5()
+    cur = mysql.connection.cursor()
+    cur.execute("select (sec+1) from codigo where id_for = 6;")
+    sec = cur.fetchone()
+    cur.execute("""
+            UPDATE codigo
+            SET sec = %s
+                WHERE id = 6
+        """, sec)
+    mysql.connection.commit()
+    if form.validate_on_submit():
+        cur = mysql.connection.cursor()
+        num = request.form['num']
+        ref = request.form['ref']
+        cur.execute(
+            "select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 6;")
+        cod_enii = cur.fetchone()
+        medidas = request.form['medidas']
+        capac = request.form['capac']
+        asiento = request.form['asiento']
+        garganta = request.form['garganta']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur.execute(
+            "select id from frgan where id = (select MAX(id) from frgan) ;")
+        llave_form = cur.fetchone()
+        print(cod_enii)
+        cur.execute('insert into frgan1 (num,ref,cod_enii,medidas,capac,asiento,garganta,vt,pt,id_f6) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (num, ref, cod_enii, medidas, capac, asiento, garganta, vt, pt, llave_form))
+        mysql.connection.commit()
+        return redirect(url_for('frgan1'))
+
+
+@app.route('/frgan1', methods=['GET', 'POST'])
+@login_required
+def frgan1():
+    form = formu5_5()
+    cur = mysql.connection.cursor()
+    cur.execute("select * from frgan1 where id_f6=(select MAX(id) from frgan) ;")
+    data = cur.fetchall()
+    return render_template('frgan1.html', form=form, data=data)
+
+
+@app.route('/edit-frgan1/<id>', methods=['POST', 'GET'])
+@login_required
+def get_frgan1(id):
+    cur = mysql.connection.cursor()
+    cur.execute(
+        'SELECT * FROM frgan1 WHERE num = %s and id_f6=(select MAX(id) from frgan)', [id])
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frgan1.html', contact=data[0])
+
+
+@app.route('/update_frgan1/<id>', methods=['POST'])
+@login_required
+def update_frgan1(id):
+    if request.method == 'POST':
         num = request.form['num']
         ref = request.form['ref']
         cod_enii = request.form['cod_enii']
-        asiento = request.form['asiento']
         medidas = request.form['medidas']
         capac = request.form['capac']
+        asiento = request.form['asiento']
         garganta = request.form['garganta']
         vt = request.form['vt']
         pt = request.form['pt']
         cur = mysql.connection.cursor()
-        cur.execute(
-            "select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
-        llave_form = cur.fetchone()
-        cur.execute(
-            "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
-        fecha_form = cur.fetchone()
-        cur.execute('insert into form6 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_en,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,num,ref,cod_enii,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,asiento,medidas,capac,garganta) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_en, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, num, ref, cod_enii, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, asiento, medidas, capac, garganta))
+        cur.execute("""
+            UPDATE frgan1
+            SET num = %s,
+                ref = %s,
+                cod_enii = %s,
+				medidas = %s,
+                capac = %s,
+                asiento = %s,
+                garganta = %s,
+                vt = %s,
+				pt = %s
+            WHERE num = %s
+        """, (num, ref, cod_enii, medidas, capac, asiento, garganta, vt, pt, num))
+        flash(' Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
-    return render_template('formu_5.html', form=form)
+        return redirect(url_for('frgan1'))
 
 
-@app.route('/formu_6', methods=['GET', 'POST'])
+@app.route('/resum_frgan')
 @login_required
-def formu_6():
+def resum_frgan():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frgan ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frgan1 where id_f6 = (select MAX(id) from frgan) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frgan.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+
+
+@app.route('/home_6', methods=['GET', 'POST'])
+@login_required
+def home_6():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id =9;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 9;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frgri'))
+    return render_template('home_6.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frgri', methods=['GET', 'POST'])
+@login_required
+def frgri():
     form = formu6()
     if form.validate_on_submit():
-        proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
         con_sup = request.form['con_sup']
@@ -1726,6 +1687,63 @@ def formu_6():
         check3 = request.form['check3']
         detalle = request.form['detalle']
         elem_en = request.form['elem_en']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        equipo = request.form['equipo']
+        modelo = request.form['modelo']
+        iden = request.form['iden']
+        cur = mysql.connection.cursor()
+        cur.execute(
+            "select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        llave_form = cur.fetchone()
+        cur.execute(
+            "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        fecha_form = cur.fetchone()
+        cur.execute('insert into frgri (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_en,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_en, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden))
+        mysql.connection.commit()
+        return redirect(url_for('frgri1'))
+    return render_template('frgri.html', form=form)
+
+
+@app.route('/edit_frgri/<id>', methods=['POST', 'GET'])
+@login_required
+def get_frgri(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frgri WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frgri.html', contact=data[0])
+
+
+@app.route('/update_frgri/<id>', methods=['POST'])
+@login_required
+def update_frgri(id):
+    if request.method == 'POST':
+        proc = request.form['proc']
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
         proc_p = request.form['proc_p']
         revis_p = request.form['revis_p']
         temp_ens = request.form['temp_ens']
@@ -1745,34 +1763,234 @@ def formu_6():
         equipo = request.form['equipo']
         modelo = request.form['modelo']
         iden = request.form['iden']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE frgri
+            SET proc = %s,
+                revis = %s,
+                nivel_il = %s,
+				con_sup = %s,
+                met_insp = %s,
+				tipo_il = %s,
+                check1 = %s,
+				check2 = %s,
+                check3 = %s,
+				detalle = %s,
+                proc_p = %s,
+				revis_p = %s,
+                temp_ens = %s,
+				tipo_il_p = %s,
+                nivel_il_p = %s,
+				mater_base = %s,
+                tipo_sec = %s,
+				tipo_pen = %s,
+                marca_kit = %s,
+				tiem_pen = %s,
+                met_rem = %s,
+				marca_kit1 = %s,
+                tiem_sec = %s,
+				for_rev = %s,
+                marca_kit2 = %s,
+				tiem_rev = %s,
+                equipo = %s,
+				modelo = %s,
+                iden = %s
+            WHERE id = %s
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, id))
+        flash('Contact Updated Successfully')
+        mysql.connection.commit()
+        return redirect(url_for('resum_frgri'))
+
+
+@app.route('/add_frgri1', methods=['POST'])
+@login_required
+def add_frgri():
+    form = formu6_6()
+    cur = mysql.connection.cursor()
+    cur.execute("select (sec+1) from codigo where id_for = 7;")
+    sec = cur.fetchone()
+    cur.execute("""
+            UPDATE codigo
+            SET sec = %s
+                WHERE id = 7
+        """, sec)
+    mysql.connection.commit()
+    if form.validate_on_submit():
+        cur = mysql.connection.cursor()
+        num = request.form['num']
+        ref = request.form['ref']
+        cur.execute(
+            "select CONCAT(preffijo,LPAD(sec, 4, '0')) from codigo where id_for = 7;")
+        cod_enii = cur.fetchone()
+        medidas = request.form['medidas']
+        capac = request.form['capac']
+        diam_cue = request.form['diam_cue']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur.execute(
+            "select id from frgan where id = (select MAX(id) from frgri) ;")
+        llave_form = cur.fetchone()
+        print(cod_enii)
+        cur.execute('insert into frgri1 (num,ref,cod_enii,medidas,capac,diam_cue,vt,pt,id_f7) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (num, ref, cod_enii, medidas, capac, diam_cue, vt, pt, llave_form))
+        mysql.connection.commit()
+        return redirect(url_for('frgri1'))
+
+
+@app.route('/frgri1', methods=['GET', 'POST'])
+@login_required
+def frgri1():
+    form = formu6_6()
+    cur = mysql.connection.cursor()
+    cur.execute("select * from frgri1 where id_f7=(select MAX(id) from frgri) ;")
+    data = cur.fetchall()
+    return render_template('frgri1.html', form=form, data=data)
+
+
+@app.route('/edit-frgri1/<id>', methods=['POST', 'GET'])
+@login_required
+def get_frgri1(id):
+    cur = mysql.connection.cursor()
+    cur.execute(
+        'SELECT * FROM frgri1 WHERE num = %s and id_f7=(select MAX(id) from frgri)', [id])
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frgri1.html', contact=data[0])
+
+
+@app.route('/update_frgri1/<id>', methods=['POST'])
+@login_required
+def update_frgri1(id):
+    if request.method == 'POST':
         num = request.form['num']
         ref = request.form['ref']
         cod_enii = request.form['cod_enii']
-        diam_cue = request.form['diam_cue']
         medidas = request.form['medidas']
         capac = request.form['capac']
+        diam_cue = request.form['diam_cue']
         vt = request.form['vt']
         pt = request.form['pt']
         cur = mysql.connection.cursor()
-        cur.execute(
-            "select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
-        llave_form = cur.fetchone()
-        cur.execute(
-            "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
-        fecha_form = cur.fetchone()
-        cur.execute('insert into form7 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_en,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,num,ref,cod_enii,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,diam_cue,medidas,capac) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_en, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, num, ref, cod_enii, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, diam_cue, medidas, capac))
+        cur.execute("""
+            UPDATE frgri1
+            SET num = %s,
+                ref = %s,
+                cod_enii = %s,
+				medidas = %s,
+                capac = %s,
+                diam_cue = %s,
+                vt = %s,
+				pt = %s
+            WHERE num = %s
+        """, (num, ref, cod_enii, medidas, capac, diam_cue, vt, pt, num))
+        flash(' Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
-    return render_template('formu_6.html', form=form)
+        return redirect(url_for('frgri1'))
 
 
-@app.route('/formu_7', methods=['GET', 'POST'])
+@app.route('/resum_frgri')
 @login_required
-def formu_7():
+def resum_frgri():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frgri ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frgri1 where id_f7 = (select MAX(id) from frgri) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frgri.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+
+
+@app.route('/cert_for6', methods=['GET', 'POST'])
+@login_required
+def cert_for6():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select num from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    numero = cursor.fetchone()
+    cursor.execute(
+        "select cod_enii from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    cod_enii = cursor.fetchone()
+    cursor.execute(
+        "select ref from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    ref = cursor.fetchone()
+    cursor.execute(
+        "select tipo_il from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    tipo_ter = cursor.fetchone()
+    cursor.execute(
+        "select medidas from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas = cursor.fetchone()
+    cursor.execute(
+        "select capac from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+
+    print(numero)
+    return render_template('cert_for6.html', numero=numero, cod_enii=cod_enii, ref=ref, tipo_ter=tipo_ter, medidas=medidas, capac=capac, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+@app.route('/home_7', methods=['GET', 'POST'])
+@login_required
+def home_7():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id =11;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 11;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frkpi'))
+    return render_template('home_7.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frkpi', methods=['GET', 'POST'])
+@login_required
+def frkpi():
     form = formu7()
     if form.validate_on_submit():
-        proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
         con_sup = request.form['con_sup']
@@ -1783,7 +2001,6 @@ def formu_7():
         check3 = request.form['check3']
         detalle = request.form['detalle']
         elem_en = request.form['elem_en']
-        proc_p = request.form['proc_p']
         revis_p = request.form['revis_p']
         temp_ens = request.form['temp_ens']
         tipo_il_p = request.form['tipo_il_p']
@@ -1819,18 +2036,278 @@ def formu_7():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form8 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_en,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,marca_pk,iden_pk,modelo_pk,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,marca,iden,capac_pk,dia_sup,dia_cen,dia_inf,obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_en, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, marca_pk, iden_pk, modelo_pk, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, capac_pk, iden, dia_sup, dia_cen, dia_inf, obs))
+        cur.execute('insert into frkpi (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_en,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,marca_pk,iden_pk,modelo_pk,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,marca,iden,capac_pk,dia_sup,dia_cen,dia_inf,obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, elem_en, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, marca_pk, iden_pk, modelo_pk, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, capac_pk, iden, dia_sup, dia_cen, dia_inf, obs))
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
-    return render_template('formu_7.html', form=form)
+        return redirect(url_for('resum_frkpi'))
+    return render_template('frkpi.html', form=form)
 
 
-@app.route('/formu_8', methods=['GET', 'POST'])
+
+@app.route('/edit_frkpi/<id>', methods=['POST', 'GET'])
 @login_required
-def formu_8():
+def get_frkpi(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frkpi WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frkpi.html', contact=data[0])
+
+
+
+@app.route('/update_frkpi/<id>', methods=['POST'])
+@login_required
+def update_frkpi(id):
+    if request.method == 'POST':
+        proc = request.form['proc']
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
+        proc_p = request.form['proc_p']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        equipo = request.form['equipo']
+        marca = request.form['marca']
+        iden = request.form['iden']
+        marca_pk = request.form['marca_pk']
+        iden_pk = request.form['iden_pk']
+        modelo_pk = request.form['modelo_pk']
+        capac_pk = request.form['capac_pk']
+        dia_sup = request.form['dia_sup']
+        dia_cen = request.form['dia_cen']
+        dia_inf = request.form['dia_inf']
+        obs = request.form['obs']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE frkpi
+            SET proc = %s,
+                revis = %s,
+                nivel_il = %s,
+				con_sup = %s,
+                met_insp = %s,
+				tipo_il = %s,
+                check1 = %s,
+				check2 = %s,
+                check3 = %s,
+				detalle = %s,
+                proc_p = %s,
+				revis_p = %s,
+                temp_ens = %s,
+				tipo_il_p = %s,
+                nivel_il_p = %s,
+				mater_base = %s,
+                tipo_sec = %s,
+				tipo_pen = %s,
+                marca_kit = %s,
+				tiem_pen = %s,
+                met_rem = %s,
+				marca_kit1 = %s,
+                tiem_sec = %s,
+				for_rev = %s,
+                marca_kit2 = %s,
+				tiem_rev = %s,
+                equipo = %s,
+				marca = %s,
+                iden = %s,
+                marca_pk = %s,
+                iden_pk = %s,
+                modelo_pk = %s,
+                capac_pk = %s,
+                dia_sup = %s,
+                dia_cen = %s,
+                dia_inf = %s,
+                obs = %s,
+                vt = %s,
+                pt = %s
+            WHERE id = %s
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, iden, marca_pk, iden_pk, modelo_pk, capac_pk,dia_sup, dia_cen,dia_inf,obs,vt,pt,id))
+        flash('Contact Updated Successfully')
+        mysql.connection.commit()
+        return redirect(url_for('resum_frkpi'))
+
+
+@app.route('/resum_frkpi')
+@login_required
+def resum_frkpi():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frkpi ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frkpi.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+
+
+
+
+
+@app.route('/cert_for7', methods=['GET', 'POST'])
+@login_required
+def cert_for7():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute(
+        "select iden_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute(
+        "select capac_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for7.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+@app.route('/home_8', methods=['GET', 'POST'])
+@login_required
+def home_8():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id =12;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 12;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frqru'))
+    return render_template('home_8.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frqru', methods=['GET', 'POST'])
+@login_required
+def frqru():
     form = formu8()
     if form.validate_on_submit():
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        equipo = request.form['equipo']
+        marca = request.form['marca']
+        iden = request.form['iden']
+        marca_pk = request.form['marca_pk']
+        iden_pk = request.form['iden_pk']
+        modelo_pk = request.form['modelo_pk']
+        capac_pk = request.form['capac_pk']
+        obs = request.form['obs']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur = mysql.connection.cursor()
+        cur.execute(
+            "select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        llave_form = cur.fetchone()
+        cur.execute(
+            "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
+        fecha_form = cur.fetchone()
+        cur.execute('insert into frqru (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,marca_pk,iden_pk,modelo_pk,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,marca,iden,capac_pk,obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, marca_pk, iden_pk, modelo_pk, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, capac_pk, iden, obs))
+        mysql.connection.commit()
+        return redirect(url_for('resum_frqru'))
+    return render_template('frqru.html', form=form)
+
+
+
+
+@app.route('/edit_frqru/<id>', methods=['POST', 'GET'])
+@login_required
+def get_frqru(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frqru WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frqru.html', contact=data[0])
+
+
+
+@app.route('/update_frqru/<id>', methods=['POST'])
+@login_required
+def update_frqru(id):
+    if request.method == 'POST':
         proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
@@ -1868,25 +2345,145 @@ def formu_8():
         vt = request.form['vt']
         pt = request.form['pt']
         cur = mysql.connection.cursor()
-        cur.execute(
-            "select id_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
-        llave_form = cur.fetchone()
-        cur.execute(
-            "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
-        fecha_form = cur.fetchone()
-        cur.execute('insert into form9 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,marca_pk,iden_pk,modelo_pk,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,marca,iden,capac_pk,obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, marca_pk, iden_pk, modelo_pk, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, capac_pk, iden, obs))
+        cur.execute("""
+            UPDATE frqru
+            SET proc = %s,
+                revis = %s,
+                nivel_il = %s,
+				con_sup = %s,
+                met_insp = %s,
+				tipo_il = %s,
+                check1 = %s,
+				check2 = %s,
+                check3 = %s,
+				detalle = %s,
+                proc_p = %s,
+				revis_p = %s,
+                temp_ens = %s,
+				tipo_il_p = %s,
+                nivel_il_p = %s,
+				mater_base = %s,
+                tipo_sec = %s,
+				tipo_pen = %s,
+                marca_kit = %s,
+				tiem_pen = %s,
+                met_rem = %s,
+				marca_kit1 = %s,
+                tiem_sec = %s,
+				for_rev = %s,
+                marca_kit2 = %s,
+				tiem_rev = %s,
+                equipo = %s,
+				marca = %s,
+                iden = %s,
+                marca_pk = %s,
+                iden_pk = %s,
+                modelo_pk = %s,
+                capac_pk = %s,
+                obs = %s,
+                vt = %s,
+                pt = %s
+            WHERE id = %s
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, iden, marca_pk, iden_pk, modelo_pk, capac_pk,obs,vt,pt,id))
+        flash('Contact Updated Successfully')
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
-    return render_template('formu_8.html', form=form)
+        return redirect(url_for('resum_frqru'))
 
-
-@app.route('/formu_9', methods=['GET', 'POST'])
+@app.route('/resum_frqru')
 @login_required
-def formu_9():
+def resum_frqru():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frqru ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frqru.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+
+
+
+@app.route('/cert_for8', methods=['GET', 'POST'])
+@login_required
+def cert_for8():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select equipo from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    equipo = cursor.fetchone()
+    cursor.execute(
+        "select marca_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute(
+        "select iden_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute(
+        "select capac_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for8.html', equipo=equipo, marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+@app.route('/home_9', methods=['GET', 'POST'])
+@login_required
+def home_9():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id =13;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 13;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frsep'))
+    return render_template('home_9.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frsep', methods=['GET', 'POST'])
+@login_required
+def frsep():
     form = formu9()
     if form.validate_on_submit():
-        proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
         con_sup = request.form['con_sup']
@@ -1896,7 +2493,6 @@ def formu_9():
         check2 = request.form['check2']
         check3 = request.form['check3']
         detalle = request.form['detalle']
-        proc_p = request.form['proc_p']
         revis_p = request.form['revis_p']
         temp_ens = request.form['temp_ens']
         tipo_il_p = request.form['tipo_il_p']
@@ -1926,18 +2522,30 @@ def formu_9():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form10 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,marca_pk,iden_pk,modelo_pk,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,capac_pk,obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, marca_pk, iden_pk, modelo_pk, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, capac_pk, obs))
+        cur.execute('insert into frsep (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,marca_pk,iden_pk,modelo_pk,vt,pt,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,capac_pk,obs) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, marca_pk, iden_pk, modelo_pk, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, capac_pk, obs))
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
-    return render_template('formu_9.html', form=form)
+        return redirect(url_for('resum_frsep'))
+    return render_template('frsep.html', form=form)
 
 
-@app.route('/formu_10', methods=['GET', 'POST'])
+
+@app.route('/edit_frsep/<id>', methods=['POST', 'GET'])
 @login_required
-def formu_10():
-    form = formu10()
-    if form.validate_on_submit():
+def get_frsep(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frsep WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frsep.html', contact=data[0])
+
+
+
+@app.route('/update_frsep/<id>', methods=['POST'])
+@login_required
+def update_frsep(id):
+    if request.method == 'POST':
         proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
@@ -1949,6 +2557,164 @@ def formu_10():
         check3 = request.form['check3']
         detalle = request.form['detalle']
         proc_p = request.form['proc_p']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        obs = request.form['obs']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE frsep
+            SET proc = %s,
+                revis = %s,
+                nivel_il = %s,
+				con_sup = %s,
+                met_insp = %s,
+				tipo_il = %s,
+                check1 = %s,
+				check2 = %s,
+                check3 = %s,
+				detalle = %s,
+                proc_p = %s,
+				revis_p = %s,
+                temp_ens = %s,
+				tipo_il_p = %s,
+                nivel_il_p = %s,
+				mater_base = %s,
+                tipo_sec = %s,
+				tipo_pen = %s,
+                marca_kit = %s,
+				tiem_pen = %s,
+                met_rem = %s,
+				marca_kit1 = %s,
+                tiem_sec = %s,
+				for_rev = %s,
+                marca_kit2 = %s,
+				tiem_rev = %s,
+                obs = %s,
+                vt = %s,
+                pt = %s
+            WHERE id = %s
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev,obs,vt,pt,id))
+        flash('Contact Updated Successfully')
+        mysql.connection.commit()
+        return redirect(url_for('resum_frsep'))
+
+@app.route('/resum_frsep')
+@login_required
+def resum_frsep():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frsep ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frsep.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+
+
+
+
+@app.route('/cert_for9', methods=['GET', 'POST'])
+@login_required
+def cert_for9():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute(
+        "select iden_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute(
+        "select capac_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for9.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+@app.route('/home_10', methods=['GET', 'POST'])
+@login_required
+def home_10():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id =14;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 14;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frhor'))
+    return render_template('home_10.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frhor', methods=['GET', 'POST'])
+@login_required
+def frhor():
+    form = formu10()
+    if form.validate_on_submit():
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
         revis_p = request.form['revis_p']
         temp_ens = request.form['temp_ens']
         tipo_il_p = request.form['tipo_il_p']
@@ -1977,10 +2743,6 @@ def formu_10():
         modelo_hi = request.form['modelo_hi']
         capac_hi = request.form['capac_hi']
         medidas_hi = request.form['medidas_hi']
-        marca_hd1 = request.form['marca_hd1']
-        iden_hd1 = request.form['iden_hd1']
-        marca_hi1 = request.form['marca_hi1']
-        iden_hi1 = request.form['iden_hi1']
         med_asi_hd = request.form['med_asi_hd']
         med_asi_hi = request.form['med_asi_hi']
         obs = request.form['obs']
@@ -1993,19 +2755,31 @@ def formu_10():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form11 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,marca_hd,iden_hd,modelo_hd,capac_hd,medidas_hd,marca_hi,iden_hi,modelo_hi,capac_hi,medidas_hi,marca_hd1,iden_hd1,marca_hi1,iden_hi1,med_asi_hd,med_asi_hi,obs,vt,pt) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, marca_hd, iden_hd, modelo_hd, capac_hd, medidas_hd, marca_hi, iden_hi, modelo_hi, capac_hi, medidas_hi, marca_hd1, iden_hd1, marca_hi1, iden_hi1, med_asi_hd, med_asi_hi, obs))
+        cur.execute('insert into frhor (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,marca_hd,iden_hd,modelo_hd,capac_hd,medidas_hd,marca_hi,iden_hi,modelo_hi,capac_hi,medidas_hi,med_asi_hd,med_asi_hi,obs,vt,pt) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, marca_hd, iden_hd, modelo_hd, capac_hd, medidas_hd, marca_hi, iden_hi, modelo_hi, capac_hi, medidas_hi, med_asi_hd, med_asi_hi,obs, vt, pt))
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
+        return redirect(url_for('resum_frhor'))
 
-    return render_template('formu_10.html', form=form)
+    return render_template('frhor.html', form=form)
 
 
-@app.route('/formu_11', methods=['GET', 'POST'])
+
+@app.route('/edit_frhor/<id>', methods=['POST', 'GET'])
 @login_required
-def formu_11():
-    form = formu11()
-    if form.validate_on_submit():
+def get_frhor(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frhor WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frhor.html', contact=data[0])
+
+
+
+@app.route('/update_frhor/<id>', methods=['POST'])
+@login_required
+def update_frhor(id):
+    if request.method == 'POST':
         proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
@@ -2033,15 +2807,214 @@ def formu_11():
         marca_kit2 = request.form['marca_kit2']
         tiem_rev = request.form['tiem_rev']
         equipo = request.form['equipo']
+        marca = request.form['marca']
+        iden = request.form['iden']
+        marca_hd = request.form['marca_hd']
+        iden_hd = request.form['iden_hd']
+        modelo_hd = request.form['modelo_hd']
+        capac_hd = request.form['capac_hd']
+        medidas_hd = request.form['medidas_hd']
+        marca_hi = request.form['marca_hi']
+        iden_hi = request.form['iden_hi']
+        modelo_hi = request.form['modelo_hi']
+        capac_hi = request.form['capac_hi']
+        obs = request.form['obs']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE frhor
+            SET proc = %s,
+                revis = %s,
+                nivel_il = %s,
+				con_sup = %s,
+                met_insp = %s,
+				tipo_il = %s,
+                check1 = %s,
+				check2 = %s,
+                check3 = %s,
+				detalle = %s,
+                proc_p = %s,
+				revis_p = %s,
+                temp_ens = %s,
+				tipo_il_p = %s,
+                nivel_il_p = %s,
+				mater_base = %s,
+                tipo_sec = %s,
+				tipo_pen = %s,
+                marca_kit = %s,
+				tiem_pen = %s,
+                met_rem = %s,
+				marca_kit1 = %s,
+                tiem_sec = %s,
+				for_rev = %s,
+                marca_kit2 = %s,
+				tiem_rev = %s,
+                equipo = %s,
+				marca = %s,
+                iden = %s,
+                marca_hd = %s,
+                iden_hd = %s,
+                modelo_hd = %s,
+                capac_hd = %s,
+                medidas_hd = %s,
+                marca_hi = %s,
+                iden_hi = %s,
+                modelo_hi = %s,
+                capac_hi = %s,
+                medidas_hi = %s,
+                med_asi_hd = %s,
+                med_asi_hi = %s,
+                obs = %s,
+                vt = %s,
+                pt = %s
+            WHERE id = %s
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, iden,marca_hd, iden_hd, modelo_hd, capac_hd, medidas_hd, marca_hi, iden_hi, modelo_hi, capac_hi, obs,vt,pt,id))
+        flash('Contact Updated Successfully')
+        mysql.connection.commit()
+        return redirect(url_for('resum_frhor'))
+
+@app.route('/resum_frhor')
+@login_required
+def resum_frhor():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frhor ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frhor.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+
+
+@app.route('/cert_for10', methods=['GET', 'POST'])
+@login_required
+def cert_for10():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_hd from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_hd = cursor.fetchone()
+    cursor.execute(
+        "select iden_hd from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_hd = cursor.fetchone()
+    cursor.execute(
+        "select medidas_hd from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas_hd = cursor.fetchone()
+    cursor.execute(
+        "select capac_hd from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_hd = cursor.fetchone()
+    cursor.execute(
+        "select marca_hi from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_hi = cursor.fetchone()
+    cursor.execute(
+        "select iden_hi from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_hi = cursor.fetchone()
+    cursor.execute(
+        "select medidas_hi from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    medidas_hi = cursor.fetchone()
+    cursor.execute(
+        "select capac_hi from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_hi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    print(marca_hd)
+    return render_template('cert_for10.html', marca_hd=marca_hd, iden_hd=iden_hd, medidas_hd=medidas_hd, capac_hd=capac_hd,
+                           marca_hi=marca_hi, iden_hi=iden_hi, medidas_hi=medidas_hi, capac_hi=capac_hi, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+
+@app.route('/home_11', methods=['GET', 'POST'])
+@login_required
+def home_11():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id =15;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 15;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frppr'))
+    return render_template('home_11.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frppr', methods=['GET', 'POST'])
+@login_required
+def frppr():
+    form = formu11()
+    if form.validate_on_submit():
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        equipo = request.form['equipo']
         modelo = request.form['modelo']
         iden = request.form['iden']
         marca_pas = request.form['marca_pas']
         iden_pas = request.form['iden_pas']
         modelo_pas = request.form['modelo_pas']
-        cap_pas = request.form['cap_pas']
+        capac_pas = request.form['capac_pas']
         numero = request.form['numero']
-        marca = request.form['marca']
-        iden1 = request.form['iden1']
+        asi_gan = request.form['asi_gan']
+        gar_gan = request.form['gar_gan']
+        med_gri = request.form['med_gri']
         obs = request.form['obs']
         vt = request.form['vt']
         pt = request.form['pt']
@@ -2052,19 +3025,31 @@ def formu_11():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form12 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,marca_pas,iden_pas,modelo_pas,cap_pas,numero,marca,iden1,obs,vt,pt) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, marca_pas, iden_pas, modelo_pas, cap_pas, numero, marca, iden1, obs))
+        cur.execute('insert into frppr (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,marca_pas,iden_pas,modelo_pas,capac_pas,numero,asi_gan,gar_gan,med_gri,obs,vt,pt,tipo_pa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, marca_pas, iden_pas, modelo_pas, capac_pas, numero, asi_gan, gar_gan, med_gri, obs, vt, pt,'1' ))
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
+        return redirect(url_for('resum_frppr'))
 
-    return render_template('formu_11.html', form=form)
+    return render_template('frppr.html', form=form)
 
 
-@app.route('/formu_12', methods=['GET', 'POST'])
+
+@app.route('/edit_frppr/<id>', methods=['POST', 'GET'])
 @login_required
-def formu_12():
-    form = formu11()
-    if form.validate_on_submit():
+def get_frppr(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frppr WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frppr.html', contact=data[0])
+
+
+
+@app.route('/update_frppr/<id>', methods=['POST'])
+@login_required
+def update_frppr(id):
+    if request.method == 'POST':
         proc = request.form['proc']
         revis = request.form['revis']
         nivel_il = request.form['nivel_il']
@@ -2092,15 +3077,198 @@ def formu_12():
         marca_kit2 = request.form['marca_kit2']
         tiem_rev = request.form['tiem_rev']
         equipo = request.form['equipo']
+        marca = request.form['marca']
+        iden = request.form['iden']
+        marca_pas = request.form['marca_pas']
+        iden_pas = request.form['iden_pas']
+        modelo_pas = request.form['modelo_pas']
+        capac_pas = request.form['capac_pas']
+        numero = request.form['numero']
+        asi_gan = request.form['asi_gan']
+        gar_gan = request.form['gar_gan']
+        med_gri = request.form['med_gri']
+        obs = request.form['obs']
+        vt = request.form['vt']
+        pt = request.form['pt']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            UPDATE frppr
+            SET proc = %s,
+                revis = %s,
+                nivel_il = %s,
+				con_sup = %s,
+                met_insp = %s,
+				tipo_il = %s,
+                check1 = %s,
+				check2 = %s,
+                check3 = %s,
+				detalle = %s,
+                proc_p = %s,
+				revis_p = %s,
+                temp_ens = %s,
+				tipo_il_p = %s,
+                nivel_il_p = %s,
+				mater_base = %s,
+                tipo_sec = %s,
+				tipo_pen = %s,
+                marca_kit = %s,
+				tiem_pen = %s,
+                met_rem = %s,
+				marca_kit1 = %s,
+                tiem_sec = %s,
+				for_rev = %s,
+                marca_kit2 = %s,
+				tiem_rev = %s,
+                equipo = %s,
+				marca = %s,
+                iden = %s,
+                marca_pas = %s,
+                iden_pas = %s,
+                modelo_pas = %s,
+                capac_pas = %s,
+                numero = %s,
+                asi_gan = %s,
+                gar_gan = %s,
+                med_gri = %s,
+                obs = %s,
+                vt = %s,
+                pt = %s
+            WHERE id = %s
+        """, (proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, marca, iden,marca_pas, iden_pas, modelo_pas, capac_pas, numero, asi_gan, gar_gan, med_gri, obs,vt,pt,id))
+        flash('Contact Updated Successfully')
+        mysql.connection.commit()
+        return redirect(url_for('resum_frppr'))
+
+@app.route('/resum_frppr')
+@login_required
+def resum_frppr():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frppr ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frppr.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+
+
+
+@app.route('/cert_for11', methods=['GET', 'POST'])
+@login_required
+def cert_for11():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pas = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pas from frppr  where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pas = cursor.fetchone()
+    cursor.execute(
+        "select iden_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pas = cursor.fetchone()
+    cursor.execute(
+        "select capac_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pas = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for11.html', marca_pas=marca_pas, modelo_pas=modelo_pas, iden_pas=iden_pas, capac_pas=capac_pas, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+
+
+
+@app.route('/home_12', methods=['GET', 'POST'])
+@login_required
+def home_12():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id =16;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 16;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('frpau'))
+    return render_template('home_12.html', form=form, datos=nom_form, desc=nom_form1)
+
+
+@app.route('/frpau', methods=['GET', 'POST'])
+@login_required
+def frpau():
+    form = formu11()
+    if form.validate_on_submit():
+        revis = request.form['revis']
+        nivel_il = request.form['nivel_il']
+        con_sup = request.form['con_sup']
+        met_insp = request.form['met_insp']
+        tipo_il = request.form['tipo_il']
+        check1 = request.form['check1']
+        check2 = request.form['check2']
+        check3 = request.form['check3']
+        detalle = request.form['detalle']
+        revis_p = request.form['revis_p']
+        temp_ens = request.form['temp_ens']
+        tipo_il_p = request.form['tipo_il_p']
+        nivel_il_p = request.form['nivel_il_p']
+        mater_base = request.form['mater_base']
+        tipo_sec = request.form['tipo_sec']
+        tipo_pen = request.form['tipo_pen']
+        marca_kit = request.form['marca_kit']
+        tiem_pen = request.form['tiem_pen']
+        met_rem = request.form['met_rem']
+        marca_kit1 = request.form['marca_kit1']
+        tiem_sec = request.form['tiem_sec']
+        for_rev = request.form['for_rev']
+        marca_kit2 = request.form['marca_kit2']
+        tiem_rev = request.form['tiem_rev']
+        equipo = request.form['equipo']
         modelo = request.form['modelo']
         iden = request.form['iden']
         marca_pas = request.form['marca_pas']
         iden_pas = request.form['iden_pas']
         modelo_pas = request.form['modelo_pas']
-        cap_pas = request.form['cap_pas']
+        capac_pas = request.form['capac_pas']
         numero = request.form['numero']
-        marca = request.form['marca']
-        iden1 = request.form['iden1']
+        asi_gan = request.form['asi_gan']
+        gar_gan = request.form['gar_gan']
+        med_gri = request.form['med_gri']
         obs = request.form['obs']
         vt = request.form['vt']
         pt = request.form['pt']
@@ -2111,12 +3279,69 @@ def formu_12():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into form13 (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,marca_pas,iden_pas,modelo_pas,cap_pas,numero,marca,iden1,obs,vt,pt) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, proc, revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, proc_p, revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, vt, pt, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, marca_pas, iden_pas, modelo_pas, cap_pas, numero, marca, iden1, obs))
+        cur.execute('insert into frppr (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,marca_pas,iden_pas,modelo_pas,capac_pas,numero,asi_gan,gar_gan,med_gri,obs,vt,pt,tipo_pa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec, tipo_pen, marca_kit, tiem_pen, met_rem, marca_kit1, tiem_sec, for_rev, marca_kit2, tiem_rev, equipo, modelo, iden, marca_pas, iden_pas, modelo_pas, capac_pas, numero, asi_gan, gar_gan, med_gri, obs, vt, pt,'0' ))
         mysql.connection.commit()
-        return redirect(url_for('reporte_foto1'))
+        return redirect(url_for('resum_frppr'))
 
-    return render_template('formu_12.html', form=form)
+    return render_template('frpau.html', form=form)
+
+
+
+
+
+@app.route('/cert_for12', methods=['GET', 'POST'])
+@login_required
+def cert_for12():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pas = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pas from frppr  where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pas = cursor.fetchone()
+    cursor.execute(
+        "select iden_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pas = cursor.fetchone()
+    cursor.execute(
+        "select capac_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pas = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    return render_template('cert_for12.html', marca_pas=marca_pas, modelo_pas=modelo_pas, iden_pas=iden_pas, capac_pas=capac_pas, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+
+@app.route('/home_13', methods=['GET', 'POST'])
+@login_required
+def home_13():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id = 17;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 17;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('formu_13'))
+    return render_template('home_13.html', form=form, datos=nom_form, desc=nom_form1)
 
 
 @app.route('/formu_13', methods=['GET', 'POST'])
@@ -2196,6 +3421,34 @@ def formu_13():
         return redirect(url_for('reporte_foto1'))
 
     return render_template('formu_13.html', form=form)
+
+
+@app.route('/home_14', methods=['GET', 'POST'])
+@login_required
+def home_14():
+    cursor = mysql.connection.cursor()
+    cursor.execute("select nombre from articulos where id = 18;")
+    nom_form = cursor.fetchone()
+    cursor.execute("select descripcion from articulos where id = 18;")
+    nom_form1 = cursor.fetchone()
+    form = datos_reporte()
+    if form.validate_on_submit():
+        empre = request.form['empresa']
+        fecha_insp = request.form['fec_inpec']
+        fecha_emi = request.form['fec_emision']
+        fecha_exp = request.form['fec_expiracion']
+        lugar_ins = request.form['lugar_inpec']
+        nombre_ins = request.form['nom_inspec']
+        cursor = mysql.connection.cursor()
+        cursor.execute('insert into formulario (llave_formulario,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        mysql.connection.commit()
+        flash('Guardado Correctamente')
+        datos = cursor.fetchone()
+        print(datos)
+        # return 'OK'
+        return redirect(url_for('formu_14'))
+    return render_template('home_14.html', form=form, datos=nom_form, desc=nom_form1)
 
 
 @app.route('/formu_14', methods=['GET', 'POST'])
@@ -2279,9 +3532,6 @@ def resumen():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     inpe = cursor.fetchone()
     return render_template('resumen.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe)
-
-
-
 
 
 @app.route('/caratula', methods=['GET', 'POST'])
@@ -4000,6 +5250,7 @@ def CERTIFICADO_GM():
                            fec_cal2=fec_cal2, cod3=cod3, nom3=nom3, fec_cal3=fec_cal3, cod4=cod4, nom4=nom4,
                            fec_cal4=fec_cal4, cod5=cod5, nom5=nom5, fec_cal5=fec_cal5)
 
+
 @app.route('/cert_for1', methods=['GET', 'POST'])
 @login_required
 def cert_for1():
@@ -4022,11 +5273,8 @@ def cert_for1():
     cursor.execute(
         "select * from frpol1 where id_f2 = (select MAX(id) from frpol) ;")
     data = cursor.fetchall()
-    
-    return render_template('cert_for1.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp,llave = llave,lug = lug,ins =ins)
 
-    
-
+    return render_template('cert_for1.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
 
 
 @app.route('/cert_for5', methods=['GET', 'POST'])
@@ -4034,22 +5282,22 @@ def cert_for1():
 def cert_for5():
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "select num from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select num from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
     numero = cursor.fetchone()
     cursor.execute(
-        "select cod_enii from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select cod_enii from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
     cod_enii = cursor.fetchone()
     cursor.execute(
-        "select ref from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select ref from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
     ref = cursor.fetchone()
     cursor.execute(
-        "select tipo_il from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select tipo_il from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
     tipo_ter = cursor.fetchone()
     cursor.execute(
-        "select medidas from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select medidas from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
     medidas = cursor.fetchone()
     cursor.execute(
-        "select capac from form6 where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select capac from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
     capac = cursor.fetchone()
     cursor.execute(
         "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
@@ -4062,203 +5310,6 @@ def cert_for5():
     return render_template('cert_for5.html', numero=numero, cod_enii=cod_enii, ref=ref, tipo_ter=tipo_ter, medidas=medidas, capac=capac, fec_emi=fec_emi, fec_exp=fec_exp)
 
 
-@app.route('/cert_for6', methods=['GET', 'POST'])
-@login_required
-def cert_for6():
-    cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select num from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
-    numero = cursor.fetchone()
-    cursor.execute(
-        "select cod_enii from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
-    cod_enii = cursor.fetchone()
-    cursor.execute(
-        "select ref from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
-    ref = cursor.fetchone()
-    cursor.execute(
-        "select tipo_il from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
-    tipo_ter = cursor.fetchone()
-    cursor.execute(
-        "select medidas from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
-    medidas = cursor.fetchone()
-    cursor.execute(
-        "select capac from form7 where id_formulario = (select MAX(id_formulario) from formulario);")
-    capac = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-
-    print(numero)
-    return render_template('cert_for6.html', numero=numero, cod_enii=cod_enii, ref=ref, tipo_ter=tipo_ter, medidas=medidas, capac=capac, fec_emi=fec_emi, fec_exp=fec_exp)
-
-
-@app.route('/cert_for7', methods=['GET', 'POST'])
-@login_required
-def cert_for7():
-    cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select marca_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
-    marca_pk = cursor.fetchone()
-    cursor.execute(
-        "select modelo_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
-    modelo_pk = cursor.fetchone()
-    cursor.execute(
-        "select iden_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
-    iden_pk = cursor.fetchone()
-    cursor.execute(
-        "select capac_pk from form8 where id_formulario = (select MAX(id_formulario) from formulario);")
-    capac_pk = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    return render_template('cert_for7.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
-
-
-@app.route('/cert_for8', methods=['GET', 'POST'])
-@login_required
-def cert_for8():
-    cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select equipo from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
-    equipo = cursor.fetchone()
-    cursor.execute(
-        "select marca_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
-    marca_pk = cursor.fetchone()
-    cursor.execute(
-        "select modelo_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
-    modelo_pk = cursor.fetchone()
-    cursor.execute(
-        "select iden_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
-    iden_pk = cursor.fetchone()
-    cursor.execute(
-        "select capac_pk from form9 where id_formulario = (select MAX(id_formulario) from formulario);")
-    capac_pk = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    return render_template('cert_for8.html', equipo=equipo, marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
-
-
-@app.route('/cert_for9', methods=['GET', 'POST'])
-@login_required
-def cert_for9():
-    cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select marca_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
-    marca_pk = cursor.fetchone()
-    cursor.execute(
-        "select modelo_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
-    modelo_pk = cursor.fetchone()
-    cursor.execute(
-        "select iden_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
-    iden_pk = cursor.fetchone()
-    cursor.execute(
-        "select capac_pk from form10 where id_formulario = (select MAX(id_formulario) from formulario);")
-    capac_pk = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    return render_template('cert_for9.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
-
-
-@app.route('/cert_for10', methods=['GET', 'POST'])
-@login_required
-def cert_for10():
-    cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select marca_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    marca_hd = cursor.fetchone()
-    cursor.execute(
-        "select iden_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    iden_hd = cursor.fetchone()
-    cursor.execute(
-        "select medidas_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    medidas_hd = cursor.fetchone()
-    cursor.execute(
-        "select capac_hd from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    capac_hd = cursor.fetchone()
-    cursor.execute(
-        "select marca_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    marca_hi = cursor.fetchone()
-    cursor.execute(
-        "select iden_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    iden_hi = cursor.fetchone()
-    cursor.execute(
-        "select medidas_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    medidas_hi = cursor.fetchone()
-    cursor.execute(
-        "select capac_hi from form11 where id_formulario = (select MAX(id_formulario) from formulario);")
-    capac_hi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    return render_template('cert_for10.html', marca_hd=marca_hd, iden_hd=iden_hd, medidas_hd=medidas_hd, capac_hd=capac_hd,
-                           marca_hi=marca_hi, iden_hi=iden_hi, medidas_hi=medidas_hi, capac_hi=capac_hi, fec_emi=fec_emi, fec_exp=fec_exp)
-
-
-@app.route('/cert_for11', methods=['GET', 'POST'])
-@login_required
-def cert_for11():
-    cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select marca_pas from form12 where id_formulario = (select MAX(id_formulario) from formulario);")
-    marca_pas = cursor.fetchone()
-    cursor.execute(
-        "select modelo_pas from form12  where id_formulario = (select MAX(id_formulario) from formulario);")
-    modelo_pas = cursor.fetchone()
-    cursor.execute(
-        "select iden_pas from form12 where id_formulario = (select MAX(id_formulario) from formulario);")
-    iden_pas = cursor.fetchone()
-    cursor.execute(
-        "select cap_pas from form12 where id_formulario = (select MAX(id_formulario) from formulario);")
-    cap_pas = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    return render_template('cert_for11.html', marca_pas=marca_pas, modelo_pas=modelo_pas, iden_pas=iden_pas, cap_pas=cap_pas, fec_emi=fec_emi, fec_exp=fec_exp)
-
-
-@app.route('/cert_for12', methods=['GET', 'POST'])
-@login_required
-def cert_for12():
-    cursor = mysql.connection.cursor()
-    cursor.execute(
-        "select marca_pas from form13 where id_formulario = (select MAX(id_formulario) from formulario);")
-    marca_pas = cursor.fetchone()
-    cursor.execute(
-        "select modelo_pas from form13  where id_formulario = (select MAX(id_formulario) from formulario);")
-    modelo_pas = cursor.fetchone()
-    cursor.execute(
-        "select iden_pas from form13 where id_formulario = (select MAX(id_formulario) from formulario);")
-    iden_pas = cursor.fetchone()
-    cursor.execute(
-        "select cap_pas from form13 where id_formulario = (select MAX(id_formulario) from formulario);")
-    cap_pas = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    return render_template('cert_for12.html', marca_pas=marca_pas, modelo_pas=modelo_pas, iden_pas=iden_pas, cap_pas=cap_pas, fec_emi=fec_emi, fec_exp=fec_exp)
 
 
 @app.route('/cert_for13', methods=['GET', 'POST'])

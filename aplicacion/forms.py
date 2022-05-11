@@ -331,8 +331,6 @@ class formu4_4(FlaskForm):
 
 
 class formu5(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -347,7 +345,6 @@ class formu5(FlaskForm):
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
     elem_en = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -374,24 +371,32 @@ class formu5(FlaskForm):
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
+   
+
+    submit = SubmitField('Enviar')
+
+
+
+class formu5_5(FlaskForm):
     num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
-    cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
     asiento = StringField('ASIENTO (mm)', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
     garganta = StringField('GARGANTA (mm)', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')   
+
+
 
     submit = SubmitField('Enviar')
 
 
+
 class formu6(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -406,7 +411,6 @@ class formu6(FlaskForm):
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
     elem_en = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -433,24 +437,30 @@ class formu6(FlaskForm):
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
-    num = StringField('Nº', validators=[DataRequired()])
-    ref = StringField('REFERENCIA', validators=[DataRequired()])
-    cod_enii = StringField('CÓDIGO ENII', validators=[DataRequired()])
-    diam_cue = StringField('DIÁMETRO DE CUERPO (mm)',
-                           validators=[DataRequired()])
-    medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
-    capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+   
 
     submit = SubmitField('Enviar')
 
 
+class formu6_6(FlaskForm):
+    num = StringField('Nº', validators=[DataRequired()])
+    ref = StringField('REFERENCIA', validators=[DataRequired()])
+    medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
+    capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
+    diam_cue = StringField('DIÁMETRO DE CUERPO (mm)', validators=[DataRequired()])
+    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+
+    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
+                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')   
+
+
+
+    submit = SubmitField('Enviar')
+
+
+
 class formu7(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -465,7 +475,6 @@ class formu7(FlaskForm):
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
     elem_en = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -511,9 +520,9 @@ class formu7(FlaskForm):
     submit = SubmitField('Enviar')
 
 
+
+
 class formu8(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -527,7 +536,6 @@ class formu8(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -568,8 +576,6 @@ class formu8(FlaskForm):
 
 
 class formu9(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -583,7 +589,6 @@ class formu9(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -621,8 +626,6 @@ class formu9(FlaskForm):
 
 
 class formu10(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -636,7 +639,6 @@ class formu10(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -675,10 +677,6 @@ class formu10(FlaskForm):
     capac_hi = StringField('CAPACIDAD', validators=[DataRequired()])
     medidas_hi = StringField(
         'MEDIDAS (ESPESOR, ANCHO, LONGITUD)(mm)', validators=[DataRequired()])
-    marca_hd1 = StringField('MARCA', validators=[DataRequired()])
-    iden_hd1 = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
-    marca_hi1 = StringField('MARCA', validators=[DataRequired()])
-    iden_hi1 = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     med_asi_hd = StringField(
         'Medida de asiento (Horquilla derecha)(mm)', validators=[DataRequired()])
     med_asi_hi = StringField(
@@ -693,8 +691,6 @@ class formu10(FlaskForm):
 
 
 class formu11(FlaskForm):
-    proc = StringField('PROCEDIMIENTO Nº', validators=[DataRequired()], render_kw={
-                       "placeholder": "PROCEDIMIENTO Nº"})
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
     nivel_il = StringField('NIVEL DE ILUMINACIÓN:',
                            validators=[DataRequired()])
@@ -708,7 +704,6 @@ class formu11(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
-    proc_p = StringField('PROCEDIMIENTO Nº ', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -738,10 +733,11 @@ class formu11(FlaskForm):
     marca_pas = StringField('MARCA', validators=[DataRequired()])
     iden_pas = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     modelo_pas = StringField('MODELO', validators=[DataRequired()])
-    cap_pas = StringField('CAPACIDAD', validators=[DataRequired()])
+    capac_pas = StringField('CAPACIDAD', validators=[DataRequired()])
     numero = StringField('Nº', validators=[DataRequired()])
-    marca = StringField('MARCA', validators=[DataRequired()])
-    iden1 = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
+    asi_gan = StringField('ASIENTO GANCHO(mm)', validators=[DataRequired()])
+    gar_gan = StringField('GARGANTA GANCHO(mm)', validators=[DataRequired()])
+    med_gri = StringField('MEDIDAS GRILLETES(mm)', validators=[DataRequired()])
     obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
                     ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')

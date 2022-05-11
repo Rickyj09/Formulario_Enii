@@ -1,21 +1,18 @@
 {% extends 'layout_for.html' %}
-{%block title%} FORMULARIO FR-INSP-049.04{%endblock%}
+{%block title%} FORMULARIO FR-INSP-053.04 {%endblock%}
 {% block content %}
 
 <body>
     <hr>
-    <h1>Reporte Inspección Ganchos</h1>
-    <P>REFERENCIA NORMATIVA: ASME B30.9 (2018) Eslingas ASME B30.10 (2019) Ganchos (Los números a indicar pertenecen a
-        la norma en mención), MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
+    <h1>Reporte Inspeccion King Pin</h1>
+    <P>REFERENCIA NORMATIVA: SAE J2228 (2011) (Los números a indicar pertenecen a la norma en mención)
+        MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
     <h3>DATOS DEL END (VT)</h3>
     <form class="row g-3 needs-validation" novalidate method="POST">
         <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc.label }} {{ form.proc(class_="form-control") }}
-            {% for error in form.proc.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-006
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis.label }} {{ form.revis(class_="form-control") }}
@@ -85,10 +82,7 @@
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc_p.label }} {{ form.proc_p(class_="form-control") }}
-            {% for error in form.proc_p.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-007
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis_p.label }} {{ form.revis_p(class_="form-control") }}
@@ -188,7 +182,7 @@
 
         <hr>
         <center>
-            <h1>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS</h1>
+            <h1>DESCRIPCIÓN DEL EQUIPO EN LA QUE SE ENCUENTRA INSTALADO KING PIN</h1>
         </center>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.equipo.label }} {{ form.equipo(class_="form-control") }}
@@ -197,8 +191,8 @@
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.modelo.label }} {{ form.modelo(class_="form-control") }}
-            {% for error in form.modelo.errors %}
+            {{ form.marca.label }} {{ form.marca(class_="form-control") }}
+            {% for error in form.marca.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
@@ -208,95 +202,98 @@
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
+
+        <center>
+            <h1>DATOS DEL KING PIN</h1>
+        </center>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            {{ form.marca_pk.label }} {{ form.marca_pk(class_="form-control") }}
+            {% for error in form.marca_pk.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            {{ form.iden_pk.label }} {{ form.iden_pk(class_="form-control") }}
+            {% for error in form.iden_pk.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            {{ form.modelo_pk.label }} {{ form.modelo_pk(class_="form-control") }}
+            {% for error in form.modelo_pk.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            {{ form.capac_pk.label }} {{ form.capac_pk(class_="form-control") }}
+            {% for error in form.capac_pk.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+
         <hr>
         <center>
             <h1>CRITERIOS DE ACEPTACIÓN Y RECHAZO </h1>
         </center>
         <center>
-            <h1>ASME B30.10 (2019) Ganchos</h1>
+            <h1>SAE J2228 (2011)</h1>
         </center>
         <div class="container">
             <div class="row">
 
-                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-                    <p>1 Identificación del fabricante faltante o ilegible</p>
-                    <p>2 Identificación de carga nominal faltante o ilegible</p>
-                    <p>3 Picaduras excesivas o corrosión</p>
-                    <p>4 Grietas, mellas o hendiduras</p>
-                    <p>5 Cualquier desgaste mas a 10% de gancho, pasador</p>
-                    <p>6 Deformación, dobladuras en plano del gancho</p>
-                    <p>7 Apertura de garganta que no exceda 5% (6mm)</p>
-                    <p>8 Incapacidad de bloqueo</p>
-                    <p>9 Cualquier daño pestillo o defectuoso inoperativo (S/A)</p>
-                    <p>10 Unión de gancho, fijación dañado, faltantes</p>
-                    <p>11 Desgaste de la rosca, daño o corrosión</p>
-                    <p>12 Exposición calor excesivo, soldado. no autorizadas</p>
-                    <p>13 Evidencia de alteraciones,perforación, rectificado, etc.</p>
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+                    <p>1 Angulos (90 grados +- 1 grado)</p>
+                    <p>2 Rebabas, muescas > 1,5 mm no deben exceder 10 unidades en diámetro</p>
+                    <p>3 Rebaba, mella, gubia</p>
+                    <p>4 Rebabas muescas no deben ser mayores a 6,4 mm de longitud</p>
+                    <p>5 No presenta golpes ni deformaciones</p>
+                    <p>6 No presenta fisuras ni fracturas</p>
+                    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+                        <img src="/static/img/053-1.jpg">
+                    </div>
                 </div>
-                <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-                    <img src="/static/img/049-1.jpg">
+
+                <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+                    <img src="/static/img/053-2.jpg">
                 </div>
-                <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-                    <img src="/static/img/049-2.jpg">
-                    <p>D.- GARGANTA</p>
-                    <p>H.- ASIENTO</p>
-                    <p>P.- SEGURO</p>
-                </div>
+
             </div>
+
         </div>
-
-
         <center>
             <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
         </center>
 
-        <h3>ESPECIFICACIONES DEL ACCESORIO INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-1  position-relative">
-            {{ form.num.label }} {{ form.num(class_="form-control") }}
-            {% for error in form.num.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
+        <h3>INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.cod_enii.label }} {{ form.cod_enii(class_="form-control") }}
-            {% for error in form.cod_enii.errors %}
+            {{ form.dia_sup.label }} {{ form.dia_sup(class_="form-control") }}
+            {% for error in form.dia_sup.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.ref.label }} {{ form.ref(class_="form-control") }}
-            {% for error in form.ref.errors %}
+            {{ form.dia_cen.label }} {{ form.dia_cen(class_="form-control") }}
+            {% for error in form.dia_cen.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.medidas.label }} {{ form.medidas(class_="form-control") }}
-            {% for error in form.medidas.errors %}
+            {{ form.dia_inf.label }} {{ form.dia_inf(class_="form-control") }}
+            {% for error in form.dia_inf.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
+
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.capac.label }} {{ form.capac(class_="form-control") }}
-            {% for error in form.capac.errors %}
+            {{ form.obs.label }} {{ form.obs(class_="form-control") }}
+            {% for error in form.obs.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.asiento.label }} {{ form.asiento(class_="form-control") }}
-            {% for error in form.asiento.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.garganta.label }} {{ form.garganta(class_="form-control") }}
-            {% for error in form.garganta.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
+
 
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
             {{ form.vt.label }} {{ form.vt(class_="form-control") }}

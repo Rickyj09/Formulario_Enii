@@ -12,10 +12,7 @@
     <form class="row g-3 needs-validation" novalidate method="POST">
         <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc.label }} {{ form.proc(class_="form-control") }}
-            {% for error in form.proc.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-006
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis.label }} {{ form.revis(class_="form-control") }}
@@ -79,10 +76,7 @@
         <hr>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc_p.label }} {{ form.proc_p(class_="form-control") }}
-            {% for error in form.proc_p.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-007
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis_p.label }} {{ form.revis_p(class_="form-control") }}
@@ -370,27 +364,30 @@
             {% endfor %}
         </div>
 
+        <h3>ESPECIFICACIONES DEL ACCESORIO, INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
+
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca.label }} {{ form.marca(class_="form-control") }}
-            {% for error in form.marca.errors %}
+            {{ form.asi_gan.label }} {{ form.asi_gan(class_="form-control") }}
+            {% for error in form.asi_gan.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.iden1.label }} {{ form.iden1(class_="form-control") }}
-            {% for error in form.iden1.errors %}
+            {{ form.gar_gan.label }} {{ form.gar_gan(class_="form-control") }}
+            {% for error in form.gar_gan.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            {{ form.med_gri.label }} {{ form.med_gri(class_="form-control") }}
+            {% for error in form.med_gri.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
 
-
-        <h3>INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
-
-
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+        <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
             {{ form.obs.label }} {{ form.obs(class_="form-control") }}
             {% for error in form.obs.errors %}
             <span style="color: red;"> {{ error }} </span>

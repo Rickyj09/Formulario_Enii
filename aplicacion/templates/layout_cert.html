@@ -14,13 +14,10 @@
 
     <ul class="nav justify-content-end">
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('resumen')}}">RESUMEN </a>
+        <a class="nav-link" href="{{ url_for('inicio_new')}}">INICIO </a>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('RESULTADOS')}}">RESULTADOS</a>
-      </li>
-
+ 
 
       <li class="nav-item">
         {% if current_user.is_authenticated %}

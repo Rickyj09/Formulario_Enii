@@ -1,21 +1,18 @@
 {% extends 'layout_for.html' %}
-{%block title%}FORMULARIO FR-INSP-055.04{%endblock%}
+{%block title%} FORMULARIO FR-INSP-049.04{%endblock%}
 {% block content %}
 
 <body>
     <hr>
-    <h1>Reporte Inspeccion Quinta Rueda</h1>
-    <P>REFERENCIA NORMATIVA: ASME Sección V Artículo 9:2019, ASTM E165/E165M-18
-        MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
+    <h1>Reporte Inspección Ganchos</h1>
+    <P>REFERENCIA NORMATIVA: ASME B30.9 (2018) Eslingas ASME B30.10 (2019) Ganchos (Los números a indicar pertenecen a
+        la norma en mención), MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
     <h3>DATOS DEL END (VT)</h3>
     <form class="row g-3 needs-validation" novalidate method="POST">
         <hr>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc.label }} {{ form.proc(class_="form-control") }}
-            {% for error in form.proc.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            PROCEDIMIENTO Nº: PR-INSP-006
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis.label }} {{ form.revis(class_="form-control") }}
@@ -77,13 +74,15 @@
         <h3>DATOS DEL END (PT)</h3>
 
         <hr>
-
-
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.proc_p.label }} {{ form.proc_p(class_="form-control") }}
-            {% for error in form.proc_p.errors %}
+            {{ form.elem_en.label }} {{ form.elem_en(class_="form-control") }}
+            {% for error in form.elem_en.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            PROCEDIMIENTO Nº: PR-INSP-007
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.revis_p.label }} {{ form.revis_p(class_="form-control") }}
@@ -183,7 +182,7 @@
 
         <hr>
         <center>
-            <h1>DESCRIPCIÓN DEL EQUIPO EN LA QUE SE ENCUENTRA INSTALADO</h1>
+            <h1>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS</h1>
         </center>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
             {{ form.equipo.label }} {{ form.equipo(class_="form-control") }}
@@ -192,8 +191,8 @@
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca.label }} {{ form.marca(class_="form-control") }}
-            {% for error in form.marca.errors %}
+            {{ form.modelo.label }} {{ form.modelo(class_="form-control") }}
+            {% for error in form.modelo.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
@@ -203,95 +202,43 @@
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
-
-        <center>
-            <h1>DESCRIPCIÓN DE LA QUINTA RUEDA</h1>
-        </center>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_pk.label }} {{ form.marca_pk(class_="form-control") }}
-            {% for error in form.marca_pk.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.iden_pk.label }} {{ form.iden_pk(class_="form-control") }}
-            {% for error in form.iden_pk.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.modelo_pk.label }} {{ form.modelo_pk(class_="form-control") }}
-            {% for error in form.modelo_pk.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.capac_pk.label }} {{ form.capac_pk(class_="form-control") }}
-            {% for error in form.capac_pk.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-
         <hr>
         <center>
             <h1>CRITERIOS DE ACEPTACIÓN Y RECHAZO </h1>
         </center>
         <center>
-            <h1> ASME Sección V Artículo 9:2019 - ASTM E165/E165M-18</h1>
+            <h1>ASME B30.10 (2019) Ganchos</h1>
         </center>
         <div class="container">
             <div class="row">
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-                    <p>1 Estado de palanca </p>
-                    <p>2 Estado de el mecanismo de bloqueo</p>
-                    <p>3 Estado de mordaza o muela</p>
-                    <p>4 Estado de pestillo cerrado</p>
-                    <p>6 No presenta golpes ni deformaciones</p>
-                    <p>7 Desgaste de surcos de lubricación</p>
-                    <p>8 Estado de pernos de seguridad (S/A)</p>
-                    <p>9 Soldaduras no autorizadas</p>
+                    <p>1 Identificación del fabricante faltante o ilegible</p>
+                    <p>2 Identificación de carga nominal faltante o ilegible</p>
+                    <p>3 Picaduras excesivas o corrosión</p>
+                    <p>4 Grietas, mellas o hendiduras</p>
+                    <p>5 Cualquier desgaste mas a 10% de gancho, pasador</p>
+                    <p>6 Deformación, dobladuras en plano del gancho</p>
+                    <p>7 Apertura de garganta que no exceda 5% (6mm)</p>
+                    <p>8 Incapacidad de bloqueo</p>
+                    <p>9 Cualquier daño pestillo o defectuoso inoperativo (S/A)</p>
+                    <p>10 Unión de gancho, fijación dañado, faltantes</p>
+                    <p>11 Desgaste de la rosca, daño o corrosión</p>
+                    <p>12 Exposición calor excesivo, soldado. no autorizadas</p>
+                    <p>13 Evidencia de alteraciones,perforación, rectificado, etc.</p>
                 </div>
-
-                <div class="form-group col-xs-12 col-sm-12 col-md-3 position-relative">
-                    <p>1.- Palanca o manilla</p>
-                    <p>2.- Pestillo de cierre</p>
-                    <p>3.- Mordaza o muela</p>
+                <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+                    <img src="/static/img/049-1.jpg">
                 </div>
-
-                <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
-                    <img src="/static/img/055-1.jpg">
-
+                <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+                    <img src="/static/img/049-2.jpg">
+                    <p>D.- GARGANTA</p>
+                    <p>H.- ASIENTO</p>
+                    <p>P.- SEGURO</p>
                 </div>
-
             </div>
-
         </div>
 
-
-        <center>
-            <h1>RESULTADO DE LA INSPECCIÓN</h1>
-        </center>
-
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.vt.label }} {{ form.vt(class_="form-control") }}
-            {% for error in form.vt.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.pt.label }} {{ form.pt(class_="form-control") }}
-            {% for error in form.pt.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.obs.label }} {{ form.obs(class_="form-control") }}
-            {% for error in form.obs.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
 
 
         <div class="col-12">
