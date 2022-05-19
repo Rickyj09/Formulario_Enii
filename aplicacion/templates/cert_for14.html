@@ -22,23 +22,21 @@
       <table class="table table-bordered">
         <tr>
           <th>N°</th>
-          <th>TIPO DE  ACCESORIO</th>
           <th>CODIGOS ENII</th>
           <th>REFERENCIAS</th>
           <th>MEDIDAS</th>
           <th>CAPACIDAD</th>
         </tr>
-        
+        {% for cat in data %}
         <tr>
-              <td>{{numero.0}}</td>
-              <td>{{equipo.0}}</td>
-              <td>{{codigo.0}}</td>
-              <td>{{ref.0}}</td>
-              <td>{{medidas.0}}</td>
-              <td>{{cap.0}}</td>
-        </tr>
+            <td>{{cat.0}}</td>
+            <td>{{cat.2}}</td>
+            <td>{{cat.1}}</td>
+            <td>{{cat.3}}</td>
+            <td>{{cat.4}}</td>
 
-    
+         </tr>
+        {% endfor %}
        
       </table>
       

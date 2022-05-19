@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> {%block title%}REPORTE DE INSPECCIÓN GENERAL DE APAREJOS {%endblock%}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+</head>
+
+<body background="/static/img/fondo1.jpg">
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('inicio_new')}}">INICIO </a>
+    </li>
+
+    <li class="nav-item">
+      {% if current_user.is_authenticated %}
+      <a class="nav-link" href="/logout"> {{ current_user.username}} (Salir)</a>
+    </li>
+    <li class="nav-item">
+      {% else %}
+      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/registro">Registro</a>
+      {% endif %}
+    </li>
+  </ul>
+  <hr>
+  <hr>
+
+  <div class="container">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+        <img src="/static/img/Acreditacion.jpg">
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+        <h3>REPORTE DE INSPECCIÓN GENERAL DE APAREJOS</h3>
+        <h4>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h4>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+        <img src="/static/img/logo_eni.jpg">
+      </div>
+
+      <hr>
+      <form class="row g-3 needs-validation" novalidate>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+          <h2>PARA USO EXCLUSIVO DE ENII</h2>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+          <h2>
+            <div>
+              CÓDIGO DEL REPORTE: {{ datos.0 }}
+            </div>
+          </h2>
+        </div>
+        <hr>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>FECHA DE INSPECCIÓN: {{ fec1.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>FECHA EMISIÓN: {{ fec2.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>FECHA EXPIRACIÓN: {{ fec3.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>LUGAR INSPECCIÓN: {{ lugar.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>NOMBRE INSPECTOR: {{ inspector.0 }}</h3>
+        </div>
+        <hr>
+        <h4>DATOS DEL END (VT)</h4>
+        {% for dato in datos1 %}
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          PROCEDIMIENTO Nº: {{ dato.3 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          REVISIÓN Nº: {{ dato.4 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          NIVEL DE ILUMINACIÓN: {{ dato.5 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          CONDICIÓN SUPERFICIAL: {{ dato.6 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MÉTODO DE INSPECCIÓN: {{ dato.7 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE ILUMINACIÓN:: {{ dato.8 }}
+        </div>
+        <hr>
+
+        <h4>DATOS DEL END (PT)</h4>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          PROCEDIMIENTO Nº {{ dato.13 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          REVISIÓN Nº {{ dato.14 }}
+
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TEMPERATURA DE ENSAYO: {{ dato.15 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE ILUMINACIÓN: {{ dato.16 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          NIVEL DE ILUMINACIÓN: {{ dato.17 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MATERIAL BASE: {{ dato.18 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE SECADO: {{ dato.19 }}
+        </div>
+        <hr>
+        <h4>CONSUMIBLES</h4>
+
+        <h4>1.- PENETRANTE</h4>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIPO DE PENETRANTE: {{ dato.20 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MARCA KIT DE INSPECCIÓN: {{ dato.21 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIEMPO DE PENETRACIÓN {{ dato.22 }}
+        </div>
+        <hr>
+        <h2>CONSUMIBLES</h2>
+
+        <h2>2.- REMOVEDOR </h2>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MÉTODO DE REMOCIÓN: {{ dato.23 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MARCA KIT DE INSPECCIÓN: {{ dato.24 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIEMPO DE SECADO DEL REMOVEDOR: {{ dato.25 }}
+        </div>
+        <hr>
+        <h4>CONSUMIBLES</h4>
+
+        <h4>3.- REVELADOR </h4>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          FORMA DE REVELADO: {{ dato.26 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MARCA KIT DE INSPECCIÓN: {{ dato.27 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          TIEMPO DE REVELADO: {{ dato.28 }}
+        </div>
+        <hr>
+        <h4>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS </h4>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          EQUIPO: {{ dato.29 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          MODELO: {{ dato.30 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          IDENTIFICACIÓN : {{ dato.31 }}
+        </div>
+        <hr>
+        <h4>
+          CRITERIOS DE ACEPTACIÓN Y RECHAZO
+        </h4>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          1 Identificación faltante o ilegible : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          2 Daños por calor, salpicaduras, soldadura, golpes : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          3 Picaduras o corrosión excesivas  : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          4 Componentes de reemplazo no autorizados: {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          5 Componentes doblados, torcidos, estirados : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          6 Daños visibles que causen duda : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          7 Montaje incorrecto u otras condiciones : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          8 Componentes alargados, agrietados o rotos. : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          9 Mellas o ranuras excesivas : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          10 Capacidad de rotar, pivotar : {{ dato.31 }}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          11 Daño excesivo hilos de rosca : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          12 Modificaciones, soldaduras no autorizadas. : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          13 Reducción + del 10% en cualquier punto cuerpo : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          14 Decoloración áreas frágiles o rígidas en cualquier parte : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          15 Indicaciones de cable dañado : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          16 Carbonización de cualquier parte de cinta : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          17 Tuercas sueltas, faltantes, pernos, pasadores de chaveta : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          18 Capacidad de rotar, pivotar : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          19 Costuras rotas o desgastadas en empalmes de carga : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          20 Nudos en cualquier parte de la cinta : {{ dato.31 }}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          21 Modificaciones, soldaduras no autorizadas. : {{ dato.31 }}
+        </div>
+
+
+        <h3>
+          DESCRIPCIÓN DE LA INSPECCIÓN
+        </h3>
+                 ESPECIFICACIONES DEL ACCESORIO INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN
+        </h4>
+
+        {% endfor %}
+        <br>
+        <hr>
+        <div class="list-group">
+          <table class="table table-bordered">
+            <tr>
+              <th>TIPO DE ACCESORIO </th>
+              <th>Nº</th>
+              <th>CÓDIGO ENII</th>
+              <th>REFERENCIA</th>
+              <th>MEDIDAS (mm)</th>
+              <th>CAPACIDAD (mm)</th>
+              <th>MEDIDA DEL CUERPO (mm)</th>
+              <th>INSPECCIÓN VISUAL</th>
+              <th>LÍQUIDOS PENETRANTES</th>
+            </tr>
+            {% for cat in data %}
+            <tr>
+              <td>{{cat.0}}</td>
+              <td>{{cat.1}}</td>
+              <td>{{cat.3}}</td>
+              <td>{{cat.2}}</td>
+              <td>{{cat.4}}</td>
+              <td>{{cat.5}}</td>
+              <td>{{cat.6}}</td>
+              <td>{{cat.7}}</td>
+              <td>{{cat.8}}</td>
+            </tr>
+            {% endfor %}
+          </table>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <a href="/edit_frapa/{{contact}}" class="btn btn-secondary">MODIFICAR</a>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <a href="{{ url_for('cert_for13')}}" class="btn btn-primary">CERTIFICADO</a>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <a href="{{ url_for('reporte_foto1')}}" class="btn btn-primary">OK</a>
+        </div>
+    </div>
+  </div>
+  </form>
+  {% block content %}{% endblock %}
+  </div>
+
+
+
+</body>
+
+</html>

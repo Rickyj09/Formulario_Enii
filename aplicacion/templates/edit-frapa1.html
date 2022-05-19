@@ -1,0 +1,54 @@
+{% extends 'layout_for.html' %}
+{%block title%} FORMULARIO FR-INSP-043.03 {%endblock%}
+{% block content %}
+
+<h1>REPORTE DE INSPECCIÓN GENERAL DE APAREJOS</h1>
+<center>
+            <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
+        </center>
+        <h3>ESPECIFICACIONES DEL ACCESORIO Y RESULTADOS DE INSPECCIÓN</h3>
+
+<form action="/update_frapa1/{{contact.1}}" method="POST" class="row g-3 needs-validation">
+  <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+    <label for="name">TIPO DE ACCESORIO: </label>
+    <input type="text" name="tipo_acc" value="{{contact.0}}" class="form-control">
+  </div>
+  <div class="list-group">
+   <table class="table table-bordered">
+      <tr>
+        <th>Nº</th>
+        <th>CÓDIGO ENII</th>
+        <th>REFERENCIA</th>
+        <th>MEDIDAS (mm)</th>
+        <th>CAPACIDAD (Kg)</th>
+        <th>MEDIDA DEL CUERPO  mm</th>
+        <th>INSPECCIÓN VISUAL</th>
+        <th>LÍQUIDOS PENETRANTES</th>
+      </tr>
+     
+      <tr>
+        <td><input type="text" name="num" value="{{contact.1}}" class="form-control"></td>
+        <td><input type="text" name="cod_enii" value="{{contact.3}}" class="form-control"></td>
+        <td><input type="text" name="ref" value="{{contact.2}}" class="form-control"></td>
+        <td><input type="text" name="medidas" value="{{contact.4}}" class="form-control"></td>
+        <td><input type="text" name="capac" value="{{contact.5}}" class="form-control"></td>
+        <td><input type="text" name="medida_cu" value="{{contact.6}}" class="form-control"></td>
+        <td><input type="text" name="vt" value="{{contact.7}}" class="form-control"></td>
+        <td><input type="text" name="pt" value="{{contact.8}}" class="form-control"></td>
+      </tr>
+     
+    </table>
+  </div>
+
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary btn-block">
+      Actualizar
+    </button>
+  </div>
+</form>
+
+</body>
+
+
+{% endblock %}
