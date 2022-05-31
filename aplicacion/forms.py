@@ -112,9 +112,9 @@ class formu1(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
-                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+                         ('NATURAL', 'NATURAL'), ('ASISTIDA', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
@@ -128,20 +128,6 @@ class formu1(FlaskForm):
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[(
         'AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
@@ -156,9 +142,9 @@ class formu1_1(FlaskForm):
     ancho = StringField('ANCHO (mm)', validators=[DataRequired()])
     diam = StringField('DIÁMETRO (mm)', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
     submit = SubmitField('Enviar')
 
@@ -1455,6 +1441,8 @@ class prueba_carga3(FlaskForm):
 class datos_reporte(FlaskForm):
     empresa = StringField('EMPRESA', validators=[DataRequired()], render_kw={
                           "placeholder": "EMPRESA"})
+    num_rep = StringField('REPORTE N°', validators=[DataRequired()], render_kw={
+                          "placeholder": "REPORTE N°"})
     fec_inpec = DateField('FECHA DE INSPECCIÓN', validators=[
                           DataRequired()], render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
     fec_emision = DateField('FECHA DE EMISIÓN', validators=[

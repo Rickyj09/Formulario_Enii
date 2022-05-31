@@ -20,21 +20,23 @@
    
 
     <form class="row g-3 needs-validation" novalidate></form>
+    {% for emi in for_emi %}
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ llave.0 }}</h4>
+    <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ emi.2 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>SOLICITADO POR (Required by): {{ fec_exp.0 }}</h4>
+    <h4>SOLICITADO POR (Required by): {{ emi.0 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>FECHA DE INSPECCIÓN (Inspection date): {{ fec_emi.0 }}</h4>
+    <h4>FECHA DE INSPECCIÓN (Inspection date): {{ emi.9 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ lug.0 }}</h4>
+    <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ emi.7 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>INSPECTOR RESPONSABLE (Inspector): {{ ins.0 }}</h4>
+    <h4>INSPECTOR RESPONSABLE (Inspector): {{ emi.8 }}</h4>
   </div>
+  {% endfor %}
 </form> 
   <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
     <div class="panel panel-default">
@@ -65,7 +67,7 @@
 
 <h2>RESULTADOS DE INSPECCIÓN</h2>
 
-<p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quien firma, certifica que en la fecha de esta inspección, las poleas arriba descritas, fueron sometidas a una prueba de ensayo no destructivo de Inspección Visual, según ASME Sección V Artículo 9 (2019) y Liquidos Penetrantes, según ASTM E165/E165M-18 y la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  ASME B30.26:2015 Aparejos,  para la emisión del presente CERTIFICADO  con RESULTADO APROBADO.</p>
+<p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quienes firman, certifican que en la fecha de esta inspección, las poleas descritas, fueron sometidas a pruebas de ensayo no destructivo de  fueron sometidas a pruebas de ensayo no destructivo de Inspección Visual; según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes; según ASME Sección V Artículo 6 (2019) y ASTM E165/E165M-18, la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  AWS D1.1. (2020) Código de Soldadura Estructural - Acero,  para la emisión del presente CERTIFICADO  con RESULTADO APROBADO.</p>
 
 <p>Los accesorios  fueron  preparados  e  inspeccionados,  de  acuerdo con los requerimientos  del procedimiento aplicado PR-INSP-006 Inspección visual y PR-INSP-007 Líquidos penetrantes.</p>
 
@@ -75,15 +77,17 @@
 
 
 <form class="row g-3 needs-validation" novalidate></form>
+{% for emi in for_emi %}
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de emisión del certificado (Certificate issue date): {{ fec_emi.0 }}</h4>
+    <h4>Fecha de emisión del certificado (Certificate issue date): {{ emi.5 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ fec_exp.0 }}</h4>
+    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ emi.6 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de próxima de inspección (Next inspection date): {{ fec_exp.0 }}</h4>
+    <h4>Fecha de próxima de inspección (Next inspection date): {{ emi.6 }}</h4>
   </div>
+  {% endfor %}
 </form> 
 
 <br>
@@ -98,7 +102,14 @@
 <center>
   <h2>
     GERENTE TECNICO ENII SA
+    {% for emi in for_emi %}
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4> {{ emi.2 }}</h4>
+  </div>
+
+  {% endfor %}
   </h2>
+  
 </center>
 
 </body>

@@ -30,6 +30,12 @@
     {% endfor %}
   </div>
   <div class="col-md-4 position-relative">
+    {{ form.num_rep.label }} {{ form.num_rep(class_="form-control") }}
+    {% for error in form.num_rep.errors %}
+    <span style="color: red;"> {{ error }} </span>
+    {% endfor %}
+  </div>
+  <div class="col-md-4 position-relative">
     {{ form.fec_inpec.label }} {{ form.fec_inpec(class_="form-control") }}
     {% for error in form.fec_inpec.errors %}
     <span style="color: red;"> {{ error }} </span>
