@@ -212,10 +212,22 @@ def home_1():
     nom_form = cursor.fetchone()
     cursor.execute("select descripcion from articulos where id = 4;")
     nom_form1 = cursor.fetchone()
+    cur = mysql.connection.cursor()
+    cur.execute("select (sec+1) from cod_rep where id_for = 2;")
+    sec = cur.fetchone()
+    cur.execute("""
+            UPDATE cod_rep
+            SET sec = %s
+                WHERE id = 2
+        """, sec)
+    mysql.connection.commit()
     form = datos_reporte()
     if form.validate_on_submit():
+        cur = mysql.connection.cursor()
         empre = request.form['empresa']
-        num_rep = request.form['num_rep']
+        cur.execute(
+            "select CONCAT(prefijo,LPAD(sec, 5, '0')) from cod_rep where id_for = 2;")
+        num_rep = cur.fetchone()
         fecha_insp = request.form['fec_inpec']
         fecha_emi = request.form['fec_emision']
         fecha_exp = request.form['fec_expiracion']
@@ -286,7 +298,6 @@ def add_frpol1():
     mysql.connection.commit()
     if form.validate_on_submit():
         cur = mysql.connection.cursor()
-        num = request.form['num']
         ref = request.form['ref']
         cur.execute(
             "select CONCAT(preffijo,LPAD(sec, 5, '0')) from codigo where id_for = 2;")
@@ -299,8 +310,8 @@ def add_frpol1():
             "select id from frpol where id = (select MAX(id) from frpol) ;")
         llave_form = cur.fetchone()
         print(cod_enii)
-        cur.execute('insert into frpol1 (num,ref,cod_enii,ancho,diam,vt,pt,id_f2) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (num, ref, cod_enii, ancho, diam, vt, pt, llave_form))
+        cur.execute('insert into frpol1 (ref,cod_enii,ancho,diam,vt,pt,id_f2) VALUES (%s,%s,%s,%s,%s,%s,%s)',
+                    ( ref, cod_enii, ancho, diam, vt, pt, llave_form))
         mysql.connection.commit()
         return redirect(url_for('frpol1'))
 
@@ -414,7 +425,7 @@ def get_frpol1(id):
 @login_required
 def update_frpol1(id):
     if request.method == 'POST':
-        num = request.form['num']
+        num = id
         ref = request.form['ref']
         cod_enii = request.form['cod_enii']
         ancho = request.form['ancho']
@@ -446,6 +457,9 @@ def resum_frpol():
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
         "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     fec_insp = cursor.fetchone()
     cursor.execute(
@@ -471,7 +485,7 @@ def resum_frpol():
     data = cursor.fetchall()
     print(data1)
     print(data)
-    return render_template('resum_frpol.html', datos=nom_form, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frpol.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
 
 
 @app.route('/reporte_fotopol')

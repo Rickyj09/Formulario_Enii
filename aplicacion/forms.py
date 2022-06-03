@@ -137,7 +137,6 @@ class formu1(FlaskForm):
 
 
 class formu1_1(FlaskForm):
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     ancho = StringField('ANCHO (mm)', validators=[DataRequired()])
     diam = StringField('DIÁMETRO (mm)', validators=[DataRequired()])
@@ -1441,8 +1440,6 @@ class prueba_carga3(FlaskForm):
 class datos_reporte(FlaskForm):
     empresa = StringField('EMPRESA', validators=[DataRequired()], render_kw={
                           "placeholder": "EMPRESA"})
-    num_rep = StringField('REPORTE N°', validators=[DataRequired()], render_kw={
-                          "placeholder": "REPORTE N°"})
     fec_inpec = DateField('FECHA DE INSPECCIÓN', validators=[
                           DataRequired()], render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
     fec_emision = DateField('FECHA DE EMISIÓN', validators=[

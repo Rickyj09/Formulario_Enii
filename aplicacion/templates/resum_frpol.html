@@ -56,9 +56,11 @@
           </h2>
         </div>
         <hr>
-
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
           <h3>FECHA DE INSPECCIÓN: {{ fec1.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>REPORTE N°: {{ num_rep.0 }}</h3>
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
           <h3>FECHA EMISIÓN: {{ fec2.0 }}</h3>
@@ -105,7 +107,7 @@
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TEMPERATURA DE ENSAYO: {{ dato.15 }}
+          TEMPERATURA DE ENSAYO: {{ dato.15 }}º 
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
           TIPO DE ILUMINACIÓN: {{ dato.16 }}
@@ -203,7 +205,7 @@
             </tr>
             {% for cat in data %}
             <tr>
-              <td>{{cat.0}}</td>
+              <td>{{loop.index}}</td>
               <td>{{cat.2}}</td>
               <td>{{cat.1}}</td>
               <td>{{cat.3}}</td>
