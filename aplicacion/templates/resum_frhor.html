@@ -61,6 +61,9 @@
           <h3>FECHA DE INSPECCIÓN: {{ fec1.0 }}</h3>
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+          <h3>REPORTE N°: {{ num_rep.0 }}</h3>
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
           <h3>FECHA EMISIÓN: {{ fec2.0 }}</h3>
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
@@ -231,13 +234,15 @@
         <hr>
         <div class="list-group">
           <table class="table table-bordered">
+
+
             <tr>
-                <th>MARCA HD</th>
-                <th>IDENTIFICACIÓN HD</th>
-                <th>MARCA HI</th>
-                <th>IDENTIFICACIÓN HI</th>
-                <th>Medida de  asiento (Horquilla derecha)(mm)</th>
-                <th>Medida de asiento (Horquilla Izquierda)(mm)</th>
+                <th>HORQUILLAS</th>
+                <th>DESGASTE  HORQUILLAS</th>
+                <th>DESALINEACIÓN PUNTAS</th>
+                <th>VÁSTAGO</th>
+                <th>HOJA</th>
+                <th>ANGULO</th>
                 <th>OBSERVACIONES</th>
                 <th>INSPECCIÓN VISUAL(VT)</th>
                 <th>LÍQUIDOS PENETRANTES(PT)</th>
@@ -245,17 +250,29 @@
             </tr>
             {% for dato in datos1 %}
             <tr>
-                <td>{{dato.32}}</td>
-                <td>{{dato.33}}</td>
-                <td>{{dato.37}}</td>
-                <td>{{dato.38}}</td>
+                <td>DERECHA</td>
                 <td>{{dato.46}}</td>
                 <td>{{dato.47}}</td>
                 <td>{{dato.48}}</td>
                 <td>{{dato.49}}</td>
                 <td>{{dato.50}}</td>
+                <td>{{dato.51}}</td>
+                <td>{{dato.52}}</td>
+                <td>{{dato.53}}</td>
               
             </tr>
+            <tr>
+              <td>IZQUIERDA</td>
+              <td>{{dato.54}}</td>
+              <td>{{dato.55}}</td>
+              <td>{{dato.56}}</td>
+              <td>{{dato.57}}</td>
+              <td>{{dato.58}}</td>
+              <td>{{dato.59}}</td>
+              <td>{{dato.60}}</td>
+              <td>{{dato.61}}</td>
+            
+          </tr>
             {% endfor %}
         </table>
 
@@ -269,7 +286,7 @@
           <a href="{{ url_for('cert_for10')}}" class="btn btn-primary">CERTIFICADO</a>
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <a href="{{ url_for('reporte_foto1')}}" class="btn btn-primary">OK</a>
+          <a href="{{ url_for('reporte_fotofrhor')}}" class="btn btn-primary">REPORTE FOTOGRÁFICO </a>
         </div>
     </div>
   </div>

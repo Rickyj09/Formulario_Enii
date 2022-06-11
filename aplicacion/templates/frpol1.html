@@ -10,7 +10,7 @@
             <h1>DESCRIPCIÓN DE LA INSPECCIÓN</h1>
         </center>
         <h3>ESPECIFICACIONES DEL ACCESORIO Y RESULTADOS DE INSPECCIÓN</h3>
-       
+
 
 
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
@@ -53,11 +53,6 @@
             {{ form.submit(class_="btn btn-primary") }}
         </div>
 
-
-     
-
-
-
     </form>
     <div class="list-group">
         <table class="table table-bordered">
@@ -71,7 +66,7 @@
                 <th>LÍQUIDOS PENETRANTES(PT)</th>
             </tr>
             {% for cat in data %}
-            
+
             <tr>
                 <td>{{loop.index}}</td>
                 <td>{{cat.2}}</td>

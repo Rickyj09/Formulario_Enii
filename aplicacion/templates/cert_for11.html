@@ -14,10 +14,29 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
 </head>
 <body>
-  <center><h2> INSPECCIÓN PASTECA PRINCIPAL</h2></center>
+
   <hr>
+  <form class="row g-3 needs-validation" novalidate>
+    {% for cat in data %}
+    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ cat.2 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>SOLICITADO POR (Required by): {{ cat.9 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>FECHA DE INSPECCIÓN (Inspection date): {{ cat.4 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ cat.7 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>INSPECTOR RESPONSABLE (Inspector): {{ cat.8 }}</h4>
+  </div>
+  {% endfor %}
+  </form>
   <div class="col-md-10">
-    <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
+    <center><h2> DESCRIPCIÓN DE PASTECA PRINCIPAL INSPECCIONADA</h2></center>
     <div class="panel panel-default">
       <table class="table table-bordered">
         <tr>
@@ -26,14 +45,14 @@
           <th>IDENTIFICACIÓN</th>
           <th>CAPACIDAD</th>
         </tr>
-        
+        {% for cat in datafr %}
         <tr>
-              <td>{{marca_pas.0}}</td>
-              <td>{{modelo_pas.0}}</td>
-              <td>{{iden_pas.0}}</td>
-              <td>{{capac_pas.0}}</td>
+              <td>{{cat.32}}</td>
+              <td>{{cat.34}}</td>
+              <td>{{cat.33}}</td>
+              <td>{{cat.35}}</td>
         </tr>
-
+        {% endfor %}
     
        
       </table>
@@ -43,9 +62,9 @@
 
 <h2>RESULTADOS DE INSPECCIÓN</h2>
 
-<p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quien firma, certifica que en la fecha de esta inspección, los accesorios arriba descritos, fueron sometidos a una prueba de ensayo no destructivo de Inspección Visual,  según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes, según ASTM E165/E165M-18 y la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  ASME B30.9:2018 Eslingas, ASME B30.10:2019 Ganchos, ASME B30.26:2015 Aparejos,  para la emisión del presente CERTIFICADO  con RESULTADO APROBADO.</p>
+<p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quien firma, certifica que en la fecha de esta inspección, los accesorios arriba descritos, fueron sometidos a una prueba de ensayo no destructivo de Inspección Visual; según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes; según ASME Sección V Artículo 6 (2019) y ASTM E165/E165M-18 y la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  ASME B30.26:2015 Aparejos, ASME B30.10:2019 Ganchos,  para la emisión del presente CERTIFICADO  con RESULTADO APROBADO.</p>
 
-<p>Los accesorios  fueron  preparados  e  inspeccionados,  de  acuerdo con los requerimientos  del procedimiento aplicado  PR-INSP-006 Inspección visual,  PR-INSP-007 Líquidos penetrantes.</p>
+<p>Los accesorios  fueron  preparados  e  inspeccionados,  de  acuerdo con los requerimientos  del procedimiento aplicado  PR-INSP-006 Inspección visual y PR-INSP-007 Líquidos penetrantes. </p>
 
 <p>Este certificado hace referencia a las condiciones que presentan los accesorios al momento de la inspección, sin ninguna obligación o responsabilidad posterior</p>
 <br>
@@ -53,15 +72,19 @@
 
 
 <form class="row g-3 needs-validation" novalidate></form>
+
+{% for cat in data %}
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de emisión del certificado (Certificate issue date): {{ fec_emi.0 }}</h4>
+    <h4>Fecha de emisión del certificado (Certificate issue date): {{ cat.5 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ fec_exp.0 }}</h4>
+    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ cat.6 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de próxima de inspección (Next inspection date): {{ fec_exp.0 }}</h4>
+    <h4>Fecha de próxima de inspección (Next inspection date): {{ cat.6 }}</h4>
   </div>
+
+  {% endfor %}
 </form> 
 
 <br>

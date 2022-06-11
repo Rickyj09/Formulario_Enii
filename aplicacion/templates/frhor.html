@@ -5,9 +5,7 @@
 <body>
     <hr>
     <h1>REPORTE DE INSPECCIÓN DE HORQUILLAS</h1>
-    <P>REFERENCIA NORMATIVA: ANSI/ITSDF B56.6:2016 Norma de seguridad para carretillas elevadoras todoterreno,
-        ANSI/ITSDF B56.1a:2018 Norma de seguridad para montacargas de baja y alta elevación (Los números a indicar
-        pertenecen a la norma en mención)
+    <P>REFERENCIA NORMATIVA:  ANSI/ITSDF B56.6:2016 Norma de seguridad para carretillas elevadoras todoterreno, ANSI/ITSDF B56.1a:2018 Norma de seguridad para montacargas de baja y alta elevación 
         MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
     <h3>DATOS DEL END (VT)</h3>
@@ -120,60 +118,33 @@
         <h3>CONSUMIBLES</h3>
         <h1>1.- PENETRANTE</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tipo_pen.label }} {{ form.tipo_pen(class_="form-control") }}
-            {% for error in form.tipo_pen.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIPO DE PENETRANTE: II VISIBLE
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit.label }} {{ form.marca_kit(class_="form-control") }}
-            {% for error in form.marca_kit.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek  VP-31A
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_pen.label }} {{ form.tiem_pen(class_="form-control") }}
-            {% for error in form.tiem_pen.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 5 minutos
         </div>
         <h1>2.- REMOVEDOR </h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.met_rem.label }} {{ form.met_rem(class_="form-control") }}
-            {% for error in form.met_rem.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MÉTODO DE REMOCIÓN: REMOVIBLE SOLVENTE
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit1.label }} {{ form.marca_kit1(class_="form-control") }}
-            {% for error in form.marca_kit1.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek   E-59A
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_sec.label }} {{ form.tiem_sec(class_="form-control") }}
-            {% for error in form.tiem_sec.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 10 minutos
         </div>
         <h1>3.- REVELADOR</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.for_rev.label }} {{ form.for_rev(class_="form-control") }}
-            {% for error in form.for_rev.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            FORMA DE REVELADO: SOLVENTE REMOVED
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit2.label }} {{ form.marca_kit2(class_="form-control") }}
-            {% for error in form.marca_kit2.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek   D-70
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_rev.label }} {{ form.tiem_rev(class_="form-control") }}
-            {% for error in form.tiem_rev.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 10 minutos
         </div>
         <hr>
         <center>
@@ -274,7 +245,7 @@
             <h1>CRITERIOS DE ACEPTACIÓN Y RECHAZO </h1>
         </center>
         <center>
-            <h1>ANSI/ITSDF B56.6:2016, ANSI/ITSDF B56.1a:2018</h1>
+            <h1>ANSI/ITSDF B56.6:2016, ANSI/ITSDF B56.1a:2018 HORQUILLAS</h1>
         </center>
         <div class="container">
             <div class="row">
@@ -317,42 +288,116 @@
 
 
         <h3>INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
-
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            HORQUILLA DERECHA
+        </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.med_asi_hd.label }} {{ form.med_asi_hd(class_="form-control") }}
-            {% for error in form.med_asi_hd.errors %}
+            {{ form.desghd.label }} {{ form.desghd(class_="form-control") }}
+            {% for error in form.desghd.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.med_asi_hi.label }} {{ form.med_asi_hi(class_="form-control") }}
-            {% for error in form.med_asi_hi.errors %}
+            {{ form.desapd.label }} {{ form.desapd(class_="form-control") }}
+            {% for error in form.desapd.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-            {{ form.obs.label }} {{ form.obs(class_="form-control") }}
-            {% for error in form.obs.errors %}
+            {{ form.vastagod.label }} {{ form.vastagod(class_="form-control") }}
+            {% for error in form.vastagod.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.hojad.label }} {{ form.hojad(class_="form-control") }}
+            {% for error in form.hojad.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.angulod.label }} {{ form.angulod(class_="form-control") }}
+            {% for error in form.angulod.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.obsd.label }} {{ form.obsd(class_="form-control") }}
+            {% for error in form.obsd.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.vtd.label }} {{ form.vtd(class_="form-control") }}
+            {% for error in form.vtd.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.ptd.label }} {{ form.ptd(class_="form-control") }}
+            {% for error in form.ptd.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+<hr>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+            HORQUILLA IZQUIERDA
+        </div>
 
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.vt.label }} {{ form.vt(class_="form-control") }}
-            {% for error in form.vt.errors %}
+            {{ form.desghi.label }} {{ form.desghi(class_="form-control") }}
+            {% for error in form.desghi.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-            {{ form.pt.label }} {{ form.pt(class_="form-control") }}
-            {% for error in form.pt.errors %}
+            {{ form.desapi.label }} {{ form.desapi(class_="form-control") }}
+            {% for error in form.desapi.errors %}
             <span style="color: red;"> {{ error }} </span>
             {% endfor %}
         </div>
 
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.vastagoi.label }} {{ form.vastagoi(class_="form-control") }}
+            {% for error in form.vastagoi.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+            {{ form.hojai.label }} {{ form.hojai(class_="form-control") }}
+            {% for error in form.hojai.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.anguloi.label }} {{ form.anguloi(class_="form-control") }}
+            {% for error in form.anguloi.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.obsi.label }} {{ form.obsi(class_="form-control") }}
+            {% for error in form.obsi.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.vti.label }} {{ form.vti(class_="form-control") }}
+            {% for error in form.vti.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
+        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
+            {{ form.pti.label }} {{ form.pti(class_="form-control") }}
+            {% for error in form.pti.errors %}
+            <span style="color: red;"> {{ error }} </span>
+            {% endfor %}
+        </div>
 
         <div class="col-12">
             {{ form.hidden_tag() }}

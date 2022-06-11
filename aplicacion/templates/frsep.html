@@ -5,8 +5,7 @@
 <body>
     <hr>
     <h1>Reporte Inspeccion Sistemas de Elevación de Personal</h1>
-    <P>REFERENCIA NORMATIVA: ASME B30.23 (2016) Sistema de izamiento de personal, AWS D1.1. (2020) Código de soldadura
-        estructural - Acero,
+    <P>REFERENCIA NORMATIVA: ASME B30.23 (2016) Sistema de izamiento de personal, AWS D1.1. (2020) Código de soldadura estructural - Acero,
         MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
     <h3>DATOS DEL END (VT)</h3>
@@ -119,60 +118,33 @@
         <h3>CONSUMIBLES</h3>
         <h1>1.- PENETRANTE</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tipo_pen.label }} {{ form.tipo_pen(class_="form-control") }}
-            {% for error in form.tipo_pen.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIPO DE PENETRANTE: II VISIBLE
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit.label }} {{ form.marca_kit(class_="form-control") }}
-            {% for error in form.marca_kit.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek  VP-31A
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_pen.label }} {{ form.tiem_pen(class_="form-control") }}
-            {% for error in form.tiem_pen.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 5 minutos
         </div>
         <h1>2.- REMOVEDOR </h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.met_rem.label }} {{ form.met_rem(class_="form-control") }}
-            {% for error in form.met_rem.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MÉTODO DE REMOCIÓN: REMOVIBLE SOLVENTE
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit1.label }} {{ form.marca_kit1(class_="form-control") }}
-            {% for error in form.marca_kit1.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek   E-59A
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_sec.label }} {{ form.tiem_sec(class_="form-control") }}
-            {% for error in form.tiem_sec.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 10 minutos
         </div>
         <h1>3.- REVELADOR</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.for_rev.label }} {{ form.for_rev(class_="form-control") }}
-            {% for error in form.for_rev.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            FORMA DE REVELADO: SOLVENTE REMOVED
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit2.label }} {{ form.marca_kit2(class_="form-control") }}
-            {% for error in form.marca_kit2.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek   D-70
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_rev.label }} {{ form.tiem_rev(class_="form-control") }}
-            {% for error in form.tiem_rev.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 10 minutos
         </div>
 
         <hr>

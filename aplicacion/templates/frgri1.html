@@ -5,9 +5,7 @@
 <body>
     <hr>
     <h1>REPORTE DE INSPECCIÓN GRILLETES</h1>
-    <P>REFERENCIA NORMATIVA: ASME B30.9 (2018) Eslingas (Los números a indicar pertenecen a la norma en mención)
-        MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTORREFERENCIA NORMATIVA: ASME B30.9 (2018) Eslingas (Los números a
-        indicar pertenecen a la norma en mención)
+    <P>REFERENCIA NORMATIVA:  ASME B30.26 (2015) Aparejos - sección Grilletes
         MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <form action="{{url_for('add_frgri')}}" method="POST" class="row g-3 needs-validation">
        
@@ -18,12 +16,7 @@
 
         <h3>ESPECIFICACIONES DEL ACCESORIO INSPECCIÓN DIMENSIONAL Y RESULTADOS DE INSPECCIÓN</h3>
 
-        <div class="form-group col-xs-12 col-sm-12 col-md-1  position-relative">
-            {{ form.num.label }} {{ form.num(class_="form-control") }}
-            {% for error in form.num.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
-        </div>
+     
 
         <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
             {{ form.ref.label }} {{ form.ref(class_="form-control") }}
@@ -88,7 +81,7 @@
                 </tr>
                 {% for cat in data %}
                 <tr>
-                    <td>{{cat.0}}</td>
+                    <td>{{loop.index}}</td>
                     <td>{{cat.2}}</td>
                     <td>{{cat.1}}</td>
                     <td>{{cat.4}}</td>

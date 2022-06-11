@@ -16,6 +16,24 @@
 <body>
   <center><h2>INSPECCIÓN SISTEMAS DE IZAMIENTO DE PERSONAL</h2></center>
   <hr>
+  <form class="row g-3 needs-validation" novalidate></form>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ llave.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>SOLICITADO POR (Required by): {{ emp.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>FECHA DE INSPECCIÓN (Inspection date): {{ fec_emi.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ lug.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>INSPECTOR RESPONSABLE (Inspector): {{ ins.0 }}</h4>
+  </div>
+  </form>
+  <hr>
   <div class="col-md-10">
     <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
     <div class="panel panel-default">

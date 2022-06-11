@@ -1,0 +1,16 @@
+{% extends "layout_for.html" %}
+{% block title %}REPORTE FOTOGRÁFICO{% endblock %}
+{% block content %}
+	    <h2>Geleria de imágenes</h2>
+	    
+	    	{% for lis in lista %}
+	    	
+	    	<img src="{{url_for('static',filename='img/subidas/frttr/')}}{{lis}}"/>
+	    	{% endfor %}
+	    	<br/>
+	    	<a href="{{url_for('upload_frttr')}}">Subir más imagenes</a>
+			<br/>
+			<a href="{{url_for('cert_for14')}}">Terminar</a>
+	    	<br/>
+  
+{% endblock %}

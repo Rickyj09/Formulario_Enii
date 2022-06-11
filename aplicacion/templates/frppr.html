@@ -5,8 +5,7 @@
 <body>
     <hr>
     <h1>REPORTE DE INSPECCIÓN PASTECA PRINCIPAL</h1>
-    <P>REFERENCIA NORMATIVA: ASME B30.26 (2015) Aparejos, ASME B30.10 (2019) Ganchos, (Los números a indicar pertenecen
-        a la norma en mención), MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
+    <P>REFERENCIA NORMATIVA:  ASME B30.26 (2015) Aparejos, ASME B30.10 (2019) Ganchos, (Los números a indicar pertenecen a la norma en mención),  MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</P>
     <h2>PARÁMETROS DE LA INSPECCIÓN DEL EXAMEN VISUAL (VT)</h2>
     <h3>DATOS DEL END (VT)</h3>
     <form class="row g-3 needs-validation" novalidate method="POST">
@@ -118,60 +117,33 @@
         <h3>CONSUMIBLES</h3>
         <h1>1.- PENETRANTE</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tipo_pen.label }} {{ form.tipo_pen(class_="form-control") }}
-            {% for error in form.tipo_pen.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIPO DE PENETRANTE: II VISIBLE
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit.label }} {{ form.marca_kit(class_="form-control") }}
-            {% for error in form.marca_kit.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek  VP-31A
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_pen.label }} {{ form.tiem_pen(class_="form-control") }}
-            {% for error in form.tiem_pen.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 5 minutos
         </div>
         <h1>2.- REMOVEDOR </h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.met_rem.label }} {{ form.met_rem(class_="form-control") }}
-            {% for error in form.met_rem.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MÉTODO DE REMOCIÓN: REMOVIBLE SOLVENTE
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit1.label }} {{ form.marca_kit1(class_="form-control") }}
-            {% for error in form.marca_kit1.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek   E-59A
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_sec.label }} {{ form.tiem_sec(class_="form-control") }}
-            {% for error in form.tiem_sec.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 10 minutos
         </div>
         <h1>3.- REVELADOR</h1>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.for_rev.label }} {{ form.for_rev(class_="form-control") }}
-            {% for error in form.for_rev.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            FORMA DE REVELADO: SOLVENTE REMOVED
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.marca_kit2.label }} {{ form.marca_kit2(class_="form-control") }}
-            {% for error in form.marca_kit2.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            MARCA KIT DE INSPECCIÓN: Met-L-Chek   D-70
         </div>
         <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-            {{ form.tiem_rev.label }} {{ form.tiem_rev(class_="form-control") }}
-            {% for error in form.tiem_rev.errors %}
-            <span style="color: red;"> {{ error }} </span>
-            {% endfor %}
+            TIEMPO DE PENETRACIÓN: 10 minutos
         </div>
 
         <hr>
@@ -240,19 +212,19 @@
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
                     <h1>ASME B30.26 (2015) Pastecas</h1>
                     <p>1 Identificación faltante o ilegible</p>
-                    <p>2 Tuercas, pernos, pasadores, chavetas, anillos reten, u otros sujetadores y dispositivos de
-                        retencion sueltos o faltantes</p>
-                    <p>3 Daños producidos por calor, salpicaduras de soldadura</p>
-                    <p>4 Picaduras o corrosion exesivas</p>
-                    <p>5 Componentes de soporte doblados, agrietados, torcidos, distorcionados, estirados, alargados,
-                        rotos</p>
-                    <p>6 Desgaste excesivo, mellas o hendiduras</p>
-                    <p>7 Reducción de 10% de la dimensión original</p>
-                    <p>8 Daño excesivo hilos de rosca</p>
-                    <p>9 Evidencia de soldaduras o modificaciones no autorizadas</p>
-                    <p>10 Para grilletes criterios de eliminación según (ASME B30.26)</p>
-                    <p>11 Para ganchos criterios de eliminación según (ASME B30.10)</p>
-                    <p>12 Daños visibles o condiciones que causen duda sobre su uso</p>
+                    <p>2 Desalineación en poleas</p>
+                    <p>3 Corrugación y desgaste excesivo en ranuras de poleas </p>
+                    <p>4 Tuercas, pernos, pasadores, chavetas, anillos reten, u otros sujetadores y dispositivos de retencion sueltos o faltantes</p>
+                    <p>5 Daños producidos por calor, salpicaduras de soldadura</p>
+                    <p>6 Picaduras o corrosion exesivas</p>
+                    <p>7 Componentes de soporte doblados, agrietados, torcidos, distorcionados, estirados, alargados, rotos</p>
+                    <p>8 Desgaste excesivo, mellas o hendiduras </p>
+                    <p>9 Reducción de 10% de la dimensión original</p>
+                    <p>10 Daño excesivo hilos de rosca</p>
+                    <p>11 Evidencia de soldaduras o modificaciones no autorizadas</p>
+                    <p>12 Para grilletes criterios de eliminación según (ASME B30.26)</p>
+                    <p>13 Para ganchos criterios de eliminación según (ASME B30.10)</p>
+                    <p>14 Daños visibles o condiciones que causen duda sobre su uso</p>
                 </div>
 
                 <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">

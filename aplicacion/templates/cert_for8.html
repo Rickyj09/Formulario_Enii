@@ -13,47 +13,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
 </head>
+
 <body>
-  <center><h2>INSPECCIÓN DE QUINTA RUEDA</h2></center>
+  <center>
+    <h2>INSPECCIÓN DE QUINTA RUEDA</h2>
+  </center>
+  <hr>
+  <form class="row g-3 needs-validation" novalidate></form>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ llave.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>SOLICITADO POR (Required by): {{ emp.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>FECHA DE INSPECCIÓN (Inspection date): {{ fec_emi.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ lug.0 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>INSPECTOR RESPONSABLE (Inspector): {{ ins.0 }}</h4>
+  </div>
+  </form>
   <hr>
   <div class="col-md-10">
     <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
-    <div class="panel panel-default">
+  <div class="panel panel-default">
       <table class="table table-bordered">
         <tr>
-          <th>EQUIPO DONDE ESTA INSTALADO</th>
+
           <th>MARCA</th>
-          <th>MODELO</th>
+          <th>MODELO /REFERENCIA</th>
           <th>IDENTIFICACIÓN</th>
-          <th>CAPACIDAD</th>
         </tr>
-        
+
         <tr>
-              <td>{{equipo.0}}</td>
-              <td>{{marca_pk.0}}</td>
-              <td>{{modelo_pk.0}}</td>
-              <td>{{iden_pk.0}}</td>
-              <td>{{capac_pk.0}}</td>
-              
+
+          <td>{{marca_pk.0}}</td>
+          <td>{{modelo_pk.0}}</td>
+          <td>{{iden_pk.0}}</td>
+
         </tr>
-       
+
       </table>
-      
+
+    </div>
   </div>
-</div>
 
-<h2>RESULTADOS DE INSPECCIÓN</h2>
+  <h2>RESULTADOS DE INSPECCIÓN</h2>
 
-<p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quien firma, certifica que en la fecha de esta inspección, los accesorios arriba descritos, fueron sometidos a una prueba de ensayo no destructivo de Inspección Visual,  según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes, según ASTM E165/E165M-18 y la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  ASME B30.9:2018 Eslingas, ASME B30.10:2019 Ganchos, ASME B30.26:2015 Aparejos,  para la emisión del presente CERTIFICADO  con RESULTADO APROBADO.</p>
+  <p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quien firma, certifica que en la fecha de
+    esta inspección, los accesorios arriba descritos, fueron sometidas a pruebas de ensayo no destructivo de Inspección
+    Visual; según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes; según ASME Sección V Artículo 6 (2019) y ASTM
+    E165/E165M-18 y la evaluación de conformidad de los elementos fueron realizados bajo especificaciones del
+    fabricante, para la emisión del presente CERTIFICADO con RESULTADO APROBADO. </p>
 
-<p>Los accesorios  fueron  preparados  e  inspeccionados,  de  acuerdo con los requerimientos  del procedimiento aplicado  PR-INSP-006 Inspección visual,  PR-INSP-007 Líquidos penetrantes.</p>
+  <p>Los accesorios fueron preparados e inspeccionados, de acuerdo con los requerimientos del procedimiento aplicado
+    PR-INSP-006 Inspección visual y PR-INSP-007 Líquidos penetrantes. </p>
 
-<p>Este certificado hace referencia a las condiciones que presentan los accesorios al momento de la inspección, sin ninguna obligación o responsabilidad posterior</p>
-<br>
-<hr>
+  <p>Este certificado hace referencia a las condiciones que presentan los accesorios al momento de la inspección, sin
+    ninguna obligación o responsabilidad posterior</p>
+  <br>
+  <hr>
 
 
-<form class="row g-3 needs-validation" novalidate></form>
+  <form class="row g-3 needs-validation" novalidate></form>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
     <h4>Fecha de emisión del certificado (Certificate issue date): {{ fec_emi.0 }}</h4>
   </div>
@@ -63,24 +88,25 @@
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
     <h4>Fecha de próxima de inspección (Next inspection date): {{ fec_exp.0 }}</h4>
   </div>
-</form> 
+  </form>
 
-<br>
-<hr>
+  <br>
+  <hr>
 
-<center>
-  <h2>
-    NOMBRE
-  </h2>
-</center>
+  <center>
+    <h2>
+      NOMBRE
+    </h2>
+  </center>
 
-<center>
-  <h2>
-    GERENTE TECNICO ENII SA
-  </h2>
-</center>
+  <center>
+    <h2>
+      GERENTE TECNICO ENII SA
+    </h2>
+  </center>
 
 </body>
+
 </html>
 
 {% endblock %}

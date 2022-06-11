@@ -156,9 +156,9 @@ class formu2(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
-                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+                         ('NATURAL', 'NATURAL'), ('ASISTIDA', 'ASISTIDA')], default='NATURAL', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
@@ -171,22 +171,8 @@ class formu2(FlaskForm):
     nivel_il_p = StringField('NIVEL DE ILUMINACIÓN',
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
-    tipo_sec = RadioField('TIPO DE SECADO:', choices=[
-                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+    tipo_sec = RadioField('TIPO DE SECADO:', choices=[(
+        'AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
@@ -195,7 +181,6 @@ class formu2(FlaskForm):
 
 
 class formu2_2(FlaskForm):
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     tipo_ter = StringField('TIPO DE TERMINAL', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
@@ -205,9 +190,9 @@ class formu2_2(FlaskForm):
     med_aces = StringField('MEDIDA DEL ACCESORIO (mm)',
                            validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
 
 
@@ -222,7 +207,7 @@ class formu3(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
                          ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
@@ -238,21 +223,7 @@ class formu3(FlaskForm):
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
-                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+                          ('AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
@@ -262,7 +233,6 @@ class formu3(FlaskForm):
 
 class formu3_3(FlaskForm):
     tipo_ace = StringField('TIPO DE ACCESORIO (mm)', validators=[DataRequired()])
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     eslabon = StringField('ESLABÓN (diámetro) mm', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
@@ -270,9 +240,9 @@ class formu3_3(FlaskForm):
     gancho1 = StringField('GANCHO 1 (E-B) mm', validators=[DataRequired()])
     gancho2 = StringField('GANCHO 2 (E-B) mm', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
 
 
@@ -285,9 +255,9 @@ class formu4(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
-                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+                         ('NATURAL', 'NATURAL'), ('ASISTIDA', 'ASISTIDA')], default='NATURAL', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
@@ -302,13 +272,13 @@ class formu4(FlaskForm):
 
 
 class formu4_4(FlaskForm):
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     tipo = StringField('TIPO', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
+   
 
     submit = SubmitField('Enviar')
 
@@ -322,7 +292,7 @@ class formu5(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
                          ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
@@ -338,21 +308,7 @@ class formu5(FlaskForm):
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
-                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+                          ('AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
@@ -363,17 +319,15 @@ class formu5(FlaskForm):
 
 
 class formu5_5(FlaskForm):
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     asiento = StringField('ASIENTO (mm)', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
     garganta = StringField('GARGANTA (mm)', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
-
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')   
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt') 
 
 
 
@@ -388,7 +342,7 @@ class formu6(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
                          ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
@@ -404,21 +358,7 @@ class formu6(FlaskForm):
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
-                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+                          ('AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
@@ -428,16 +368,14 @@ class formu6(FlaskForm):
 
 
 class formu6_6(FlaskForm):
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (Kg)', validators=[DataRequired()])
     diam_cue = StringField('DIÁMETRO DE CUERPO (mm)', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
-
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')   
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')  
 
 
 
@@ -452,9 +390,9 @@ class formu7(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
-                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+                         ('NATURAL', 'NATURAL'), ('ASISTIDA', 'ASISTIDA')], default='NATURAL', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
@@ -469,20 +407,6 @@ class formu7(FlaskForm):
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
                           ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     marca = StringField('MARCA', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
@@ -498,9 +422,9 @@ class formu7(FlaskForm):
                           validators=[DataRequired()])
     obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt') 
 
     submit = SubmitField('Enviar')
 
@@ -514,7 +438,7 @@ class formu8(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
                          ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
@@ -529,21 +453,7 @@ class formu8(FlaskForm):
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
-                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+                          ('AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     marca = StringField('MARCA', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN ', validators=[DataRequired()])
@@ -553,9 +463,9 @@ class formu8(FlaskForm):
     capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
     obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
     submit = SubmitField('Enviar')
 
@@ -567,9 +477,9 @@ class formu9(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
-                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+                         ('NATURAL', 'NATURAL'), ('ASISTIDA', 'ASISTIDA')], default='NATURAL', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
@@ -582,30 +492,16 @@ class formu9(FlaskForm):
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
-                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+                          ('AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     marca_pk = StringField('MARCA', validators=[DataRequired()])
     iden_pk = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     modelo_pk = StringField('MODELO', validators=[DataRequired()])
     capac_pk = StringField('CAPACIDAD', validators=[DataRequired()])
     obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
     submit = SubmitField('Enviar')
 
@@ -633,20 +529,6 @@ class formu10(FlaskForm):
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
                           ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
@@ -662,15 +544,26 @@ class formu10(FlaskForm):
     capac_hi = StringField('CAPACIDAD', validators=[DataRequired()])
     medidas_hi = StringField(
         'MEDIDAS (ESPESOR, ANCHO, LONGITUD)(mm)', validators=[DataRequired()])
-    med_asi_hd = StringField(
-        'Medida de asiento (Horquilla derecha)(mm)', validators=[DataRequired()])
-    med_asi_hi = StringField(
-        'Medida de asiento(Horquilla Izquierda)(mm)', validators=[DataRequired()])
-    obs = StringField('OBSERVACIONES', validators=[DataRequired()])
-    vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
-    pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+    desghd = StringField('DESGASTE  HORQUILLA DERECHA', validators=[DataRequired()])
+    desapd = StringField('DESALINEACIÓN PUNTAS DERECHA', validators=[DataRequired()])
+    vastagod = StringField('VÁSTAGO', validators=[DataRequired()])
+    hojad = StringField('HOJA DERECHA', validators=[DataRequired()])
+    angulod = StringField('ANGULO DERECHA ', validators=[DataRequired()])
+    obsd = StringField('OBSERVACIONES DERECHA ', validators=[DataRequired()])
+    vtd = RadioField('INSPECCIÓN VISUAL DERECHA(VT)', choices=[
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
+    ptd = RadioField('LÍQUIDOS PENETRANTES DERECHA(PT)', choices=[
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
+    desghi = StringField('DESGASTE  HORQUILLA IZQUIERDA', validators=[DataRequired()])
+    desapi = StringField('DESALINEACIÓN PUNTAS IZQUIERDA', validators=[DataRequired()])
+    vastagoi = StringField('VÁSTAGO IZQUIERDA ', validators=[DataRequired()])
+    hojai = StringField('HOJA IZQUIERDA', validators=[DataRequired()])
+    anguloi = StringField('ANGULO IZQUIERDA', validators=[DataRequired()])
+    obsi = StringField('OBSERVACIONES IZQUIERDA ', validators=[DataRequired()])
+    vti = RadioField('INSPECCIÓN VISUAL IZQUIERDA(VT)', choices=[
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
+    pti = RadioField('LÍQUIDOS PENETRANTES IZQUIERDA(PT)', choices=[
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
     submit = SubmitField('Enviar')
 
@@ -682,9 +575,9 @@ class formu11(FlaskForm):
     con_sup = StringField('CONDICIÓN SUPERFICIAL:',
                           validators=[DataRequired()])
     met_insp = RadioField('MÉTODO DE INSPECCIÓN:', choices=[(
-        'D', 'DIRECTA'), ('I', 'INDIRECTA')], default='D', render_kw={}, id='met_insp')
+        'DIRECTA', 'DIRECTA'), ('INDIRECTA', 'INDIRECTA')], default='DIRECTA', render_kw={}, id='met_insp')
     tipo_il = RadioField('TIPO DE ILUMINACIÓN:', choices=[
-                         ('N', 'NATURAL'), ('A', 'ASISTIDA')], default='N', render_kw={}, id='tipo_il')
+                         ('NATURAL', 'NATURAL'), ('ASISTIDA', 'ASISTIDA')], default='NATURAL', render_kw={}, id='tipo_il')
     check1 = SelectField('ESPEJOS:', choices=[(' ', ' '), ('X', 'X')])
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
@@ -697,21 +590,7 @@ class formu11(FlaskForm):
                              validators=[DataRequired()])
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
-                          ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
+                          ('AMBIENTE', 'AMBIENTE'), ('HORNO', 'HORNO')], default='AMBIENTE', render_kw={}, id='tipo_sec')
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
@@ -725,9 +604,9 @@ class formu11(FlaskForm):
     med_gri = StringField('MEDIDAS GRILLETES(mm)', validators=[DataRequired()])
     obs = StringField('OBSERVACIONES', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
     submit = SubmitField('Enviar')
 
@@ -755,65 +634,51 @@ class formu12(FlaskForm):
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
                           ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
     c1 = RadioField('1 Identificación faltante o ilegible ', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c1')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c1')
     c2 = RadioField('2 Daños por calor, salpicaduras, soldadura, golpes ', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c2')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c2')
     c3 = RadioField('3 Picaduras o corrosión excesivas', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c3')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c3')
     c4 = RadioField('4 Componentes de reemplazo no autorizados', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c4')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c4')
     c5 = RadioField('5 Componentes doblados, torcidos, estirados', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c5')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c5')
     c6 = RadioField('6 Daños visibles que causen duda', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c6')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c6')
     c7 = RadioField('7 Montaje incorrecto u otras condiciones', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c7')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c7')
     c8 = RadioField('8 Componentes alargados, agrietados o rotos', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c8')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c8')
     c9 = RadioField('9 Mellas o ranuras excesivas', choices=[
-                    ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c9')
+                    ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c9')
     c10 = RadioField('10 Capacidad de rotar, pivotar', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c10')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c10')
     c11 = RadioField('11 Daño excesivo hilos de rosca', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c11')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c11')
     c12 = RadioField('12 Modificaciones, soldaduras no autorizadas', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c12')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c12')
     c13 = RadioField('13 Reducción + del 10% en cualquier punto cuerpo', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c13')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c13')
     c14 = RadioField('14 Decoloración áreas frágiles o rígidas en cualquier parte', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c14')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c14')
     c15 = RadioField('15 Indicaciones de cable dañado', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c15')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c15')
     c16 = RadioField('16 Carbonización de cualquier parte de cinta', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c16')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c16')
     c17 = RadioField('17 Tuercas sueltas, faltantes, pernos, pasadores de chaveta', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c17')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c17')
     c18 = RadioField('18 Capacidad de rotar, pivotar', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c18')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c18')
     c19 = RadioField('19 Costuras rotas o desgastadas en empalmes de carga', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c19')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c19')
     c20 = RadioField('20 Nudos en cualquier parte de la cinta', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c20')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c20')
     c21 = RadioField('21 Modificaciones, soldaduras no autorizadas.', choices=[
-                     ('A', 'APROBADO'), ('R', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='A', id='c21')
+                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c21')
  
     
 
@@ -823,15 +688,14 @@ class formu12(FlaskForm):
 
 class formu12_1(FlaskForm):
     tipo_acc = StringField('TIPO DE ACCESORIO ', validators=[DataRequired()])
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (kg)', validators=[DataRequired()])
     medida_cu = StringField('MEDIDA DEL CUERPO (mm)', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
 
     submit = SubmitField('Enviar')
@@ -861,20 +725,6 @@ class formu13(FlaskForm):
     mater_base = StringField('MATERIAL BASE', validators=[DataRequired()])
     tipo_sec = RadioField('TIPO DE SECADO:', choices=[
                           ('A', 'AMBIENTE'), ('H', 'HORNO')], default='A', render_kw={}, id='tipo_sec')
-    tipo_pen = StringField('TIPO DE PENETRANTE', validators=[DataRequired()])
-    marca_kit = StringField('MARCA KIT DE INSPECCIÓN',
-                            validators=[DataRequired()])
-    tiem_pen = StringField('TIEMPO DE PENETRACIÓN',
-                           validators=[DataRequired()])
-    met_rem = StringField('MÉTODO DE REMOCIÓN', validators=[DataRequired()])
-    marca_kit1 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_sec = StringField('TIEMPO DE SECADO DEL REMOVEDOR',
-                           validators=[DataRequired()])
-    for_rev = StringField('FORMA DE REVELADO', validators=[DataRequired()])
-    marca_kit2 = StringField('MARCA KIT DE INSPECCIÓN',
-                             validators=[DataRequired()])
-    tiem_rev = StringField('TIEMPO DE REVELADO', validators=[DataRequired()])
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
@@ -884,16 +734,15 @@ class formu13(FlaskForm):
 
 
 class formu13_1(FlaskForm):
-    num = StringField('Nº', validators=[DataRequired()])
     ref = StringField('REFERENCIA', validators=[DataRequired()])
     medidas = StringField('MEDIDAS (mm)', validators=[DataRequired()])
     capac = StringField('CAPACIDAD (kg)', validators=[DataRequired()])
     gancho1 = StringField('GANCHO 1 (A-E) mm', validators=[DataRequired()])
     gancho2 = StringField('GANCHO 2  (A-E) mm', validators=[DataRequired()])
     vt = RadioField('INSPECCIÓN VISUAL (VT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='vt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='vt')
     pt = RadioField('LÍQUIDOS PENETRANTES (PT)', choices=[
-                    ('A', 'Aprobado'), ('R', 'Rechazado')], default='A', id='pt')
+                    ('Aprobado', 'Aprobado'), ('Rechazado', 'Rechazado')], default='Aprobado', id='pt')
 
 
     submit = SubmitField('Enviar')
@@ -1441,7 +1290,7 @@ class datos_reporte(FlaskForm):
     empresa = StringField('EMPRESA', validators=[DataRequired()], render_kw={
                           "placeholder": "EMPRESA"})
     fec_inpec = DateField('FECHA DE INSPECCIÓN', validators=[
-                          DataRequired()], render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
+                          DataRequired()], default='', render_kw={"placeholder": "FECHA DE INSPECCIÓN"})
     fec_emision = DateField('FECHA DE EMISIÓN', validators=[
                             DataRequired()], render_kw={"placeholder": "FECHA DE EMISIÓN"})
     fec_expiracion = DateField('FECHA DE EXPIRACIÓN', validators=[

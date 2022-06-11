@@ -16,6 +16,25 @@
 <body>
   <center><h2>INSPECCIÓN GENERAL DE APAREJOS</h2></center>
   <hr>
+  <form class="row g-3 needs-validation" novalidate>
+    {% for cat in data %}
+    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ cat.2 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>SOLICITADO POR (Required by): {{ cat.9 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>FECHA DE INSPECCIÓN (Inspection date): {{ cat.4 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ cat.7 }}</h4>
+  </div>
+  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+    <h4>INSPECTOR RESPONSABLE (Inspector): {{ cat.8 }}</h4>
+  </div>
+  {% endfor %}
+  </form>
   <div class="col-md-10">
     <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
     <div class="panel panel-default">
@@ -29,10 +48,10 @@
           <th>CAPACIDAD</th>
         </tr>
         
-        {% for cat in data %}
+        {% for cat in datafr %}
         <tr>
+          <td>{{loop.index}}</td>
           <td>{{cat.1}}</td>
-          <td>{{cat.0}}</td>
           <td>{{cat.3}}</td>
           <td>{{cat.2}}</td>
           <td>{{cat.4}}</td>
@@ -58,16 +77,19 @@
 <hr>
 
 
-<form class="row g-3 needs-validation" novalidate></form>
+<form class="row g-3 needs-validation" novalidate>
+  {% for cat in data %}
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de emisión del certificado (Certificate issue date): {{ fec_emi.0 }}</h4>
+    <h4>Fecha de emisión del certificado (Certificate issue date): {{ cat.5 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ fec_exp.0 }}</h4>
+    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ cat.6 }}</h4>
   </div>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de próxima de inspección (Next inspection date): {{ fec_exp.0 }}</h4>
+    <h4>Fecha de próxima de inspección (Next inspection date): {{ cat.6 }}</h4>
   </div>
+
+  {% endfor %}
 </form> 
 
 <br>
