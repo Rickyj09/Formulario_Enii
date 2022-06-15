@@ -504,6 +504,14 @@ def upload_fpol():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/pol/"+filename)
+        foto = app.root_path+"/static/img/subidas/pol/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frpol where id = (select MAX(id) from frpol) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frpol (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotopol'))
     return render_template('upload_fpol.html', form=form)
 
@@ -511,7 +519,7 @@ def upload_fpol():
 @login_required
 def inicio_fotopol():
     lista = []
-    for file in listdir(app.root_path+"/static/img/subidas/"):
+    for file in listdir(app.root_path+"/static/img/subidas/pol"):
         lista.append(file)
     return render_template("inicio_fotopol.html", lista=lista)
 
@@ -843,7 +851,7 @@ def resum_freca():
 @login_required
 def reporte_fotofreca():
     lista = []
-    for file in listdir(app.root_path+"/static/img/subidas/pol/"):
+    for file in listdir(app.root_path+"/static/img/subidas/freca/"):
         lista.append(file)
     return render_template("reporte_fotofreca.html", lista=lista)
 
@@ -855,6 +863,14 @@ def upload_freca():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/freca/"+filename)
+        foto = app.root_path+"/static/img/subidas/freca/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from freca where id = (select MAX(id) from freca) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_freca (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofreca'))
     return render_template('upload_freca.html', form=form)
 
@@ -1208,6 +1224,14 @@ def upload_frcad():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frcad/"+filename)
+        foto = app.root_path+"/static/img/subidas/frcad/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frcad where id = (select MAX(id) from frcad) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frcad (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrcad'))
     return render_template('upload_frcad.html', form=form)
 
@@ -1498,6 +1522,14 @@ def upload_frefs():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frefs/"+filename)
+        foto = app.root_path+"/static/img/subidas/frefs/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frefs where id = (select MAX(id) from frefs) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frefs (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrefs'))
     return render_template('upload_frefs.html', form=form)
 
@@ -1845,6 +1877,14 @@ def upload_frgan():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frgan/"+filename)
+        foto = app.root_path+"/static/img/subidas/frgan/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frgan where id = (select MAX(id) from frgan) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frgan (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrgan'))
     return render_template('upload_frgan.html', form=form)
 
@@ -2071,7 +2111,7 @@ def add_frgri():
         vt = request.form['vt']
         pt = request.form['pt']
         cur.execute(
-            "select id from frgan where id = (select MAX(id) from frgri) ;")
+            "select id from frgri where id = (select MAX(id) from frgri) ;")
         llave_form = cur.fetchone()
         print(cod_enii)
         cur.execute('insert into frgri1 (ref,cod_enii,medidas,capac,diam_cue,vt,pt,id_f7) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)',
@@ -2188,6 +2228,14 @@ def upload_frgri():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frgri/"+filename)
+        foto = app.root_path+"/static/img/subidas/frgri/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frgri where id = (select MAX(id) from frgri) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frgri (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrgri'))
     return render_template('upload_frgri.html', form=form)
 
@@ -2473,6 +2521,14 @@ def upload_frkpi():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frkpi/"+filename)
+        foto = app.root_path+"/static/img/subidas/frkpi/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frkpi where id = (select MAX(id) from frkpi) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frkpi (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrkpi'))
     return render_template('upload_frkpi.html', form=form)
 
@@ -2746,6 +2802,14 @@ def upload_frqru():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frqru/"+filename)
+        foto = app.root_path+"/static/img/subidas/frqru/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frqru where id = (select MAX(id) from frqru) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frqru (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrqru'))
     return render_template('upload_frqru.html', form=form)
 
@@ -3016,6 +3080,14 @@ def upload_frsep():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frsep/"+filename)
+        foto = app.root_path+"/static/img/subidas/frsep/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frsep where id = (select MAX(id) from frsep) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frsep (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrsep'))
     return render_template('upload_frsep.html', form=form)
 
@@ -3334,6 +3406,14 @@ def upload_frhor():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frhor/"+filename)
+        foto = app.root_path+"/static/img/subidas/frhor/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frhor where id = (select MAX(id) from frhor) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frhor (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrhor'))
     return render_template('upload_frhor.html', form=form)
 
@@ -3611,6 +3691,14 @@ def upload_frppr():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frppr/"+filename)
+        foto = app.root_path+"/static/img/subidas/frppr/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frppr where id = (select MAX(id) from frppr) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frppr (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrppr'))
     return render_template('upload_frppr.html', form=form)
 
@@ -4132,6 +4220,14 @@ def upload_frapa():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frapa/"+filename)
+        foto = app.root_path+"/static/img/subidas/frapa/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frapa where id = (select MAX(id) from frapa) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frapa (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrapa'))
     return render_template('upload_frapa.html', form=form)
 
@@ -4468,6 +4564,14 @@ def upload_frttr():
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/frttr/"+filename)
+        foto = app.root_path+"/static/img/subidas/frttr/"+filename
+        cursor = mysql.connection.cursor()
+        cursor.execute(
+            "select id from frttr where id = (select MAX(id) from frttr) ;")
+        llave_form = cursor.fetchone()
+        cursor.execute('insert into rep_foto_frttr (foto,id_f) VALUES (%s,%s)',
+                    ( foto,llave_form))
+        mysql.connection.commit()
         return redirect(url_for('inicio_fotofrttr'))
     return render_template('upload_frttr.html', form=form)
 
