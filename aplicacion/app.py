@@ -1,4 +1,5 @@
 from http.client import OK
+from pydoc import html
 from typing import Text
 from flask import Flask, render_template, request, redirect, url_for, flash, make_response
 from flask_sqlalchemy import SQLAlchemy
@@ -548,6 +549,65 @@ def cert_for1():
     data = cursor.fetchall()
 
     return render_template('cert_for1.html', data=data, for_emi=for_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+
+
+@app.route('/cert_foto1', methods=['GET', 'POST'])
+@login_required
+def cert_foto1():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    for_emi = cursor.fetchall()
+    cursor.execute(
+        "select * from rep_foto_frpol where id_f = (select MAX(id) from frpol) ;")
+    data = cursor.fetchall()
+
+    return render_template('cert_foto1.html', data=data, for_emi=for_emi)
+
+
+@app.route('/genera_pdf1')
+@login_required
+def genera_pdf1():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    for_emi = cursor.fetchall()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    cursor.execute(
+        "select * from frpol1 where id_f2 = (select MAX(id) from frpol) ;")
+    data = cursor.fetchall()
+    html = render_template('cert_for1.html', data=data, for_emi=for_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for1.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_2', methods=['GET', 'POST'])

@@ -1,0 +1,106 @@
+{% extends 'layout_cert.html' %}
+{%block title%} REPORTE FOTOGRAFICO POLEAS{%endblock%}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/static/base.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+</head>
+
+<body>
+  <center>
+    <h2>REPORTE DE INSPECCIÓN POLEAS</h2>
+  </center>
+  <hr>
+  <div class="col-md-10">
+
+
+    <form class="row g-3 needs-validation" novalidate>
+    {% for emi in for_emi %}
+    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+      <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ emi.2 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+      <h4>SOLICITADO POR (Required by): {{ emi.9 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+      <h4>FECHA DE INSPECCIÓN (Inspection date): {{ emi.4 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+      <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ emi.7 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+      <h4>INSPECTOR RESPONSABLE (Inspector): {{ emi.8 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+      <h4>Fecha de emisión del certificado (Certificate issue date): {{ emi.5 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+      <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ emi.6 }}</h4>
+    </div>
+
+    {% endfor %}
+    </form>
+    <center>
+    <h3>VISTA GENERAL</h3>
+  </center>
+    {% for cat in data %}
+    <div class="d-flex">
+      <div class="flex-shrink-0">
+        <img width="200" src="{{url_for('static',filename='img/subidas/pol/foto8.jpg')}}"/>
+      </div>
+      <div class="flex-grow-1 ms-3">
+        content and adjust it as needed.
+      </div>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+      <img width="100" src="{{url_for('static',filename='img/subidas/pol/foto8.jpg')}}" alt="...">
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <h2>RESUMEN DE LA INSPECCIÓN</h2>
+
+  <p>
+    De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quienes firman, certifican que en la fecha de esta inspección, las poleas descritas, fueron sometidas a pruebas de ensayo no destructivo de Inspección Visual; según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes; según ASME Sección V Artículo 6 (2019) y ASTM E165/E165M-18, la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  AWS D1.1. (2020) Código de Soldadura Estructural - Acero,  para la emisión del presente reporte.
+    El accesorio será considerado como APROBADO,  para incluirlo en el CERTIFICADO, siempre que, apruebe tanto la Inspección Visual como la Inspección por Líquidos Penetrantes.
+  </p>
+
+  <p>Los abajo firmantes, certificamos que lo expuesto en este registro, es correcto y que el elemento o accesorio fueron preparadas e inspeccionadas, de acuerdo con los requerimientos  del procedimiento aplicado  PR-INSP-006 Inspección visual, PR-INSP-007 Líquidos penetrantes.</p>
+
+  <hr>
+
+  <center>
+    <h2>
+      NOMBRE
+    </h2>
+  </center>
+  <center>
+    <h2>
+      GERENTE TECNICO ENII SA
+    </h2>
+  </center>
+
+  {% for emi in for_emi %}
+  <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
+    <h4> {{ emi.2 }}</h4>
+  </div>
+
+  {% endfor %}
+  </h2>
+
+
+
+</body>
+
+</html>
+
+{% endblock %}

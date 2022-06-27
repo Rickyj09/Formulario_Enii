@@ -1,8 +1,3 @@
-{% extends 'layout_cert.html' %}
-{%block title%} CERTIFICADO POLEAS{%endblock%}
-{% block content %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,68 +6,88 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+
 </head>
 
-<body>
-  <center>
-    <h2>INSPECCIÓN POLEAS</h2>
-  </center>
+<body background="/static/img/fondo1.jpg">
   <hr>
-  <div class="col-md-10">
 
+  <div class="container">
+    <div class="row">
 
-    <form class="row g-3 needs-validation" novalidate></form>
-    {% for emi in for_emi %}
-    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-      <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ emi.2 }}</h4>
-    </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-      <h4>SOLICITADO POR (Required by): {{ emi.0 }}</h4>
-    </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-      <h4>FECHA DE INSPECCIÓN (Inspection date): {{ emi.9 }}</h4>
-    </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-      <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ emi.7 }}</h4>
-    </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-      <h4>INSPECTOR RESPONSABLE (Inspector): {{ emi.8 }}</h4>
-    </div>
-    {% endfor %}
-    </form>
-    <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
-    <div class="panel panel-default">
+      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+        <img src="/static/img/logo_eni.jpg">
+      </div>
 
-      <table class="table table-bordered">
-        <tr>
-          <th>Nº</th>
-          <th>CÓDIGO ENII</th>
-          <th>REFERENCIA</th>
-          <th>ANCHO (mm)</th>
-          <th>DIÁMETRO (mm)</th>
+      <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
+        <center>
+          <h3>INSPECCIÓN DE POLEAS</h3>
+          <h3>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h3>
+          <FONT FACE="arial" SIZE=76 COLOR="blue">
+            CERTIFICADO</FONT>
+        </center>
+      </div>
 
-        </tr>
-        {% for cat in data %}
-        <tr>
-          <td>{{cat.0}}</td>
-          <td>{{cat.2}}</td>
-          <td>{{cat.1}}</td>
-          <td>{{cat.3}}</td>
-          <td>{{cat.4}}</td>
-
-        </tr>
-        {% endfor %}
-      </table>
+      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
+        <img src="/static/img/Acreditacion.jpg">
+      </div>
 
     </div>
+  </div>
+  <div class="panel panel-default">
+    <table class="table table-bordered">
+      <form class="row g-3 needs-validation" novalidate></form>
+      {% for emi in for_emi %}
+      <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+        <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ emi.2 }}</h4>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+        <h4>SOLICITADO POR (Required by): {{ emi.9 }}</h4>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+        <h4>FECHA DE INSPECCIÓN (Inspection date): {{ emi.4 }}</h4>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+        <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ emi.7 }}</h4>
+      </div>
+      <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+        <h4>INSPECTOR RESPONSABLE (Inspector): {{ emi.8 }}</h4>
+      </div>
+      {% endfor %}
+      </form>
+      <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
+      <div class="panel panel-default">
+
+        <table class="table table-bordered">
+
+          <tr>
+            <th>Nº</th>
+            <th>CÓDIGO ENII</th>
+            <th>REFERENCIA</th>
+            <th>ANCHO (mm)</th>
+            <th>DIÁMETRO (mm)</th>
+
+          </tr>
+          {% for cat in data %}
+          <tr>
+            <td>{{loop.index}}</td>
+            <td>{{cat.2}}</td>
+            <td>{{cat.1}}</td>
+            <td>{{cat.3}}</td>
+            <td>{{cat.4}}</td>
+
+          </tr>
+          {% endfor %}
+        </table>
+
+      </div>
   </div>
 
   <h2>RESULTADOS DE INSPECCIÓN</h2>
 
-  <p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quienes firman, certifican que en la fecha de
-    esta inspección, las poleas descritas, fueron sometidas a pruebas de ensayo no destructivo de fueron sometidas a
-    pruebas de ensayo no destructivo de Inspección Visual; según ASME Sección V Artículo 9 (2019) y Líquidos
+  <p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quienes firman, certifican que en la fecha
+    de esta inspección, las poleas descritas, fueron sometidas a pruebas de ensayo no destructivo de fueron sometidas
+    a pruebas de ensayo no destructivo de Inspección Visual; según ASME Sección V Artículo 9 (2019) y Líquidos
     Penetrantes; según ASME Sección V Artículo 6 (2019) y ASTM E165/E165M-18, la evaluación de conformidad de los
     elementos fueron realizados bajo los criterios del estándar AWS D1.1. (2020) Código de Soldadura Estructural -
     Acero, para la emisión del presente CERTIFICADO con RESULTADO APROBADO.
@@ -87,46 +102,41 @@
   <hr>
 
 
-  <form class="row g-3 needs-validation" novalidate></form>
-  {% for emi in for_emi %}
-  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de emisión del certificado (Certificate issue date): {{ emi.5 }}</h4>
-  </div>
-  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ emi.6 }}</h4>
-  </div>
-  <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-    <h4>Fecha de próxima de inspección (Next inspection date): {{ emi.6 }}</h4>
-  </div>
-  {% endfor %}
+  <form class="row g-3 needs-validation" novalidate>
+    {% for emi in for_emi %}
+    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+      <h4>Fecha de emisión del certificado (Certificate issue date): {{ emi.5 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+      <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ emi.6 }}</h4>
+    </div>
+    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+      <h4>Fecha de próxima de inspección (Next inspection date): {{ emi.6 }}</h4>
+    </div>
   </form>
-
-  <br>
   <hr>
 
   <center>
-    <h2>
-      NOMBRE
-    </h2>
+    <h4> NOMBRE  </h4> 
+    <h2>GERENTE TECNICO ENII SA</h2>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+        <h4> {{ emi.2 }}</h4>
+      </div>
+      {% endfor %}
+    
+
   </center>
-  <center>
-    <h2>
-      GERENTE TECNICO ENII SA
-    </h2>
-  </center>
-
-  {% for emi in for_emi %}
-  <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-    <h4> {{ emi.2 }}</h4>
-  </div>
-
-  {% endfor %}
-  </h2>
-
-
 
 </body>
 
-</html>
+<footer>
+  <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+    <a href="{{ url_for('resum_frpol')}}" class="btn btn-primary">VOLVER</a>
 
-{% endblock %}
+    <a href="{{ url_for('genera_pdf1')}}" class="btn btn-primary">PDF</a>
+  </div>
+
+</footer>
+
+</html>
