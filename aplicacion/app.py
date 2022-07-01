@@ -8,7 +8,7 @@ from aplicacion.forms import datos_equipo, datos_reporte, check_list2, check_lis
 from aplicacion.forms import check_list4, check_list5, check_list6, check_list7, check_list8, check_list9
 from aplicacion.forms import check_list10, check_list11, check_list12, check_list13, check_list14, check_list15
 from aplicacion.forms import check_list16, check_list17, check_list18, check_list19, check_list20, check_list21
-from aplicacion.forms import check_list22, check_list23, check_list24, check_list25, Publicaciones, CHECK_LIST_FIN
+from aplicacion.forms import check_list22, check_list23, check_list24, check_list25, buscaform, CHECK_LIST_FIN
 from aplicacion.forms import prueba_carga, check_list1, prueba_carga3
 from aplicacion.forms import formu1, formu1_1, formu2, formu3, formu4, formu5, formu6, formu7, formu8, formu9, formu10, formu11, formu12, formu13
 from aplicacion.forms import formu2_2, formu3_3, formu4_4, formu5_5, formu6_6,formu12_1,formu13_1
@@ -6465,3 +6465,32 @@ def perfil(username):
 def load_user(user_id):
     from aplicacion.models import Usuarios
     return Usuarios.query.get(int(user_id))
+
+
+
+
+@app.route('/bus_form', methods = ['POST', 'GET'])
+@login_required
+def bus_form():
+    form = buscaform()
+    if request.method == 'POST':
+        iden = request.form['iden']
+        print(iden)
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT * FROM formulario WHERE num_rep = %s", [iden])
+        data = cursor.fetchall()
+        #print(data[0])
+        return render_template('listar-form.html', data=data)
+    return render_template("bus_form.html", form=form) 
+
+
+@app.route('/listar_form/<id>', methods=['POST', 'GET'])
+@login_required
+def listar_form(id):
+    cur = mysql.connection.cursor()
+    cur.execute(
+        'SELECT * FROM formulario  WHERE a.num_rep = %s )',  [id])
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('listar-form.html', contact=data[0])

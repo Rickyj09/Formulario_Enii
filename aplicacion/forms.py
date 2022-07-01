@@ -19,6 +19,11 @@ def validar_obvio(form, field):
         raise ValidationError('La clave debe ser más segura!!')
 
 
+class buscaform(FlaskForm):
+    iden = StringField('Número Reporte', validators=[DataRequired(),Length(min=10,max=14)], render_kw={"placeholder": ""})
+    submit = SubmitField('Buscar')
+
+
 class Publicaciones(FlaskForm):
     post = TextAreaField('Notas de las fotos', validators=[
         DataRequired(), Length(min=1, max=140)
