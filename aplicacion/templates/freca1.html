@@ -64,12 +64,9 @@
         </div>
 
         <hr>
-        <div class="col-12">
-            {{ form.hidden_tag() }}
-            {{ form.submit(class_="btn btn-primary") }}
-            <a href="{{ url_for('resum_freca') }}" class="btn btn-dark btn-sm rounded-0">Fin</a>
-        </div>
-
+       <div>
+        {{ form.hidden_tag() }}
+        {{ form.submit(class_="btn btn-primary") }}
 
         </div>
 
@@ -89,6 +86,7 @@
                 <th>MEDIDA DEL ACCESORIO (mm)</th>
                 <th>INSPECCIÓN VISUAL(VT)</th>
                 <th>LÍQUIDOS PENETRANTES(PT)</th>
+                <th>EDITAR</th>
             </tr>
             {% for cat in data %}
             <tr>
@@ -108,6 +106,10 @@
             </tr>
             {% endfor %}
         </table>
+    </div>
+    <div class="col-12">
+     
+        <a href="{{ url_for('resum_freca') }}" class="btn btn-dark btn-sm rounded-0">Fin</a>
     </div>
 </body>
 

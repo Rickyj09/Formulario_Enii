@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+	<title></title>
+</head>
+<style>
+	.parent {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-template-rows: 80px 20px 1fr 20px repeat(2, 10px) repeat(2, 1fr) 10px 30px repeat(2, 1fr);
+grid-column-gap: 2px;
+grid-row-gap: 2px;
+}
+
+.div1 { grid-area: 1 / 1 / 2 / 5; }
+.div2 { grid-area: 2 / 4 / 3 / 5; }
+.div3 { grid-area: 3 / 1 / 4 / 2; }
+.div4 { grid-area: 3 / 2 / 4 / 3; }
+.div5 { grid-area: 3 / 3 / 4 / 4; }
+.div6 { grid-area: 3 / 4 / 4 / 5; }
+.div7 { grid-area: 4 / 1 / 5 / 5; }
+.div8 { grid-area: 5 / 1 / 6 / 3; }
+.div9 { grid-area: 5 / 3 / 6 / 5; }
+.div10 { grid-area: 6 / 1 / 7 / 3; }
+.div11 { grid-area: 6 / 3 / 7 / 4; }
+.div12 { grid-area: 6 / 4 / 7 / 5; }
+.div13 { grid-area: 7 / 1 / 8 / 3; }
+.div14 { grid-area: 8 / 1 / 9 / 2; }
+.div15 { grid-area: 8 / 2 / 9 / 3; }
+.div16 { grid-area: 7 / 3 / 9 / 4; }
+.div17 { grid-area: 7 / 4 / 9 / 5; }
+.div18 { grid-area: 9 / 1 / 10 / 5; }
+.div19 { grid-area: 10 / 1 / 11 / 2; }
+.div20 { grid-area: 10 / 2 / 11 / 4; }
+.div21 { grid-area: 10 / 4 / 11 / 5; }
+.div22 { grid-area: 11 / 1 / 12 / 5; }
+.div23 { grid-area: 12 / 1 / 13 / 5; }
+.parent .div2 {
+	background: #e7e9ec;
+	justify-self: stretch;
+	align-self: stretch;
+	border: black 1px solid
+}
+
+.parent .div3,
+.div4 {
+	background: #eff1f1;
+	justify-self: stretch;
+	align-self: stretch;
+
+   border: black 1px solid
+}
+
+.parent .div5 {
+	background: #d5e2e2;
+	justify-self: stretch;
+	align-self: stretch;
+	display: flex;
+    justify-content: center;
+
+}
+.parent .div6{
+	background: #eff1f1;
+
+   border: black 1px solid
+}
+
+.parent .div7, .div8, .div9, .div10,
+.div11, .div12, .div18 {
+	background: #aba7e6;
+
+   border: rgb(243, 242, 242) 1px solid
+}
+</style>
+<body>
+
+	
+	{% for dato in datos1 %}
+	<div class="parent">
+		<div class="div1"> 
+			<img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\re_frcad.png"> 
+		</div>
+		<div class="div2"> 
+			
+				PROCEDIMIENTO Nº: {{ dato.3 }}
+		
+		</div>
+		<div class="div3"> 
+          EMPRESA:  <br>
+          LUGAR DE INSPECCIÓN:  <br>
+          NOMBRE INSPECTOR: 
+		</div>
+		<div class="div4"> 
+		
+          {{ dato.3 }} <br>
+          {{ dato.4 }} <br>
+          {{ dato.5 }}
+	
+		</div>
+		<div class="div5"> 
+          FECHA DE INSPECCIÓN: <br>
+          FECHA EMISIÓN:  <br>
+          FECHA EXPIRACIÓN:
+		</div>
+		<div class="div6"> 
+		
+			{{ dato.3 }} <br>
+            {{ dato.4 }} <br>
+			{{ dato.5 }}
+
+		</div>
+		<div class="div7"> 
+			REFERENCIA NORMATIVA ASME B30.9 (2018) ESLINGAS
+		</div>
+		<div class="div8">PARAMETROS DE INSPECCIÓN DEL EXAMÉN VISUAL (VT) </div>
+		<div class="div9">PARAMETROS DE INSPECCIÓN MEDIANTE LIQUIDOS PENETRATEN (PT)</div>
+		<div class="div10">DATOS DE END (VT) </div>
+		<div class="div11">DATOS DE END (PT) </div>
+		<div class="div12">COMSUMIBLES </div>
+		<div class="div13">
+	
+			PROCEDIMIENTO Nº: {{ dato.3 }} <br>
+			REVISIÓN Nº: {{ dato.4 }} <br>
+			NIVEL DE ILUMINACIÓN: {{ dato.5 }} <br>
+			CONDICION SUPERFICIAL: {{ dato.3 }} <br>
+			METODO DE INSPECCIÓN: {{ dato.4 }} <br>
+			TIPO DE ILUMINACIÓN: {{ dato.5 }} <br>
+	
+		</div>
+		<div class="div14"> 
+	
+			ESPEJOS: {{ dato.5 }} <br>
+			LENTES: {{ dato.3 }} <br>
+			OTROS: {{ dato.4 }} <br>
+			DETALLE: {{ dato.5 }}
+
+		</div>
+		<div class="div15"> 
+
+			DETALLE: {{ dato.5 }}
+
+		</div>
+		<div class="div16"> 
+
+			ELEMENTO A ENSAYAR: {{ dato.3 }} <br>
+			PROCEDIMIENTO Nº: {{ dato.3 }} <br>
+			REVISIÓN Nº: {{ dato.4 }} <br>
+			TEMPERATURA DE ENSAYO: {{ dato.5 }} <br>
+			TIPO DE ILUMINACIÓN: {{ dato.4 }} <br>
+			NIVEL DE ILUMINACIÓN: {{ dato.5 }} <br>
+			MATERIAL BASE: {{ dato.3 }} <br>
+			TIPO DE SECADO: {{ dato.4 }} <br>
+
+		</div>
+		<div class="div17"> <img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\consumibles.png"> </div>
+		<div class="div18">CRITERIOS DE ACEPTACIÓN Y RECHAZO </div>
+		<div class="div19"><img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\re_frcad1.png"> </div>
+		<div class="div20"> DESCRIPCIÓN DE LA INSPECCIÓN</div>
+		<div class="div21">
+
+			TIPO DE ACCESORIOS: {{ dato.4 }} <br>
+		
+		</div>
+		<div class="div22"> 
+		
+		</div>
+		{% endfor %}
+		<div class="div23"> 
+			<table class="table table-bordered">
+                <tr>
+                  <th>Nº</th>
+                  <th>CÓDIGO ENI</th>
+                  <th>REFERENCIA</th>
+                  <th>MEDIDAS (mm)</th>
+                  <th>CAPACIDAD (mm)</th>
+                </tr>
+                {% for cat in data %}
+                <tr>
+                  <td>{{loop.index}}</td>
+                  <td>{{cat.2}}</td>
+                  <td>{{cat.1}}</td>
+                  <td>{{cat.3}}</td>
+                  <td>{{cat.4}}</td>
+                </tr>
+                {% endfor %}
+              </table>
+		</div>
+		</div>
+</body>
+<div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+	<a href="{{ url_for('genera_pdf2')}}" class="btn btn-primary">PDF</a>
+</div>
+</html>

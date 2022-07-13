@@ -1,21 +1,25 @@
-{% extends 'layout_cert.html' %}
-{%block title%} CERTIFICADO INSPECCIÓN DE CADENAS{%endblock%}
-{% block content %}
-
 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <link rel="stylesheet" href="/static/base.css">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
-</head>
-<body>
-  <center><h2>INSPECCIÓN DE CADENAS</h2></center>
-  <hr>
+  <head>
+
+    <link rel="stylesheet" href="C:\Ricardo\paginas_web\u30\aplicacion\static\css\style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  </head>
+  
+  
+  <body background="C:\Ricardo\paginas_web\u30\aplicacion\static\img\logo2020.png">
+  
+    
+    <div>
+          <img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\ca_cert.png">
+        </div>
+       
+    </div>
   <form class="row g-3 needs-validation" novalidate></form>
   <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
     <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ llave.0 }}</h4>
@@ -99,6 +103,14 @@
 </center>
 
 </body>
-</html>
+<footer>
+  <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+    <a href="{{ url_for('resum_frcad')}}" class="btn btn-primary">VOLVER</a>
 
-{% endblock %}
+    <a href="{{ url_for('genera_pdffrcad')}}" class="btn btn-primary">PDF</a>
+  </div>
+
+</footer>
+
+
+</html>

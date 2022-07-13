@@ -4,7 +4,7 @@
 	    <h2>Geleria de imágenes</h2>
 	    
 	    	{% for lis in lista %}
-	    	<img src="{{url_for('static',filename='img/subidas/pol/')}}{{lis}}"/>
+	    	<img width="100" src="{{url_for('static',filename='img/subidas/pol/')}}{{lis}}"/>
 	    	{% endfor %}
 	    	<br/>
 	    	<a href="{{url_for('upload_fpol')}}">Subir más imagenes</a>

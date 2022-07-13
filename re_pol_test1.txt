@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+	<title></title>
+</head>
+<style>
+	.parent {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+grid-template-rows: 90px 10px 1fr repeat(2, 10px) 1opx 1fr repeat(2, 10px) 20px repeat(2, 1fr);
+grid-column-gap: 5px;
+grid-row-gap: 3px;
+}
+
+.div1 { grid-area: 1 / 1 / 2 / 5; }
+.div2 { grid-area: 2 / 4 / 3 / 5; }
+.div3 { grid-area: 3 / 1 / 4 / 3; }
+.div4 { grid-area: 3 / 3 / 4 / 5; }
+.div5 { grid-area: 4 / 1 / 5 / 5; }
+.div6 { grid-area: 5 / 1 / 6 / 2; }
+.div7 { grid-area: 5 / 3 / 6 / 5; }
+.div8 { grid-area: 6 / 1 / 7 / 2; }
+.div9 { grid-area: 7 / 1 / 8 / 2; }
+.div10 { grid-area: 6 / 3 / 8 / 5; }
+.div11 { grid-area: 8 / 1 / 9 / 5; }
+.div12 { grid-area: 9 / 1 / 10 / 5; }
+.div13 { grid-area: 10 / 1 / 11 / 5; }
+.div14 { grid-area: 11 / 1 / 12 / 5; }
+.div15 { grid-area: 12 / 1 / 13 / 5; }
+
+.parent .div2 {
+	background: #e7e9ec;
+	justify-self: stretch;
+	align-self: stretch;
+	border: black 1px solid
+}
+
+.parent .div3,
+.div4 {
+	background: #eff1f1;
+	justify-self: stretch;
+	align-self: stretch;
+
+   border: black 1px solid
+}
+
+.parent .div5 {
+	background: #d5e2e2;
+	justify-self: stretch;
+	align-self: stretch;
+	display: flex;
+    justify-content: center;
+
+}
+.parent .div6,
+.div7 {
+	background: #eff1f1;
+
+   border: black 1px solid
+}
+</style>
+<body>
+	<div class="parent">
+		<div class="div1"> <img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\re_frcad.png">  </div>
+		<div class="div2">
+			{% for dato in datos1 %}
+			PROCEDIMIENTO Nº: {{ dato.3 }}
+		  {% endfor %}
+		</div>
+		<div class="div3"> 
+		{% for dato in datos1 %}
+          EMPRESA: {{ dato.3 }} <br>
+          LUGAR DE INSPECCIÓN: {{ dato.4 }} <br>
+          NOMBRE INSPECTOR: {{ dato.5 }}
+		{% endfor %}
+		</div>
+		<div class="div4"> 
+		{% for dato in datos1 %}
+          FECHA DE INSPECCIÓN: {{ dato.3 }} <br>
+          FECHA EMISIÓN: {{ dato.4 }} <br>
+          FECHA EXPIRACIÓN: {{ dato.5 }}
+		{% endfor %}
+		</div>
+		<div class="div5"> 
+			<h3>REFERENCIA NORMATIVA ASME B30.9 (2018) ESLINGAS</h3>
+		</div>
+		<div class="div6">
+			PARAMETROS DE INSPECCIÓN DEL EXAMEN VISUAL
+		</div>
+		<div class="div7"> 
+			PARAMETROS DE INSPECCIÓN MEDIANTE LIQUIDOS PENETRATES
+		</div>
+		<div class="div8">
+		{% for dato in datos1 %}
+			PROCEDIMIENTO Nº: {{ dato.3 }} <br>
+			REVISIÓN Nº: {{ dato.4 }} <br>
+			NIVEL DE ILUMINACIÓN: {{ dato.5 }} <br>
+			CONDICION SUPERFICIAL: {{ dato.3 }} <br>
+			METODO DE INSPECCIÓN: {{ dato.4 }} <br>
+			TIPO DE ILUMINACIÓN: {{ dato.5 }} <br>
+		{% endfor %}	
+		</div>
+		<div class="div9"> 
+		{% for dato in datos1 %}
+			ESPEJOS: {{ dato.5 }} <br>
+			LENTES: {{ dato.3 }} <br>
+			OTROS: {{ dato.4 }} <br>
+			DETALLE: {{ dato.5 }}
+		{% endfor %}
+		</div>
+		<div class="div10"> 
+		{% for dato in datos1 %}
+			ELEMENTO A ENSAYAR: {{ dato.3 }} <br>
+			PROCEDIMIENTO Nº: {{ dato.3 }} <br>
+			REVISIÓN Nº: {{ dato.4 }} <br>
+			TEMPERATURA DE ENSAYO: {{ dato.5 }} <br>
+			TIPO DE ILUMINACIÓN: {{ dato.4 }} <br>
+			NIVEL DE ILUMINACIÓN: {{ dato.5 }} <br>
+			MATERIAL BASE: {{ dato.3 }} <br>
+			TIPO DE SECADO: {{ dato.4 }} <br>
+		{% endfor %}
+		</div>
+		<div class="div11"><h3>DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS</h3> </div>
+		<div class="div12"> 
+		{% for dato in datos1 %}
+          ELEMENTO A ENSAYAR: {{ dato.3 }} <br>
+		  PROCEDIMIENTO Nº: {{ dato.3 }} <br>
+          REVISIÓN Nº: {{ dato.4 }} <br>
+		{% endfor %}
+		</div>
+		<div class="div13"><img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\re_frcad1.png"> </div>
+		<div class="div14">
+			<table class="table table-bordered">
+			<tr>
+			  <th>Nº</th>
+			  <th>CÓDIGO ENII</th>
+			  <th>REFERENCIA</th>
+			  <th>ANCHO (mm)</th>
+			  <th>DIÁMETRO (mm)</th>
+			  <th>INSPECCIÓN VISUAL</th>
+			  <th>LÍQUIDOS PENETRANTES</th>
+			</tr>
+			{% for cat in data %}
+			<tr>
+			  <td>{{loop.index}}</td>
+			  <td>{{cat.2}}</td>
+			  <td>{{cat.1}}</td>
+			  <td>{{cat.3}}</td>
+			  <td>{{cat.4}}</td>
+			  <td>{{cat.5}}</td>
+			  <td>{{cat.6}}</td>
+			</tr>
+			{% endfor %}
+		  </table> 
+		</div>
+		<div class="div15"> </div>
+		</div>
+	</body>
+	<div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
+		<a href="{{ url_for('genera_pdf2')}}" class="btn btn-primary">PDF</a>
+	  </div>
+	</html>

@@ -2,41 +2,24 @@
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="/static/base.css">
+
+  <link rel="stylesheet" href="C:\Ricardo\paginas_web\u30\aplicacion\static\css\style.css">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 
-<body background="/static/img/fondo1.jpg">
-  <hr>
 
-  <div class="container">
-    <div class="row">
+<body background="C:\Ricardo\paginas_web\u30\aplicacion\static\img\logo2020.png">
 
-      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-        <img src="/static/img/logo_eni.jpg">
+  
+  <div>
+        <img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\ca_cert.png">
       </div>
-
-      <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-        <center>
-          <h3>INSPECCIÓN DE POLEAS</h3>
-          <h3>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h3>
-          <FONT FACE="arial" SIZE=76 COLOR="blue">
-            CERTIFICADO</FONT>
-        </center>
-      </div>
-
-      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-        <img src="/static/img/Acreditacion.jpg">
-      </div>
-
-    </div>
+     
   </div>
-  <div class="panel panel-default">
-    <table class="table table-bordered">
-      <form class="row g-3 needs-validation" novalidate></form>
+      <form class="row g-3 needs-validation" novalidate>
       {% for emi in for_emi %}
       <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
         <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ emi.2 }}</h4>
@@ -55,10 +38,9 @@
       </div>
       {% endfor %}
       </form>
+      <center>
       <h3>DESCRIPCIÓN DE ACCESORIOS INSPECCIONADOS</h3>
-      <div class="panel panel-default">
-
-        <table class="table table-bordered">
+          <table class="table table-bordered">
 
           <tr>
             <th>Nº</th>
@@ -79,12 +61,11 @@
           </tr>
           {% endfor %}
         </table>
+      </center>
 
-      </div>
-  </div>
+
 
   <h2>RESULTADOS DE INSPECCIÓN</h2>
-
   <p>De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quienes firman, certifican que en la fecha
     de esta inspección, las poleas descritas, fueron sometidas a pruebas de ensayo no destructivo de fueron sometidas
     a pruebas de ensayo no destructivo de Inspección Visual; según ASME Sección V Artículo 9 (2019) y Líquidos
@@ -98,10 +79,8 @@
 
   <p>Este certificado hace referencia a las condiciones que presentan los accesorios al momento de la inspección, sin
     ninguna obligación o responsabilidad posterior</p>
-  <br>
+
   <hr>
-
-
   <form class="row g-3 needs-validation" novalidate>
     {% for emi in for_emi %}
     <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
@@ -115,17 +94,13 @@
     </div>
   </form>
   <hr>
-
   <center>
-    <h4> NOMBRE  </h4> 
+    <h4> NOMBRE </h4>
     <h2>GERENTE TECNICO ENII SA</h2>
-
-      <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-        <h4> {{ emi.2 }}</h4>
-      </div>
-      {% endfor %}
-    
-
+    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
+      <h4> {{ emi.2 }}</h4>
+    </div>
+    {% endfor %}
   </center>
 
 </body>

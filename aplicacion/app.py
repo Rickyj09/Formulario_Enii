@@ -455,26 +455,29 @@ def update_frpol1(id):
 def resum_frpol():
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    nom_form = cursor.fetchone()
-    cursor.execute(
-        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_insp = cursor.fetchone()
+        "select * from frpol where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
+    datos1 = cursor.fetchall()
     cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
+        "select MAX(id) from frpol ;")
+    data1 = cursor.fetchone()
     cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
+        "select * from frpol1 where id_f2 = (select MAX(id) from frpol) ;")
+    data = cursor.fetchall()
     cursor.execute(
-        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    lugar = cursor.fetchone()
-    cursor.execute(
-        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    inpe = cursor.fetchone()
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    for_emi = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frpol.html',num_rep=num_rep, datos1=datos1, contact=data1[0], data=data,for_emi=for_emi)
+
+
+@app.route('/resum_frpol_1')
+@login_required
+def resum_frpol_1():
+    cursor = mysql.connection.cursor()
     cursor.execute(
         "select * from frpol where id_formulario = (select MAX(id_formulario) from formulario);")
     datos1 = cursor.fetchall()
@@ -486,7 +489,7 @@ def resum_frpol():
     data = cursor.fetchall()
     print(data1)
     print(data)
-    return render_template('resum_frpol.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frpol_1.html',datos1=datos1, contact=data1[0], data=data)
 
 
 @app.route('/reporte_fotopol')
@@ -502,16 +505,17 @@ def reporte_fotopol():
 def upload_fpol():
     form = UploadForm()  # carga request.from y request.file
     if form.validate_on_submit():
+        cursor = mysql.connection.cursor()
+        cursor.execute("select CURDATE();")
+        fecha_hoy = cursor.fetchone()
         f = form.photo.data
         filename = secure_filename(f.filename)
         f.save(app.root_path+"/static/img/subidas/pol/"+filename)
-        foto = app.root_path+"/static/img/subidas/pol/"+filename
-        cursor = mysql.connection.cursor()
         cursor.execute(
             "select id from frpol where id = (select MAX(id) from frpol) ;")
         llave_form = cursor.fetchone()
-        cursor.execute('insert into rep_foto_frpol (foto,id_f) VALUES (%s,%s)',
-                    ( foto,llave_form))
+        cursor.execute('insert into rep_foto_frpol (foto,fecha_foto,id_f) VALUES (%s,%s,%s)',
+                    (filename,fecha_hoy,llave_form))
         mysql.connection.commit()
         return redirect(url_for('inicio_fotopol'))
     return render_template('upload_fpol.html', form=form)
@@ -551,6 +555,28 @@ def cert_for1():
     return render_template('cert_for1.html', data=data, for_emi=for_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
 
 
+@app.route('/resumen_foto_pol', methods=['GET', 'POST'])
+@login_required
+def resumen_foto_pol():
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    for_emi = cursor.fetchall()
+    cursor.execute(
+        "select * from rep_foto_frpol where id_f = (select MAX(id) from frpol) ;")
+    data = cursor.fetchall()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
+    nom_ins = cursor.fetchone()
+    cursor.execute(
+        "select * from equipos_ins where nombre_insp = %s and nombre in ('PIE DE REY','FLEXOMETRO','LUXOMETRO','TERMOMETRO INFRAROJO') or nombre = 'MEDIDOR DE SOLDADURA';" ,[nom_ins])
+    data_ins = cursor.fetchall()
+    print(nom_ins)
+    return render_template('resumen_foto_pol.html', num_rep=num_rep,data=data, for_emi=for_emi,data_ins=data_ins)
+
 @app.route('/cert_foto1', methods=['GET', 'POST'])
 @login_required
 def cert_foto1():
@@ -564,24 +590,64 @@ def cert_foto1():
 
     return render_template('cert_foto1.html', data=data, for_emi=for_emi)
 
-
-@app.route('/genera_pdf1')
+@app.route('/genera_pdffoto2')
 @login_required
-def genera_pdf1():
+def genera_pdffoto2():
     options = {
+        'dpi': '300',
         'page-size': 'A4',
         # 'orientation': 'Landscape',
-        'margin-top': '20mm',
+        'margin-top': '0mm',
         'margin-right': '20mm',
         'margin-bottom': '20mm',
-        'margin-left': '20mm',
+        'margin-left': '10mm',
         'encoding': "UTF-8",
-        'grayscale': None,
+        #'grayscale': None,
         'outline-depth':3,
         # 'footer-center':'[page]',
         'footer-line': None,
         "enable-local-file-access": None,
     }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    for_emi = cursor.fetchall()
+    cursor.execute(
+        "select * from rep_foto_frpol where id_f = (select MAX(id) from frpol) ;")
+    data = cursor.fetchall()
+    html = render_template('resumen_foto_pol.html', data=data, for_emi=for_emi)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_foto1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for1'))
+
+@app.route('/genera_pdf1')
+@login_required
+def genera_pdf1():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
     path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
     cursor = mysql.connection.cursor()
     cursor.execute(
@@ -606,8 +672,71 @@ def genera_pdf1():
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
     pdfkit.from_string(html, "cert_for1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
     print("="*50)
     return redirect(url_for('inicio'))
+
+
+@app.route('/genera_pdf2')
+@login_required
+def genera_pdf2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from frpol where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frpol ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frpol1 where id_f2 = (select MAX(id) from frpol) ;")
+    data = cursor.fetchall()
+    html = render_template('resum_frpol_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frpol_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('reporte_fotopol'))
 
 
 @app.route('/home_2', methods=['GET', 'POST'])
@@ -872,26 +1001,11 @@ def update_freca1(id):
 def resum_freca():
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    nom_form = cursor.fetchone()
-    cursor.execute(
-        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join freca b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_insp = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    cursor.execute(
-        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    lugar = cursor.fetchone()
-    cursor.execute(
-        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    inpe = cursor.fetchone()
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    for_emi = cursor.fetchone()
     cursor.execute(
         "select * from freca where id_formulario = (select MAX(id_formulario) from formulario);")
     datos1 = cursor.fetchall()
@@ -901,9 +1015,8 @@ def resum_freca():
     cursor.execute(
         "select * from freca1 where id_f3 = (select MAX(id) from freca) ;")
     data = cursor.fetchall()
-    print(data1)
-    print(data)
-    return render_template('resum_freca.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    print(for_emi)
+    return render_template('resum_freca.html', num_rep=num_rep,for_emi=for_emi, datos1=datos1, contact=data1[0], data=data)
 
 
 
@@ -968,6 +1081,114 @@ def cert_for2():
     data = cursor.fetchall()
 
     return render_template('cert_for2.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+
+
+@app.route('/genera_pdffreca')
+@login_required
+def genera_pdffreca():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    cursor.execute(
+        "select * from freca1 where id_f3 = (select MAX(id) from freca) ;")
+    data = cursor.fetchall()
+    html = render_template('cert_for2.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for2.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
+
+
+@app.route('/genera_pdffreca2')
+@login_required
+def genera_pdffreca2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    nom_form = cursor.fetchone()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_insp = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lugar = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    inpe = cursor.fetchone()
+    cursor.execute(
+        "select * from freca where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from freca ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from freca1 where id_f3 = (select MAX(id) from freca) ;")
+    data = cursor.fetchall()
+    html = render_template('resum_freca_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_freca_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for2'))
 
 
 @app.route('/home_3', methods=['GET', 'POST'])
@@ -1234,6 +1455,49 @@ def update_frcad1(id):
 def resum_frcad():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frcad b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frcad where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frcad ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frcad1 where id_f4 = (select MAX(id) from frcad) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frcad.html', datos=datos, num_rep=num_rep, datos1=datos1, contact=data1[0], data=data)
+
+
+@app.route('/genera_pdffrcad2')
+@login_required
+def genera_pdffrcad2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -1263,10 +1527,13 @@ def resum_frcad():
     cursor.execute(
         "select * from frcad1 where id_f4 = (select MAX(id) from frcad) ;")
     data = cursor.fetchall()
-    print(data1)
-    print(data)
-    return render_template('resum_frcad.html', datos=nom_form, num_rep=num_rep,fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
-
+    html = render_template('resum_frcad_1.html', datos=nom_form, num_rep=num_rep,fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frcad_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for3'))
 
 @app.route('/reporte_fotofrcad')
 @login_required
@@ -1315,6 +1582,7 @@ def cert_for3():
     cursor.execute(
         "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     fec_exp = cursor.fetchone()
+  
     cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     llave = cursor.fetchone()
@@ -1329,6 +1597,52 @@ def cert_for3():
     data = cursor.fetchall()
 
     return render_template('cert_for3.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+
+
+
+@app.route('/genera_pdffrcad')
+@login_required
+def genera_pdffrcad():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    cursor.execute(
+        "select * from frcad1 where id_f4 = (select MAX(id) from frcad) ;")
+    data = cursor.fetchall()
+    html = render_template('cert_for3.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for3.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
+
 
 
 @app.route('/home_4', methods=['GET', 'POST'])
@@ -1532,6 +1846,49 @@ def update_frefs1(id):
 def resum_frefs():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchone()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frefs b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frefs where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frefs ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frefs1 where id_f5 = (select MAX(id) from frefs) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frefs.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+
+
+@app.route('/genera_pdffrefs2')
+@login_required
+def genera_pdffrefs2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -1561,10 +1918,13 @@ def resum_frefs():
     cursor.execute(
         "select * from frefs1 where id_f5 = (select MAX(id) from frefs) ;")
     data = cursor.fetchall()
-    print(data1)
-    print(data)
-    return render_template('resum_frefs.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
-
+    html = render_template('resum_frefs_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frefs_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for4'))
 
 @app.route('/reporte_fotofrefs')
 @login_required
@@ -1628,6 +1988,50 @@ def cert_for4():
     data = cursor.fetchall()
 
     return render_template('cert_for4.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+
+
+@app.route('/genera_pdffrefs')
+@login_required
+def genera_pdffrefs():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    cursor.execute(
+        "select * from frefs1 where id_f5 = (select MAX(id) from frefs) ;")
+    data = cursor.fetchall()
+    html = render_template('cert_for4.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for4.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_5', methods=['GET', 'POST'])
@@ -1886,6 +2290,48 @@ def update_frgan1(id):
 def resum_frgan():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frgan b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frgan ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frgan1 where id_f6 = (select MAX(id) from frgan) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frgan.html', datos=datos,num_rep=num_rep, datos1=datos1, contact=data1[0], data=data)
+
+@app.route('/genera_pdffrgan2')
+@login_required
+def genera_pdffrgan2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -1915,10 +2361,13 @@ def resum_frgan():
     cursor.execute(
         "select * from frgan1 where id_f6 = (select MAX(id) from frgan) ;")
     data = cursor.fetchall()
-    print(data1)
-    print(data)
-    return render_template('resum_frgan.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
-
+    html = render_template('resum_frgan_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frgan_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for5'))
 
 
 @app.route('/reporte_fotofrgan')
@@ -1981,6 +2430,50 @@ def cert_for5():
 
     return render_template('cert_for5.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
 
+
+
+@app.route('/genera_pdffrgan')
+@login_required
+def genera_pdffrgan():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    cursor.execute(
+        "select * from frgan1 where id_f6 = (select MAX(id) from frgan) ;")
+    data = cursor.fetchall()
+    html = render_template('cert_for5.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for5.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 
@@ -2237,6 +2730,48 @@ def update_frgri1(id):
 def resum_frgri():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frgri b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frgri ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frgri1 where id_f7 = (select MAX(id) from frgri) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frgri.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+
+@app.route('/genera_pdffrgri2')
+@login_required
+def genera_pdffrgri2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -2266,11 +2801,13 @@ def resum_frgri():
     cursor.execute(
         "select * from frgri1 where id_f7 = (select MAX(id) from frgri) ;")
     data = cursor.fetchall()
-    print(data1)
-    print(data)
-    return render_template('resum_frgri.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
-
-
+    html = render_template('resum_frgri_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frgri_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for6'))
 
 @app.route('/reporte_fotofrgri')
 @login_required
@@ -2333,6 +2870,49 @@ def cert_for6():
     data = cursor.fetchall()
 
     return render_template('cert_for6.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+
+@app.route('/genera_pdffrgri')
+@login_required
+def genera_pdffrgri():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    cursor.execute(
+        "select * from frgri1 where id_f7 = (select MAX(id) from frgri) ;")
+    data = cursor.fetchall()
+    html = render_template('cert_for6.html', data=data, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for6.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_7', methods=['GET', 'POST'])
@@ -2534,6 +3114,46 @@ def update_frkpi(id):
 def resum_frkpi():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frkpi b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frkpi ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frkpi.html', datos=datos,num_rep=num_rep, datos1=datos1, contact=data1[0])
+
+
+@app.route('/genera_pdfrkpif2')
+@login_required
+def genera_pdffrkpi2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -2560,10 +3180,13 @@ def resum_frkpi():
     cursor.execute(
         "select MAX(id) from frkpi ;")
     data1 = cursor.fetchone()
-    print(data1)
-    
-    return render_template('resum_frkpi.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
-
+    html = render_template('resum_frkpi_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frkpi_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for7'))
 
 @app.route('/reporte_fotofrkpi')
 @login_required
@@ -2624,6 +3247,51 @@ def cert_for7():
         "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     fec_exp = cursor.fetchone()
     return render_template('cert_for7.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
+
+
+
+@app.route('/genera_pdffrkpi')
+@login_required
+def genera_pdffrkpi():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute(
+        "select iden_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute(
+        "select capac_pk from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    html = render_template('cert_for7.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for7.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_8', methods=['GET', 'POST'])
@@ -2815,6 +3483,46 @@ def update_frqru(id):
 def resum_frqru():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frqru b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frqru ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frqru.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+
+
+@app.route('/genera_pdffrqru2')
+@login_required
+def genera_pdffrqru2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -2841,10 +3549,13 @@ def resum_frqru():
     cursor.execute(
         "select MAX(id) from frqru ;")
     data1 = cursor.fetchone()
-    print(data1)
-    
-    return render_template('resum_frqru.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
-
+    html = render_template('resum_frqru_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frqru_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for8'))
 
 @app.route('/reporte_fotofrqru')
 @login_required
@@ -2920,6 +3631,64 @@ def cert_for8():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     ins = cursor.fetchone()
     return render_template('cert_for8.html', equipo=equipo, marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, emp=emp, lug=lug, ins=ins)
+
+@app.route('/genera_pdffrqru')
+@login_required
+def genera_pdffrqru():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select equipo from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    equipo = cursor.fetchone()
+    cursor.execute(
+        "select marca_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute(
+        "select iden_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute(
+        "select capac_pk from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select empresa from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    emp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    html = render_template('cert_for8.html', equipo=equipo, marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, emp=emp, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for8.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_9', methods=['GET', 'POST'])
@@ -3093,6 +3862,47 @@ def update_frsep(id):
 def resum_frsep():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frsep b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frsep ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frsep.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+
+
+@app.route('/genera_pdffrsep2')
+@login_required
+def genera_pdffrsep2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -3119,10 +3929,13 @@ def resum_frsep():
     cursor.execute(
         "select MAX(id) from frsep ;")
     data1 = cursor.fetchone()
-    print(data1)
-    
-    return render_template('resum_frsep.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
-
+    html = render_template('resum_frsep_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frsep_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for9'))
 
 @app.route('/reporte_fotofrsep')
 @login_required
@@ -3197,6 +4010,62 @@ def cert_for9():
         "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     ins = cursor.fetchone()
     return render_template('cert_for9.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, emp=emp, lug=lug, ins=ins)
+
+
+@app.route('/genera_pdffrsep')
+@login_required
+def genera_pdffrsep():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pk = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pk = cursor.fetchone()
+    cursor.execute(
+        "select iden_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pk = cursor.fetchone()
+    cursor.execute(
+        "select capac_pk from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pk = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    llave = cursor.fetchone()
+    cursor.execute(
+        "select empresa from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    emp = cursor.fetchone()
+    cursor.execute(
+        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    lug = cursor.fetchone()
+    cursor.execute(
+        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    ins = cursor.fetchone()
+    html = render_template('cert_for9.html', marca_pk=marca_pk, modelo_pk=modelo_pk, iden_pk=iden_pk, capac_pk=capac_pk, fec_emi=fec_emi, fec_exp=fec_exp, llave=llave, emp=emp, lug=lug, ins=ins)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for9.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_10', methods=['GET', 'POST'])
@@ -3281,11 +4150,11 @@ def frhor():
         obsd = request.form['obsd']
         vtd = request.form['vtd']
         ptd = request.form['ptd']
-        desghi = request.form['desghd']
-        desapi = request.form['desapd']
-        vastagoi = request.form['vastagod']
-        hojai = request.form['hojad']
-        anguloi = request.form['angulod']
+        desghi = request.form['desghi']
+        desapi = request.form['desapi']
+        vastagoi = request.form['vastagoi']
+        hojai = request.form['hojai']
+        anguloi = request.form['anguloi']
         obsi = request.form['obsi']
         vti = request.form['vti']
         pti = request.form['pti']
@@ -3420,6 +4289,45 @@ def update_frhor(id):
 def resum_frhor():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frhor b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frhor ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    return render_template('resum_frhor.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+
+@app.route('/genera_pdffrhor2')
+@login_required
+def genera_pdffrhor2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -3446,9 +4354,13 @@ def resum_frhor():
     cursor.execute(
         "select MAX(id) from frhor ;")
     data1 = cursor.fetchone()
-    print(data1)
-    return render_template('resum_frhor.html', datos=nom_form, fec1=fec_insp, num_rep=num_rep,fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
-
+    html = render_template('resum_frhor_1.html', datos=nom_form, fec1=fec_insp, num_rep=num_rep,fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frhor_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for10'))
 
 @app.route('/reporte_fotofrhor')
 @login_required
@@ -3501,6 +4413,41 @@ def cert_for10():
     fec_exp = cursor.fetchone()
     return render_template('cert_for10.html', datafr=datafr, data=data)
 
+
+
+@app.route('/genera_pdffrhor')
+@login_required
+def genera_pdffrhor():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select * from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+    datafr = cursor.fetchall()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    data = cursor.fetchall()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    html = render_template('cert_for10.html', datafr=datafr, data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for10.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_11', methods=['GET', 'POST'])
@@ -3704,6 +4651,47 @@ def update_frppr(id):
 def resum_frppr():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frppr b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frppr ;")
+    data1 = cursor.fetchone()
+    print(data1)
+    
+    return render_template('resum_frppr.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+
+
+
+@app.route('/genera_pdffrppr2')
+@login_required
+def genera_pdffrppr2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -3730,10 +4718,13 @@ def resum_frppr():
     cursor.execute(
         "select MAX(id) from frppr ;")
     data1 = cursor.fetchone()
-    print(data1)
-    
-    return render_template('resum_frppr.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
-
+    html = render_template('resum_frppr_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0])
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frppr_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for11'))
 
 @app.route('/reporte_fotofrppr')
 @login_required
@@ -3784,7 +4775,36 @@ def cert_for11():
     return render_template('cert_for11.html', datafr=datafr, data=data)
 
 
-
+@app.route('/genera_pdffrppr')
+@login_required
+def genera_pdffrppr():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select * from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    datafr = cursor.fetchall()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    data = cursor.fetchall()
+    html = render_template('cert_for11.html', datafr=datafr, data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for11.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_12', methods=['GET', 'POST'])
@@ -3904,6 +4924,49 @@ def cert_for12():
     fec_exp = cursor.fetchone()
     return render_template('cert_for12.html', marca_pas=marca_pas, modelo_pas=modelo_pas, iden_pas=iden_pas, capac_pas=capac_pas, fec_emi=fec_emi, fec_exp=fec_exp)
 
+
+@app.route('/genera_pdffrppr1')
+@login_required
+def genera_pdffrppr1():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select marca_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    marca_pas = cursor.fetchone()
+    cursor.execute(
+        "select modelo_pas from frppr  where id_formulario = (select MAX(id_formulario) from formulario);")
+    modelo_pas = cursor.fetchone()
+    cursor.execute(
+        "select iden_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    iden_pas = cursor.fetchone()
+    cursor.execute(
+        "select capac_pas from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+    capac_pas = cursor.fetchone()
+    cursor.execute(
+        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_emi = cursor.fetchone()
+    cursor.execute(
+        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    fec_exp = cursor.fetchone()
+    html = render_template('cert_for12.html', marca_pas=marca_pas, modelo_pas=modelo_pas, iden_pas=iden_pas, capac_pas=capac_pas, fec_emi=fec_emi, fec_exp=fec_exp)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for12.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_13', methods=['GET', 'POST'])
@@ -4230,6 +5293,49 @@ def update_frapa1(id):
 def resum_frapa():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchall()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frapa b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frapa where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frapa ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frapa1 where id_f12 = (select MAX(id) from frapa) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frapa.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+
+
+@app.route('/genera_pdffrapa2')
+@login_required
+def genera_pdffrapa2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -4259,10 +5365,13 @@ def resum_frapa():
     cursor.execute(
         "select * from frapa1 where id_f12 = (select MAX(id) from frapa) ;")
     data = cursor.fetchall()
-    print(data1)
-    print(data)
-    return render_template('resum_frapa.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
-
+    html = render_template('resum_frapa_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frapa_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for13'))
 
 @app.route('/reporte_fotofrapa')
 @login_required
@@ -4313,6 +5422,36 @@ def cert_for13():
     return render_template('cert_for13.html', datafr=datafr, data=data)
 
 
+@app.route('/genera_pdffrapa')
+@login_required
+def genera_pdffrapa():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select * from frapa1 where id_f12 = (select MAX(id) from frapa);")
+    datafr = cursor.fetchall()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    data = cursor.fetchall()
+    html = render_template('cert_for13.html', datafr=datafr, data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for13.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 
 @app.route('/home_14', methods=['GET', 'POST'])
@@ -4574,6 +5713,50 @@ def update_frttr1(id):
 def resum_frttr():
     cursor = mysql.connection.cursor()
     cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos = cursor.fetchone()
+    cursor.execute(
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frttr b on a.id_formulario = b.id_formulario);")
+    num_rep = cursor.fetchone()
+    cursor.execute(
+        "select * from frttr where id_formulario = (select MAX(id_formulario) from formulario);")
+    datos1 = cursor.fetchall()
+    cursor.execute(
+        "select MAX(id) from frttr ;")
+    data1 = cursor.fetchone()
+    cursor.execute(
+        "select * from frttr1 where id_f13 = (select MAX(id) from frttr) ;")
+    data = cursor.fetchall()
+    print(data1)
+    print(data)
+    return render_template('resum_frttr.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+
+
+
+@app.route('/genera_pdffrttr2')
+@login_required
+def genera_pdffrttr2():
+    options = {
+        'dpi': '300',
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '0mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '10mm',
+        'encoding': "UTF-8",
+        #'grayscale': None,
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path = r'C:/Ricardo/paginas_web/u30/aplicacion/static/css/'
+    css = [path + 'style.css']
+
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
         "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     nom_form = cursor.fetchone()
     cursor.execute(
@@ -4603,10 +5786,13 @@ def resum_frttr():
     cursor.execute(
         "select * from frttr1 where id_f13 = (select MAX(id) from frttr) ;")
     data = cursor.fetchall()
-    print(data1)
-    print(data)
-    return render_template('resum_frttr.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
-
+    html = render_template('resum_frttr_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "resum_frttr_1.pdf", options=options,configuration=config)
+    #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('cert_for14'))
 
 @app.route('/reporte_fotofrttr')
 @login_required
@@ -4615,6 +5801,8 @@ def reporte_fotofrttr():
     for file in listdir(app.root_path+"/static/img/subidas/frttr/"):
         lista.append(file)
     return render_template("reporte_fotofrttr.html", lista=lista)
+
+
 
 
 @app.route('/upload_frttr', methods=['get', 'post'])
@@ -4656,7 +5844,36 @@ def cert_for14():
 
     return render_template('cert_for14.html', datafr=datafr, data=data)
 
-
+@app.route('/genera_pdffrttr')
+@login_required
+def genera_pdffrttr():
+    options = {
+        'page-size': 'A4',
+        # 'orientation': 'Landscape',
+        'margin-top': '20mm',
+        'margin-right': '20mm',
+        'margin-bottom': '20mm',
+        'margin-left': '20mm',
+        'encoding': "UTF-8",
+        'outline-depth':3,
+        # 'footer-center':'[page]',
+        'footer-line': None,
+        "enable-local-file-access": None,
+    }
+    path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
+    cursor = mysql.connection.cursor()
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+    data = cursor.fetchall()
+    cursor.execute(
+        "select * from frttr1 where id_f13 = (select MAX(id) from frttr) ;")
+    datafr = cursor.fetchall()
+    html = render_template('cert_for14.html', datafr=datafr, data=data)
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
+    pdfkit.from_string(html, "cert_for14.pdf", options=options,configuration=config)
+    print("="*50)
+    return redirect(url_for('inicio'))
 
 @app.route('/resumen')
 @login_required

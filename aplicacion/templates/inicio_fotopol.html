@@ -3,14 +3,14 @@
 {% block content %}
 	    <h2>Geleria de imágenes</h2>
 	    
-	    	{% for lis in lista %}
+ 	{% for lis in lista %}
 	    	
 	    	<img width="100" src="{{url_for('static',filename='img/subidas/pol/')}}{{lis}}"/>
 	    	{% endfor %}
 	    	<br/>
 	    	<a href="{{url_for('upload_fpol')}}">Subir más imagenes</a>
 			<br/>
-			<a href="{{url_for('cert_foto1')}}">Terminar</a>
+			<a href="{{url_for('resumen_foto_pol')}}">Terminar</a>
 	    	<br/>
   
-{% endblock %}
+	{% endblock %}

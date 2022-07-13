@@ -1,106 +1,138 @@
-{% extends 'layout_cert.html' %}
-{%block title%} REPORTE FOTOGRAFICO POLEAS{%endblock%}
-{% block content %}
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <link rel="stylesheet" href="/static/base.css">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+
+	<title></title>
 </head>
+<style>
+.parent {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-template-rows: 60px 30px 90px 100px 100px 100px 90px 90px 90px;
+grid-column-gap: 2px;
+grid-row-gap: 2px;
+}
 
+.div1 { grid-area: 1 / 1 / 2 / 3; }
+.div2 { grid-area: 2 / 2 / 3 / 3; }
+.div3 { grid-area: 3 / 1 / 4 / 2; }
+.div4 { grid-area: 3 / 2 / 4 / 3; }
+.div5 { grid-area: 4 / 1 / 5 / 2; }
+.div6 { grid-area: 4 / 2 / 5 / 3; }
+.div7 { grid-area: 5 / 1 / 6 / 2; }
+.div8 { grid-area: 5 / 2 / 6 / 3; }
+.div9 { grid-area: 6 / 1 / 7 / 2; }
+.div10 { grid-area: 6 / 2 / 7 / 3; }
+.div11 { grid-area: 7 / 1 / 8 / 3; }
+.div12 { grid-area: 8 / 1 / 9 / 3; }
+.div13 { grid-area: 9 / 1 / 10 / 3; }
+
+.parent .div2 {
+	background: #d4dbe4;
+
+	border: black 1px solid
+}
+
+.parent .div5, .div6, .div7, .div8, .div9,
+.div10 {
+	background: #cfe0e0;
+	justify-self: stretch;
+	align-self: stretch;
+
+   border: black 1px solid
+}
+
+
+
+.parent .div11, .div12, .div13 {
+	background: #dac7d1;
+	justify-self: stretch;
+	align-self: stretch;
+
+   border: black 1px solid
+}
+
+</style>
 <body>
-  <center>
-    <h2>REPORTE DE INSPECCIÓN POLEAS</h2>
-  </center>
-  <hr>
-  <div class="col-md-10">
-
-
-    <form class="row g-3 needs-validation" novalidate>
-    {% for emi in for_emi %}
-    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-      <h4>CERTIFICADO INSPECCIÓN Nº (Inspection): {{ emi.2 }}</h4>
+  <div class="parent">
+    <div class="div1"> 
+      <img src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\re_frcad.png"> 
     </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-      <h4>SOLICITADO POR (Required by): {{ emi.9 }}</h4>
+    
+    <div class="div2"> 
+      {% for dato in datos1 %}
+        PROCEDIMIENTO Nº: {{ dato.3 }}
+      {% endfor %}
     </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-      <h4>FECHA DE INSPECCIÓN (Inspection date): {{ emi.4 }}</h4>
+    <hr>
+    <div class="div3"> 
+      {% for dato in datos1 %}
+          EMPRESA: {{ dato.3 }} <br>
+          LUGAR DE INSPECCIÓN: {{ dato.3 }} <br>
+          NOMBRE INSPECTOR: {{ dato.3 }}
+      {% endfor %}
     </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-      <h4>LUGAR DE INSPECCIÓN (Inspection place): {{ emi.7 }}</h4>
+    <hr>
+    <div class="div4">
+      {% for dato in datos1 %}
+          FECHA DE INSPECCIÓN: {{ dato.3 }} <br>
+          FECHA DE EMISIÓN: {{ dato.3 }} <br>
+          FECHA DE EXPIRACIÓN: {{ dato.3 }}
+      {% endfor %}
     </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-      <h4>INSPECTOR RESPONSABLE (Inspector): {{ emi.8 }}</h4>
+    <hr>
+    <div class="div5">
+      <img width="200" src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\foto8.jpg">
+      INFORMACIÓN GENERAL
     </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-      <h4>Fecha de emisión del certificado (Certificate issue date): {{ emi.5 }}</h4>
+    <div class="div6">
+      <img width="200" src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\foto8.jpg">
+      INSTRUMENTACIÓN
     </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-      <h4>Fecha de vencimiento del Certificado (Proof load due date): {{ emi.6 }}</h4>
+    <div class="div7">
+      <img width="200" src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\foto8.jpg">
+      INSPECCIÓN DIMENCIONAL
     </div>
-
-    {% endfor %}
-    </form>
-    <center>
-    <h3>VISTA GENERAL</h3>
-  </center>
-    {% for cat in data %}
-    <div class="d-flex">
-      <div class="flex-shrink-0">
-        <img width="200" src="{{url_for('static',filename='img/subidas/pol/foto8.jpg')}}"/>
-      </div>
-      <div class="flex-grow-1 ms-3">
-        content and adjust it as needed.
-      </div>
+    <div class="div8"> 
+      <img width="200" src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\foto8.jpg">
+      IDENTIFICACIÓN ACCESORIOS
     </div>
-    <div class="form-group col-xs-12 col-sm-12 col-md-12  position-relative">
-      <img width="100" src="{{url_for('static',filename='img/subidas/pol/foto8.jpg')}}" alt="...">
+    <div class="div9"> 
+      <img width="200" src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\foto8.jpg">
+      APLICACIÓN LIQUIDO PENETRANTE 5min
     </div>
-    {% endfor %}
-
-  </div>
-
-  <h2>RESUMEN DE LA INSPECCIÓN</h2>
-
-  <p>
-    De acuerdo a los resultados obtenidos y que se adjunta en el reporte, quienes firman, certifican que en la fecha de esta inspección, las poleas descritas, fueron sometidas a pruebas de ensayo no destructivo de Inspección Visual; según ASME Sección V Artículo 9 (2019) y Líquidos Penetrantes; según ASME Sección V Artículo 6 (2019) y ASTM E165/E165M-18, la evaluación de conformidad de los elementos fueron realizados bajo los criterios del estándar  AWS D1.1. (2020) Código de Soldadura Estructural - Acero,  para la emisión del presente reporte.
-    El accesorio será considerado como APROBADO,  para incluirlo en el CERTIFICADO, siempre que, apruebe tanto la Inspección Visual como la Inspección por Líquidos Penetrantes.
-  </p>
-
-  <p>Los abajo firmantes, certificamos que lo expuesto en este registro, es correcto y que el elemento o accesorio fueron preparadas e inspeccionadas, de acuerdo con los requerimientos  del procedimiento aplicado  PR-INSP-006 Inspección visual, PR-INSP-007 Líquidos penetrantes.</p>
-
-  <hr>
-
-  <center>
-    <h2>
-      NOMBRE
-    </h2>
-  </center>
-  <center>
-    <h2>
-      GERENTE TECNICO ENII SA
-    </h2>
-  </center>
-
-  {% for emi in for_emi %}
-  <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-    <h4> {{ emi.2 }}</h4>
-  </div>
-
-  {% endfor %}
-  </h2>
-
-
-
+    <div class="div10"> 
+      <img width="200" src="C:\Ricardo\paginas_web\u30\aplicacion\static\img\foto8.jpg">
+      APLICACIÓN REVELADOR 10min
+    </div>
+    
+    <div class="div11"> 
+      <table class="table table-bordered">
+				<tr>
+				  <th>DESCRIPCIÓN</th>
+				  <th>CÓDIGO</th>
+				  <th>FECHA DE CALIBRACIÓN</th>
+				</tr>
+				{% for cat in data %}
+				<tr>
+				  <td>{{loop.index}}</td>
+				  <td>{{cat.2}}</td>
+				  <td>{{cat.1}}</td>
+				  <td>{{cat.3}}</td>
+				</tr>
+				{% endfor %}
+			  </table> 
+    </div>
+    <div class="div12">RESUMEN </div>
+    <div class="div13">FIRMAS </div>
+    </div>
 </body>
-
+<div class="col-12">
+     
+  <a href="{{ url_for('genera_pdffoto2') }}" class="btn btn-dark btn-sm rounded-0">PDF</a>
+</div>
 </html>
-
-{% endblock %}
