@@ -38,18 +38,20 @@
         </div>
         <table class="table table-bordered">
           <tr>
-            <th>NOMBRE FORMULARIO </th>
+            <th>EMPRESA</th>
             <th>NÚMERO FORMULARIO </th>
             <th>DESCRIPCIÓN FORMULARIO </th>
             <th>FECHA INSPECCIÓN</th>
+            <th>REVISAR</th>
           </tr>
           {% for cat in data %}
 
           <tr>
-            <td>{{cat.1}}</td>
+            <td>{{cat.9}}</td>
             <td>{{cat.2}}</td>
             <td>{{cat.3}}</td>
             <td>{{cat.4}}</td>
+            <td><a href="/edit_{{cat.10}}/{{contact}}" class="btn btn-secondary">IR</a></td>
 
           </tr>
           {% endfor %}

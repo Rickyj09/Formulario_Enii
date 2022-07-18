@@ -1,3 +1,7 @@
+{% extends "layout_for.html" %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,258 +13,347 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}" />
 </head>
 
-<body background="/static/img/fondo1.jpg">
-  <ul class="nav justify-content-end">
-    <li class="nav-item">
-      <a class="nav-link" href="{{ url_for('inicio_new')}}">INICIO </a>
-    </li>
 
-    <li class="nav-item">
-      {% if current_user.is_authenticated %}
-      <a class="nav-link" href="/logout"> {{ current_user.username}} (Salir)</a>
-    </li>
-    <li class="nav-item">
-      {% else %}
-      <a class="nav-link" href="/login">Login</a>
-      <a class="nav-link" href="/registro">Registro</a>
-      {% endif %}
-    </li>
-  </ul>
-  <hr>
-  <hr>
+
+<body>
 
   <div class="container">
-    <div class="row">
-      <div class="form-group col-xs-12 col-sm-12 col-md-2  position-relative">
-        <img src="/static/img/Acreditacion.jpg">
-      </div>
-      <div class="form-group col-xs-12 col-sm-12 col-md-6 position-relative">
-        <h3>REPORTE DE INSPECCIÓN PASTECA PRINCIPAL</h3>
-        <h4>ESTÁNDARES NORMATIVAS & INSPECCIÓN ENII S.A.</h4>
-      </div>
-      <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-        <img src="/static/img/logo_eni.jpg">
-      </div>
-
-      <hr>
-      <form class="row g-3 needs-validation" novalidate>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-          <h2>PARA USO EXCLUSIVO DE ENII</h2>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-6  position-relative">
-          <h2>
-            <div>
-              CÓDIGO DEL REPORTE: {{ datos.0 }}
-            </div>
-          </h2>
-        </div>
-        <hr>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h3>FECHA DE INSPECCIÓN: {{ fec1.0 }}</h3>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h3>REPORTE N°: {{ num_rep.0 }}</h3>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h3>FECHA EMISIÓN: {{ fec2.0 }}</h3>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h3>FECHA EXPIRACIÓN: {{ fec3.0 }}</h3>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h3>LUGAR INSPECCIÓN: {{ lugar.0 }}</h3>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          <h3>NOMBRE INSPECTOR: {{ inspector.0 }}</h3>
-        </div>
-        <hr>
-        <h4>DATOS DEL END (VT)</h4>
-        {% for dato in datos1 %}
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          PROCEDIMIENTO Nº: {{ dato.3 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          REVISIÓN Nº: {{ dato.4 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          NIVEL DE ILUMINACIÓN: {{ dato.5 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          CONDICIÓN SUPERFICIAL: {{ dato.6 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MÉTODO DE INSPECCIÓN: {{ dato.7 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIPO DE ILUMINACIÓN:: {{ dato.8 }}
-        </div>
-        <hr>
-
-        <h4>DATOS DEL END (PT)</h4>
-      
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          PROCEDIMIENTO Nº {{ dato.13 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          REVISIÓN Nº {{ dato.14 }}
-
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TEMPERATURA DE ENSAYO: {{ dato.15 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIPO DE ILUMINACIÓN: {{ dato.16 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          NIVEL DE ILUMINACIÓN: {{ dato.17 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MATERIAL BASE: {{ dato.18 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIPO DE SECADO: {{ dato.19 }}
-        </div>
-        <hr>
-        <h4>CONSUMIBLES</h4>
-
-        <h4>1.- PENETRANTE</h4>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIPO DE PENETRANTE: {{ dato.20 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MARCA KIT DE INSPECCIÓN: {{ dato.21 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIEMPO DE PENETRACIÓN {{ dato.22 }}
-        </div>
-        <hr>
-        <h2>CONSUMIBLES</h2>
-
-        <h2>2.- REMOVEDOR </h2>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MÉTODO DE REMOCIÓN: {{ dato.23 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MARCA KIT DE INSPECCIÓN: {{ dato.24 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIEMPO DE SECADO DEL REMOVEDOR: {{ dato.25 }}
-        </div>
-        <hr>
-        <h4>CONSUMIBLES</h4>
-
-        <h4>3.- REVELADOR </h4>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          FORMA DE REVELADO: {{ dato.26 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MARCA KIT DE INSPECCIÓN: {{ dato.27 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          TIEMPO DE REVELADO: {{ dato.28 }}
-        </div>
-        <hr>
-        <h4>DESCRIPCIÓN DEL EQUIPO EN LA QUE SE ENCUENTRA INSTALADO </h4>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          EQUIPO: {{ dato.29 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MODELO: {{ dato.30 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          IDENTIFICACIÓN : {{ dato.31 }}
-        </div>
-        <hr>
-        <h4>
-          DESCRIPCIÓN  DE LA QUINTA RUEDA
-        </h4>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MARCA: {{ dato.32 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          IDENTIFICACIÓN: {{ dato.33 }}
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          MODELO : {{ dato.34 }}
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
-          CAPACIDAD : {{ dato.35 }}
-        </div>
-        <h4>
-          DESCRIPCIÓN DE LA INSPECCIÓN
-        </h4>
-     
-        {% endfor %}
-        <br>
-        <hr>
-        <div class="list-group">
-          <table class="table table-bordered">
-            <tr>
-                <th>Nº</th>
-                <th>MARCA</th>
-                <th>IDENTIFICACIÓN</th>
-                <th>ASIENTO GANCHO(mm) </th>
-                <th>GARGANTA GANCHO(mm)</th>
-                <th>MEDIDAS GRILLETES(mm)</th>
-                <th>OBSERVACIONES</th>
-                <th>INSPECCIÓN VISUAL(VT)</th>
-                <th>LÍQUIDOS PENETRANTES(PT)</th>
-                
-            </tr>
-            {% for dato in datos1 %}
-            <tr>
-                <td>{{dato.36}}</td>
-                <td>{{dato.32}}</td>
-                <td>{{dato.33}}</td>
-                <td>{{dato.39}}</td>
-                <td>{{dato.40}}</td>
-                <td>{{dato.41}}</td>
-                <td>{{dato.42}}</td>
-                <td>{{dato.43}}</td>
-                <td>{{dato.44}}</td>
-              
-            </tr>
-            {% endfor %}
-        </table>
-
-        </div>
-     
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-          <a href="/edit_frppr/{{contact}}" class="btn btn-secondary">MODIFICAR</a>
-
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-          <a href="{{ url_for('cert_for11')}}" class="btn btn-primary">CERTIFICADO</a>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-          <a href="{{ url_for('reporte_fotofrppr')}}" class="btn btn-primary">REPORTE FOTOGRÁFICO</a>
-        </div>
-        <div class="form-group col-xs-12 col-sm-12 col-md-3  position-relative">
-          <a href="{{ url_for('genera_pdffrppr2')}}" class="btn btn-primary">PDF</a>
-        </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col" style="background: #b9c4d6;">REPORTE NÚMERO:</div>
+      <div class="col" style="background: #b9c4d6;">{{ num_rep.0 }}</div>
     </div>
-  </div>
-  </form>
-  {% block content %}{% endblock %}
-  </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+      {% for dato in for_emi %}
+      <div class="col-6">
+        EMPRESA: {{ dato.9 }} <br>
+        LUGAR DE INSPECCIÓN: {{ dato.7 }} <br>
+        NOMBRE DEL INSPECTOR: {{ dato.8 }}
+      </div>
+      <div class="col-6">
+        FECHA DE INSPECCIÓN: {{ dato.4 }} <br>
+        FECHA DE EMISIÓN: {{ dato.5 }} <br>
+        FECHA DE EXPIRACIÓN: {{ dato.6 }}
+      </div>
+      {% endfor  %}
+    </div>
+<hr>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1">
+      <div class="col"><center>REFERENCIA NORMATIVA:  ASME B30.26 (2015) Aparejos, ASME B30.10 (2019) Ganchos, (Los números a indicar pertenecen a la norma en mención),<br>
+        MANUAL DEL FABRICANTE, REGLAMENTACIÓN DEL SECTOR</center></div>
+    </div>
+<hr>
 
 
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8"> PARAMETROS DE LA INSPECCIÓN DEL EXAMÉN VISUAL (VT)</h7></center>
+  </div>
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8" >PARAMETROS DE LA INSPECCIÓN MEDIANTE LIQUIDOS PENETRATES (PT)</h7></center>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8">DATOS DEL END (VT)</h7></center>
+  </div>
+  <div class="col" style="background: #20252e;">
+    <h7 style="color:#f0e8e8">&nbsp;&nbsp;DATOS DEL END (PT)</h7>
+  </div>
+</div>
+<hr>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+
+    <div class="col-6">
+      {% for dato in datos1 %}
+        PROCEDIMIENTO Nº:  {{ dato.3 }} <br>
+        REVISIÓN Nº: {{ dato.4 }} <br>
+        NIVEL DE ILUMINACIÓN: {{ dato.5 }} <br>
+        CONDICIÓN SUPERFICIAL: {{ dato.6 }} <br>
+        MÉTODO DE INSPECCIÓN: {{ dato.7 }} <br>
+        TIPO DE ILUMINACIÓN: {{ dato.8 }} <br>
+      {%  endfor %}  
+        <center> <h7 style="color:#5e1717">EQUIPAMIENTO PARA LA TECNICA INDIRECTA</h7></center> 
+      {% for dato in datos1 %}
+        ESPEJOS:  {{ dato.9 }} <br>
+        LENTES: {{ dato.10 }} <br>
+        OTROS: {{ dato.11 }} <br>
+        DETALLE: {{ dato.12 }}
+      {% endfor  %}
+    </div>
+
+    <div class="col-3">
+      {% for dato in datos1 %}
+        PROCEDIMIENTO Nº: {{ dato.13 }} <br>
+        REVISIÓN Nº: {{ dato.14 }} <br>
+        TEMPERATURA DE ENSAYO: {{ dato.15 }}
+        TIPO DE ILUMINACIÓN: {{ dato.16 }} <br>
+        NIVEL DE ILUMINACIÓN: {{ dato.17 }} <br>
+        MATERIAL BASE: {{ dato.18 }} <br>
+        TIPO DE SECADO: {{ dato.19 }}
+      {% endfor  %}
+    </div>
+
+    <div class="col-3">
+      {% for dato in datos1 %}
+      <center> <h7 style="color:#5e1717">1.- PENETRANTE</h7></center>
+        TIPO DE PENETRANTE: {{ dato.20 }} <br>
+        MARCA KIT DE INSPECCIÓN: {{ dato.21 }} <br>
+        TIEMPO DE PENETRACIÓN: {{ dato.22 }}
+        <center> <h7 style="color:#5e1717">2.- REMOVEDOR</h7></center>
+        MÉTODO DE REMOCIÓN: {{ dato.23 }} <br>
+        MARCA KIT DE INSPECCIÓN: {{ dato.24 }} <br>
+        TIEMPO DE SECADO DEL REMOVEDOR: {{ dato.25 }}
+        <center> <h7 style="color:#5e1717">3.- REVELADOR</h7></center>
+        FORMA DE REVELADO: {{ dato.26 }} <br>
+        MARCA KIT DE INSPECCIÓN: {{ dato.27 }} <br>
+        TIEMPO DE REVELADO: {{ dato.28 }}
+      {% endfor  %}
+    </div>
+</div>
+
+<br>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-1">
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8">DESCRIPCIÓN DEL EQUIPO AL QUE PERTENECEN LOS ACCESORIOS</h7></center>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+  {% for dato in datos1 %}
+  <div class="col" style="background: #3e5786;">
+    <h7 style="color:#ce9a9a">EQUIPO</h7>  {{ dato.29 }}
+  </div>
+  <div class="col" style="background: #3e5786;">
+    <h7 style="color:#ce9a9a">MODELO</h7>  {{ dato.30 }}
+  </div>
+  <div class="col" style="background: #3e5786;">
+    <h7 style="color:#ce9a9a">IDENTIFICACIÓN</h7>  {{ dato.31 }}
+  </div>
+  {% endfor %}
+</div>
+<br>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-1">
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8">DATOS DE PASTECA</h7></center>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+  {% for dato in datos1 %}
+  <div class="col" style="background: #3e5786;">
+    <h7 style="color:#ce9a9a">MARCA</h7>  {{ dato.29 }}
+  </div>
+  <div class="col" style="background: #3e5786;">
+    <h7 style="color:#ce9a9a">MODELO</h7>  {{ dato.31 }}
+  </div>
+  {% endfor %}
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+  {% for dato in datos1 %}
+  <div class="col" style="background: #3e5786;">
+    <h7 style="color:#ce9a9a">IDENTIFICACIÓN</h7>  {{ dato.29 }}
+  </div>
+  <div class="col" style="background: #3e5786;">
+    <h7 style="color:#ce9a9a">CAPACIDAD</h7>  {{ dato.31 }}
+  </div>
+  {% endfor %}
+</div>
+
+<br>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-1">
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8">CRITERIOS DE ACEPTACIÓN Y RECHAZO </h7></center>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h1>ASME B30.26 (2015) Pastecas</h1>
+          <p>1 Identificación faltante o ilegible</p>
+          <p>2 Desalineación en poleas</p>
+          <p>3 Corrugación y desgaste excesivo en ranuras de poleas </p>
+          <p>4 Tuercas, pernos, pasadores, chavetas, anillos reten, u otros sujetadores y dispositivos de retencion sueltos o faltantes</p>
+          <p>5 Daños producidos por calor, salpicaduras de soldadura</p>
+          <p>6 Picaduras o corrosion exesivas</p>
+          <p>7 Componentes de soporte doblados, agrietados, torcidos, distorcionados, estirados, alargados, rotos</p>
+          <p>8 Desgaste excesivo, mellas o hendiduras </p>
+          <p>9 Reducción de 10% de la dimensión original</p>
+          <p>10 Daño excesivo hilos de rosca</p>
+          <p>11 Evidencia de soldaduras o modificaciones no autorizadas</p>
+          <p>12 Para grilletes criterios de eliminación según (ASME B30.26)</p>
+          <p>13 Para ganchos criterios de eliminación según (ASME B30.10)</p>
+          <p>14 Daños visibles o condiciones que causen duda sobre su uso</p>
+      </div>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <img src="/static/img/061-1.jpg">
+      </div>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <p>1.- SEGUROS</p>
+          <p>2.- POLEAS</p>
+          <p>3.- PASADOR,PERNOS</p>
+          <p>4.- CUBIERTAS</p>
+          <p>5.- ROSCA</p>
+          <p>6.- BASE</p>
+          <p>7.- TALON</p>
+          <p>8.- PESTILLO</p>
+          <p>9.- GANCHO</p>
+      </div>
+
+
+
+  </div>
+
+</div>
+
+<div class="container">
+  <div class="row">
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h1>ASME B30.10 (2019) Ganchos</h1>
+          <p>1 Identificación del fabricante faltante o ilegible</p>
+          <p>2 Identificación de carga nominal faltante o ilegible</p>
+          <p>3 Picaduras excesivas o corrosión</p>
+          <p>4 Grietas, mellas o hendiduras</p>
+          <p>5 Cualquier desgaste mas a 10% de gancho, pasador</p>
+          <p>6 Deformación, dobladuras en plano del gancho</p>
+          <p>7 Apertura de garganta que no exceda 5% (6mm)</p>
+          <p>8 Incapacidad de bloqueo</p>
+          <p>9 Cualquier daño pestillo o defectuoso inoperativo (S/A)</p>
+          <p>10 Unión de gancho, fijación dañado, faltantes</p>
+          <p>11 Desgaste de la rosca, daño o corrosión</p>
+          <p>12 Exposición calor excesivo, soldado. no autorizadas</p>
+          <p>13 Evidencia de alteraciones, perforación, rectificado, etc.</p>
+      </div>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <img src="/static/img/061-2.jpg">
+      </div>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <p>A.- GARGANTA</p>
+          <p>B.- ASIENTO</p>
+          <p>C.- SEGURO/PESTILLO</p>
+      </div>
+
+
+
+  </div>
+
+</div>
+
+
+<div class="container">
+  <div class="row">
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <h1>ASME B30.26 (2015) Grilletes</h1>
+          <p>1 Identificación faltante o ilegible</p>
+          <p>2 Daños por calor, salpicaduras soldadura, golpes</p>
+          <p>3 Picaduras o corrosión excesivas</p>
+          <p>4 Componentes doblados, torcidos, estirados</p>
+          <p>5 Componentes alargados, agrietados o rotos.</p>
+          <p>6 Mellas o ranuras excesivas</p>
+          <p>7 Reducción + del 10% en cualquier punto cuerpo</p>
+          <p>8 Enganche de pin incompleto</p>
+          <p>9 Daño excesivo hilos de rosca</p>
+          <p>10 Modificaciones, soldaduras no autorizadas</p>
+      </div>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <img src="/static/img/061-3.jpg">
+      </div>
+
+      <div class="form-group col-xs-12 col-sm-12 col-md-4 position-relative">
+          <p>A.- DIÁMETRO</p>
+          <p>B.- PASADOR</p>
+          <p>C.- PUNTOS DE RESISTENCIA</p>
+          <p>D.- ENTRADA</p>
+          <p>E.- OREJA</p>
+          <p>F.- CUERPO</p>
+      </div>
+
+
+
+  </div>
+
+</div>
+
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-1">
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8">DESCRIPCIÓN DE LA INSPECCIÓN</h7></center>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2">
+  <div class="col" style="background: #20252e;">
+    <h7 style="color:#f0e8e8">ESPECIFICACIONES DEL ACCESORIO</h7>
+  </div>
+  <div class="col" style="background: #20252e;">
+    <center> <h7 style="color:#f0e8e8" >RESULTADOS DE INSPECCIÓN</h7></center>
+  </div>
+</div>
+
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-1">
+  <div class="col">
+    <table class="table table-bordered">
+      <tr>
+          <th>Nº</th>
+          <th>MARCA</th>
+          <th>IDENTIFICACIÓN</th>
+          <th>ASIENTO GANCHO(mm) </th>
+          <th>GARGANTA GANCHO(mm)</th>
+          <th>MEDIDAS GRILLETES(mm)</th>
+          <th>OBSERVACIONES</th>
+          <th>INSPECCIÓN VISUAL(VT)</th>
+          <th>LÍQUIDOS PENETRANTES(PT)</th>
+          
+      </tr>
+      {% for dato in datos1 %}
+      <tr>
+          <td>{{dato.36}}</td>
+          <td>{{dato.32}}</td>
+          <td>{{dato.33}}</td>
+          <td>{{dato.39}}</td>
+          <td>{{dato.40}}</td>
+          <td>{{dato.41}}</td>
+          <td>{{dato.42}}</td>
+          <td>{{dato.43}}</td>
+          <td>{{dato.44}}</td>
+        
+      </tr>
+      {% endfor %}
+  </table>
+  </div>
+</div>
+
+
+ </div>
 
 </body>
-
+<footer>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+    <div class="col">
+      <a href="/edit_frpol/{{contact}}" class="btn btn-secondary">MODIFICAR</a>
+    </div>
+    <div class="col">
+      <a href="{{ url_for('genera_pdf2')}}" class="btn btn-primary">PDF</a>
+    </div>
+    <div class="col"></div>
+    <div class="col"></div>
+  </div>
+</footer>
 </html>
+
+{% endblock %}

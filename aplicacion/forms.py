@@ -1,3 +1,4 @@
+from random import choices
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, DecimalField, IntegerField,\
     TextAreaField, SelectField, PasswordField
@@ -109,6 +110,10 @@ class datos_equipo(FlaskForm):
 
     submit = SubmitField('Enviar')
 
+class list_formulario(FlaskForm):
+    nombre = SelectField('Formulario', choices=[('Reporte Inspeccion Poleas', 'Poleas'), ('Formato Inspección visual Eslinga Cable Acero', 'Eslinga Cable Acero'),('Reporte Inspección Cadena','Cadena'),('Reporte Inspección visual Eslinga Faja Sintética','Eslinga Faja Sintética'),('Reporte Inspección visual Ganchos','Ganchos'),('Reporte Inspección visual Grilletes','Grilletes'),('Reporte Inspeccion King Pin','King Pin'),('Reporte Inspeccion Quinta Rueda','Quinta Rueda'),('Reporte Inspeccion Sistemas de Elevación de Personal','Sistemas de Elevación de Personal'),('Reporte Inspeccion Horquillas','Horquillas'),('Reporte Inspección  Pasteca Principal','Pasteca Principal'),('Reporte Inspeccion Pasteca Auxiliar','Pasteca Auxiliar'),('Reporte Inspección Aparejos','Aparejos'),('Reporte Inspección Tensor Trinquete','Tensor Trinquete')])
+    
+    submit = SubmitField('Enviar')
 
 class formu1(FlaskForm):
     revis = StringField('REVISIÓN Nº', validators=[DataRequired()])
@@ -630,6 +635,7 @@ class formu12(FlaskForm):
     check2 = SelectField('LENTES:', choices=[(' ', ' '), ('X', 'X')])
     check3 = SelectField(u'OTROS:', choices=[(' ', ' '), ('X', 'X')])
     detalle = StringField('Detalla:', validators=[])
+    elem_ens = StringField('ELEMENTO A ENSAYAR', validators=[DataRequired()])
     revis_p = StringField('REVISIÓN Nº', validators=[DataRequired()])
     temp_ens = StringField('TEMPERATURA DE ENSAYO',
                            validators=[DataRequired()])
@@ -642,6 +648,7 @@ class formu12(FlaskForm):
     equipo = StringField('EQUIPO', validators=[DataRequired()])
     modelo = StringField('MODELO', validators=[DataRequired()])
     iden = StringField('IDENTIFICACIÓN', validators=[DataRequired()])
+    tipo_acce  = StringField('TIPO DE ACCESORIO ', validators=[DataRequired()])
     c1 = RadioField('1 Identificación faltante o ilegible ', choices=[
                     ('APROBADO', 'APROBADO'), ('RECHAZADO', 'RECHAZADO'), ('N/A', 'NO APLICA')], default='APROBADO', id='c1')
     c2 = RadioField('2 Daños por calor, salpicaduras, soldadura, golpes ', choices=[

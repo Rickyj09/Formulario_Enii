@@ -9,7 +9,7 @@ from aplicacion.forms import check_list4, check_list5, check_list6, check_list7,
 from aplicacion.forms import check_list10, check_list11, check_list12, check_list13, check_list14, check_list15
 from aplicacion.forms import check_list16, check_list17, check_list18, check_list19, check_list20, check_list21
 from aplicacion.forms import check_list22, check_list23, check_list24, check_list25, buscaform, CHECK_LIST_FIN
-from aplicacion.forms import prueba_carga, check_list1, prueba_carga3
+from aplicacion.forms import prueba_carga, check_list1, prueba_carga3,list_formulario
 from aplicacion.forms import formu1, formu1_1, formu2, formu3, formu4, formu5, formu6, formu7, formu8, formu9, formu10, formu11, formu12, formu13
 from aplicacion.forms import formu2_2, formu3_3, formu4_4, formu5_5, formu6_6,formu12_1,formu13_1
 from aplicacion.forms import LoginForm, UploadForm
@@ -24,6 +24,11 @@ from flask_login import LoginManager, login_user, logout_user, login_required,\
 from aplicacion.forms import LoginForm, FormUsuario
 import pdfkit
 import os
+
+import xhtml2pdf.pisa as pisa
+from io import StringIO
+#from flask_weasyprint import HTML, render_pdf
+
 
 
 UPLOAD_FOLDER = os.path.abspath("./static/uploads/")
@@ -58,6 +63,33 @@ app.secret_key = 'millave'
 def load_user(user_id):
     return (user_id)
 
+
+#@app.route('/genera_pdf2_test')
+#@login_required
+#def genera_pdf2_test():
+ #  cursor.execute(
+  #      "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
+   # num_rep = cursor.fetchone()
+   # cursor.execute(
+    #    "select * from frpol where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
+    #datos1 = cursor.fetchall()
+    #cursor.execute(
+    #    "select MAX(id) from frpol ;")
+    #data1 = cursor.fetchone()
+    #cursor.execute(
+     #   "select * from frpol1 where id_f2 = (select MAX(id) from frpol) ;")
+    #data = cursor.fetchall()
+    #cursor.execute(
+     #   "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario) and llave_formulario='FR-INSP-041.04';")
+    #for_emi = cursor.fetchall()
+    #cursor.execute(
+     #   "select descr from cat_form where codigo = 'FR-INSP-043.03';")
+    #cata = cursor.fetchone()
+    #html1 = StringIO(render_template('resum_frpol.html',num_rep=num_rep, datos1=datos1, contact=data1[0], data=data,for_emi=for_emi,cata=cata).encode("UTF-8"))
+    #pdf = pisa.CreatePDF(html1,dest=resultFile)
+    #resultFile = StringIO()
+    #pisa.showLogging()
+    #return pdf
 
 @app.route('/')
 def inicio():
@@ -236,8 +268,8 @@ def home_1():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frpol'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -334,7 +366,6 @@ def get_contact(id):
     cur.execute('SELECT * FROM frpol WHERE id = %s', (id,))
     data = cur.fetchall()
     cur.close()
-    print(data[0])
     return render_template('edit-frpol.html', contact=data[0])
 
 
@@ -467,11 +498,13 @@ def resum_frpol():
         "select * from frpol1 where id_f2 = (select MAX(id) from frpol) ;")
     data = cursor.fetchall()
     cursor.execute(
-        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario) and llave_formulario='FR-INSP-041.04';")
     for_emi = cursor.fetchall()
-    print(data1)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-043.03';")
+    cata = cursor.fetchone()
     print(data)
-    return render_template('resum_frpol.html',num_rep=num_rep, datos1=datos1, contact=data1[0], data=data,for_emi=for_emi)
+    return render_template('resum_frpol.html',num_rep=num_rep, datos1=datos1, contact=data1[0], data=data,for_emi=for_emi,cata=cata)
 
 
 @app.route('/resum_frpol_1')
@@ -563,7 +596,7 @@ def resumen_foto_pol():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario) and llave_formulario='FR-INSP-041.04';")
     for_emi = cursor.fetchall()
     cursor.execute(
         "select * from rep_foto_frpol where id_f = (select MAX(id) from frpol) ;")
@@ -701,28 +734,10 @@ def genera_pdf2():
     path_wkhtmltopdf = r'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'
     cursor = mysql.connection.cursor()
     cursor.execute(
-        "select llave_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    nom_form = cursor.fetchone()
-    cursor.execute(
-        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_insp = cursor.fetchone()
-    cursor.execute(
-        "select fecha_emision_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_emi = cursor.fetchone()
-    cursor.execute(
-        "select fecha_expiracion_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    fec_exp = cursor.fetchone()
-    cursor.execute(
-        "select lugar_ins_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    lugar = cursor.fetchone()
-    cursor.execute(
-        "select nom_inspe_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
-    inpe = cursor.fetchone()
-    cursor.execute(
-        "select * from frpol where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frpol where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frpol b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frpol ;")
@@ -730,13 +745,22 @@ def genera_pdf2():
     cursor.execute(
         "select * from frpol1 where id_f2 = (select MAX(id) from frpol) ;")
     data = cursor.fetchall()
-    html = render_template('resum_frpol_1.html', datos=nom_form,num_rep=num_rep, fec1=fec_insp, fec2=fec_emi, fec3=fec_exp, lugar=lugar, inspector=inpe, datos1=datos1, contact=data1[0], data=data)
+    cursor.execute(
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario) and llave_formulario='FR-INSP-041.04';")
+    for_emi = cursor.fetchall()
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-043.03';")
+    cata = cursor.fetchone()
+    html = render_template('resum_frpol.html',num_rep=num_rep, datos1=datos1, contact=data1[0], data=data,for_emi=for_emi,cata=cata)
     config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     #pdfkit.from_file("aplicacion/templates/cert_for1.html", "index.pdf", options=options,configuration=config)
     pdfkit.from_string(html, "resum_frpol_1.pdf", options=options,configuration=config)
     #pdfkit.from_url("http://127.0.0.1:5000/cert_for1", "cert_for1.pdf",options=options,configuration=config)
     print("="*50)
     return redirect(url_for('reporte_fotopol'))
+
+
+
 
 
 @app.route('/home_2', methods=['GET', 'POST'])
@@ -770,8 +794,8 @@ def home_2():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'freca'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -1004,10 +1028,10 @@ def resum_freca():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join freca b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario) and llave_formulario='FR-INSP-042.00';")
     for_emi = cursor.fetchone()
     cursor.execute(
-        "select * from freca where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from freca where id_formulario = (select MAX(b.id_formulario) from formulario a inner join freca b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from freca ;")
@@ -1015,8 +1039,11 @@ def resum_freca():
     cursor.execute(
         "select * from freca1 where id_f3 = (select MAX(id) from freca) ;")
     data = cursor.fetchall()
-    print(for_emi)
-    return render_template('resum_freca.html', num_rep=num_rep,for_emi=for_emi, datos1=datos1, contact=data1[0], data=data)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-043.03';")
+    cata = cursor.fetchone()
+    print(cata)
+    return render_template('resum_freca.html', num_rep=num_rep,for_emi=for_emi, datos1=datos1, contact=data1[0], data=data,cata=cata)
 
 
 
@@ -1222,8 +1249,8 @@ def home_3():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frcad'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -1461,7 +1488,7 @@ def resum_frcad():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frcad b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frcad where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frcad where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frcad b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frcad ;")
@@ -1469,9 +1496,11 @@ def resum_frcad():
     cursor.execute(
         "select * from frcad1 where id_f4 = (select MAX(id) from frcad) ;")
     data = cursor.fetchall()
-    print(data1)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-045.04';")
+    cata = cursor.fetchone()
     print(data)
-    return render_template('resum_frcad.html', datos=datos, num_rep=num_rep, datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frcad.html', datos=datos, num_rep=num_rep, datos1=datos1, contact=data1[0], data=data,cata=cata)
 
 
 @app.route('/genera_pdffrcad2')
@@ -1676,8 +1705,8 @@ def home_4():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frefs'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -1717,6 +1746,16 @@ def frefs():
         return redirect(url_for('frefs1'))
     return render_template('frefs.html', form=form)
 
+
+@app.route('/edit_frefs/<id>', methods=['POST', 'GET'])
+@login_required
+def get_frefs(id):
+    cur = mysql.connection.cursor()
+    cur.execute('SELECT * FROM frefs WHERE id = %s', (id,))
+    data = cur.fetchall()
+    cur.close()
+    print(data[0])
+    return render_template('edit-frefs.html', contact=data[0])
 
 @app.route('/add_frefs1', methods=['POST'])
 @login_required
@@ -1852,7 +1891,7 @@ def resum_frefs():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frefs b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frefs where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frefs where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frefs b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frefs ;")
@@ -1860,9 +1899,11 @@ def resum_frefs():
     cursor.execute(
         "select * from frefs1 where id_f5 = (select MAX(id) from frefs) ;")
     data = cursor.fetchall()
-    print(data1)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-047.03';")
+    cata = cursor.fetchone()
     print(data)
-    return render_template('resum_frefs.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frefs.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data,cata=cata)
 
 
 @app.route('/genera_pdffrefs2')
@@ -2064,8 +2105,8 @@ def home_5():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frgan'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -2296,7 +2337,7 @@ def resum_frgan():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frgan b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frgan where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frgan where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frgan b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frgan ;")
@@ -2304,9 +2345,11 @@ def resum_frgan():
     cursor.execute(
         "select * from frgan1 where id_f6 = (select MAX(id) from frgan) ;")
     data = cursor.fetchall()
-    print(data1)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-049.04';")
+    cata = cursor.fetchone()
     print(data)
-    return render_template('resum_frgan.html', datos=datos,num_rep=num_rep, datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frgan.html', datos=datos,num_rep=num_rep, datos1=datos1, contact=data1[0], data=data,cata=cata)
 
 @app.route('/genera_pdffrgan2')
 @login_required
@@ -2507,8 +2550,8 @@ def home_6():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frgri'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -2736,7 +2779,7 @@ def resum_frgri():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frgri b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frgri where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frgri where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frgri b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frgri ;")
@@ -2744,9 +2787,11 @@ def resum_frgri():
     cursor.execute(
         "select * from frgri1 where id_f7 = (select MAX(id) from frgri) ;")
     data = cursor.fetchall()
-    print(data1)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-051.03';")
+    cata = cursor.fetchone()
     print(data)
-    return render_template('resum_frgri.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frgri.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data,cata=cata)
 
 @app.route('/genera_pdffrgri2')
 @login_required
@@ -2937,7 +2982,7 @@ def home_7():
         mysql.connection.commit()
         empre = request.form['empresa']
         cur.execute(
-            "select CONCAT(prefijo,LPAD(sec, 5, '0')) from cod_rep where id_for = 7;")
+            "select CONCAT(prefijo,LPAD(sec, 5, '0')) from cod_rep where id_for = 8;")
         num_rep = cur.fetchone()
         fecha_insp = request.form['fec_inpec']
         fecha_emi = request.form['fec_emision']
@@ -2945,8 +2990,8 @@ def home_7():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frkpi'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -3120,14 +3165,18 @@ def resum_frkpi():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frkpi b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frkpi where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frkpi where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frkpi b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frkpi ;")
     data1 = cursor.fetchone()
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-053.04';")
+    cata = cursor.fetchone()
+    
     print(data1)
     
-    return render_template('resum_frkpi.html', datos=datos,num_rep=num_rep, datos1=datos1, contact=data1[0])
+    return render_template('resum_frkpi.html', datos=datos,num_rep=num_rep, datos1=datos1, contact=data1[0],cata=cata)
 
 
 @app.route('/genera_pdfrkpif2')
@@ -3324,8 +3373,8 @@ def home_8():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frqru'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -3489,14 +3538,17 @@ def resum_frqru():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frqru b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frqru where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frqru where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frqru b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frqru ;")
     data1 = cursor.fetchone()
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-055.04';")
+    cata = cursor.fetchone()
     print(data1)
     
-    return render_template('resum_frqru.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+    return render_template('resum_frqru.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0],cata=cata)
 
 
 @app.route('/genera_pdffrqru2')
@@ -3713,7 +3765,7 @@ def home_9():
         mysql.connection.commit()
         empre = request.form['empresa']
         cur.execute(
-            "select CONCAT(prefijo,LPAD(sec, 5, '0')) from cod_rep where id_for = 3;")
+            "select CONCAT(prefijo,LPAD(sec, 5, '0')) from cod_rep where id_for = 10;")
         num_rep = cur.fetchone()
         fecha_insp = request.form['fec_inpec']
         fecha_emi = request.form['fec_emision']
@@ -3721,8 +3773,8 @@ def home_9():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frsep'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -3868,14 +3920,17 @@ def resum_frsep():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frsep b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frsep where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frsep where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frsep b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frsep ;")
     data1 = cursor.fetchone()
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-057.04';")
+    cata = cursor.fetchone()
     print(data1)
     
-    return render_template('resum_frsep.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+    return render_template('resum_frsep.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0],cata=cata)
 
 
 @app.route('/genera_pdffrsep2')
@@ -4098,8 +4153,8 @@ def home_10():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frhor'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -4295,13 +4350,16 @@ def resum_frhor():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frhor b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frhor where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frhor where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frhor b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frhor ;")
     data1 = cursor.fetchone()
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-059.04';")
+    cata = cursor.fetchone()
     print(data1)
-    return render_template('resum_frhor.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+    return render_template('resum_frhor.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0],cata=cata)
 
 @app.route('/genera_pdffrhor2')
 @login_required
@@ -4480,8 +4538,8 @@ def home_11():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frppr'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -4654,17 +4712,20 @@ def resum_frppr():
         "select * from formulario where id_formulario = (select MAX(id_formulario) from formulario);")
     datos = cursor.fetchall()
     cursor.execute(
-        "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frppr b on a.id_formulario = b.id_formulario);")
+        "select num_rep from formulario where id_formulario = (select MAX(id_formulario) from formulario where llave_formulario = 'FR-INSP-061.04');")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frppr where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frppr where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frppr b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frppr ;")
     data1 = cursor.fetchone()
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-061.04';")
+    cata = cursor.fetchone()
     print(data1)
     
-    return render_template('resum_frppr.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0])
+    return render_template('resum_frppr.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0],cata=cata)
 
 
 
@@ -4837,8 +4898,8 @@ def home_12():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frpau'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -4999,8 +5060,8 @@ def home_13():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frapa'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -5024,6 +5085,7 @@ def frapa():
         check2 = request.form['check2']
         check3 = request.form['check3']
         detalle = request.form['detalle']
+        elem_ens = request.form['elem_ens']
         revis_p = request.form['revis_p']
         temp_ens = request.form['temp_ens']
         tipo_il_p = request.form['tipo_il_p']
@@ -5061,8 +5123,8 @@ def frapa():
         cur.execute(
             "select fecha_inspec_formulario from formulario where id_formulario = (select MAX(id_formulario) from formulario) ;")
         fecha_form = cur.fetchone()
-        cur.execute('insert into frapa (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec,  'II VISIBLE', 'Met-L-Chek  VP-31A', '5 minutos', 'REMOVIBLE SOLVENTE', 'Met-L-Chek   E-59A', '10 minutos', 'SOLVENTE REMOVED', 'Met-L-Chek   D-70', '10 minutos', equipo, modelo, iden, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21))
+        cur.execute('insert into frapa (id_formulario,fec_formulario,proc,revis,nivel_il,con_sup,met_insp,tipo_il,check1,check2,check3,detalle,elem_ens,proc_p,revis_p,temp_ens,tipo_il_p,nivel_il_p,mater_base,tipo_sec,tipo_pen,marca_kit,tiem_pen,met_rem,marca_kit1,tiem_sec,for_rev,marca_kit2,tiem_rev,equipo,modelo,iden,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (llave_form, fecha_form, 'PR-INSP-006', revis, nivel_il, con_sup, met_insp, tipo_il, check1, check2, check3, detalle,elem_ens, 'PR-INSP-007', revis_p, temp_ens, tipo_il_p, nivel_il_p, mater_base, tipo_sec,  'II VISIBLE', 'Met-L-Chek  VP-31A', '5 minutos', 'REMOVIBLE SOLVENTE', 'Met-L-Chek   E-59A', '10 minutos', 'SOLVENTE REMOVED', 'Met-L-Chek   D-70', '10 minutos', equipo, modelo, iden, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21))
         mysql.connection.commit()
         return redirect(url_for('frapa1'))
 
@@ -5299,7 +5361,7 @@ def resum_frapa():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frapa b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frapa where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frapa where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frapa b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frapa ;")
@@ -5307,9 +5369,11 @@ def resum_frapa():
     cursor.execute(
         "select * from frapa1 where id_f12 = (select MAX(id) from frapa) ;")
     data = cursor.fetchall()
-    print(data1)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-065.02';")
+    cata = cursor.fetchone()
     print(data)
-    return render_template('resum_frapa.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frapa.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data,cata=cata)
 
 
 @app.route('/genera_pdffrapa2')
@@ -5484,8 +5548,8 @@ def home_14():
         lugar_ins = request.form['lugar_inpec']
         nombre_ins = request.form['nom_inspec']
         cursor = mysql.connection.cursor()
-        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)',
-                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre))
+        cursor.execute('insert into formulario (llave_formulario,num_rep,desc_formulario,fecha_inspec_formulario,fecha_emision_formulario,fecha_expiracion_formulario,lugar_ins_formulario,nom_inspe_formulario,empresa,cod_form) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',
+                       (nom_form,num_rep, nom_form1, fecha_insp, fecha_emi, fecha_exp, lugar_ins, nombre_ins, empre,'frttr'))
         mysql.connection.commit()
         flash('Guardado Correctamente')
         datos = cursor.fetchone()
@@ -5719,7 +5783,7 @@ def resum_frttr():
         "select num_rep from formulario where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frttr b on a.id_formulario = b.id_formulario);")
     num_rep = cursor.fetchone()
     cursor.execute(
-        "select * from frttr where id_formulario = (select MAX(id_formulario) from formulario);")
+        "select * from frttr where id_formulario = (select MAX(b.id_formulario) from formulario a inner join frttr b on a.id_formulario = b.id_formulario);")
     datos1 = cursor.fetchall()
     cursor.execute(
         "select MAX(id) from frttr ;")
@@ -5727,9 +5791,11 @@ def resum_frttr():
     cursor.execute(
         "select * from frttr1 where id_f13 = (select MAX(id) from frttr) ;")
     data = cursor.fetchall()
-    print(data1)
+    cursor.execute(
+        "select descr from cat_form where codigo = 'FR-INSP-066.00';")
+    cata = cursor.fetchone()
     print(data)
-    return render_template('resum_frttr.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data)
+    return render_template('resum_frttr.html', datos=datos,num_rep=num_rep,datos1=datos1, contact=data1[0], data=data,cata=cata)
 
 
 
@@ -7689,15 +7755,84 @@ def load_user(user_id):
 @app.route('/bus_form', methods = ['POST', 'GET'])
 @login_required
 def bus_form():
-    form = buscaform()
+    form = list_formulario()
     if request.method == 'POST':
-        iden = request.form['iden']
-        print(iden)
+        nombre = request.form['nombre']
+        print(nombre)
         cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM formulario WHERE num_rep = %s", [iden])
+        cursor.execute("SELECT * FROM formulario WHERE desc_formulario = %s order by fecha_inspec_formulario desc", [nombre])
         data = cursor.fetchall()
-        #print(data[0])
-        return render_template('listar-form.html', data=data)
+        cursor.execute("SELECT cod_form FROM formulario WHERE desc_formulario = %s ", [nombre])
+        formu = cursor.fetchone()
+        cursor.execute("SELECT id_formulario FROM formulario WHERE desc_formulario = %s ", [nombre])
+        num_rep = cursor.fetchone()
+        print(formu)
+        print(num_rep)
+        if formu == ('frpol',):
+            cursor.execute("select id from frpol where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('freca',):
+            cursor.execute("select id from freca where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frcad',):
+            cursor.execute("select id from frcad where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frefs',):
+            cursor.execute("select id from frefs where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frgan',):
+            cursor.execute("select id from frgan where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frgri',):
+            cursor.execute("select id from frgri where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frkpi',):
+            cursor.execute("select id from frkpi where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frqru',):
+            cursor.execute("select id from frqru where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frsep',):
+            cursor.execute("select id from frsep where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frhor',):
+            cursor.execute("select id from frhor where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frppr',):
+            cursor.execute("select id from frppr where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frapa',):
+            cursor.execute("select id from frapa where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
+        if formu == ('frttr',):
+            cursor.execute("select id from frttr where id_formulario = %s ",[num_rep])
+            data1 = cursor.fetchone()
+            print(data1)
+            return render_template('listar_form.html', data=data,contact=data1[0])
     return render_template("bus_form.html", form=form) 
 
 
@@ -7705,9 +7840,8 @@ def bus_form():
 @login_required
 def listar_form(id):
     cur = mysql.connection.cursor()
-    cur.execute(
-        'SELECT * FROM formulario  WHERE a.num_rep = %s )',  [id])
-    data = cur.fetchall()
+    cur.execute('SELECT * FROM frpol  ')
+    data1 = cur.fetchall()
     cur.close()
-    print(data[0])
-    return render_template('listar-form.html', contact=data[0])
+    print(data1)
+    return render_template('listar_form.html')
