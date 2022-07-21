@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'layout_for.html' %}
 {%block title%} CARATULA FR-INPS-009.02 {%endblock%}
 {% block content %}
 <body>
@@ -207,7 +207,9 @@
                 <span style="color: red;"> {{ error }} </span>
 		{% endfor %}
     </div>
-
+    <center>
+<h5>El equipo antes descrito fue inspeccionado empleando técnicas de inspección de acuerdo a normativas de referencia:
+    ASME B30.5 (2018), y manual del fabricante.</h5></center>
     <h2>RESULTADOS: </h2>
     <div class="form-group col-xs-12 col-sm-12 col-md-4  position-relative">
         
@@ -222,17 +224,7 @@
         {{ form.submit(class_="btn btn-primary") }}
       </div>
       
-    <hr>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="{{ url_for('caratula')}}">CARATULA</a></li>
-          <li class="page-item"><a class="page-link" href="{{ url_for('CHECK_LIST_bck')}}">CHECK LIST</a></li>
-          <li class="page-item"><a class="page-link" href="{{ url_for('PRUE_CARG')}}">REP - PRUE-CARG-001</a></li>
-          <li class="page-item"><a class="page-link" href="{{ url_for('REP_FOTO')}}">REP-FOT-001</a></li>
-          <li class="page-item"><a class="page-link" href="{{ url_for('RESULTADOS')}}">RESULTADOS</a></li>
-          <li class="page-item"><a class="page-link" href="{{ url_for('CERTIFICADO_GM')}}">CERTIFICADO GM</a></li>
-        </ul>
-      </nav>
+
       
     </form>  
 </body>
